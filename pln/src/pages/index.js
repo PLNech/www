@@ -1,6 +1,5 @@
 import * as React from "react"
 import { Link } from "gatsby"
-import { StaticImage } from "gatsby-plugin-image"
 
 import Layout from "../components/layout"
 import Seo from "../components/seo"
@@ -9,22 +8,22 @@ const IndexPage = () => (
   <Layout>
     <Seo title="PLN's Home" />
     <h1>Welcome!</h1>
-    <h2>I'm PLN, and I love to <b>transform</b>
-    </h2>
+    <h2>I'm PLN, and I love to <i>transform…</i></h2>
 
-    <p>This is gonna be great.</p>
-    <StaticImage
-      src="../images/WIP_GaLactic.png"
-      width={2048}
-      quality={95}
-      formats={["AUTO", "WEBP", "AVIF"]}
-      alt="A Gatsby astronaut"
-      style={{ marginBottom: `1.45rem` }}
-    />
+    <h3>…code into <em>human solutions</em></h3>
     <p>
-      <Link to="/page-2/">Go to page 2</Link> <br />
-      <Link to="/using-typescript/">Go to "Using TypeScript"</Link>
+      At <Link to="/algolia/">Algolia</Link>, I create technologies to help humans find things and answers.
     </p>
+
+    <h3>…code into <em>music</em></h3>
+    <p>
+      As <Link to="/parvagues/">ParVagues</Link>, I write patterns that shape soundwaves.
+    </p>
+
+    <h3>…code into <em>animated pixelscapes</em></h3>
+    <p>
+      Using <Link to="/hydra/">Hydra</Link>, I create technologies to help humans find things and answers
+    </p>.
   </Layout>
 )
 
