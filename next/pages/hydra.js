@@ -23,7 +23,6 @@ export default function Hydra() {
         // width={700}
         // height={475}
       />
-      <Link href="/">Back</Link>
     </div>
   );
 }
