@@ -33,7 +33,7 @@ export default function Home({ allPostsData }) {
             …code into <em>human solutions</em>
           </h3>
           <p className="description">
-            At <Link href="/algolia/">Algolia</Link>, I create technologies to
+            At <a href="https://algolia.com">Algolia</a>, I create technologies to
             help humans find things and
             <a href="https://www.algolia.com/products/answers-for-support/">
               {" "}
