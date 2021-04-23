@@ -11,21 +11,21 @@ export async function getStaticProps(context) {
 
 export default function Hydra() {
   return (
-    <>
-    <Head>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>PLN's Hydra works</title>
-    </Head>
     <Layout>
+      <Head>
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>PLN's Hydra works</title>
+      </Head>
       <div>
         <h1>I create visuals with patterns</h1>
         <Image
-          alt="Mountains"
+          alt="GaLactic intermediary steps"
           src="/images/WIP_GaLactic.png"
-          layout="fill"
-          // width={700}
-          // height={475}
+          // layout="fill"
+          width={700}
+          height={475}
         />
+        <p><i>Intermediary steps of <a href="https://nech.pl/nights-galactic">GaLactic</a></i></p>
       </div>
       </Layout>
   );
