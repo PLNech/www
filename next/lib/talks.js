@@ -4,10 +4,14 @@ export function getTalksData() {
   return getAllContentData('talks', true)
 }
 
-export function getAllPostIds() {
+export function getRecentTalksData() {
+  return getAllContentData('talks', true).slice(0,3)
+}
+
+export function getAllTalkIds() {
   return getAllContentIds("talks")
 }
 
-export async function getPostData(id) {
+export async function getTalkData(id) {
   return getContentData("talks", id)
 }
