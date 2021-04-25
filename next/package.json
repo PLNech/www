@@ -1,11 +1,14 @@
 {
-  "name": "learn-starter",
-  "version": "0.1.0",
+  "name": "pln-www",
+  "version": "0.2.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start"
+  },
+  "engines": {
+    "node": "==12"
   },
   "dependencies": {
     "bootstrap": "^5.0.0-beta3",
