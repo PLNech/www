@@ -35,7 +35,15 @@ export default function ParVagues() {
           height={475}
         />*/}
         </section>
-        <ReactPlayer url="https://soundcloud.com/parvagues/" />
+        <br />
+        <div className='player-wrapper'>
+          <ReactPlayer
+            className='react-player'
+            url="https://soundcloud.com/parvagues/"
+            width='100%'
+            height='32em'
+          />
+        </div>
       </div>
     </Layout>
   );
