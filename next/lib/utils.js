@@ -5,16 +5,14 @@ import remark from "remark";
 import html from "remark-html";
 
 function getContentDirectory(name) {
-  const dir = path.join(process.cwd(), "content", name);
-  console.log("gCD:", dir);
-  return dir;
+  return path.join(process.cwd(), "content", name)
 }
 
 function getAllContentData(name, sorted = false) {
   // Get file names under /content/{name}
   const contentDirectory = getContentDirectory(name);
   const fileNames = fs.readdirSync(contentDirectory);
-  console.log("gACD: total", fileNames.length, "items");
+  console.log(`gACD: total ${name}(s): ${fileNames.length}`);
 
   const allContentData = fileNames.map((fileName) => {
     // Remove ".md" from file name to get id
@@ -72,6 +70,16 @@ async function getContentData(name, id) {
     .use(html)
     .process(matterResult.content);
   const contentHtml = processedContent.toString();
+  console.log(matterResult);
+  if ("description" in matterResult.data) {
+    console.log("Got desc!");
+    const processedDescription = await remark()
+      .use(html)
+      .process(matterResult.data.description);
+    matterResult.data.description = processedContent.toString();
+
+  }
+
 
   // Combine the data with the id and contentHtml
   return {

@@ -3,18 +3,23 @@ import Link from "next/link";
 import Date from "../components/date";
 import Layout from "../components/layout";
 import utilStyles from "../styles/utils.module.css";
-import { getSortedPostsData } from "../lib/posts";
+import { getPostsData } from "../lib/posts";
+import { getRecentTalksData } from "../lib/talks";
 
 export async function getStaticProps() {
-  const allPostsData = getSortedPostsData();
+  const nbLastTalks = 3;
+  const talks = getRecentTalksData();
+  const posts = getPostsData();
+
   return {
     props: {
-      allPostsData,
+      posts,
+      talks,
     },
   };
 }
 
-export default function Home({ allPostsData }) {
+export default function Home({ posts, talks }) {
   return (
     <div className="container">
       <Layout home>
@@ -30,11 +35,11 @@ export default function Home({ allPostsData }) {
           </h2>
 
           <h3>
-            …code into <em>human solutions</em>
+            …code into <em>solutions to human problems</em>
           </h3>
           <p className="description">
-            At <a href="https://algolia.com">Algolia</a>, I create technologies to
-            help humans find things and
+            At <a href="https://algolia.com">Algolia</a>, I create technologies
+            to help humans find things and
             <a href="https://www.algolia.com/products/answers-for-support/">
               {" "}
               answers
@@ -59,11 +64,38 @@ export default function Home({ allPostsData }) {
           </p>
         </section>
         <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
+          <h3>
+            …ideas into <em>talks</em>
+          </h3>
+          <p className="description">
+            I <Link href="/talks/">speak</Link> about topics I care about: from
+            sharing my passions and teaching useful patterns, to questioning our
+            current mental models.
+          </p>
+          <h2 className={utilStyles.headingLg}>Most recent talks</h2>
+          <ul className={utilStyles.list}>
+            {talks.map(({ id, title, description }) => (
+              <Link href={`/talk/${id}`} key={id}>
+                <li className={utilStyles.listItem} key={id}>
+                  <h4>{title}</h4>
+                  {description && (
+                    <small className={utilStyles.lightText}>
+                      {description}
+                    </small>
+                  )}
+                  <br />
+
+                </li>
+              </Link>
+            ))}
+          </ul>
+        </section>
+        <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
           <h2 className={utilStyles.headingLg}>Blog</h2>
           <ul className={utilStyles.list}>
-            {allPostsData.map(({ id, date, title }) => (
+            {posts.map(({ id, date, title }) => (
               <li className={utilStyles.listItem} key={id}>
-                <Link href={`/posts/${id}`}>
+                <Link href={`/post/${id}`}>
                   <a>{title}</a>
                 </Link>
                 <br />

@@ -1,6 +1,6 @@
 import {getAllContentData, getAllContentIds, getContentData} from './utils'
 
-export function getSortedPostsData() {
+export function getPostsData() {
   return getAllContentData('posts', true)
 }
 
