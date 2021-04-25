@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Head from "next/head";
 import Layout from "../components/layout";
+import HydraSynth from "../components/hydra";
 
 export async function getStaticProps(context) {
   return {
@@ -26,6 +27,9 @@ export default function Hydra() {
           height={475}
         />
         <p><i>Intermediary steps of <a href="https://nech.pl/nights-galactic">GaLactic</a></i></p>
+        <HydraSynth
+        width={700}
+        height={475} />
       </div>
       </Layout>
   );
