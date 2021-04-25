@@ -3,18 +3,21 @@ import Link from "next/link";
 import Date from "../components/date";
 import Layout from "../components/layout";
 import utilStyles from "../styles/utils.module.css";
-import { getSortedPostsData } from "../lib/posts";
+import { getPostsData } from "../lib/posts";
+import { getTalksData } from "../lib/talks";
 
 export async function getStaticProps() {
-  const allPostsData = getSortedPostsData();
+  const allPostsData = getPostsData();
+  const allTalksData = getTalksData();
   return {
     props: {
       allPostsData,
+      allTalksData,
     },
   };
 }
 
-export default function Home({ allPostsData }) {
+export default function Home({ allPostsData, allTalksData }) {
   return (
     <div className="container">
       <Layout home>
@@ -57,6 +60,22 @@ export default function Home({ allPostsData }) {
             Using <Link href="/hydra/">Hydra</Link>, I create animations that
             offer windows into other words.
           </p>
+        </section>
+        <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
+          <h2 className={utilStyles.headingLg}>Talks</h2>
+          <ul className={utilStyles.list}>
+            {allTalksData.map(({ id, date, title, url, slides }) => (
+              <li className={utilStyles.listItem} key={id}>
+                <Link href={`/posts/${id}`}>
+                  <a href={url}>{title}</a>
+                </Link>
+                <br />
+                <small className={utilStyles.lightText}>
+                  <Date dateString={date} />
+                </small>
+              </li>
+            ))}
+          </ul>
         </section>
         <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
           <h2 className={utilStyles.headingLg}>Blog</h2>
