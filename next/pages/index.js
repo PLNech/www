@@ -75,18 +75,15 @@ export default function Home({ posts, talks }) {
           <h2 className={utilStyles.headingLg}>Most recent talks</h2>
           <ul className={utilStyles.list}>
             {talks.map(({ id, title, description }) => (
-              <Link href={`/talk/${id}`} key={id}>
-                <li className={utilStyles.listItem} key={id}>
+              <li className={utilStyles.listItem} key={id}>
+                <Link href={`/talk/${id}`} key={id}>
                   <h4>{title}</h4>
-                  {description && (
-                    <small className={utilStyles.lightText}>
-                      {description}
-                    </small>
-                  )}
-                  <br />
-
-                </li>
-              </Link>
+                </Link>
+                {description && (
+                  <small className={utilStyles.lightText}>{description}</small>
+                )}
+                <br />
+              </li>
             ))}
           </ul>
         </section>

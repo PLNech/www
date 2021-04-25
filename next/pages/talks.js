@@ -10,13 +10,12 @@ import ReactPlayer from "react-player";
 
 export async function getStaticProps() {
   const talks = getTalksData();
-  const selection = [
-  ];
+  const selection = [];
 
   return {
     props: {
       talks,
-      selection
+      selection,
     },
   };
 }
@@ -30,31 +29,66 @@ export default function Talks({ talks, selection }) {
       </Head>
       <div>
         <section className={utilStyles.headingMd}>
-          <h1>I give talks about topics I care about</h1>
-          <h2></h2>
+          <h1>I speak about topics I love</h1>
           <ul>
             {selection.map(({}) => (
-              <li><h3>Item</h3></li>
+              <li>
+                <h3>Item</h3>
+              </li>
             ))}
           </ul>
         </section>
 
-        <h2 className={utilStyles.headingLg}>Most recent talks</h2>
         <ul className={utilStyles.list}>
           {talks.map(
-            ({ id, date, title, org, context, video, slides, event }) => (
+            ({
+              id,
+              title,
+              description,
+              date,
+              org,
+              context,
+              video,
+              slides,
+              event,
+            }) => (
               <li className={utilStyles.listItem} key={id}>
-                <a href={video || slides}>{title}</a>
-                <br />
+                <h3>{title}</h3>
+                {description && (
+                  <>
+                    <small>{description}</small>
+                    <br />
+                  </>
+                )}
                 <small className={utilStyles.lightText}>
                   <Date dateString={date} />
-                  {event && (
+                  {context && (
                     <p>
                       {" "}
-                      at <a href={event}>{context}</a> by {org}
+                      <i>
+                        at <a href={event}>{context}</a>{" "}
+                        {org && <>organised by {org}</>}
+                      </i>
                     </p>
                   )}
                 </small>{" "}
+                <ul class="links">
+                  {video && (
+                    <li>
+                      <a href={video}>Video</a>
+                    </li>
+                  )}
+                  {slides && (
+                    <li>
+                      <a href={slides}>Slides</a>
+                    </li>
+                  )}
+                  {event && (
+                    <li>
+                      <a href={event}>Event</a>
+                    </li>
+                  )}
+                </ul>
               </li>
             )
           )}
