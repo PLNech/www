@@ -14,7 +14,6 @@ export async function getStaticProps({ params }) {
   const response = await fetch(hydraData.source);
   const source = await response.text();
   const sourceCode = source.replace(/(?:\r\n|\r|\n)/g, "<br>");
-  console.log(sourceCode);
 
   hydraData.source = source;
 
@@ -42,9 +41,12 @@ export default function Hydra({ hydraData, sourceCode }) {
       </Head>
       <article>
         <h1 className={utilStyles.headingXl}>{hydraData.title}</h1>
-        <SyntaxHighlighter width="64em" language="javascript" wrapLongLines={true}
-          >
-            {hydraData.source}
+        <SyntaxHighlighter
+          width="64em"
+          language="javascript"
+          wrapLongLines={true}
+        >
+          {hydraData.source}
         </SyntaxHighlighter>
         {/*<HydraSynth
       width={700}

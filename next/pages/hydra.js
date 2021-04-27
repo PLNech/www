@@ -34,8 +34,9 @@ export default function Hydra({hydras}) {
         />
         <p>
           <i>
-            Intermediary steps of{" "}
-            <a href="https://nech.pl/nights-galactic">GaLactic</a>
+            Successive layers within the work{" "}
+            <a href="https://nech.pl/nights-galactic">GaLactic</a>,
+            part of the serie <b>Nuits étoilées</b><br />in which I turn pictures of the night sky into animated windows on the universe.
           </i>
         </p>
 
