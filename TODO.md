@@ -10,7 +10,6 @@
   - Details page per item: fetch source-code, fetch song
 
 # Customization
+- Image de profil: neural or bust!
 - General style
 - Favicon
-
-- Hydras: Highlight with https://www.npmjs.com/package/react-syntax-highlighter
