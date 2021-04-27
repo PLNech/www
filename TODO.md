@@ -2,10 +2,10 @@
 - Pro
   - Landing page: projects with links
 - Talks
-  - FIX detail pages
+  - Detail page?
+  - IMG!
 
-- Hydra: Generic landing with subpages
-  - Details page per item: fetch source-code, render
+- Hydra[id]: Render own source
 - ParVagues: Generic landing with master player, a code sample, and subpages
   - Details page per item: fetch source-code, fetch song
 
