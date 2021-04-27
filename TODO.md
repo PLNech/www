@@ -12,3 +12,5 @@
 # Customization
 - General style
 - Favicon
+
+- Hydras: Highlight with https://www.npmjs.com/package/react-syntax-highlighter
