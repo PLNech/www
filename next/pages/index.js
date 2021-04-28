@@ -46,37 +46,45 @@ export default function Home({ posts, talks }) {
             </a>
             .
           </p>
-
-          <h3>
-            …code into <em>music</em>
-          </h3>
+        </section>
+        <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
+          <Link href="/parvagues/">
+            <h3>
+              …code into <em>music</em>
+            </h3>
+          </Link>
           <p className="description">
             As <Link href="/parvagues/">ParVagues</Link>, I write patterns that
             shape soundwaves.
           </p>
-
-          <h3>
-            …code into <em>animated pixelscapes</em>
-          </h3>
+        </section>
+        <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
+          <Link href="/hydra/">
+            <h3>
+              …code into <em>animated pixelscapes</em>
+            </h3>
+          </Link>
           <p className="description">
             Using <Link href="/hydra/">Hydra</Link>, I create animations that
             offer windows into other words.
           </p>
         </section>
         <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-          <h3>
-            …ideas into <em>talks</em>
-          </h3>
+          <Link href="/talks/">
+            <h3>
+              …ideas into <em>talks</em>
+            </h3>
+          </Link>
           <p className="description">
             I <Link href="/talks/">speak</Link> about topics I care about: from
             sharing my passions and teaching useful patterns, to questioning our
             current mental models.
           </p>
-          <h2 className={utilStyles.headingLg}>Most recent talks</h2>
+          <h5 className={utilStyles.headingLg}>Most recent talks</h5>
           <ul className={utilStyles.list}>
             {talks.map(({ id, title, description }) => (
               <li className={utilStyles.listItem} key={id}>
-                <Link href={`/talk/${id}`} key={id}>
+                <Link href={`/talks#${id}`}>
                   <h4>{title}</h4>
                 </Link>
                 {description && (

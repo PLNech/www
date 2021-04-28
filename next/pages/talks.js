@@ -52,44 +52,46 @@ export default function Talks({ talks, selection }) {
               slides,
               event,
             }) => (
-              <li className={utilStyles.listItem} key={id}>
-                <h3>{title}</h3>
-                {description && (
-                  <>
-                    <small>{description}</small>
-                    <br />
-                  </>
-                )}
-                <small className={utilStyles.lightText}>
-                  <Date dateString={date} />
-                  {context && (
-                    <p>
-                      {" "}
-                      <i>
-                        at <a href={event}>{context}</a>{" "}
-                        {org && <>organised by {org}</>}
-                      </i>
-                    </p>
+              <Link href={`/talks#${id}`} key={id}>
+                <li className={utilStyles.listItem}>
+                  <h3 id={id}>{title}</h3>
+                  {description && (
+                    <>
+                      <small>{description}</small>
+                      <br />
+                    </>
                   )}
-                </small>{" "}
-                <ul class="links">
-                  {video && (
-                    <li>
-                      <a href={video}>Video</a>
-                    </li>
-                  )}
-                  {slides && (
-                    <li>
-                      <a href={slides}>Slides</a>
-                    </li>
-                  )}
-                  {event && (
-                    <li>
-                      <a href={event}>Event</a>
-                    </li>
-                  )}
-                </ul>
-              </li>
+                  <small className={utilStyles.lightText}>
+                    <Date dateString={date} />
+                    {context && (
+                      <p>
+                        {" "}
+                        <i>
+                          at <a href={event}>{context}</a>{" "}
+                          {org && <>organised by {org}</>}
+                        </i>
+                      </p>
+                    )}
+                  </small>{" "}
+                  <ul className="links">
+                    {video && (
+                      <li>
+                        <a href={video}>Video</a>
+                      </li>
+                    )}
+                    {slides && (
+                      <li>
+                        <a href={slides}>Slides</a>
+                      </li>
+                    )}
+                    {event && (
+                      <li>
+                        <a href={event}>Event</a>
+                      </li>
+                    )}
+                  </ul>
+                </li>
+              </Link>
             )
           )}
         </ul>

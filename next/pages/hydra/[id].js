@@ -41,6 +41,7 @@ export default function Hydra({ hydraData, sourceCode }) {
       </Head>
       <article>
         <h1 className={utilStyles.headingXl}>{hydraData.title}</h1>
+        <a href={hydraData.link}>See it live</a>
         <SyntaxHighlighter
           width="64em"
           language="javascript"
