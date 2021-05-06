@@ -1,29 +1,36 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from './layout.module.css'
-import utilStyles from '../styles/utils.module.css'
-import Link from 'next/link'
+import Head from "next/head";
+import Image from "next/image";
+import styles from "./layout.module.css";
+import utilStyles from "../styles/utils.module.css";
+import Link from "next/link";
 
-const name = 'PLN'
-export const siteTitle = 'PLN\'s Works'
+const name = "PLN";
+export const siteTitle = "PLN's Works";
+export const siteURL = "https://me.plnech.fr";
+export const twitterHandle = "@PaulLouisNech";
+export const description = "PLN's Selected Works";
 
 export default function Layout({ children, home }) {
   return (
     <div className={styles.container}>
       <Head>
         <link rel="icon" href="/favicon.ico" />
-        <meta
-          name="description"
-          content="PLN's Selected Works"
-        />
+        <meta name="description" content={description} />
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:creator" content={twitterHandle} key="twhandle" />
+        {/* Open Graph */}
+        <meta name="og:title" content={siteTitle} key="ogtitle"/>
+        <meta property="og:url" content={siteURL} key="ogurl" />
+        <meta property="og:site_name" content={siteTitle} key="ogsitename" />
+        <meta property="og:type" content="website" key="ogtype" />
+        <meta property="og:description" content={description} key="ogdesc" />
         <meta
           property="og:image"
           content={`https://og-image.vercel.app/${encodeURI(
             siteTitle
           )}.png?theme=dark&md=0&fontSize=75px&images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fnextjs-black-logo.svg`}
         />
-        <meta name="og:title" content={siteTitle} />
-        <meta name="twitter:card" content="summary_large_image" />
       </Head>
       <header className={styles.header}>
         {home ? (
@@ -69,12 +76,15 @@ export default function Layout({ children, home }) {
         </div>
       )}
       <footer>
-          PLN 2021 | ☇<a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >▲</a>
+        PLN 2021 | ☇
+        <a
+          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          ▲
+        </a>
       </footer>
     </div>
-  )
+  );
 }
