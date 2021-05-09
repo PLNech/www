@@ -42,7 +42,7 @@ export default function NuitsEtoilees() {
           <Link href="https://nech.pl/halley">
             <li>
               <h3>
-                <a href="https://nech.pl/halley">Dusty Halley</a>
+                <a href="https://nech.pl/halley">⮞ Dusty Halley</a>
               </h3>
               <p>
                 Pour la{" "}
@@ -67,7 +67,7 @@ export default function NuitsEtoilees() {
           <Link href="https://nech.pl/edge">
             <li>
               <h3>
-                <a href="https://nech.pl/edge">Edge of Destruction</a>
+                <a href="https://nech.pl/edge">⮞ Edge of Destruction</a>
               </h3>
               <p>
                 Pour une{" "}
@@ -93,7 +93,7 @@ export default function NuitsEtoilees() {
           <Link href="https://nech.pl/ariane13">
             <li>
               <h3>
-                <a href="https://nech.pl/ariane13">Ariane13</a>
+                <a href="https://nech.pl/ariane13">⮞ Ariane13</a>
               </h3>
               <p>
                 Basé sur une photo prise par Hubble{" "}
