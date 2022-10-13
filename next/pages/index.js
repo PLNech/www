@@ -39,12 +39,7 @@ export default function Home({ posts, talks }) {
           </h3>
           <p className="description">
             At <a href="https://algolia.com">Algolia</a>, I create technologies
-            to help humans find things and
-            <a href="https://www.algolia.com/products/answers-for-support/">
-              {" "}
-              answers
-            </a>
-            .
+            to help humans find things, get <a href="https://algolia.com/products/recommendations">inspired</a>, and <a href="https://www.algolia.com/blog/ai/launching-an-industry-leading-artificially-intelligent-search-platform/">be understood</a>.
           </p>
         </section>
         <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
@@ -66,7 +61,7 @@ export default function Home({ posts, talks }) {
           </Link>
           <p className="description">
             Using <Link href="/hydra/">Hydra</Link>, I create animations that
-            offer windows into other words.
+            offer windows into other worlds.
           </p>
         </section>
         <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
