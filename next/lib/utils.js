@@ -12,7 +12,7 @@ function getAllContentData(name, sorted = false) {
   // Get file names under /content/{name}
   const contentDirectory = getContentDirectory(name);
   const fileNames = fs.readdirSync(contentDirectory);
-  console.log(`gACD: total ${name}(s): ${fileNames.length}`);
+  // console.log(`gACD: total ${name}(s): ${fileNames.length}`);
 
   const allContentData = fileNames.map((fileName) => {
     // Remove ".md" from file name to get id

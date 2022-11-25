@@ -90,7 +90,8 @@ export default function Home({ posts, talks }) {
             ))}
           </ul>
         </section>
-        <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
+        {/* TODO: Get rid of blog or use it :') */}
+        {/* <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
           <h2 className={utilStyles.headingLg}>Blog</h2>
           <ul className={utilStyles.list}>
             {posts.map(({ id, date, title }) => (
@@ -105,7 +106,7 @@ export default function Home({ posts, talks }) {
               </li>
             ))}
           </ul>
-        </section>
+        </section> */}
       </Layout>
     </div>
   );

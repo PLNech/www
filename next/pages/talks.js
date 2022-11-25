@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Head from "next/head";
 import Layout from "../components/layout";
+import Date from "../components/date";
 import utilStyles from "../styles/utils.module.css";
 import { getTalksData } from "../lib/talks";
 
@@ -64,13 +65,9 @@ export default function Talks({ talks, selection }) {
                   <small className={utilStyles.lightText}>
                     <Date dateString={date} />
                     {context && (
-                      <p>
-                        {" "}
-                        <i>
-                          at <a href={event}>{context}</a>{" "}
+                        <i> at <a href={event}>{context}</a>{" "}
                           {org && <>organised by {org}</>}
                         </i>
-                      </p>
                     )}
                   </small>{" "}
                   <ul className="links">
