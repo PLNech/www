@@ -75,7 +75,8 @@ export default function Home({ posts, talks }) {
             sharing my passions and teaching useful patterns, to questioning our
             current mental models.
           </p>
-          <h5 className={utilStyles.headingLg}>Most recent talks</h5>
+          <hr />
+          <h6 className={utilStyles.headingLg}>Most recent talks</h6>
           <ul className={utilStyles.list}>
             {talks.map(({ id, title, description }) => (
               <li className={utilStyles.listItem} key={id}>

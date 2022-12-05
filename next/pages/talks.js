@@ -49,6 +49,7 @@ export default function Talks({ talks, selection }) {
               date,
               org,
               context,
+              audio,
               video,
               slides,
               event,
@@ -71,9 +72,14 @@ export default function Talks({ talks, selection }) {
                     )}
                   </small>{" "}
                   <ul className="links">
-                    {video && (
+                  {video && (
                       <li>
                         <a href={video}>Video</a>
+                      </li>
+                    )}
+                    {audio && (
+                      <li>
+                        <a href={audio}>Audio</a>
                       </li>
                     )}
                     {slides && (
