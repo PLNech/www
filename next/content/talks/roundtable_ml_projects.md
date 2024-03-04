@@ -1,5 +1,5 @@
 ---
-title: Roundtable: How to successfully drive a machine learning project ?
+title: How to successfully drive a machine learning project ?
 description: "Table ronde sur ce qui rend les projets de Machine Learning particuliers : comment la gestion de projet peut s'adapter à la recherche expérimentale, comment parler aux autres acteurs du projet, et comment faire monter en compétence nos collègues."
 date: "2023-03-17"
 org: Ekimetrics
