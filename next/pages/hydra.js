@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Head from "next/head";
 import Layout from "../components/layout";
-import HydraSynth from "../components/hydra";
+import HydraSynth from "../components/hydra-view.js";
 import utilStyles from "../styles/utils.module.css";
 import { getHydrasData } from "../lib/hydras";
 
