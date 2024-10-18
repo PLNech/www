@@ -4,7 +4,7 @@ description: "What data do you use to fuel your product carousels? Textual attri
 date: '2024-06-12'
 slides: https://alg.li/mices24
 video: https://www.youtube.com/watch?v=un5PKNsdHPM
-event: https://mices.co/
 context: "MICES Conference in Berlin"
+event: https://mices.co/
 org: "OpenSource Connections"
 ---

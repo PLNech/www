@@ -4,5 +4,6 @@ description: "In a Machine Learning product or API, what makes a good Developer 
 date: '2022-09-25'
 context: Anil Kumar Krishnashetty's Podcast
 video: https://www.youtube.com/watch?v=_c_U1O9SRqk
+event: https://www.youtube.com/@ANILKUMARKRISHNASHETTY
 slides: https://medium.com/@anilbms75/developer-experience-from-machine-learning-engineer-perspective-2c81b8ce46be
 ---
