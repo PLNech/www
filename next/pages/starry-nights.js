@@ -3,7 +3,6 @@ import Link from "next/link";
 import Head from "next/head";
 import Layout from "../components/layout";
 import HydraSynth from "../components/hydra-view";
-import HydraSynth from "../components/hydra-view";
 import utilStyles from "../styles/utils.module.css";
 
 export default function NuitsEtoilees() {
