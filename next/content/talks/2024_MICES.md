@@ -5,4 +5,6 @@ date: '2024-06-12'
 slides: https://alg.li/mices24
 video: https://www.youtube.com/watch?v=un5PKNsdHPM
 event: https://mices.co/
+context: "MICES Conference in Berlin"
+org: "OpenSource Connections"
 ---
