@@ -35,7 +35,7 @@ export async function getStaticPaths() {
 }
 
 export default function Hydra({ hydraData, sourceCode }) {
-  const canvasRef = useRef(null);
+  // const canvasRef = useRef(null);
   return (
     <Layout>
       <Head>
@@ -49,7 +49,7 @@ export default function Hydra({ hydraData, sourceCode }) {
         </h5>
         {/* <canvas id={canvasRef}/> */}
         {/* <HydraSynth width={700} height={475} */}
-          canvasRef={canvasRef} source={hydraData.source} />
+          {/* canvasRef={canvasRef} source={hydraData.source} /> */}
         <SyntaxHighlighter
           width="64em"
           language="javascript"
@@ -60,3 +60,32 @@ export default function Hydra({ hydraData, sourceCode }) {
     </Layout>
   );
 }
+
+
+// Suggestion for later:
+// 
+// Dynamic import with SSR disabled
+// const HydraSynth = dynamic(
+//   () => import('../../components/hydra-view'),
+//   { ssr: false }
+// )
+// 
+// export default function Hydra({ hydraData, sourceCode }) {
+//   const canvasRef = useRef(null);
+// 
+//   return (
+//     <Layout>
+//       {/* ... rest of your component ... */}
+// 
+//       {/* Now this will only run on the client side */}
+//       <HydraSynth 
+//         width={700} 
+//         height={475}
+//         canvasRef={canvasRef} 
+//         source={hydraData.source} 
+//       />
+// 
+//       {/* ... rest of your component ... */}
+//     </Layout>
+//   );
+// }
