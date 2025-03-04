@@ -1,7 +1,7 @@
 import SyntaxHighlighter from "react-syntax-highlighter";
 import Head from "next/head";
 import Layout from "../../components/layout";
-import HydraSynth from "../../components/hydra-view";
+// import HydraSynth from "../../components/hydra-view";
 import Date from "../../components/date";
 const https = require("https");
 import { useRef } from "react";
@@ -48,7 +48,7 @@ export default function Hydra({ hydraData, sourceCode }) {
           <i><a href={hydraData.link}>Run it fullscreen in your browser</a></i>
         </h5>
         {/* <canvas id={canvasRef}/> */}
-        <HydraSynth width={700} height={475}
+        {/* <HydraSynth width={700} height={475} */}
           canvasRef={canvasRef} source={hydraData.source} />
         <SyntaxHighlighter
           width="64em"
