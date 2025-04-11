@@ -1,8 +1,8 @@
 import path from "path";
 import fs from "fs";
 import matter from "gray-matter";
-import remark from "remark";
-import html from "remark-html";
+import { remark } from 'remark';
+import remarkHtml from 'remark-html';
 
 function getContentDirectory(name) {
   return path.join(process.cwd(), "content", name)
@@ -67,14 +67,14 @@ async function getContentData(name, id) {
 
   // Use remark to convert markdown into HTML string
   const processedContent = await remark()
-    .use(html)
+    .use(remarkHtml)
     .process(matterResult.content);
   const contentHtml = processedContent.toString();
   console.log(matterResult);
   if ("description" in matterResult.data) {
     console.log("Got desc!");
     const processedDescription = await remark()
-      .use(html)
+      .use(remarkHtml)
       .process(matterResult.data.description);
     matterResult.data.description = processedContent.toString();
 

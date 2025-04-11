@@ -50,3 +50,68 @@
 .lightText {
   color: #666;
 }
+
+.filters {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.filters select {
+  margin-left: 0.5rem;
+  padding: 0.25rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.poemContent {
+  margin-top: 2rem;
+  line-height: 1.8;
+  white-space: pre-wrap;
+}
+
+.poemContent p {
+  margin: 1rem 0;
+}
+
+.poemContent img {
+  max-width: 100%;
+  height: auto;
+  margin: 1rem 0;
+}
+
+.listItemLink {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.listItemLink:hover {
+  text-decoration: underline;
+}
+
+.sectionLink {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  margin: 1rem 0;
+}
+
+.sectionLink:hover {
+  text-decoration: underline;
+}
+
+.inlineLink {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.inlineLink:hover {
+  opacity: 0.8;
+}

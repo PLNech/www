@@ -43,35 +43,37 @@ export default function Home({ posts, talks }) {
           </p>
         </section>
         <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-          <Link href="/parvagues/">
-            <h3>
-              …code into <em>music</em>
-            </h3>
+          <Link href="/parvagues/" className={utilStyles.sectionLink}>
+            …code into <em>music</em>
           </Link>
           <p className="description">
-            As <Link href="/parvagues/">ParVagues</Link>, I write patterns that
+            As <Link href="/parvagues/" className={utilStyles.inlineLink}>ParVagues</Link>, I write patterns that
             shape soundwaves.
           </p>
         </section>
         <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-          <Link href="/hydra/">
-            <h3>
-              …code into <em>animated pixelscapes</em>
-            </h3>
+          <Link href="/hydra/" className={utilStyles.sectionLink}>
+            …code into <em>animated pixelscapes</em>
           </Link>
           <p className="description">
-            Using <Link href="/hydra/">Hydra</Link>, I create animations that
+            Using <Link href="/hydra/" className={utilStyles.inlineLink}>Hydra</Link>, I create animations that
             offer windows into other worlds.
           </p>
         </section>
         <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-          <Link href="/talks/">
-            <h3>
-              …ideas into <em>talks</em>
-            </h3>
+          <Link href="/poesie/" className={utilStyles.sectionLink}>
+            …words into <em>thoughts</em>
           </Link>
           <p className="description">
-            I <Link href="/talks/">speak</Link> about topics I care about: from
+            A selection of texts scattered across note books and note apps.
+          </p>
+        </section>
+        <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
+          <Link href="/talks/" className={utilStyles.sectionLink}>
+            …ideas into <em>talks</em>
+          </Link>
+          <p className="description">
+            I <Link href="/talks/" className={utilStyles.inlineLink}>speak</Link> about topics I care about: from
             sharing my passions and teaching useful patterns, to questioning our
             current mental models.
           </p>
@@ -80,8 +82,8 @@ export default function Home({ posts, talks }) {
           <ul className={utilStyles.list}>
             {talks.map(({ id, title, description }) => (
               <li className={utilStyles.listItem} key={id}>
-                <Link href={`/talks#${id}`}>
-                  <h4>{title}</h4>
+                <Link href={`/talks#${id}`} className={utilStyles.listItemLink}>
+                  {title}
                 </Link>
                 {description && (
                   <small className={utilStyles.lightText}>{description}</small>
