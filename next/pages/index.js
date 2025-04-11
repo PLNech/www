@@ -43,7 +43,7 @@ export default function Home({ posts, talks }) {
           </p>
         </section>
         <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-          <Link href="/parvagues/" className={utilStyles.sectionLink}>
+          <Link href="/parvagues/" className={utilStyles.sectionLink} legacyBehavior>
             …code into <em>music</em>
           </Link>
           <p className="description">
@@ -52,7 +52,7 @@ export default function Home({ posts, talks }) {
           </p>
         </section>
         <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-          <Link href="/hydra/" className={utilStyles.sectionLink}>
+          <Link href="/hydra/" className={utilStyles.sectionLink} legacyBehavior>
             …code into <em>animated pixelscapes</em>
           </Link>
           <p className="description">
@@ -61,7 +61,7 @@ export default function Home({ posts, talks }) {
           </p>
         </section>
         <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-          <Link href="/poesie/" className={utilStyles.sectionLink}>
+          <Link href="/poesie/" className={utilStyles.sectionLink} legacyBehavior>
             …words into <em>thoughts</em>
           </Link>
           <p className="description">
@@ -69,7 +69,7 @@ export default function Home({ posts, talks }) {
           </p>
         </section>
         <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-          <Link href="/talks/" className={utilStyles.sectionLink}>
+          <Link href="/talks/" className={utilStyles.sectionLink} legacyBehavior>
             …ideas into <em>talks</em>
           </Link>
           <p className="description">
@@ -82,7 +82,7 @@ export default function Home({ posts, talks }) {
           <ul className={utilStyles.list}>
             {talks.map(({ id, title, description }) => (
               <li className={utilStyles.listItem} key={id}>
-                <Link href={`/talks#${id}`} className={utilStyles.listItemLink}>
+                <Link href={`/talks#${id}`} className={utilStyles.listItemLink} legacyBehavior>
                   {title}
                 </Link>
                 {description && (

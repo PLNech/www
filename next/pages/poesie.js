@@ -87,7 +87,7 @@ export default function Poems({ poems }) {
         <ul className={utilStyles.list}>
           {sortedPoems.map(({ id, title, date, language, tags }) => (
             <li className={utilStyles.listItem} key={id}>
-              <Link href={`/poesie/${id}`} className={utilStyles.listItemLink}>
+              <Link href={`/poesie/${id}`} className={utilStyles.listItemLink} legacyBehavior>
                 {title}
               </Link>
               <small className={utilStyles.lightText}>

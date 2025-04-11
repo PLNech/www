@@ -69,7 +69,7 @@ export default function Hydra({ hydras }) {
         <ul className={utilStyles.list}>
           {hydras.map(({ id, title }) => (
             <li className={utilStyles.listItem} key={id}>
-              <Link href={`/hydra/${id}`}>
+              <Link href={`/hydra/${id}`} legacyBehavior>
                 <h4> {title}</h4>
               </Link>
             </li>

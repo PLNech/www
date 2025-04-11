@@ -54,7 +54,7 @@ export default function Talks({ talks, selection }) {
               slides,
               event,
             }) => (
-              <Link href={`/talks#${id}`} key={id}>
+              <Link href={`/talks#${id}`} key={id} legacyBehavior>
                 <li className={utilStyles.listItem}>
                   <h3 id={id}>{title}</h3>
                   {description && (

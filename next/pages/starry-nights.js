@@ -39,7 +39,7 @@ export default function NuitsEtoilees() {
         <br />
         <br />
         <ul className={utilStyles.list}>
-          <Link href="https://nech.pl/halley">
+          <Link href="https://nech.pl/halley" legacyBehavior>
             <li>
               <h3>
                 <a href="https://nech.pl/halley">⮞ Dusty Halley</a>
@@ -64,7 +64,7 @@ export default function NuitsEtoilees() {
               </p>
             </li>
           </Link>
-          <Link href="https://nech.pl/edge">
+          <Link href="https://nech.pl/edge" legacyBehavior>
             <li>
               <h3>
                 <a href="https://nech.pl/edge">⮞ Edge of Destruction</a>
@@ -90,7 +90,7 @@ export default function NuitsEtoilees() {
               </p>
             </li>
           </Link>
-          <Link href="https://nech.pl/ariane13">
+          <Link href="https://nech.pl/ariane13" legacyBehavior>
             <li>
               <h3>
                 <a href="https://nech.pl/ariane13">⮞ Ariane13</a>
