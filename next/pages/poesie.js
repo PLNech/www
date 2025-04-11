@@ -18,7 +18,7 @@ export async function getStaticProps() {
 export default function Poems({ poems }) {
   const [sortBy, setSortBy] = useState('date');
   const [sortOrder, setSortOrder] = useState('desc');
-  const [filterLanguage, setFilterLanguage] = useState('all');
+  const [filterLanguage, setFilterLanguage] = useState('Français'); // Default language set to Français
   const [filterTags, setFilterTags] = useState('all');
 
   // Get unique languages and tags

@@ -5,19 +5,30 @@ import { remark } from 'remark';
 import remarkHtml from 'remark-html';
 
 function getContentDirectory(name) {
-  return path.join(process.cwd(), "content", name)
+  return path.join(process.cwd(), "content", name);
+}
+
+// Helper function to check if a file is a markdown file
+function isMarkdownFile(fileName) {
+  return fileName.endsWith('.md') && !fileName.endsWith('.mdx.md');
+}
+
+// Helper function to get ID from filename
+function getIdFromFileName(fileName) {
+  return fileName.replace(/\.md$/, '');
 }
 
 function getAllContentData(name, sorted = false) {
   // Get file names under /content/{name}
   const contentDirectory = getContentDirectory(name);
   const fileNames = fs.readdirSync(contentDirectory);
+  console.log(`getAllContentData: Found ${fileNames.length} files in ${name}`);
   
   const allContentData = fileNames
-    .filter(fileName => fileName.endsWith('.md')) // Keep only .md files
+    .filter(isMarkdownFile)
     .map((fileName) => {
-      // Remove ".md" from file name to get id
-      const id = fileName.replace(/\.md$/, "");
+      const id = getIdFromFileName(fileName);
+      console.log(`Processing ${fileName} with id ${id}`);
 
       // Read markdown file as string
       const fullPath = path.join(contentDirectory, fileName);
@@ -46,22 +57,29 @@ function getAllContentData(name, sorted = false) {
 
 function getAllContentIds(name) {
   const fileNames = fs.readdirSync(getContentDirectory(name));
-  console.log(`getAllContentIds: ${fileNames.length} ${name}(s).`);
+  console.log(`getAllContentIds: Found ${fileNames.length} files in ${name}`);
 
-  return fileNames.map((fileName) => {
-    return {
+  return fileNames
+    .filter(isMarkdownFile)
+    .map((fileName) => ({
       params: {
-        id: fileName.replace(/\.md$/, ""),
+        id: getIdFromFileName(fileName),
       },
-    };
-  });
+    }));
 }
 
 async function getContentData(name, id) {
-  const fullPath = path.join(getContentDirectory(name), `${id}.md`);
-  console.log("Got content fullPath:", fullPath);
+  // Ensure we're looking for a .md file
+  const fileName = `${id}${id.endsWith('.md') ? '' : '.md'}`;
+  const fullPath = path.join(getContentDirectory(name), fileName);
+  
+  if (!fs.existsSync(fullPath)) {
+    console.error(`File not found: ${fullPath}`);
+    throw new Error(`No content found for ${id}`);
+  }
+
+  console.log("Reading content from:", fullPath);
   const fileContents = fs.readFileSync(fullPath, "utf8");
-  console.log("Got contents:", fileContents);
 
   // Use gray-matter to parse the post metadata section
   const matterResult = matter(fileContents);
@@ -71,20 +89,17 @@ async function getContentData(name, id) {
     .use(remarkHtml)
     .process(matterResult.content);
   const contentHtml = processedContent.toString();
-  console.log(matterResult);
+
   if ("description" in matterResult.data) {
-    console.log("Got desc!");
     const processedDescription = await remark()
       .use(remarkHtml)
       .process(matterResult.data.description);
-    matterResult.data.description = processedContent.toString();
-
+    matterResult.data.description = processedDescription.toString();
   }
-
 
   // Combine the data with the id and contentHtml
   return {
-    id,
+    id: getIdFromFileName(fileName),
     contentHtml,
     ...matterResult.data,
   };
