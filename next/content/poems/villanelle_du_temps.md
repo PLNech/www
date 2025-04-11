@@ -1,9 +1,10 @@
 ---
-title: "Villanelle du Temps "
+title: "Villanelle du Temps"
 date: "2023-06-05 02:04:24"
 lines: 24
 words: 172
 chars: 958
+language: "Français"
 original_file: "notes.carnet/carnet_archive/Villanelle du Temps .sqd"
 ---
 

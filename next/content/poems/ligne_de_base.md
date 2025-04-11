@@ -3,6 +3,7 @@ title: "Ligne de base"
 date: "2022-06-29 16:24:36"
 color: "violet"
 tags: ["texte", "poème"]
+language: "Français"
 lines: 44
 words: 301
 chars: 1687

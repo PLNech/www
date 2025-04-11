@@ -2,6 +2,7 @@
 title: "Paysans"
 date: "2022-07-26 00:02:18"
 tags: ["poème", "texte"]
+language: "Français"
 lines: 17
 words: 98
 chars: 559

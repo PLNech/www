@@ -3,6 +3,7 @@ title: "Haïkus"
 date: "2022-06-28 17:40:41"
 color: "purple"
 tags: ["poème", "texte"]
+language: "Français"
 lines: 108
 words: 382
 chars: 2260

@@ -3,6 +3,7 @@ title: "Critique "
 date: "2022-08-25 16:54:48"
 color: "blue"
 tags: ["texte", "poème"]
+language: "Français"
 lines: 33
 words: 201
 chars: 1178

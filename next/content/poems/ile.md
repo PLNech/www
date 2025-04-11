@@ -2,6 +2,7 @@
 title: "Île"
 date: "2022-06-27 21:38:32"
 color: "violet"
+language: "Français"
 lines: 20
 words: 117
 chars: 647
