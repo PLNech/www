@@ -23,7 +23,8 @@ export default function Poems({ poems }) {
 
   // Get unique languages and tags
   const languages = ['all', ...new Set(poems.map(p => p.language || 'unknown'))];
-  const tags = ['all', ...new Set(poems.flatMap(p => p.tags || []))];
+  const allTags = [...new Set(poems.flatMap(p => p.tags || []))];
+  const tags = ['all', ...allTags];
 
   // Filter and sort poems
   const filteredPoems = poems
@@ -47,57 +48,113 @@ export default function Poems({ poems }) {
   return (
     <Layout>
       <Head>
-        <title>Poems</title>
+        <title>Poems | Words into thoughts</title>
+        <meta name="description" content="A collection of poems and thoughts" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <div className={utilStyles.headingMd}>
         <h1>Words into thoughts</h1>
+        <p>A selection of texts scattered across note books and note apps.</p>
         
-        <div className={utilStyles.filters}>
-          <div>
-            <label>Sort by: </label>
-            <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
-              <option value="date">Date</option>
-              <option value="wordcount">Word count</option>
-            </select>
-            <select value={sortOrder} onChange={(e) => setSortOrder(e.target.value)}>
-              <option value="desc">Descending</option>
-              <option value="asc">Ascending</option>
-            </select>
-          </div>
-          
-          <div>
-            <label>Language: </label>
-            <select value={filterLanguage} onChange={(e) => setFilterLanguage(e.target.value)}>
-              {languages.map(lang => (
-                <option key={lang} value={lang}>{lang}</option>
-              ))}
-            </select>
-          </div>
-          
-          <div>
-            <label>Tag: </label>
-            <select value={filterTags} onChange={(e) => setFilterTags(e.target.value)}>
-              {tags.map(tag => (
-                <option key={tag} value={tag}>{tag}</option>
-              ))}
-            </select>
+        <div className={utilStyles.filtersContainer}>
+          <div className={utilStyles.filtersGroup}>
+            <div className={utilStyles.filterItem}>
+              <span className={utilStyles.filterLabel}>Sort by</span>
+              <select 
+                className={utilStyles.filterSelect}
+                value={sortBy} 
+                onChange={(e) => setSortBy(e.target.value)}
+                aria-label="Sort poems by"
+              >
+                <option value="date">Date</option>
+                <option value="wordcount">Word count</option>
+              </select>
+            </div>
+            
+            <div className={utilStyles.filterItem}>
+              <span className={utilStyles.filterLabel}>Order</span>
+              <select 
+                className={utilStyles.filterSelect}
+                value={sortOrder} 
+                onChange={(e) => setSortOrder(e.target.value)}
+                aria-label="Sort order"
+              >
+                <option value="desc">Newest first</option>
+                <option value="asc">Oldest first</option>
+              </select>
+            </div>
+            
+            <div className={utilStyles.filterItem}>
+              <span className={utilStyles.filterLabel}>Language</span>
+              <select 
+                className={utilStyles.filterSelect}
+                value={filterLanguage} 
+                onChange={(e) => setFilterLanguage(e.target.value)}
+                aria-label="Filter by language"
+              >
+                {languages.map(lang => (
+                  <option key={lang} value={lang}>
+                    {lang === 'all' ? 'All languages' : lang}
+                  </option>
+                ))}
+              </select>
+            </div>
+            
+            <div className={utilStyles.filterItem}>
+              <span className={utilStyles.filterLabel}>Tags</span>
+              <select 
+                className={utilStyles.filterSelect}
+                value={filterTags} 
+                onChange={(e) => setFilterTags(e.target.value)}
+                aria-label="Filter by tag"
+              >
+                {tags.map(tag => (
+                  <option key={tag} value={tag}>
+                    {tag === 'all' ? 'All tags' : tag}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
         </div>
 
-        <ul className={utilStyles.list}>
-          {sortedPoems.map(({ id, title, date, language, tags }) => (
-            <li className={utilStyles.listItem} key={id}>
-              <Link href={`/poesie/${id}`} className={utilStyles.listItemLink} legacyBehavior>
-                {title}
-              </Link>
-              <small className={utilStyles.lightText}>
-                <Date dateString={date} />
-                {language && ` • ${language}`}
-                {tags && tags.length > 0 && ` • ${tags.join(', ')}`}
-              </small>
-            </li>
-          ))}
-        </ul>
+        <div className={utilStyles.list}>
+          {sortedPoems.length === 0 ? (
+            <p>No poems match your current filters. Try adjusting your selection.</p>
+          ) : (
+            sortedPoems.map(({ id, title, date, language, tags }) => (
+              <div className={utilStyles.poemCard} key={id}>
+                <Link href={`/poesie/${id}`} className={utilStyles.listItemLink}>
+                  {title}
+                </Link>
+                
+                <div className={utilStyles.poemMeta}>
+                  {date && (
+                    <span className={utilStyles.poemMetaItem}>
+                      <Date dateString={date} />
+                    </span>
+                  )}
+                  
+                  {language && (
+                    <span className={utilStyles.poemMetaItem}>
+                      {language}
+                    </span>
+                  )}
+                </div>
+                
+                {tags && tags.length > 0 && (
+                  <div className={utilStyles.tagList}>
+                    {tags.map(tag => (
+                      <span key={tag} className={utilStyles.tag}>
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))
+          )}
+        </div>
       </div>
     </Layout>
   );

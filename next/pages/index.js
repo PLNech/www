@@ -43,8 +43,8 @@ export default function Home({ posts, talks }) {
           </p>
         </section>
         <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-          <Link href="/parvagues/" className={utilStyles.sectionLink} legacyBehavior>
-            …code into <em>music</em>
+          <Link href="/parvagues/" className={utilStyles.sectionLink}>
+            <span>…code into <em>music</em></span>
           </Link>
           <p className="description">
             As <Link href="/parvagues/" className={utilStyles.inlineLink}>ParVagues</Link>, I write patterns that
@@ -52,8 +52,8 @@ export default function Home({ posts, talks }) {
           </p>
         </section>
         <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-          <Link href="/hydra/" className={utilStyles.sectionLink} legacyBehavior>
-            …code into <em>animated pixelscapes</em>
+          <Link href="/hydra/" className={utilStyles.sectionLink}>
+            <span>…code into <em>animated pixelscapes</em></span>
           </Link>
           <p className="description">
             Using <Link href="/hydra/" className={utilStyles.inlineLink}>Hydra</Link>, I create animations that
@@ -61,16 +61,16 @@ export default function Home({ posts, talks }) {
           </p>
         </section>
         <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-          <Link href="/poesie/" className={utilStyles.sectionLink} legacyBehavior>
-            …words into <em>thoughts</em>
+          <Link href="/poesie/" className={utilStyles.sectionLink}>
+            <span>…words into <em>thoughts</em></span>
           </Link>
           <p className="description">
             A selection of texts scattered across note books and note apps.
           </p>
         </section>
         <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-          <Link href="/talks/" className={utilStyles.sectionLink} legacyBehavior>
-            …ideas into <em>talks</em>
+          <Link href="/talks/" className={utilStyles.sectionLink}>
+            <span>…ideas into <em>talks</em></span>
           </Link>
           <p className="description">
             I <Link href="/talks/" className={utilStyles.inlineLink}>speak</Link> about topics I care about: from
@@ -82,8 +82,8 @@ export default function Home({ posts, talks }) {
           <ul className={utilStyles.list}>
             {talks.map(({ id, title, description }) => (
               <li className={utilStyles.listItem} key={id}>
-                <Link href={`/talks#${id}`} className={utilStyles.listItemLink} legacyBehavior>
-                  {title}
+                <Link href={`/talks#${id}`} className={utilStyles.listItemLink}>
+                  <span>{title}</span>
                 </Link>
                 {description && (
                   <small className={utilStyles.lightText}>{description}</small>

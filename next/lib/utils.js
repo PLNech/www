@@ -12,25 +12,26 @@ function getAllContentData(name, sorted = false) {
   // Get file names under /content/{name}
   const contentDirectory = getContentDirectory(name);
   const fileNames = fs.readdirSync(contentDirectory);
-  // console.log(`gACD: total ${name}(s): ${fileNames.length}`);
+  
+  const allContentData = fileNames
+    .filter(fileName => fileName.endsWith('.md')) // Keep only .md files
+    .map((fileName) => {
+      // Remove ".md" from file name to get id
+      const id = fileName.replace(/\.md$/, "");
 
-  const allContentData = fileNames.map((fileName) => {
-    // Remove ".md" from file name to get id
-    const id = fileName.replace(/\.md$/, "");
+      // Read markdown file as string
+      const fullPath = path.join(contentDirectory, fileName);
+      const fileContents = fs.readFileSync(fullPath, "utf8");
 
-    // Read markdown file as string
-    const fullPath = path.join(contentDirectory, fileName);
-    const fileContents = fs.readFileSync(fullPath, "utf8");
+      // Use gray-matter to parse the post metadata section
+      const matterResult = matter(fileContents);
 
-    // Use gray-matter to parse the post metadata section
-    const matterResult = matter(fileContents);
-
-    // Combine the data with the id
-    return {
-      id,
-      ...matterResult.data,
-    };
-  });
+      // Combine the data with the id
+      return {
+        id,
+        ...matterResult.data,
+      };
+    });
 
   return sorted
     ? allContentData.sort((a, b) => {
