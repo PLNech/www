@@ -13,7 +13,7 @@ Choisissant leur tenue avec soin le dimanche
 Pour aller à l'église
 Ou plutôt à la Cathédrale
 Quel espace
-Quel vitraux
+Quels vitraux
 Et les balançoires  
 Diese Menschen wissen zu feiern
 Liebe, Überall  
