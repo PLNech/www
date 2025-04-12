@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import Layout from '../components/layout';
@@ -18,32 +18,49 @@ export async function getStaticProps() {
 export default function Poems({ poems }) {
   const [sortBy, setSortBy] = useState('date');
   const [sortOrder, setSortOrder] = useState('desc');
-  const [filterLanguage, setFilterLanguage] = useState('Français'); // Default language set to Français
+  const [filterLanguage, setFilterLanguage] = useState('Français');
   const [filterTags, setFilterTags] = useState('all');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [displayedPoems, setDisplayedPoems] = useState([]);
 
   // Get unique languages and tags
   const languages = ['all', ...new Set(poems.map(p => p.language || 'unknown'))];
   const allTags = [...new Set(poems.flatMap(p => p.tags || []))];
   const tags = ['all', ...allTags];
 
-  // Filter and sort poems
-  const filteredPoems = poems
-    .filter(p => filterLanguage === 'all' || p.language === filterLanguage)
-    .filter(p => filterTags === 'all' || (p.tags && p.tags.includes(filterTags)));
+  // Filter and sort poems whenever filters change
+  useEffect(() => {
+    // Filter poems based on all criteria
+    const filtered = poems
+      .filter(p => filterLanguage === 'all' || p.language === filterLanguage)
+      .filter(p => filterTags === 'all' || (p.tags && p.tags.includes(filterTags)))
+      .filter(p => {
+        if (!searchTerm) return true;
+        
+        const search = searchTerm.toLowerCase();
+        const titleMatch = p.title?.toLowerCase().includes(search);
+        const contentMatch = p.contentHtml?.toLowerCase().includes(search);
+        
+        return titleMatch || contentMatch;
+      });
 
-  const sortedPoems = [...filteredPoems].sort((a, b) => {
-    if (sortBy === 'date') {
-      if (a.date < b.date) return sortOrder === 'desc' ? 1 : -1;
-      if (a.date > b.date) return sortOrder === 'desc' ? -1 : 1;
+    // Sort filtered poems
+    const sorted = [...filtered].sort((a, b) => {
+      if (sortBy === 'date') {
+        if (a.date < b.date) return sortOrder === 'desc' ? 1 : -1;
+        if (a.date > b.date) return sortOrder === 'desc' ? -1 : 1;
+        return 0;
+      }
+      if (sortBy === 'wordcount') {
+        const aWords = a.contentHtml?.split(/\s+/).length || 0;
+        const bWords = b.contentHtml?.split(/\s+/).length || 0;
+        return sortOrder === 'desc' ? bWords - aWords : aWords - bWords;
+      }
       return 0;
-    }
-    if (sortBy === 'wordcount') {
-      const aWords = a.contentHtml?.split(/\s+/).length || 0;
-      const bWords = b.contentHtml?.split(/\s+/).length || 0;
-      return sortOrder === 'desc' ? bWords - aWords : aWords - bWords;
-    }
-    return 0;
-  });
+    });
+
+    setDisplayedPoems(sorted);
+  }, [poems, sortBy, sortOrder, filterLanguage, filterTags, searchTerm]);
 
   return (
     <Layout>
@@ -56,75 +73,73 @@ export default function Poems({ poems }) {
         <h1>Words into thoughts</h1>
         <p>A selection of texts scattered across note books and note apps.</p>
         
-        <div className={utilStyles.filtersContainer}>
-          <div className={utilStyles.filtersGroup}>
-            <div className={utilStyles.filterItem}>
-              <span className={utilStyles.filterLabel}>Sort by</span>
-              <select 
-                className={utilStyles.filterSelect}
-                value={sortBy} 
-                onChange={(e) => setSortBy(e.target.value)}
-                aria-label="Sort poems by"
-              >
-                <option value="date">Date</option>
-                <option value="wordcount">Word count</option>
-              </select>
-            </div>
+        <div className={utilStyles.searchContainer}>
+          {/* Search bar */}
+          <input
+            type="text"
+            className={utilStyles.searchBar}
+            placeholder="Search poems by title or content..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            aria-label="Search poems"
+          />
+          
+          {/* Compact filter dropdowns */}
+          <div className={utilStyles.filterDropdowns}>
+            <select 
+              className={utilStyles.filterSelect}
+              value={filterLanguage} 
+              onChange={(e) => setFilterLanguage(e.target.value)}
+              aria-label="Filter by language"
+            >
+              {languages.map(lang => (
+                <option key={lang} value={lang}>
+                  {lang === 'all' ? 'All languages' : lang}
+                </option>
+              ))}
+            </select>
             
-            <div className={utilStyles.filterItem}>
-              <span className={utilStyles.filterLabel}>Order</span>
-              <select 
-                className={utilStyles.filterSelect}
-                value={sortOrder} 
-                onChange={(e) => setSortOrder(e.target.value)}
-                aria-label="Sort order"
-              >
-                <option value="desc">Newest first</option>
-                <option value="asc">Oldest first</option>
-              </select>
-            </div>
+            <select 
+              className={utilStyles.filterSelect}
+              value={filterTags} 
+              onChange={(e) => setFilterTags(e.target.value)}
+              aria-label="Filter by tag"
+            >
+              {tags.map(tag => (
+                <option key={tag} value={tag}>
+                  {tag === 'all' ? 'All tags' : tag}
+                </option>
+              ))}
+            </select>
             
-            <div className={utilStyles.filterItem}>
-              <span className={utilStyles.filterLabel}>Language</span>
-              <select 
-                className={utilStyles.filterSelect}
-                value={filterLanguage} 
-                onChange={(e) => setFilterLanguage(e.target.value)}
-                aria-label="Filter by language"
-              >
-                {languages.map(lang => (
-                  <option key={lang} value={lang}>
-                    {lang === 'all' ? 'All languages' : lang}
-                  </option>
-                ))}
-              </select>
-            </div>
-            
-            <div className={utilStyles.filterItem}>
-              <span className={utilStyles.filterLabel}>Tags</span>
-              <select 
-                className={utilStyles.filterSelect}
-                value={filterTags} 
-                onChange={(e) => setFilterTags(e.target.value)}
-                aria-label="Filter by tag"
-              >
-                {tags.map(tag => (
-                  <option key={tag} value={tag}>
-                    {tag === 'all' ? 'All tags' : tag}
-                  </option>
-                ))}
-              </select>
-            </div>
+            <select 
+              className={utilStyles.filterSelect}
+              value={`${sortBy}-${sortOrder}`} 
+              onChange={(e) => {
+                const [newSortBy, newSortOrder] = e.target.value.split('-');
+                setSortBy(newSortBy);
+                setSortOrder(newSortOrder);
+              }}
+              aria-label="Sort options"
+            >
+              <option value="date-desc">Newest first</option>
+              <option value="date-asc">Oldest first</option>
+              <option value="wordcount-desc">Longest first</option>
+              <option value="wordcount-asc">Shortest first</option>
+            </select>
           </div>
         </div>
 
         <div className={utilStyles.list}>
-          {sortedPoems.length === 0 ? (
+          {displayedPoems.length === 0 ? (
             <p>No poems match your current filters. Try adjusting your selection.</p>
           ) : (
-            sortedPoems.map(({ id, title, date, language, tags }) => (
+            displayedPoems.map(({ id, title, date, language, tags }) => (
               <div className={utilStyles.poemCard} key={id}>
-                <Link href={`/poesie/${id}`} className={utilStyles.listItemLink}>
+                <Link 
+                  href={`/poesie/${id}`} 
+                  className={utilStyles.listItemLink}
+                >
                   {title}
                 </Link>
                 

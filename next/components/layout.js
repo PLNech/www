@@ -3,6 +3,7 @@ import Image from "next/image";
 import styles from "./layout.module.css";
 import utilStyles from "../styles/utils.module.css";
 import Link from "next/link";
+import Router from 'next/router'
 
 const name = "PLN";
 export const siteTitle = "PLN's Works";
@@ -14,6 +15,7 @@ export default function Layout({ children, home }) {
   return (
     <div className={styles.container}>
       <Head>
+        <script src="http://localhost:8097"></script>
         <link rel="icon" href="/favicon.ico" />
         <meta name="description" content={description} />
         {/* Twitter */}
@@ -70,9 +72,9 @@ export default function Layout({ children, home }) {
       <main>{children}</main>
       {!home && (
         <div className={styles.backToHome}>
-          <Link href="/">
-            ← Back to home
-          </Link>
+          <div onClick={() => Router.back()} className={utilStyles.backButton}>
+            Go Back
+          </div>
         </div>
       )}
       <footer>

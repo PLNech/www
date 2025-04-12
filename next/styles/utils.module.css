@@ -265,3 +265,103 @@
     margin: 1rem auto;
   }
 }
+
+.hydraContainer {
+  width: 100%;
+  margin: 2rem 0 1rem;
+  position: relative;
+}
+
+.hydraLinks {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.hydraLinks a {
+  color: #0070f3;
+  text-decoration: none;
+}
+
+.hydraLinks a:hover {
+  text-decoration: underline;
+}
+
+.toggleButton {
+  background: none;
+  border: none;
+  color: #0070f3;
+  cursor: pointer;
+  font-size: 0.95rem;
+  padding: 0;
+  text-decoration: none;
+}
+
+.toggleButton:hover {
+  text-decoration: underline;
+}
+
+.codeContainer {
+  margin-top: 1rem;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #f6f8fa;
+}
+
+.searchContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  align-items: center;
+}
+
+.searchBar {
+  flex: 1;
+  min-width: 200px;
+  padding: 0.6rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  background-color: white;
+}
+
+.searchBar:focus {
+  outline: none;
+  border-color: #0070f3;
+  box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.2);
+}
+
+.filterDropdowns {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.filterSelect {
+  padding: 0.6rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  background-color: white;
+  min-width: 120px;
+}
+
+.hydraCard {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.hydraCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}

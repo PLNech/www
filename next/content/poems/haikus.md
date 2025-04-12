@@ -1,6 +1,6 @@
 ---
 title: "Haïkus"
-date: "2022-06-28 17:40:41"
+date: "2025-03-28 16:00:00"
 color: "purple"
 tags: ["poème", "texte"]
 language: "Français"

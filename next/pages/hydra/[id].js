@@ -1,13 +1,17 @@
 import SyntaxHighlighter from "react-syntax-highlighter";
 import Head from "next/head";
 import Layout from "../../components/layout";
-// import HydraSynth from "../../components/hydra-view";
 import Date from "../../components/date";
-const https = require("https");
-import { useRef } from "react";
-
+import { useState } from "react";
+import dynamic from "next/dynamic";
 import utilStyles from "../../styles/utils.module.css";
 import { getAllHydraIds, getHydraData } from "../../lib/hydras";
+
+// Dynamically import HydraSynth with SSR disabled
+const HydraSynth = dynamic(
+  () => import("../../components/hydra-view"),
+  { ssr: false }
+);
 
 export async function getStaticProps({ params }) {
   const hydraData = await getHydraData(params.id);
@@ -35,7 +39,8 @@ export async function getStaticPaths() {
 }
 
 export default function Hydra({ hydraData, sourceCode }) {
-  // const canvasRef = useRef(null);
+  const [showCode, setShowCode] = useState(false);
+  
   return (
     <Layout>
       <Head>
@@ -43,19 +48,27 @@ export default function Hydra({ hydraData, sourceCode }) {
       </Head>
       <article>
         <h1 className={utilStyles.headingXl}>{hydraData.title}</h1>
-        <h3>See it running at the bottom of this page, or</h3>
-        <h5>
-          <i><a href={hydraData.link}>Run it fullscreen in your browser</a></i>
-        </h5>
-        {/* <canvas id={canvasRef}/> */}
-        {/* <HydraSynth width={700} height={475} */}
-          {/* canvasRef={canvasRef} source={hydraData.source} /> */}
-        <SyntaxHighlighter
-          width="64em"
-          language="javascript"
-          wrapLongLines={true}>
-          {hydraData.source}
-        </SyntaxHighlighter>
+        
+        {/* Hydra visualization */}
+        <div className={utilStyles.hydraContainer}>
+          <HydraSynth source={hydraData.source} />
+        </div>
+        
+        {/* Fullscreen link */}
+        <div className={utilStyles.hydraLinks}>
+          <a href={hydraData.link} target="_blank" rel="noopener noreferrer">
+            View fullscreen in your browser
+          </a>
+        </div>
+        
+        {/* Source code (conditionally rendered) */}
+        <div className={utilStyles.codeContainer}>
+            <SyntaxHighlighter
+              language="javascript"
+              wrapLongLines={true}>
+              {hydraData.source}
+            </SyntaxHighlighter>
+        </div>
       </article>
     </Layout>
   );

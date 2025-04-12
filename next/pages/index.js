@@ -62,7 +62,7 @@ export default function Home({ posts, talks }) {
         </section>
         <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
           <Link href="/poesie/" className={utilStyles.sectionLink}>
-            <span>…words into <em>thoughts</em></span>
+            <span>…words into <em>poems</em></span>
           </Link>
           <p className="description">
             A selection of texts scattered across note books and note apps.
