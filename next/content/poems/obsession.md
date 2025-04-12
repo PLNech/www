@@ -26,14 +26,14 @@ Mais impossible, telle une abeille
 L'obsession bourdonne sans pareille
 
 Alors tu te mets à l'ouvrage
-Tel la sculptrice face au rocher
-Tu canalise toute ta rage 
+Telle la sculptrice face au rocher
+Tu canalises toute ta rage 
 De ne pas pouvoir oublier
-Ce dont tu fait tout un fromage
+Ce dont tu fais tout un fromage
 
 Et ce jour, tu verras ta Muse
 (ou, plus souvent, en fait, cette nuit)
-Au temps où tu transpire le plus
+Au temps où tu transpires le plus
 Ou ton projet semble folie
 
 T'apparaitre dans une lumière noire
