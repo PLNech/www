@@ -1,0 +1,7 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Use @/ syntax for imports in Next.js projects
+- Always use `@/components/xxx` syntax, not the `../../components/xxx` syntax.
