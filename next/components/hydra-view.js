@@ -7,7 +7,7 @@ export default function HydraSynth({ source }) {
   
   useEffect(() => {
     if (!canvasRef.current) return;
-
+    
     // Dynamically import hydra-synth (client-side only)
     import('hydra-synth').then((HydraModule) => {
       const canvas = canvasRef.current;
@@ -33,19 +33,27 @@ export default function HydraSynth({ source }) {
         // Remove any HTML-like tags
         let sanitizedCode = code.replace(/<[^>]*>/g, '');
         
-        // Replace local file paths with Git URLs - careful to preserve s0.initImage
+        // Replace local file paths with Git URLs
         sanitizedCode = sanitizedCode.replace(
-          /initImage\("file:\/\/\/home\/pln\/Work\/Hydra\/(.+?)\/(.+?)"\)/g, 
-          'initImage("https://git.nech.pl/pln/Hydra/raw/master/$1/$2")'
+          /s([0-9])\.initImage\("file:\/\/\/home\/pln\/Work\/Hydra\/(.+?)\/(.+?)"\)/g, 
+          's$1.initImage("https://git.nech.pl/pln/Hydra/raw/master/$2/$3")'
         );
         
-        // Replace old domain with new domain
-        sanitizedCode = sanitizedCode.replace(/git\.plnech\.fr/g, 'git.nech.pl');
+        // Replace old domain with new domain - match the complete URL
+        sanitizedCode = sanitizedCode.replace(
+          /https:\/\/git\.plnech\.fr\/pln\/Hydra\/raw\/[a-f0-9]+\/(.+?)\/(.+?)(\.jpg|\.jpeg|\.png|\.gif|\.svg)/g, 
+          'https://git.nech.pl/pln/Hydra/raw/master/$1/$2$3'
+        );
         
         // Trim whitespace and remove any leading/trailing backticks
-        return sanitizedCode.trim().replace(/^`+|`+$/g, '');
+        sanitizedCode = sanitizedCode.trim().replace(/^`+|`+$/g, '');
+        
+        // Remove any JavaScript code block indicators
+        sanitizedCode = sanitizedCode.replace(/```javascript|```/g, '');
+        
+        return sanitizedCode;
       };
-
+      
       // Validate and run the hydra code
       const runHydraCode = (code) => {
         try {
@@ -59,18 +67,17 @@ export default function HydraSynth({ source }) {
           }
           
           // Log the transformed code for debugging
-          console.log("Running Hydra code with transformed paths");
+          console.log("Running Hydra code:", cleanCode);
           
           // Attempt to evaluate the code
           hydra.eval(cleanCode);
         } catch (error) {
           console.error("Error running Hydra code:", error);
-          
-          // Attempt to provide more context
-          console.log("Sanitized code error location:", error.lineNumber);
+          console.error("Error details:", error.message);
+          console.error("Error location:", error.lineNumber, error.columnNumber);
         }
       };
-
+      
       // Run the hydra code
       runHydraCode(source);
       
