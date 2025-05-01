@@ -31,7 +31,16 @@ export default function HydraSynth({ source }) {
       // Sanitize and prepare the source code
       const sanitizeHydraCode = (code) => {
         // Remove any HTML-like tags
-        const sanitizedCode = code.replace(/<[^>]*>/g, '');
+        let sanitizedCode = code.replace(/<[^>]*>/g, '');
+        
+        // Replace local file paths with Git URLs - careful to preserve s0.initImage
+        sanitizedCode = sanitizedCode.replace(
+          /initImage\("file:\/\/\/home\/pln\/Work\/Hydra\/(.+?)\/(.+?)"\)/g, 
+          'initImage("https://git.nech.pl/pln/Hydra/raw/master/$1/$2")'
+        );
+        
+        // Replace old domain with new domain
+        sanitizedCode = sanitizedCode.replace(/git\.plnech\.fr/g, 'git.nech.pl');
         
         // Trim whitespace and remove any leading/trailing backticks
         return sanitizedCode.trim().replace(/^`+|`+$/g, '');
@@ -49,14 +58,16 @@ export default function HydraSynth({ source }) {
             return;
           }
           
+          // Log the transformed code for debugging
+          console.log("Running Hydra code with transformed paths");
+          
           // Attempt to evaluate the code
           hydra.eval(cleanCode);
         } catch (error) {
           console.error("Error running Hydra code:", error);
           
           // Attempt to provide more context
-          console.log("Original source code:", code);
-          console.log("Sanitized code:", sanitizeHydraCode(code));
+          console.log("Sanitized code error location:", error.lineNumber);
         }
       };
 
