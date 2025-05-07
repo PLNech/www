@@ -8,6 +8,7 @@ lines: 108
 words: 382
 chars: 2260
 original_file: "notes.carnet/carnet_archive/Haïkus - Courts .sqd"
+tier: "A"
 ---
 
 C'est une trop petite fenêtre 

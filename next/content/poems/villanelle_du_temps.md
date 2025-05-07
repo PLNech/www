@@ -6,6 +6,7 @@ words: 172
 chars: 958
 language: "Français"
 original_file: "notes.carnet/carnet_archive/Villanelle du Temps .sqd"
+tier: 2
 ---
 
 Les doigts sur la guitare répètent la vieille danse,

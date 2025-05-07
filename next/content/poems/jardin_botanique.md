@@ -7,6 +7,7 @@ lines: 19
 words: 65
 chars: 419
 original_file: "notes.carnet/carnet_archive/Jardin botanique .sqd"
+tier: "C"
 ---
 
 Vue à en perdre le souffle

@@ -116,7 +116,7 @@ export default function Home({ posts, talks }) {
         </section>
         <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
           <Link href="/parvagues/" className={utilStyles.sectionLink}>
-            <span>…code into <em>music</em></span>
+            <h3>…code into <em>music</em></h3>
           </Link>
           <p className="description">
             As <Link href="/parvagues/" className={utilStyles.inlineLink}>ParVagues</Link>, I write patterns that
@@ -126,7 +126,7 @@ export default function Home({ posts, talks }) {
         </section>
         <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
           <Link href="/hydra/" className={utilStyles.sectionLink}>
-            <span>…code into <em>animated pixelscapes</em></span>
+            <h3>…code into <em>animated pixelscapes</em></h3>
           </Link>
           <p className="description">
             Using <Link href="/hydra/" className={utilStyles.inlineLink}>Hydra</Link>, I create animations that
@@ -146,7 +146,7 @@ export default function Home({ posts, talks }) {
         </section>
         <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
           <Link href="/poesie/" className={utilStyles.sectionLink}>
-            <span>…words into <em>poems</em></span>
+            <h3>…words into <em>poems</em></h3>
           </Link>
           <p className="description">
             A selection of texts scattered across note books and note apps.
@@ -154,7 +154,7 @@ export default function Home({ posts, talks }) {
         </section>
         <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
           <Link href="/talks/" className={utilStyles.sectionLink}>
-            <span>…ideas into <em>talks</em></span>
+            <h3>…ideas into <em>talks</em></h3>
           </Link>
           <p className="description">
             I <Link href="/talks/" className={utilStyles.inlineLink}>speak</Link> about topics I care about: from

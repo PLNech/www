@@ -16,7 +16,7 @@ export async function getStaticProps() {
 }
 
 export default function Poems({ poems }) {
-  const [sortBy, setSortBy] = useState('date');
+  const [sortBy, setSortBy] = useState('tier');
   const [sortOrder, setSortOrder] = useState('desc');
   const [filterLanguage, setFilterLanguage] = useState('Français');
   const [filterTags, setFilterTags] = useState('all');
@@ -122,6 +122,8 @@ export default function Poems({ poems }) {
               }}
               aria-label="Sort options"
             >
+              <option value="tier-desc">Best first</option>
+              <option value="tier-asc">Worst first</option>
               <option value="date-desc">Newest first</option>
               <option value="date-asc">Oldest first</option>
               <option value="wordcount-desc">Longest first</option>

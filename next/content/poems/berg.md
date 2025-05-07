@@ -6,6 +6,7 @@ words: 122
 chars: 748
 language: "Français"
 original_file: "notes.carnet/Berg.sqd"
+tier: "C"
 ---
 
 L'avenir appartient à ceux qui se lèvent tôt 

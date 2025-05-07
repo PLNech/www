@@ -8,6 +8,7 @@ lines: 44
 words: 301
 chars: 1687
 original_file: "notes.carnet/carnet_archive/Ligne de base - dire pourquoi .sqd"
+tier: 2
 ---
 
 Ligne de base tracée là dans le sable
