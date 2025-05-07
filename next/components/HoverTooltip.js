@@ -13,7 +13,7 @@ export default function HoverTooltip({ children, content, links }) {
   const handleMouseLeave = () => {
     timeoutRef.current = setTimeout(() => {
       setIsVisible(false);
-    }, 300); // 0.3 second delay before hiding
+    }, 1000); // 1 second delay before hiding
   };
 
   // Clear timeout on unmount
@@ -38,8 +38,10 @@ export default function HoverTooltip({ children, content, links }) {
       {isVisible && (
         <div className={styles.hoverPopup}>
           <div className={styles.popupContent}>
-            {/* TODO:Render markdown or JSX in content */}
-            <p>{content}</p>
+            {/* Support for JSX content */}
+            <div className={styles.popupText}>
+              {typeof content === 'string' ? <p>{content}</p> : content}
+            </div>
             {links && links.length > 0 && (
               <div className={styles.popupLinks}>
                 {links.map((link, index) => (

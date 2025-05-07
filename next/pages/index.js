@@ -41,14 +41,19 @@ export default function Home({ posts, talks }) {
           <p className="description">
             At <a href="https://algolia.com">Algolia</a>, I've crafted tools that help you{" "}
             <HoverTooltip 
-              content="From 2016 to 2018, I built tools to accelerate Android developers crafting unique search experiences."
+              content={
+                <>
+                  From <strong>2016</strong> to <strong>2018</strong>,<br /> 
+                  I built tools to <strong>accelerate Android developers</strong> crafting unique search experiences.
+                </>
+              }
               links={[
                 { 
-                  text: "Crafted the first Algolia Mobile Search Toolkit, InstantSearch-Android", 
+                  text: "InstantSearch-Android, the first Algolia Mobile Search Toolkit", 
                   url: "https://github.com/algolia/instantsearch-android" 
                 },
                 { 
-                  text: "Built the Voice-Overlay, an open-source voice input and STT helper", 
+                  text: "Voice-Overlay, an open-source speech-to-text helper", 
                   url: "https://github.com/algolia/voice-overlay-android" 
                 }
               ]}
@@ -56,8 +61,16 @@ export default function Home({ posts, talks }) {
                 build mobile apps
             </HoverTooltip>,{" "}
             <HoverTooltip 
-              content="From 2019 to 2021, I built tools to better understand search users and give them semantic answers:
-              Algolia Understand was a cross-index Intent Detection and Entity Recognition API, and Algolia Answers was a Question Answering API with Semantic Reranking using early Transformer models & Smart Highlighting with QA models."
+              content={
+                <>
+                  From <strong>2019</strong> to <strong>2021</strong>,<br /> 
+                  I built APIs to better <strong>understand user language</strong> in search engines and give them semantic answers.
+                  <br /><br />
+                  <strong>Algolia Understand</strong> was a cross-index Intent Detection and Entity Recognition API.
+                  <br /><br />
+                  <strong>Algolia Answers</strong> was a Question Answering API with Semantic Reranking using early Transformer models & Smart Highlighting with QA models.
+                </>
+              }
               links={[
                 { 
                   text: "Algolia Understand", 
@@ -68,7 +81,15 @@ export default function Home({ posts, talks }) {
               understand your users
             </HoverTooltip>, and {" "}
             <HoverTooltip 
-              content="From 2022 to 2024, I worked on Recommendation APIs - serving at high-scale (billions of items per months) a blend of algorithms to recommend content by learning from either user behavior, semantic image analysis, or textual analysis."
+              content={
+                <>
+                  From <strong>2022</strong> to <strong>2024</strong>,<br /> 
+                  I worked on <strong>Recommendation APIs</strong> - serving at high-scale (<i>billions</i><br /> of items per months) a blend of algorithms to recommend content by learning from either <i>user behavior</i>, <i>semantic image analysis</i>, or <i>textual analysis</i>.
+                  <br /><br />
+                  <strong>LookingSimilar</strong> is the visual recommendation API I built over Algolia's NeuralHash engine, 
+                  leveraging open-source image vectorization models and HNSW graphs to recommend visually relevant items.
+                </>
+              }
               links={[
                 { 
                   text: "LookingSimilar", 
@@ -78,19 +99,19 @@ export default function Home({ posts, talks }) {
             >
               show them your world
             </HoverTooltip>.<br />
-            Nowadays, i create GenAI tools for{" "}
+            Nowadays, I create GenAI tools for{" "}
             <HoverTooltip 
-              content="Blending state-of-the-art LLMs with world-class search engines to create next-generation AI experiences."
+              content="Blending state-of-the-art LLMs with a distributed search engine to create a new kind of content discovery experiences."
               links={[
                 { 
                   text: "Generative Experiences", 
-                  url: "https://www.algolia.com/products/ai-search/"
+                  url: "https://www.algolia.com/about/news/revolutionizing-retail-algolia-unveils-groundbreaking-generative-ai-for-shopping-experiences"
                 }
               ]}
             >
-              builders of unique experiences
+              builders of generative experiences
             </HoverTooltip><br />{" "}
-            that blend the best of search and AI.
+            that blend the best of search and language understanding.
           </p>
         </section>
         <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
@@ -99,7 +120,8 @@ export default function Home({ posts, talks }) {
           </Link>
           <p className="description">
             As <Link href="/parvagues/" className={utilStyles.inlineLink}>ParVagues</Link>, I write patterns that
-            shape soundwaves.
+            shape soundwaves. <br />
+            I share those as <Link href="https://song.link/i/1773790994" target="_blank" className={utilStyles.inlineLink}>tracks</Link>, <Link href="https://archive.org/details/toplap-solstice-dec2024-parvagues" target="_blank" className={utilStyles.inlineLink}>videos</Link>, and <Link href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" className={utilStyles.inlineLink}>live performances</Link>.
           </p>
         </section>
         <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
@@ -108,7 +130,18 @@ export default function Home({ posts, talks }) {
           </Link>
           <p className="description">
             Using <Link href="/hydra/" className={utilStyles.inlineLink}>Hydra</Link>, I create animations that
-            offer windows into other worlds.
+            offer{" "}
+            <HoverTooltip 
+              content={
+                <>
+                  <img src="/images/halley.png" alt="Hydra" />
+                  <br />
+                  With <Link href="https://github.com/ojack/hydra" target="_blank" className={utilStyles.inlineLink}>Olivia Jack's Hydra.js</Link>, I create interactive or slowly morphing pixelscapes.
+                </>
+              }
+            >
+              windows into other worlds
+            </HoverTooltip>.
           </p>
         </section>
         <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>

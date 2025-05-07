@@ -478,8 +478,8 @@
   transform: translateX(-50%);
   z-index: 100;
   
-  min-width: 280px;
-  max-width: 380px;
+  min-width: 380px;
+  max-width: 500px;
   
   animation: fadeIn 0.2s ease-in-out;
 }
@@ -499,6 +499,18 @@
   background-image: linear-gradient(to bottom, #fff 0%, #f9f9f9 100%);
   border-left: 1px solid #f0f0f0;
   border-right: 1px solid #f0f0f0;
+}
+
+.popupText {
+  margin: 0 0 0.8rem 0;
+}
+
+.popupText p {
+  margin: 0 0 0.8rem 0;
+}
+
+.popupText p:last-child {
+  margin-bottom: 0;
 }
 
 .popupContent p {
@@ -561,8 +573,8 @@
 /* Mobile responsiveness */
 @media (max-width: 768px) {
   .hoverPopup {
-    min-width: 220px;
-    max-width: 300px;
+    min-width: 280px;
+    max-width: 340px;
   }
   
   .popupContent {
