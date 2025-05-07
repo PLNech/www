@@ -84,3 +84,8 @@ h1 a, h2 a, h3 a, h4 a, h5 a {
   top: 0;
   left: 0;
 }
+
+.description {
+  font-size: 1.2rem;
+  line-height: 2.5;
+}

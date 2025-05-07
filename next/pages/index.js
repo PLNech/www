@@ -5,6 +5,7 @@ import Layout from "../components/layout";
 import utilStyles from "../styles/utils.module.css";
 import { getPostsData } from "../lib/posts";
 import { getRecentTalksData } from "../lib/talks";
+import HoverTooltip from "@/components/HoverTooltip";
 
 export async function getStaticProps() {
   const nbLastTalks = 3;
@@ -29,17 +30,67 @@ export default function Home({ posts, talks }) {
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <section className={utilStyles.headingMd}>
-          <h1 className="title">Bienvenue !</h1>
+          <h1 className="title">Bonjour !</h1>
           <h2>
             I'm PLN, and I love to <i>transform…</i>
           </h2>
 
           <h3>
             …code into <em>solutions to human problems</em>
-          </h3>
+          </h3><br />
           <p className="description">
-            At <a href="https://algolia.com">Algolia</a>, I create technologies
-            to help humans find things, get <a href="https://algolia.com/products/recommendations">inspired</a>, and <a href="https://www.algolia.com/blog/ai/launching-an-industry-leading-artificially-intelligent-search-platform/">be understood</a>.
+            At <a href="https://algolia.com">Algolia</a>, I've crafted tools that help you{" "}
+            <HoverTooltip 
+              content="From 2016 to 2018, I built tools to accelerate Android developers crafting unique search experiences."
+              links={[
+                { 
+                  text: "Crafted the first Algolia Mobile Search Toolkit, InstantSearch-Android", 
+                  url: "https://github.com/algolia/instantsearch-android" 
+                },
+                { 
+                  text: "Built the Voice-Overlay, an open-source voice input and STT helper", 
+                  url: "https://github.com/algolia/voice-overlay-android" 
+                }
+              ]}
+            >
+                build mobile apps
+            </HoverTooltip>,{" "}
+            <HoverTooltip 
+              content="From 2019 to 2021, I built tools to better understand search users and give them semantic answers:
+              Algolia Understand was a cross-index Intent Detection and Entity Recognition API, and Algolia Answers was a Question Answering API with Semantic Reranking using early Transformer models & Smart Highlighting with QA models."
+              links={[
+                { 
+                  text: "Algolia Understand", 
+                  url: "https://www.algolia.com/blog/ai/launching-an-industry-leading-artificially-intelligent-search-platform/"
+                }
+              ]}
+            >
+              understand your users
+            </HoverTooltip>, and {" "}
+            <HoverTooltip 
+              content="From 2022 to 2024, I worked on Recommendation APIs - serving at high-scale (billions of items per months) a blend of algorithms to recommend content by learning from either user behavior, semantic image analysis, or textual analysis."
+              links={[
+                { 
+                  text: "LookingSimilar", 
+                  url: "https://www.algolia.com/about/news/algolia-unveils-new-looking-similar-capability-elevating-shopping-experiences-with-image-based-recommendations"
+                }
+              ]}
+            >
+              show them your world
+            </HoverTooltip>.<br />
+            Nowadays, i create GenAI tools for{" "}
+            <HoverTooltip 
+              content="Blending state-of-the-art LLMs with world-class search engines to create next-generation AI experiences."
+              links={[
+                { 
+                  text: "Generative Experiences", 
+                  url: "https://www.algolia.com/products/ai-search/"
+                }
+              ]}
+            >
+              builders of unique experiences
+            </HoverTooltip><br />{" "}
+            that blend the best of search and AI.
           </p>
         </section>
         <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>

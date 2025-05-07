@@ -365,3 +365,208 @@
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
+
+/* Hover Popup Styles */
+.hoverReveal {
+  position: relative;
+  border-bottom: 1px dotted #666;
+  cursor: help;
+}
+
+.hoverReveal:hover::after,
+.hoverReveal:focus::after {
+  content: attr(title);
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 10px);
+  transform: translateX(-50%);
+  z-index: 100;
+  
+  min-width: 250px;
+  max-width: 350px;
+  padding: 1rem;
+  
+  background: #fff;
+  color: #333;
+  font-size: 1rem;
+  line-height: 1.5;
+  text-align: center;
+  
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border: 1px solid #eee;
+  
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s, visibility 0s 0.2s;
+}
+
+.hoverReveal:hover::before,
+.hoverReveal:focus::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 5px);
+  transform: translateX(-50%);
+  
+  border-width: 5px;
+  border-style: solid;
+  border-color: #eee transparent transparent transparent;
+  
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s, visibility 0s 0.2s;
+}
+
+.hoverReveal:hover::after,
+.hoverReveal:hover::before,
+.hoverReveal:focus::after,
+.hoverReveal:focus::before {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.2s;
+}
+
+/* Popup Persistence */
+.hoverReveal::after,
+.hoverReveal::before {
+  transition-delay: 0s;
+}
+
+.hoverReveal:hover::after,
+.hoverReveal:hover::before,
+.hoverReveal:focus::after,
+.hoverReveal:focus::before {
+  transition-delay: 0s;
+}
+
+.hoverReveal:not(:hover)::after,
+.hoverReveal:not(:hover)::before,
+.hoverReveal:not(:focus)::after,
+.hoverReveal:not(:focus)::before {
+  transition-delay: 1s;
+}
+
+/* Ensure links within tooltips are clickable */
+.hoverReveal:hover::after a,
+.hoverReveal:focus::after a {
+  color: #0070f3;
+  text-decoration: underline;
+  position: relative;
+  z-index: 101;
+}
+
+/* Paper-like effect for tooltips */
+.hoverReveal::after {
+  background-image: linear-gradient(to bottom, #fff 0%, #f9f9f9 100%);
+  border-left: 1px solid #f0f0f0;
+  border-right: 1px solid #f0f0f0;
+}
+
+/* Advanced Tooltip Styles */
+.hoverTrigger {
+  position: relative;
+  border-bottom: 1px dotted #666;
+  cursor: help;
+  display: inline-block;
+}
+
+.hoverPopup {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 15px);
+  transform: translateX(-50%);
+  z-index: 100;
+  
+  min-width: 280px;
+  max-width: 380px;
+  
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+.popupContent {
+  background: #fff;
+  color: #333;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+  border: 1px solid #eee;
+  font-size: 1rem;
+  line-height: 1.6;
+  text-align: left;
+  
+  /* Paper-like effect */
+  background-image: linear-gradient(to bottom, #fff 0%, #f9f9f9 100%);
+  border-left: 1px solid #f0f0f0;
+  border-right: 1px solid #f0f0f0;
+}
+
+.popupContent p {
+  margin: 0 0 0.8rem 0;
+}
+
+.popupLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 0.5rem;
+}
+
+.popupLinks a {
+  display: inline-block;
+  color: #0070f3;
+  text-decoration: none;
+  font-size: 0.9rem;
+  background: #f5f7ff;
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.popupLinks a:hover {
+  background: #e6eaff;
+  text-decoration: underline;
+}
+
+.hoverPopup::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -5px;
+  transform: translateX(-50%);
+  
+  border-width: 5px;
+  border-style: solid;
+  border-color: #eee transparent transparent transparent;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* Make tooltips accessible via keyboard navigation */
+.hoverTrigger:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.3);
+  border-radius: 2px;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .hoverPopup {
+    min-width: 220px;
+    max-width: 300px;
+  }
+  
+  .popupContent {
+    padding: 0.8rem;
+    font-size: 0.9rem;
+  }
+}
