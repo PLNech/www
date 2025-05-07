@@ -39,9 +39,9 @@ export default function Poems({ poems }) {
         
         const search = searchTerm.toLowerCase();
         const titleMatch = p.title?.toLowerCase().includes(search);
-        const contentMatch = p.contentHtml?.toLowerCase().includes(search);
+        const tagsMatch = p.tags?.some(tag => tag.toLowerCase().includes(search));
         
-        return titleMatch || contentMatch;
+        return titleMatch || tagsMatch;
       });
 
     // Sort filtered poems
@@ -78,7 +78,7 @@ export default function Poems({ poems }) {
           <input
             type="text"
             className={utilStyles.searchBar}
-            placeholder="Search poems by title or content..."
+            placeholder="Title or tag(s)  "
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             aria-label="Search poems"

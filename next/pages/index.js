@@ -38,7 +38,7 @@ export default function Home({ posts, talks }) {
           <h3>
             …code into <em>solutions to human problems</em>
           </h3><br />
-          <p className="description">
+          <div className="description">
             At <a href="https://algolia.com">Algolia</a>, I've crafted tools that help you{" "}
             <HoverTooltip 
               content={
@@ -99,7 +99,8 @@ export default function Home({ posts, talks }) {
             >
               show them your world
             </HoverTooltip>.<br />
-            Nowadays, I create GenAI tools for{" "}
+            <div className="divider" />
+            Nowadays, I create GenAI tools for builders of{" "}
             <HoverTooltip 
               content="Blending state-of-the-art LLMs with a distributed search engine to create a new kind of content discovery experiences."
               links={[
@@ -109,10 +110,10 @@ export default function Home({ posts, talks }) {
                 }
               ]}
             >
-              builders of generative experiences
+              generative experiences
             </HoverTooltip><br />{" "}
-            that blend the best of search and language understanding.
-          </p>
+            blending search engines and language models together.
+          </div>
         </section>
         <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
           <Link href="/parvagues/" className={utilStyles.sectionLink}>

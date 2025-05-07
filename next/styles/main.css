@@ -89,3 +89,9 @@ h1 a, h2 a, h3 a, h4 a, h5 a {
   font-size: 1.2rem;
   line-height: 2.5;
 }
+
+.divider {
+  margin: 1.5em 0 0.75em 0;
+  height: 1px;
+  background-color: #e0e0e0;
+}
