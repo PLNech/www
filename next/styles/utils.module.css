@@ -365,7 +365,6 @@
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
-
 /* Hover Popup Styles */
 .hoverReveal {
   position: relative;
@@ -480,6 +479,8 @@
   
   min-width: 380px;
   max-width: 500px;
+  width: max-content;
+  max-width: calc(100vw - 40px); /* Ensure popup doesn't exceed viewport width */
   
   animation: fadeIn 0.2s ease-in-out;
 }
@@ -573,12 +574,25 @@
 /* Mobile responsiveness */
 @media (max-width: 768px) {
   .hoverPopup {
-    min-width: 280px;
-    max-width: 340px;
+    min-width: auto;
+    max-width: calc(100vw - 40px); /* 20px margin on each side */
+    width: max-content;
+    left: 50%;
+    transform: translateX(-50%);
   }
   
   .popupContent {
     padding: 0.8rem;
     font-size: 0.9rem;
+  }
+
+  .popupLinks {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .popupLinks a {
+    text-align: center;
+    width: 100%;
   }
 }
