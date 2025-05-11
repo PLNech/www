@@ -1,4 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.css'
+import '../styles/globals.css'
 import '../styles/main.css'
 import '../styles/masonry.css'
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { FaEnvelope, FaInstagram, FaTwitter } from 'react-icons/fa';
 import { SiMastodon, SiBluesky } from 'react-icons/si';
 import styles from '@/styles/parvagues.module.css';
@@ -16,51 +17,54 @@ export default function ParVaguesFooter() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-black border-t border-purple-500/20 py-12">
-      <div className="max-w-6xl mx-auto px-4">
+    <footer className="bg-black border-t border-[#d900ff]/20 py-12 relative overflow-hidden">
+      <div className={styles.neonGradient}></div>
+      <div className="max-w-6xl mx-auto px-4 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* About Column */}
           <div>
-            <h3 className="text-purple-400 font-semibold text-lg mb-4">ParVagues</h3>
+            <div className="flex items-center mb-4">
+              <div className="w-12 h-12 relative mr-3">
+                {/* <Image 
+                  src="/images/parvagues/logo.png" 
+                  alt="ParVagues Logo" 
+                  fill 
+                  className="object-contain" 
+                  sizes="48px"
+                /> */}
+              </div>
+              <h3 className="text-[#d900ff] font-semibold text-lg">ParVagues</h3>
+            </div>
             <p className="text-gray-400 text-sm mb-4">
-              Livecoding de musique open-source avec TidalCycles et contrôleur MIDI. 
+              Livecoding de musique open-source avec TidalCycles et contrôleur MIDI.<br />
               Performances algorithmiques et création sonore en direct.
             </p>
           </div>
 
-          {/* Links Column */}
-          <div>
-            <h3 className="text-purple-400 font-semibold text-lg mb-4">Explorez</h3>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <Link href="/parvagues#music" className="text-gray-400 hover:text-purple-300 transition-colors">
-                  Musique
-                </Link>
-              </li>
-              <li>
-                <Link href="/parvagues#performances" className="text-gray-400 hover:text-purple-300 transition-colors">
-                  Performances
-                </Link>
-              </li>
-              <li>
-                <Link href="/parvagues#about" className="text-gray-400 hover:text-purple-300 transition-colors">
-                  À propos
-                </Link>
-              </li>
-              <li>
-                <a 
-                  href="mailto:parvagues@nech.pl?subject=Booking Request" 
-                  className="text-gray-400 hover:text-purple-300 transition-colors"
-                >
-                  Réserver un live
-                </a>
-              </li>
-            </ul>
+          {/* Navigation Links */}
+          <div className="w-full bg-black py-2">
+            <div className="max-w-6xl mx-auto flex justify-center items-center space-x-6 text-xs tracking-widest uppercase">
+              <Link href="/parvagues#music" className="text-gray-300 hover:text-[#ff3d7b] transition-colors">
+                MUSIQUE
+              </Link>
+              <Link href="/parvagues#performances" className="text-gray-300 hover:text-[#ff3d7b] transition-colors">
+                PERFORMANCES
+              </Link>
+              <Link href="/parvagues#about" className="text-gray-300 hover:text-[#ff3d7b] transition-colors">
+                À PROPOS
+              </Link>
+              <a 
+                href="mailto:parvagues@nech.pl?subject=Booking Request" 
+                className="text-gray-300 hover:text-[#ff3d7b] transition-colors"
+              >
+                RÉSERVER UN LIVE
+              </a>
+            </div>
           </div>
 
           {/* Social Column */}
           <div>
-            <h3 className="text-purple-400 font-semibold text-lg mb-4">Connect</h3>
+            <h3 className="text-[#d900ff] font-semibold text-lg mb-4">Connect</h3>
             <div className="flex flex-wrap gap-4">
               {socialLinks.map((link, index) => (
                 <a 
@@ -68,7 +72,7 @@ export default function ParVaguesFooter() {
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-gray-800 hover:bg-purple-900 text-white p-3 rounded-full transition-colors"
+                  className="bg-gray-800 hover:bg-[#8900b3]/60 text-white p-3 rounded-full transition-colors shadow-md hover:shadow-[#d900ff]/40"
                   aria-label={link.label}
                 >
                   {link.icon}

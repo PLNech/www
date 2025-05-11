@@ -7,6 +7,7 @@ import styles from '@/styles/parvagues.module.css';
 import dynamic from 'next/dynamic';
 import ParVaguesHeader from '@/components/ParVaguesHeader';
 import ParVaguesFooter from '@/components/ParVaguesFooter';
+import GlitchText from '@/components/GlitchText';
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { atomOneDark } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 
@@ -68,11 +69,11 @@ export default function ParVagues({ lives }) {
   
   // Define section content
   const sections = {
-    potentiel: {
+    code: {
       type: 'image',
       image: '/images/parvagues/samples.png'
     },
-    composition: {
+    midi: {
       type: 'carousel',
       images: [
         '/images/parvagues/studio1.jpg',
@@ -86,10 +87,6 @@ export default function ParVagues({ lives }) {
         '/images/parvagues/live.jpg',
         '/images/parvagues/code_overlay.jpg'
       ]
-    },
-    code: {
-      type: 'code',
-      content: tidalCode
     }
   };
   
@@ -294,6 +291,7 @@ d4 $ note ("<e3 fs3 <gs3 d4> <a3 df4>>" - 12)
         <title>ParVagues - Musique Algorithmique</title>
         <meta name="description" content="Livecoding de musique open-source avec TidalCycles et contrôleur MIDI" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" href="/images/parvagues/favicon.ico" />
       </Head>
       
       <div className="flex flex-col min-h-screen bg-black text-white">
@@ -330,8 +328,12 @@ d4 $ note ("<e3 fs3 <gs3 d4> <a3 df4>>" - 12)
               <div className={styles.heroContent}>
                 {/* Left side: Title and content */}
                 <div className="md:w-1/2">
-                  <h1 className={`${styles.heroTitle} ${styles.glitchEffect}`}>
-                    ParVagues
+                  <h1 className={styles.heroTitle}>
+                    <GlitchText 
+                      text="ParVagues" 
+                      className={styles.glitchEffect} 
+                      burstFrequency={450} 
+                    />
                   </h1>
                   <p className={styles.heroSubtitle}>
                     Livecoding de musique open-source avec TidalCycles et contrôleur MIDI
@@ -344,7 +346,7 @@ d4 $ note ("<e3 fs3 <gs3 d4> <a3 df4>>" - 12)
                 {/* Right side: Code sample with play overlay */}
                 <div className="md:w-1/2 relative">
                   <div className="relative">
-                    <CodeBlock height="300px" isTerminal={true}>
+                    <CodeBlock className="h-full" isTerminal={true}>
                       {tidalCode}
                     </CodeBlock>
                     
@@ -397,14 +399,6 @@ d4 $ note ("<e3 fs3 <gs3 d4> <a3 df4>>" - 12)
                   <h3 className="text-xl font-semibold text-purple-400 mb-2">Performance</h3>
                   <p className="text-gray-300">Live improvise avec contrôleur MIDI pour une interactivité totale</p>
                 </div>
-
-                <div 
-                  className={`${styles.bulletPoint} cursor-pointer ${selectedSection === 'code' ? 'text-purple-400 border-l-2 border-purple-400 pl-4' : ''}`}
-                  onClick={() => setSelectedSection('code')}
-                >
-                  <h3 className="text-xl font-semibold text-purple-400 mb-2">Code</h3>
-                  <p className="text-gray-300">Voir un exemple de pattern TidalCycles en action</p>
-                </div>
               </div>
               
               <div>
@@ -456,34 +450,7 @@ d4 $ note ("<e3 fs3 <gs3 d4> <a3 df4>>" - 12)
             </div>
           </section>
           
-          {/* Section 3: Performances */}
-          <section id="performances" className={styles.sectionContainer}>
-            <h2 className="text-3xl font-bold mb-8 text-center">
-              <span className="bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent">
-                Performances
-              </span>
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {posterImages.map((src, index) => (
-                <div key={index} className="relative aspect-[3/4] rounded-lg overflow-hidden group">
-                  <Image
-                    src={src}
-                    alt={`Performance ${index + 1}`}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity">
-                  </div>
-                  <div className="absolute bottom-0 left-0 w-full p-4 text-white">
-                    <h3 className="text-xl font-bold mb-1">Live {2022 + Math.floor(index/2)}</h3>
-                    <p className="text-sm opacity-80">Algorave Paris</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-          
-          {/* Section 4: About */}
+          {/* Section 3: About */}
           <section id="about" className={`${styles.sectionContainer} pb-24`}>
             <h2 className="text-3xl font-bold mb-8 text-center">
               <span className="bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent">

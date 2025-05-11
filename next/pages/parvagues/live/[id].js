@@ -42,7 +42,7 @@ export default function Live({ data, slug, images }) {
   // Fix scroll handling for header
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 100);
+      setScrolled(window.scrollY > window.innerHeight);
     };
     
     // Initial check
@@ -255,6 +255,7 @@ export default function Live({ data, slug, images }) {
       <Head>
         <title>{data.frontmatter.title} - ParVagues</title>
         <meta name="description" content={data.frontmatter.description} />
+        <link rel="icon" href="/images/parvagues/favicon.ico" />
       </Head>
       
       {/* Above fold section */}
@@ -266,11 +267,14 @@ export default function Live({ data, slug, images }) {
                 src={posterImage}
                 alt={data.frontmatter.title}
                 fill
-                className={styles.posterImage}
+                className={styles.posterImageBG}
               />
             <div className={styles.posterGradient}></div>
           </div>
         )}
+        
+        {/* Neon gradient overlay */}
+        <div className={styles.neonGradient}></div>
 
         {/* Use the ParVaguesHeader component */}
         <ParVaguesHeader eventName={data.frontmatter.title} />
@@ -280,7 +284,7 @@ export default function Live({ data, slug, images }) {
           {/* Main hero content */}
           <div className="relative z-10 flex items-center justify-center min-h-screen pt-16 pb-20">
             <div className="w-full max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
-              <article className="w-full mx-auto bg-black/80 backdrop-filter backdrop-blur-sm rounded-2xl overflow-hidden border border-purple-500/20 shadow-xl shadow-purple-900/20">
+              <article className="w-full mx-auto bg-black/80 backdrop-filter backdrop-blur-sm rounded-2xl overflow-hidden border border-[#d900ff]/20 shadow-xl shadow-[#d900ff]/20">
                 <div className="grid md:grid-cols-5 gap-0">
                   {/* Left column: Title and info (3/5 width) */}
                   <div className="md:col-span-3 p-8 md:p-10">
@@ -301,12 +305,12 @@ export default function Live({ data, slug, images }) {
                     {timeToEvent !== null && (
                       <div className="mb-8">
                         {timeToEvent >= 0 ? (
-                          <div className="inline-flex items-center bg-black/60 p-4 rounded-lg border border-purple-500/30">
-                            <div className="font-mono text-2xl font-bold mr-3 text-purple-400">{timeString}</div>
+                          <div className="inline-flex items-center bg-black/60 p-4 rounded-lg border border-[#d900ff]/30">
+                            <div className="font-mono text-2xl font-bold mr-3 text-[#d900ff]">{timeString}</div>
                             <div className="text-gray-300">avant l'événement</div>
                           </div>
                         ) : (
-                          <div className="inline-flex items-center bg-black/60 p-4 rounded-lg border border-purple-500/30">
+                          <div className="inline-flex items-center bg-black/60 p-4 rounded-lg border border-[#d900ff]/30">
                             <div className="text-gray-300">Événement passé</div>
                           </div>
                         )}
@@ -320,7 +324,7 @@ export default function Live({ data, slug, images }) {
                           href={data.frontmatter.ctaURL}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
+                          className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-[#8900b3] hover:bg-[#a700d1] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#d900ff]"
                         >
                           {data.frontmatter.ctaText || 'S\'inscrire'}
                         </a>
@@ -337,19 +341,19 @@ export default function Live({ data, slug, images }) {
                   </div>
                   
                   {/* Right column: status and teasers (2/5 width) */}
-                  <div className="md:col-span-2 bg-black/80 p-8 md:p-10 border-t md:border-t-0 md:border-l border-purple-500/20">
+                  <div className="md:col-span-2 bg-black/80 p-8 md:p-10 border-t md:border-t-0 md:border-l border-[#d900ff]/20">
                     {/* Upcoming drops section */}
                     {upcomingDrops.length > 0 && (
-                      <div className="mb-8 bg-black/50 border border-purple-500/30 rounded-lg p-4">
-                        <h3 className="text-xl font-bold text-purple-400 mb-4">Prochains drops</h3>
+                      <div className="mb-8 bg-black/50 border border-[#d900ff]/30 rounded-lg p-4">
+                        <h3 className="text-xl font-bold text-[#d900ff] mb-4">Prochains drops</h3>
                         <div className="space-y-4">
                           {upcomingDrops.map((drop, index) => (
-                            <div key={index} className="flex items-center justify-between gap-4 border-b border-purple-500/10 pb-4 last:border-0 last:pb-0">
+                            <div key={index} className="flex items-center justify-between gap-4 border-b border-[#d900ff]/10 pb-4 last:border-0 last:pb-0">
                               <div>
                                 <div className="text-lg font-medium text-gray-200">{drop.name}</div>
                                 <div className="text-sm text-gray-400">{formatPreciseDateTime(drop.date)}</div>
                               </div>
-                              <div className="font-mono text-lg text-purple-300">{getTimeDifferenceString(drop.date)}</div>
+                              <div className="font-mono text-lg text-[#ff3d7b]">{getTimeDifferenceString(drop.date)}</div>
                             </div>
                           ))}
                         </div>
@@ -362,10 +366,10 @@ export default function Live({ data, slug, images }) {
                     {/* Teasings */}
                     {teasingsToShow.length > 0 && (
                       <div>
-                        <h3 className="text-xl font-bold text-purple-400 mb-4">Teasings</h3>
+                        <h3 className="text-xl font-bold text-[#d900ff] mb-4">Teasings</h3>
                         <div className="space-y-6">
                           {teasingsToShow.map((teasing, index) => (
-                            <div key={index} className="bg-black/50 border border-purple-500/30 rounded-lg p-4">
+                            <div key={index} className="bg-black/50 border border-[#d900ff]/30 rounded-lg p-4">
                               <div dangerouslySetInnerHTML={renderMarkdown(teasing)} className="prose prose-sm prose-invert max-w-none" />
                             </div>
                           ))}
@@ -385,7 +389,7 @@ export default function Live({ data, slug, images }) {
                 
                 {/* Description */}
                 <div>
-                  <h2 className="text-2xl font-bold text-purple-400 mb-6">À propos de cet événement</h2>
+                  <h2 className="text-2xl font-bold text-[#d900ff] mb-6">À propos de cet événement</h2>
                   <div 
                     className="prose prose-lg prose-invert"
                     dangerouslySetInnerHTML={renderMarkdown(data.content)} 
@@ -400,11 +404,12 @@ export default function Live({ data, slug, images }) {
                 <div>
                   {images && images.length > 0 && (
                     <div>
-                      <h2 className="text-2xl font-bold text-purple-400 mb-6">Galerie</h2>
+                      <h2 className="text-2xl font-bold text-[#d900ff] mb-6">Galerie</h2>
                       <ImageGallery 
                         images={images}
                         slug={slug}
                         alt={data.frontmatter.title}
+                        className="filter grayscale hover:grayscale-0"
                       />
                     </div>
                   )}
