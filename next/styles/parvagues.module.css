@@ -3,6 +3,15 @@
   min-height: 100vh;
   position: relative;
   overflow: hidden;
+  padding-top: 2rem;
+}
+
+.heroTitle {
+  font-size: clamp(4rem, 12vw, 9rem);
+  font-weight: 800;
+  margin: 1.5rem;
+  padding: 0.5rem;
+  text-wrap: balance;
 }
 
 .bgImage {
@@ -25,7 +34,7 @@
 }
 
 .heroContent {
-  padding: 0 1rem;
+  padding: 2rem 1rem;
   max-width: 1400px;
   margin: 0 auto;
   width: 100%;
@@ -47,7 +56,9 @@
 .heroTitle {
   font-size: clamp(4rem, 12vw, 9rem);
   font-weight: 800;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  padding-top: 0.5em;
+  padding-bottom: 0.1em;
   background: linear-gradient(45deg, #a855f7, #ec4899, #8b5cf6);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
