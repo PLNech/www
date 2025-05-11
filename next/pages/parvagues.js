@@ -36,7 +36,8 @@ function CodeBlock({ children, height = '400px', isTerminal = false }) {
           margin: 0, 
           borderRadius: isTerminal ? '0 0 8px 8px' : '8px',
           height: 'auto',
-          maxHeight: isTerminal ? `calc(${height} - 30px)` : height
+          maxHeight: isTerminal ? `calc(${height} - 30px)` : height,
+          fontSize: '0.85rem'
         }}
       >
         {children}
@@ -374,7 +375,7 @@ d4 $ note ("<e3 fs3 <gs3 d4> <a3 df4>>" - 12)
             <div className={styles.splitSection}>
               <div>
                 <div 
-                  className={`${styles.bulletPoint} cursor-pointer ${selectedSection === 'potentiel' ? 'text-purple-400' : ''}`}
+                  className={`${styles.bulletPoint} cursor-pointer ${selectedSection === 'potentiel' ? 'text-purple-400 border-l-2 border-purple-400 pl-4' : ''}`}
                   onClick={() => setSelectedSection('potentiel')}
                 >
                   <h3 className="text-xl font-semibold text-purple-400 mb-2">Potentiel</h3>
@@ -382,7 +383,7 @@ d4 $ note ("<e3 fs3 <gs3 d4> <a3 df4>>" - 12)
                 </div>
                 
                 <div 
-                  className={`${styles.bulletPoint} cursor-pointer ${selectedSection === 'composition' ? 'text-purple-400' : ''}`}
+                  className={`${styles.bulletPoint} cursor-pointer ${selectedSection === 'composition' ? 'text-purple-400 border-l-2 border-purple-400 pl-4' : ''}`}
                   onClick={() => setSelectedSection('composition')}
                 >
                   <h3 className="text-xl font-semibold text-purple-400 mb-2">Composition</h3>
@@ -390,37 +391,23 @@ d4 $ note ("<e3 fs3 <gs3 d4> <a3 df4>>" - 12)
                 </div>
                 
                 <div 
-                  className={`${styles.bulletPoint} cursor-pointer ${selectedSection === 'performance' ? 'text-purple-400' : ''}`}
+                  className={`${styles.bulletPoint} cursor-pointer ${selectedSection === 'performance' ? 'text-purple-400 border-l-2 border-purple-400 pl-4' : ''}`}
                   onClick={() => setSelectedSection('performance')}
                 >
                   <h3 className="text-xl font-semibold text-purple-400 mb-2">Performance</h3>
                   <p className="text-gray-300">Live improvise avec contrôleur MIDI pour une interactivité totale</p>
                 </div>
+
+                <div 
+                  className={`${styles.bulletPoint} cursor-pointer ${selectedSection === 'code' ? 'text-purple-400 border-l-2 border-purple-400 pl-4' : ''}`}
+                  onClick={() => setSelectedSection('code')}
+                >
+                  <h3 className="text-xl font-semibold text-purple-400 mb-2">Code</h3>
+                  <p className="text-gray-300">Voir un exemple de pattern TidalCycles en action</p>
+                </div>
               </div>
               
               <div>
-                <div className="mb-4 flex gap-4">
-                  <button
-                    onClick={() => setSelectedSection('code')}
-                    className={`px-4 py-2 rounded-md transition-all ${
-                      selectedSection === 'code'
-                        ? 'bg-purple-500 text-white'
-                        : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
-                    }`}
-                  >
-                    Code
-                  </button>
-                  <button
-                    onClick={() => setSelectedSection('potentiel')}
-                    className={`px-4 py-2 rounded-md transition-all ${
-                      selectedSection === 'potentiel'
-                        ? 'bg-purple-500 text-white'
-                        : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
-                    }`}
-                  >
-                    Samples
-                  </button>
-                </div>
                 {renderSectionContent()}
               </div>
             </div>

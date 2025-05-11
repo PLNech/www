@@ -2,23 +2,26 @@ import { useEffect, useState, useRef } from 'react';
 import { getAllLives, getLiveData, getLivesImages } from '../../../lib/livesData';
 import ImageGallery from '@/components/ImageGallery';
 import ParVaguesHeader from '@/components/ParVaguesHeader';
+import ParVaguesFooter from '@/components/ParVaguesFooter';
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
 import { marked } from 'marked';
-import Prism from 'prismjs';
-import 'prismjs/components/prism-haskell';
+import SyntaxHighlighter from "react-syntax-highlighter";
+import { atomOneDark } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 import styles from '@/styles/parvagues.module.css';
 import { FaEnvelope, FaYoutube } from 'react-icons/fa';
 
 export default function Live({ data, slug, images }) {
   const [timeToEvent, setTimeToEvent] = useState(null);
+  const [timeString, setTimeString] = useState('');
   const [currentTeasing, setCurrentTeasing] = useState(null);
   const [pastEvent, setPastEvent] = useState(false);
   const [teasingsToShow, setTeasingsToShow] = useState([]);
+  const [upcomingDrops, setUpcomingDrops] = useState([]);
   const [posterImage, setPosterImage] = useState(null);
   const [mainColor, setMainColor] = useState('#a855f7');
-  const [isHeaderSticky, setIsHeaderSticky] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const headerRef = useRef(null);
   
   // Find poster or live image for background
@@ -36,19 +39,10 @@ export default function Live({ data, slug, images }) {
     }
   }, [images]);
   
-  // Handle Prism code highlighting
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      Prism.highlightAll();
-    }
-  }, [teasingsToShow]);
-  
-  // Fix scroll handling for sticky header
+  // Fix scroll handling for header
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      const threshold = window.innerHeight * 0.7; // Lower threshold to 70% of viewport height
-      setIsHeaderSticky(scrollPosition > threshold);
+      setScrolled(window.scrollY > 100);
     };
     
     // Initial check
@@ -65,6 +59,14 @@ export default function Live({ data, slug, images }) {
       const eventDate = new Date(data.frontmatter.date);
       const timeDiff = eventDate - now;
       const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+      
+      // Format precise time string (HH:MM:SS)
+      const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+      
+      setTimeString(`${days}j ${hours}h ${minutes}m ${seconds}s`);
       
       if (timeDiff > 0) {
         setTimeToEvent(daysDiff);
@@ -86,6 +88,32 @@ export default function Live({ data, slug, images }) {
         // Always show most recent teasing at the top
         setTeasingsToShow(teasings.reverse());
         
+        // Set upcoming drops information
+        const drops = [];
+        
+        if (data.frontmatter.drop1date && new Date(data.frontmatter.drop1date) > now) {
+          drops.push({
+            date: new Date(data.frontmatter.drop1date),
+            name: data.frontmatter.drop1name || "Teasing mysterieux"
+          });
+        }
+        
+        if (data.frontmatter.drop2date && new Date(data.frontmatter.drop2date) > now) {
+          drops.push({
+            date: new Date(data.frontmatter.drop2date),
+            name: data.frontmatter.drop2name || "Révélation cryptique"
+          });
+        }
+        
+        if (data.frontmatter.drop3date && new Date(data.frontmatter.drop3date) > now) {
+          drops.push({
+            date: new Date(data.frontmatter.drop3date),
+            name: data.frontmatter.drop3name || "Manifestation finale"
+          });
+        }
+        
+        setUpcomingDrops(drops);
+        
       } else {
         setTimeToEvent(-1);
         setPastEvent(true);
@@ -100,7 +128,7 @@ export default function Live({ data, slug, images }) {
     };
     
     updateCountdown();
-    const interval = setInterval(updateCountdown, 1000 * 60 * 60); // Update every hour
+    const interval = setInterval(updateCountdown, 1000); // Update every second
     
     return () => clearInterval(interval);
   }, [data.frontmatter]);
@@ -122,11 +150,43 @@ export default function Live({ data, slug, images }) {
     }).format(date);
   };
   
+  // Format precise date with time (HH:MM:SS)
+  const formatPreciseDateTime = (date) => {
+    return new Intl.DateTimeFormat('fr-FR', { 
+      day: 'numeric', 
+      month: 'long', 
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false
+    }).format(date);
+  };
+  
   // Scroll to details section
   const scrollToSection = (e) => {
     e.preventDefault();
     const section = document.getElementById('details-section');
     section?.scrollIntoView({ behavior: 'smooth' });
+  };
+  
+  // Calculate time difference in precise format
+  const getTimeDifferenceString = (targetDate) => {
+    const now = new Date();
+    const timeDiff = targetDate - now;
+    
+    if (timeDiff <= 0) return "Maintenant";
+    
+    const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+    
+    if (days > 0) {
+      return `${days}j ${hours}h ${minutes}m ${seconds}s`;
+    } else {
+      return `${hours}h ${minutes}m ${seconds}s`;
+    }
   };
   
   // Render YouTube embed if URL is provided
@@ -170,6 +230,26 @@ export default function Live({ data, slug, images }) {
     );
   };
   
+  // Render code blocks with SyntaxHighlighter
+  const renderCodeBlock = (code, language = 'haskell') => {
+    return (
+      <div className={styles.codeContainer}>
+        <SyntaxHighlighter 
+          language={language}
+          style={atomOneDark}
+          wrapLongLines={true}
+          customStyle={{ 
+            margin: 0, 
+            borderRadius: '8px',
+            fontSize: '0.85rem'
+          }}
+        >
+          {code}
+        </SyntaxHighlighter>
+      </div>
+    );
+  };
+  
   return (
     <>
       <Head>
@@ -178,12 +258,7 @@ export default function Live({ data, slug, images }) {
       </Head>
       
       {/* Above fold section */}
-      <div 
-        className="min-h-screen text-white relative overflow-hidden"
-        style={{
-          background: mainColor ? `radial-gradient(circle at 50% 0%, ${mainColor}20 0%, #000 60%)` : '#000'
-        }}
-      >
+      <div className="flex flex-col min-h-screen text-white relative overflow-hidden">
         {/* Background poster image with blur */}
         {posterImage && (
           <div className={styles.posterBackground}>
@@ -198,215 +273,149 @@ export default function Live({ data, slug, images }) {
         )}
 
         {/* Use the ParVaguesHeader component */}
-        <ParVaguesHeader isSticky={isHeaderSticky} eventName={data.frontmatter.title} />
+        <ParVaguesHeader eventName={data.frontmatter.title} />
         
-        {/* Fixed top CTA that shows only when not in sticky mode */}
-        <a 
-          href="mailto:parvagues@nech.pl?subject=Booking Request&body=Bonjour,%0D%0A%0D%0AJe souhaiterais discuter d'une possibilité de performance live coding."
-          className={`${styles.ctaButton} ${isHeaderSticky ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
-        >
-          <FaEnvelope className="inline mr-2" />
-          Invoquer un live
-        </a>
-        
-        {/* Main hero content */}
-        <div className="relative z-10 flex items-center justify-center min-h-screen pt-16 pb-20">
-          <div className="w-full max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
-            <article className="w-full mx-auto bg-black/80 backdrop-filter backdrop-blur-sm rounded-2xl overflow-hidden border border-purple-500/20 shadow-xl shadow-purple-900/20">
-              <div className="grid md:grid-cols-5 gap-0">
-                {/* Left column: Title and info (3/5 width) */}
-                <div className="md:col-span-3 p-8 md:p-10">
-                  <h1 className="text-4xl md:text-5xl font-bold mb-4">
-                    <span className={`bg-gradient-to-r from-purple-400 via-pink-500 to-purple-600 bg-clip-text text-transparent z-10 ${styles.glitchEffect}`}>
-                      {data.frontmatter.title}
-                    </span>
-                  </h1>
-                  <h2 className="text-2xl md:text-3xl font-bold mb-4 text-gray-200 z-10">
-                    {data.frontmatter.subtitle || 'ParVagues'}
-                  </h2>
-                  <div className="text-gray-300 mb-6">
-                    <p className="text-xl">{data.frontmatter.location}</p>
-                    <p>{formatEventDate(data.frontmatter.date)} {data.frontmatter.time && `• ${data.frontmatter.time}`}</p>
-                  </div>
-                  
-                  {/* Countdown or date display */}
-                  {timeToEvent !== null && (
-                    <div className="mb-8">
-                      {timeToEvent >= 0 ? (
-                        <div className="inline-flex items-center bg-black/60 p-4 rounded-lg border border-purple-500/30">
-                          <div className="text-3xl font-bold mr-3 text-purple-400">J-{timeToEvent}</div>
-                          <div className="text-gray-300">avant l'événement</div>
-                        </div>
-                      ) : (
-                        <div className="inline-flex items-center bg-black/60 p-4 rounded-lg border border-purple-500/30">
-                          <div className="text-gray-300">Événement passé</div>
-                        </div>
-                      )}
+        {/* Main content with flex-auto to push footer to bottom */}
+        <main className="flex-auto">
+          {/* Main hero content */}
+          <div className="relative z-10 flex items-center justify-center min-h-screen pt-16 pb-20">
+            <div className="w-full max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
+              <article className="w-full mx-auto bg-black/80 backdrop-filter backdrop-blur-sm rounded-2xl overflow-hidden border border-purple-500/20 shadow-xl shadow-purple-900/20">
+                <div className="grid md:grid-cols-5 gap-0">
+                  {/* Left column: Title and info (3/5 width) */}
+                  <div className="md:col-span-3 p-8 md:p-10">
+                    <h1 className="text-4xl md:text-5xl font-bold mb-4">
+                      <span className={`bg-gradient-to-r from-purple-400 via-pink-500 to-purple-600 bg-clip-text text-transparent z-10 ${styles.glitchEffect}`}>
+                        {data.frontmatter.title}
+                      </span>
+                    </h1>
+                    <h2 className="text-2xl md:text-3xl font-bold mb-4 text-gray-200 z-10">
+                      {data.frontmatter.subtitle || 'ParVagues'}
+                    </h2>
+                    <div className="text-gray-300 mb-6">
+                      <p className="text-xl">{data.frontmatter.location}</p>
+                      <p>{formatEventDate(data.frontmatter.date)} {data.frontmatter.time && `• ${data.frontmatter.time}`}</p>
                     </div>
-                  )}
-                  
-                  {/* CTA button and scroll link */}
-                  <div className="flex flex-wrap gap-4">
-                    {data.frontmatter.ctaURL && !pastEvent && (
-                      <a 
-                        href={data.frontmatter.ctaURL}
-                        className="inline-block bg-gradient-to-r from-purple-500 to-pink-500 text-white px-8 py-3 rounded-lg font-semibold hover:from-purple-600 hover:to-pink-600 transition-all transform hover:scale-105 shadow-lg shadow-purple-500/20"
-                      >
-                        {data.frontmatter.ctaText || "S'inscrire"}
-                      </a>
+                    
+                    {/* Countdown or date display */}
+                    {timeToEvent !== null && (
+                      <div className="mb-8">
+                        {timeToEvent >= 0 ? (
+                          <div className="inline-flex items-center bg-black/60 p-4 rounded-lg border border-purple-500/30">
+                            <div className="font-mono text-2xl font-bold mr-3 text-purple-400">{timeString}</div>
+                            <div className="text-gray-300">avant l'événement</div>
+                          </div>
+                        ) : (
+                          <div className="inline-flex items-center bg-black/60 p-4 rounded-lg border border-purple-500/30">
+                            <div className="text-gray-300">Événement passé</div>
+                          </div>
+                        )}
+                      </div>
                     )}
                     
-                    <a 
-                      href="#details-section" 
-                      onClick={scrollToSection}
-                      className="inline-block bg-black/70 text-white border border-purple-500/30 px-8 py-3 rounded-lg font-semibold hover:bg-black/90 hover:border-purple-500/50 transition-all"
-                    >
-                      Détails
-                    </a>
-                  </div>
-                </div>
-                </div>
-            </article>
-          </div>
-        </div>
-        
-        {/* Floating tags in background */}
-        {data.frontmatter.tags && data.frontmatter.tags.length > 0 && (
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            {data.frontmatter.tags.map((tag, index) => (
-              <div 
-                key={index}
-                className="absolute text-purple-500/20 font-bold text-3xl md:text-6xl uppercase select-none"
-                style={{
-                  top: `${Math.random() * 100}%`,
-                  left: `${Math.random() * 100}%`,
-                  transform: `rotate(${Math.random() * 60 - 30}deg)`,
-                  opacity: 0.1 + Math.random() * 0.3
-                }}
-              >
-                {tag}
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-      
-      {/* Below fold section */}
-      <div id="details-section" className="min-h-screen bg-black text-white relative">
-        {/* Gradient overlay */}
-        <div className="absolute inset-0" style={{
-          background: `linear-gradient(135deg, #000 0%, ${mainColor}10 50%, #000 100%)`
-        }} />
-        
-        {/* Content */}
-        <div className="relative z-10">
-          <main className="w-full max-w-6xl mx-auto px-4 md:px-6 lg:px-8 py-16">
-            <article className="bg-black/80 backdrop-filter backdrop-blur-sm rounded-2xl overflow-hidden border border-purple-500/20 shadow-xl shadow-purple-900/20 p-6 md:p-10">
-              {pastEvent ? (
-                // Post-event view
-                <div className="space-y-12">
-                  {/* Media section */}
-                  {(data.frontmatter.video || data.frontmatter.audio) && (
-                    <div className="space-y-8">
-                      <h2 className="text-3xl font-bold mb-8">
-                        <span className="bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent">
-                          Captures
-                        </span>
-                      </h2>
+                    {/* CTA button and scroll link */}
+                    <div className="flex flex-wrap gap-4">
+                      {data.frontmatter.ctaURL && !pastEvent && (
+                        <a 
+                          href={data.frontmatter.ctaURL}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
+                        >
+                          {data.frontmatter.ctaText || 'S\'inscrire'}
+                        </a>
+                      )}
                       
-                      {data.frontmatter.video && renderYouTubeEmbed(data.frontmatter.video)}
-                      {data.frontmatter.audio && renderAudioPlayer(data.frontmatter.audio)}
-                    </div>
-                  )}
-                  
-                  {/* Content description */}
-                  <div className="prose prose-purple prose-invert max-w-none">
-                    <div dangerouslySetInnerHTML={renderMarkdown(data.content)} />
-                  </div>
-                  
-                  {/* Gallery if available */}
-                  {images && images.length > 0 && (
-                    <div className="mt-12">
-                      <h2 className="text-3xl font-bold mb-8">
-                        <span className="bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent">
-                          Gallerie
-                        </span>
-                      </h2>
-                      <ImageGallery images={images} slug={slug} />
-                    </div>
-                  )}
-                  
-                  {/* Teasings archive */}
-                  {teasingsToShow.length > 0 && (
-                    <details className="group mt-12">
-                      <summary className="cursor-pointer p-4 bg-black/50 rounded-lg hover:bg-black/70 transition-colors border border-purple-500/10">
-                        <span className="font-mono text-purple-400">// decrypt teasings</span>
-                      </summary>
-                      <div className="mt-4 space-y-4 pl-4 border-l-2 border-purple-500/20">
-                        {teasingsToShow.map((teasing, i) => (
-                          <div key={i} className="bg-black/40 rounded p-4">
-                            <div 
-                              className="prose prose-purple prose-invert prose-pre:bg-gray-900/70 prose-pre:border prose-pre:border-purple-500/20 max-w-none text-sm"
-                              dangerouslySetInnerHTML={renderMarkdown(teasing)}
-                            />
-                          </div>
-                        ))}
-                      </div>
-                    </details>
-                  )}
-                </div>
-              ) : (
-                // Pre-event view
-                <div className="space-y-12">
-                  {/* Description */}
-                  <div className="prose prose-purple prose-invert max-w-none">
-                    <div dangerouslySetInnerHTML={renderMarkdown(data.frontmatter.description)} />
-                  </div>
-                  
-                  {/* Teasings */}
-                  {teasingsToShow.length > 0 && (
-                    <div className="space-y-8">
-                      <h2 className="text-3xl font-bold mb-4">
-                        <span className="bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent">
-                          Teasings
-                        </span>
-                      </h2>
-                      {teasingsToShow.map((teasing, i) => (
-                        <div key={i} className="bg-black/60 backdrop-blur-sm rounded-lg p-6 border border-purple-500/20">
-                          <div 
-                            className="prose prose-purple prose-invert prose-pre:bg-gray-900/70 prose-pre:border prose-pre:border-purple-500/20 max-w-none"
-                            dangerouslySetInnerHTML={renderMarkdown(teasing)}
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                  
-                  {/* CTA button if available */}
-                  {data.frontmatter.ctaURL && (
-                    <div className="text-center py-8">
                       <a 
-                        href={data.frontmatter.ctaURL}
-                        className="inline-block bg-gradient-to-r from-purple-500 to-pink-500 text-white px-8 py-4 rounded-lg font-semibold hover:from-purple-600 hover:to-pink-600 transition-all transform hover:scale-105 shadow-lg shadow-purple-500/20 text-xl"
+                        href="#details-section" 
+                        onClick={scrollToSection}
+                        className="inline-flex items-center justify-center px-5 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-200 bg-black/40 hover:bg-black/60 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
                       >
-                        {data.frontmatter.ctaText || data.frontmatter.title}
+                        En savoir plus
                       </a>
                     </div>
+                  </div>
+                  
+                  {/* Right column: status and teasers (2/5 width) */}
+                  <div className="md:col-span-2 bg-black/80 p-8 md:p-10 border-t md:border-t-0 md:border-l border-purple-500/20">
+                    {/* Upcoming drops section */}
+                    {upcomingDrops.length > 0 && (
+                      <div className="mb-8 bg-black/50 border border-purple-500/30 rounded-lg p-4">
+                        <h3 className="text-xl font-bold text-purple-400 mb-4">Prochains drops</h3>
+                        <div className="space-y-4">
+                          {upcomingDrops.map((drop, index) => (
+                            <div key={index} className="flex items-center justify-between gap-4 border-b border-purple-500/10 pb-4 last:border-0 last:pb-0">
+                              <div>
+                                <div className="text-lg font-medium text-gray-200">{drop.name}</div>
+                                <div className="text-sm text-gray-400">{formatPreciseDateTime(drop.date)}</div>
+                              </div>
+                              <div className="font-mono text-lg text-purple-300">{getTimeDifferenceString(drop.date)}</div>
+                            </div>
+                          ))}
+                        </div>
+                        <div className="mt-4 text-sm text-center text-gray-400 italic">
+                          Reviens à ces moments précis pour ne rien manquer...
+                        </div>
+                      </div>
+                    )}
+                    
+                    {/* Teasings */}
+                    {teasingsToShow.length > 0 && (
+                      <div>
+                        <h3 className="text-xl font-bold text-purple-400 mb-4">Teasings</h3>
+                        <div className="space-y-6">
+                          {teasingsToShow.map((teasing, index) => (
+                            <div key={index} className="bg-black/50 border border-purple-500/30 rounded-lg p-4">
+                              <div dangerouslySetInnerHTML={renderMarkdown(teasing)} className="prose prose-sm prose-invert max-w-none" />
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+          
+          {/* Details section */}
+          <section id="details-section" className={styles.sectionContainer}>
+            <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+                
+                {/* Description */}
+                <div>
+                  <h2 className="text-2xl font-bold text-purple-400 mb-6">À propos de cet événement</h2>
+                  <div 
+                    className="prose prose-lg prose-invert"
+                    dangerouslySetInnerHTML={renderMarkdown(data.content)} 
+                  />
+                  
+                  {/* Media */}
+                  {data.frontmatter.youtubeURL && renderYouTubeEmbed(data.frontmatter.youtubeURL)}
+                  {data.frontmatter.audioURL && renderAudioPlayer(data.frontmatter.audioURL)}
+                </div>
+                
+                {/* Gallery */}
+                <div>
+                  {images && images.length > 0 && (
+                    <div>
+                      <h2 className="text-2xl font-bold text-purple-400 mb-6">Galerie</h2>
+                      <ImageGallery 
+                        images={images}
+                        slug={slug}
+                        alt={data.frontmatter.title}
+                      />
+                    </div>
                   )}
                 </div>
-              )}
-            </article>
-          </main>
+              </div>
+            </div>
+          </section>
+        </main>
         
-
-          {/* Footer */}
-          <footer className={styles.footer}>
-            <p className="text-gray-400">© {new Date().getFullYear()} ParVagues</p>
-            <Link href="/parvagues" className="mt-4 inline-block text-gray-500 text-sm hover:text-purple-400 transition-colors">
-              ← Retour à ParVagues
-            </Link>
-          </footer>
-        </div>
+        {/* Footer */}
+        <ParVaguesFooter />
       </div>
     </>
   );
