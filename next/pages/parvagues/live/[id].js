@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react';
 import { getAllLives, getLiveData, getLivesImages } from '../../../lib/livesData';
 import ImageGallery from '../../../components/ImageGallery';
-import '../../../styles/masonry.css';
 import Head from 'next/head';
 import Link from 'next/link';
-import Image from 'next/image';
 import { marked } from 'marked';
 import Prism from 'prismjs';
 import 'prismjs/components/prism-haskell';
@@ -50,7 +48,7 @@ export default function Live({ data, slug, images }) {
   }, [data.frontmatter.date]);
   
   const renderMarkdown = (content) => {
-    if (!content) return '';
+    if (!content) return { __html: '' };
     const html = marked(content);
     return { __html: html };
   };

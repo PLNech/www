@@ -2,18 +2,58 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
 import { getAllLives } from '../lib/livesData';
-import { useEffect, useRef } from 'react';
-import Prism from 'prismjs';
-import 'prismjs/components/prism-haskell';
-import 'prismjs/themes/prism-tomorrow.css';
+import { useEffect, useRef, useLayoutEffect, useState } from 'react';
+import dynamic from 'next/dynamic';
+
+// Dynamically import Prism.js with no SSR
+const Prism = dynamic(() => import('prismjs'), { ssr: false });
+const PrismHaskell = dynamic(() => import('prismjs/components/prism-haskell'), { ssr: false });
+const PrismCSS = dynamic(() => import('prismjs/themes/prism-tomorrow.css'), { ssr: false });
+
+// Import Swiper components
+const Swiper = dynamic(() => import('swiper/react').then(mod => mod.Swiper), { ssr: false });
+const SwiperSlide = dynamic(() => import('swiper/react').then(mod => mod.SwiperSlide), { ssr: false });
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/effect-cards';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+
+function CodeBlock({ children, className = '' }) {
+  const [isClient, setIsClient] = useState(false);
+  const codeRef = useRef(null);
+  
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+  
+  useEffect(() => {
+    if (isClient && codeRef.current) {
+      import('prismjs').then((Prism) => {
+        Prism.default.highlightElement(codeRef.current);
+      });
+    }
+  }, [isClient, children]);
+  
+  if (!isClient) {
+    return (
+      <pre className={`bg-gray-900 p-4 rounded-lg text-sm overflow-x-auto border border-purple-500/20 ${className}`}>
+        <code>{children}</code>
+      </pre>
+    );
+  }
+  
+  return (
+    <pre className={`language-haskell bg-gray-900 p-4 rounded-lg text-sm overflow-x-auto border border-purple-500/20 ${className}`}>
+      <code ref={codeRef}>{children}</code>
+    </pre>
+  );
+}
 
 export default function ParVagues({ lives }) {
   const rainRef = useRef(null);
   
   useEffect(() => {
-    // Highlight code blocks
-    Prism.highlightAll();
-    
     // Subtle rain effect
     const canvas = rainRef.current;
     if (!canvas) return;
@@ -71,8 +111,15 @@ export default function ParVagues({ lives }) {
   return (
     <>
       <Head>
-        <title>ParVagues - Live Algorithmic Music</title>
-        <meta name="description" content="Live coding performances, algorithmic music, and cyberpunk aesthetics" />
+        <title>ParVagues - Musique Algorithmique Live</title>
+        <meta name="description" content="Performances de Livecoding: musique algorithmique du breakbeat à la Jungle Drum n Bass, nujazz, broken beat, ambient electronic, melodic technocyberpunk" />
+        <meta name="language" content="french" />
+        <meta name="author" content="ParVagues" />
+        <meta name="keywords" content="musique algorithmique, livecoding, live coding, tidalcycles, tidal, hydra, algorave, live music, live performance, musique, live, coding, open-source, free software" />
+        <meta name="robots" content="index, follow" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="theme-color" content="#6B486B" />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
       
       <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 text-white overflow-hidden relative">
@@ -86,28 +133,36 @@ export default function ParVagues({ lives }) {
           {/* Hero Section */}
           <section className="min-h-screen flex flex-col justify-center px-4 relative">
             <div className="max-w-6xl mx-auto w-full">
-              <div className="flex flex-col md:flex-row items-center justify-between">
-                <div className="md:w-2/3 mb-8 md:mb-0">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+                <div className="md:w-1/2 mb-8 md:mb-0">
+                  <div className="relative w-full aspect-square md:aspect-[4/3] rounded-lg overflow-hidden mb-6">
+                    <Image
+                      src="/images/parvagues/live.jpg"
+                      alt="ParVagues Live Performance"
+                      fill
+                      className="object-cover"
+                      priority
+                    />
+                  </div>
                   <h1 className="text-5xl md:text-7xl font-bold mb-4">
                     <span className="bg-gradient-to-r from-purple-400 via-pink-500 to-purple-600 bg-clip-text text-transparent">
                       ParVagues
                     </span>
                   </h1>
                   <p className="text-xl text-gray-300 mb-8 font-mono">
-                    live.coding() breakbeat.nujazz.hybrid()
+                    live.coding() electronic.hybrid.genres() realtime.music()
                   </p>
-                  <div className="grid gap-4">
-                    <pre className="bg-gray-900 p-4 rounded-lg text-sm overflow-x-auto border border-purple-500/20">
-                      <code className="language-haskell">{`d1 $ every 4 (0.25 <~) 
-   $ fast 2 $ sound "cp ho:3 mt lt"
-d8 $ chop 16 $ loopAt 2 
-   $ sound "jungle_breaks:45"`}</code>
-                    </pre>
-                  </div>
                 </div>
                 
-                {/* Live Events Sidebar */}
-                <div className="md:w-1/3 md:pl-8">
+                <div className="md:w-1/2 space-y-8">
+                  <div className="grid gap-4">
+                    <CodeBlock>{`d1 $ every 4 (0.25 <~) 
+   $ fast 2 $ sound "cp ho:3 mt lt"
+d8 $ chop 16 $ loopAt 2 
+   $ sound "jungle_breaks:45"`}</CodeBlock>
+                  </div>
+                  
+                  {/* Live Events Sidebar */}
                   <div className="bg-gray-800/50 backdrop-blur-sm rounded-lg p-6 border border-purple-500/20">
                     <h2 className="text-xl font-semibold mb-4 text-purple-400">// upcoming</h2>
                     {upcomingLives.length > 0 ? (
@@ -143,8 +198,7 @@ d8 $ chop 16 $ loopAt 2
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="bg-gray-800/50 backdrop-blur-sm rounded-lg p-6 border border-purple-500/20">
                   <h3 className="text-lg font-semibold mb-3 text-purple-400">Breakbeat Deconstruction</h3>
-                  <pre className="bg-gray-900 p-4 rounded text-sm overflow-x-auto">
-                    <code className="language-haskell">{`d8 $ n (cat[
+                  <CodeBlock>{`d8 $ n (cat[
     0, 0, 0, [0,7],
     0, [0,3], 0, [7,0],
     0, 0, 7, [7,3],
@@ -152,20 +206,17 @@ d8 $ chop 16 $ loopAt 2
   ])
   # s "jungle_breaks"
   # cut 8
-  # amp (range 0.7 1.2 rand)`}</code>
-                  </pre>
+  # amp (range 0.7 1.2 rand)`}</CodeBlock>
                 </div>
                 
                 <div className="bg-gray-800/50 backdrop-blur-sm rounded-lg p-6 border border-purple-500/20">
                   <h3 className="text-lg font-semibold mb-3 text-purple-400">Nujazz Harmonies</h3>
-                  <pre className="bg-gray-900 p-4 rounded text-sm overflow-x-auto">
-                    <code className="language-haskell">{`d4 $ every 8 (|+ n "<12 19>")
+                  <CodeBlock>{`d4 $ every 8 (|+ n "<12 19>")
   $ off 0.125 (|+ n 7)
   $ chord "<am9 dm9 bm7b5 e7b9>"
   # s "nujazz_keys"
   # lpf (sine * 1000 + 1200)
-  # amp 0.8`}</code>
-                  </pre>
+  # amp 0.8`}</CodeBlock>
                 </div>
               </div>
             </div>
@@ -181,29 +232,95 @@ d8 $ chop 16 $ loopAt 2
               </h2>
               
               <div className="grid md:grid-cols-3 gap-6">
-                <div className="aspect-video bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-lg border border-purple-500/20 relative overflow-hidden">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-gray-400 text-sm">
-                      [live_coding_screenshot.png]
-                    </div>
-                  </div>
+                <div className="aspect-video relative rounded-lg overflow-hidden">
+                  <Image
+                    src="/images/parvagues/gear1.jpg"
+                    alt="Live Coding Setup"
+                    fill
+                    className="object-cover"
+                  />
                 </div>
                 
-                <div className="aspect-video bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-lg border border-purple-500/20 relative overflow-hidden">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-gray-400 text-sm">
-                      [live_performance_setup.jpg]
-                    </div>
-                  </div>
+                <div className="aspect-video relative rounded-lg overflow-hidden">
+                  <Image
+                    src="/images/parvagues/studio1.jpg"
+                    alt="Studio Setup"
+                    fill
+                    className="object-cover"
+                  />
                 </div>
                 
-                <div className="aspect-video bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-lg border border-purple-500/20 relative overflow-hidden">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-gray-400 text-sm">
-                      [cyberpunk_visuals.gif]
-                    </div>
-                  </div>
+                <div className="aspect-video relative rounded-lg overflow-hidden">
+                  <Image
+                    src="/images/parvagues/gear2.jpg"
+                    alt="Performance Setup"
+                    fill
+                    className="object-cover"
+                  />
                 </div>
+              </div>
+            </div>
+          </section>
+          
+          {/* Performance Carousel */}
+          <section className="py-20 px-4 overflow-hidden">
+            <div className="max-w-6xl mx-auto">
+              <h2 className="text-3xl font-bold mb-12 text-center">
+                <span className="bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent">
+                  Live Performances
+                </span>
+              </h2>
+              
+              <div className="relative">
+                <Swiper
+                  effect={'cards'}
+                  grabCursor={true}
+                  centeredSlides={true}
+                  slidesPerView={'auto'}
+                  spaceBetween={30}
+                  className="w-full h-[60vh]"
+                >
+                  <SwiperSlide className="relative rounded-lg overflow-hidden">
+                    <Image
+                      src="/images/parvagues/PXL_20241005_032846861.TS_exported_1474.jpg"
+                      alt="Live Performance 1"
+                      fill
+                      className="object-cover"
+                    />
+                  </SwiperSlide>
+                  <SwiperSlide className="relative rounded-lg overflow-hidden">
+                    <Image
+                      src="/images/parvagues/signal-2024-09-27-20-41-19-515.jpg"
+                      alt="Live Performance 2"
+                      fill
+                      className="object-cover"
+                    />
+                  </SwiperSlide>
+                  <SwiperSlide className="relative rounded-lg overflow-hidden">
+                    <Image
+                      src="/images/parvagues/IMG_5945_exported_77863~2.jpg"
+                      alt="Live Performance 3"
+                      fill
+                      className="object-cover"
+                    />
+                  </SwiperSlide>
+                  <SwiperSlide className="relative rounded-lg overflow-hidden">
+                    <Image
+                      src="/images/parvagues/IMG-20230331-WA0001(1).jpg"
+                      alt="Live Performance 4"
+                      fill
+                      className="object-cover"
+                    />
+                  </SwiperSlide>
+                  <SwiperSlide className="relative rounded-lg overflow-hidden">
+                    <Image
+                      src="/images/parvagues/img_9479.jpg"
+                      alt="Live Performance 5"
+                      fill
+                      className="object-cover"
+                    />
+                  </SwiperSlide>
+                </Swiper>
               </div>
             </div>
           </section>
@@ -243,16 +360,26 @@ d8 $ chop 16 $ loopAt 2
           <footer className="py-8 px-4 border-t border-purple-500/20 bg-black/50">
             <div className="max-w-6xl mx-auto text-center">
               <p className="text-gray-400 text-sm">
-                © 2025 ParVagues | Algorithmic music & cyberpunk aesthetics
+                © { new Date().getFullYear() } ParVagues | Algorithmic music
               </p>
               <div className="flex justify-center gap-4 mt-4">
+                <a href="https://www.deezer.com/us/artist/103670512" className="text-gray-400 hover:text-purple-400 transition-colors">
+                  Deezer
+                </a>
+                <a href="https://open.spotify.com/intl-fr/artist/0kznTQnx5QRhMwktmZboX4" className="text-gray-400 hover:text-purple-400 transition-colors">
+                  Spotify
+                </a>
+                <a href="https://www.youtube.com/@parvagues" className="text-gray-400 hover:text-purple-400 transition-colors">
+                  YouTube
+                </a>
+                
                 <a href="https://soundcloud.com/parvagues" className="text-gray-400 hover:text-purple-400 transition-colors">
                   SoundCloud
                 </a>
-                <a href="https://bandcamp.com/parvagues" className="text-gray-400 hover:text-purple-400 transition-colors">
+                <a href="https://parvagues.bandcamp.com/" className="text-gray-400 hover:text-purple-400 transition-colors">
                   Bandcamp
                 </a>
-                <a href="https://instagram.com/parvagues" className="text-gray-400 hover:text-purple-400 transition-colors">
+                <a href="https://instagram.com/parvagues.mp3" className="text-gray-400 hover:text-purple-400 transition-colors">
                   Instagram
                 </a>
               </div>
