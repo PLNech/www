@@ -5,8 +5,8 @@ time: "XX:XX"
 location: "Venue TBD"
 address: "Lyon, France"
 description: "Live algorithmic performance"
-ctaURL: "https://nech.pl/algorave-lyon"
-ctaText: "Plus d'infos"
+# ctaURL: "https://nech.pl/algorave-lyon"
+# ctaText: "Plus d'infos"
 teasing1: |
   # AlgoRave preparation
   

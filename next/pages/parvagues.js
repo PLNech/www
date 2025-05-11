@@ -6,52 +6,16 @@ import { getAllLives } from '@/lib/livesData';
 import styles from '@/styles/parvagues.module.css';
 import dynamic from 'next/dynamic';
 import ParVaguesHeader from '@/components/ParVaguesHeader';
+import ParVaguesFooter from '@/components/ParVaguesFooter';
+import SyntaxHighlighter from "react-syntax-highlighter";
+import { atomOneDark } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 
 // React Icons imports
 import { FaSpotify, FaDeezer, FaYoutube, FaApple, FaAmazon, FaInstagram, FaTwitter, FaEnvelope } from 'react-icons/fa';
 import { SiTidal, SiBluesky, SiMastodon } from 'react-icons/si';
 import { MdPlayArrow, MdPause } from 'react-icons/md';
 
-// Dynamically import Prism.js with no SSR
-const Prism = dynamic(() => import('prismjs'), { ssr: false });
-const PrismHaskell = dynamic(() => import('prismjs/components/prism-haskell'), { ssr: false });
-
 function CodeBlock({ children, height = '400px', isTerminal = false }) {
-  const [isClient, setIsClient] = useState(false);
-  const codeRef = useRef(null);
-  
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-  
-  useEffect(() => {
-    if (isClient && codeRef.current) {
-      import('prismjs').then((Prism) => {
-        Prism.default.highlightElement(codeRef.current);
-      });
-    }
-  }, [isClient, children]);
-  
-  if (!isClient) {
-    return (
-      <div className={`${styles.codeContainer} ${isTerminal ? styles.terminalContainer : ''}`} style={{ maxHeight: height }}>
-        {isTerminal && (
-          <div className={styles.terminalHeader}>
-            <div className={styles.terminalControls}>
-              <span className={styles.redCircle}></span>
-              <span className={styles.yellowCircle}></span>
-              <span className={styles.greenCircle}></span>
-            </div>
-            <div className={styles.terminalTitle}>ParVagues@tidal:~</div>
-          </div>
-        )}
-        <pre className="language-haskell">
-          <code>{children}</code>
-        </pre>
-      </div>
-    );
-  }
-  
   return (
     <div className={`${styles.codeContainer} ${isTerminal ? styles.terminalContainer : ''}`} style={{ maxHeight: height }}>
       {isTerminal && (
@@ -64,9 +28,19 @@ function CodeBlock({ children, height = '400px', isTerminal = false }) {
           <div className={styles.terminalTitle}>ParVagues@tidal:~</div>
         </div>
       )}
-      <pre className="language-haskell">
-        <code ref={codeRef}>{children}</code>
-      </pre>
+      <SyntaxHighlighter 
+        language="haskell"
+        style={atomOneDark}
+        wrapLongLines={true}
+        customStyle={{ 
+          margin: 0, 
+          borderRadius: isTerminal ? '0 0 8px 8px' : '8px',
+          height: 'auto',
+          maxHeight: isTerminal ? `calc(${height} - 30px)` : height
+        }}
+      >
+        {children}
+      </SyntaxHighlighter>
     </div>
   );
 }
@@ -87,7 +61,7 @@ export default function ParVagues({ lives }) {
   const [selectedSection, setSelectedSection] = useState('code');
   const [sectionImages, setSectionImages] = useState([]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [isHeaderSticky, setIsHeaderSticky] = useState(false);
+  const [currentAlbumIndex, setCurrentAlbumIndex] = useState(0);
   const backgroundRef = useRef(null);
   const audioRef = useRef(null);
   
@@ -151,6 +125,16 @@ d4 $ note ("<e3 fs3 <gs3 d4> <a3 df4>>" - 12)
       return () => clearInterval(interval);
     }
   }, [sectionImages.length]);
+
+  // Carousel effect for albums
+  useEffect(() => {
+    if (albums.length > 1) {
+      const interval = setInterval(() => {
+        setCurrentAlbumIndex(prev => (prev + 1) % albums.length);
+      }, 5000);
+      return () => clearInterval(interval);
+    }
+  }, []);
   
   // Animate background images
   useEffect(() => {
@@ -173,21 +157,6 @@ d4 $ note ("<e3 fs3 <gs3 d4> <a3 df4>>" - 12)
     
     const interval = setInterval(cycle, 3000);
     return () => clearInterval(interval);
-  }, []);
-  
-  // Fix scroll handling for sticky header
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      const threshold = window.innerHeight * 0.7; // Lower threshold to 70% of viewport height
-      setIsHeaderSticky(scrollPosition > threshold);
-    };
-    
-    // Initial check
-    handleScroll();
-    
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
   
   const scrollToSection = (e) => {
@@ -240,14 +209,6 @@ d4 $ note ("<e3 fs3 <gs3 d4> <a3 df4>>" - 12)
         { platform: 'Amazon', url: 'https://music.amazon.com/albums/B0CKTZMFDF', icon: <FaAmazon /> }
       ]
     }
-  ];
-  
-  const socialLinks = [
-    { icon: <FaEnvelope />, label: 'email', url: 'mailto:parvagues@nech.pl' },
-    { icon: <SiMastodon />, label: 'mastodon', url: 'https://chaos.social/@PixelNoir' },
-    { icon: <FaTwitter />, label: 'twitter', url: 'https://x.com/ParVagues' },
-    { icon: <SiBluesky />, label: 'bluesky [soon]', url: '#' },
-    { icon: <FaInstagram />, label: 'instagram', url: 'https://instagram.com/parvagues.mp3' }
   ];
   
   const renderSectionContent = () => {
@@ -334,186 +295,235 @@ d4 $ note ("<e3 fs3 <gs3 d4> <a3 df4>>" - 12)
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
       
-      <div className="min-h-screen bg-black text-white relative">
-        {/* Replace static CTA with ParVaguesHeader component */}
-        <ParVaguesHeader isSticky={isHeaderSticky} />
+      <div className="flex flex-col min-h-screen bg-black text-white">
+        {/* Apply proper sticky header */}
+        <ParVaguesHeader />
         
-        {/* Fixed top CTA that shows only when not in sticky mode */}
-        <a 
-          href="mailto:parvagues@nech.pl?subject=Booking Request&body=Bonjour,%0D%0A%0D%0AJe souhaiterais discuter d'une possibilité de performance live coding."
-          className={`${styles.ctaButton} ${isHeaderSticky ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
-        >
-          <FaEnvelope className="inline mr-2" />
-          Invoquer un live
-        </a>
-        
-        {/* Hero Section */}
-        <section className={styles.heroSection}>
-          <div className={styles.posterCollage} ref={backgroundRef}>
-            {posterImages.map((src, i) => (
-              <Image
-                key={i}
-                src={src}
-                alt={`Poster ${i + 1}`}
-                fill
-                className={styles.posterImage}
-                priority={i < 3}
-              />
-            ))}
-          </div>
-          
-          {/* Audio element */}
-          <audio 
-            ref={audioRef} 
-            src="/parvagues.mp3" 
-            loop 
-            onPlay={() => setIsPlaying(true)}
-            onPause={() => setIsPlaying(false)}
-          />
-          
-          <div className={styles.contentOverlay}>
-            <div className={styles.heroContent}>
-              {/* Left side: Title and content */}
-              <div className="md:w-1/2">
-                <h1 className={`${styles.heroTitle} ${styles.glitchEffect}`}>
-                  ParVagues
-                </h1>
-                <p className={styles.heroSubtitle}>
-                  Livecoding de musique open-source avec TidalCycles et contrôleur MIDI
-                </p>
-                <a href="#section1" onClick={scrollToSection} className={styles.plungeButton}>
-                  Plonger ↓
-                </a>
-              </div>
-              
-              {/* Right side: Code sample with play overlay */}
-              <div className="md:w-1/2 relative">
-                <div className="relative">
-                  <CodeBlock height="300px" isTerminal={true}>
-                    {tidalCode}
-                  </CodeBlock>
-                  
-                  {/* Pretty Play overlay */}
-                  <button
-                    onClick={toggleAudio}
-                    className="absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center transition-all duration-300 hover:bg-black/80 group"
-                  >
-                    <div className="bg-gradient-to-br from-purple-500 to-pink-500 rounded-full p-8 shadow-xl shadow-purple-500/50 transition-all duration-300 group-hover:scale-110 group-hover:shadow-2xl group-hover:shadow-purple-500/30">
-                      {isPlaying ? (
-                        <MdPause className="w-16 h-16 text-white" />
-                      ) : (
-                        <MdPlayArrow className="w-16 h-16 text-white" />
-                      )}
-                    </div>
-                    <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-sm text-purple-300 opacity-0 group-hover:opacity-100 transition-opacity">
-                      {isPlaying ? 'Pause' : 'Écouter le mix'}
-                    </div>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        
-        {/* Section 1: Interactive Sections */}
-        <section id="section1" className={styles.sectionContainer}>
-          <div className={styles.splitSection}>
-            <div>
-              <div 
-                className={`${styles.bulletPoint} cursor-pointer ${selectedSection === 'potentiel' ? 'text-purple-400' : ''}`}
-                onClick={() => setSelectedSection('potentiel')}
-              >
-                <h3 className="text-xl font-semibold text-purple-400 mb-2">Potentiel</h3>
-                <p className="text-gray-300">Samples et synthés SuperCollider pour une palette sonore infinie</p>
-              </div>
-              
-              <div 
-                className={`${styles.bulletPoint} cursor-pointer ${selectedSection === 'composition' ? 'text-purple-400' : ''}`}
-                onClick={() => setSelectedSection('composition')}
-              >
-                <h3 className="text-xl font-semibold text-purple-400 mb-2">Composition</h3>
-                <p className="text-gray-300">Code Haskell TidalCycles pour des patterns algorithmiques complexes</p>
-              </div>
-              
-              <div 
-                className={`${styles.bulletPoint} cursor-pointer ${selectedSection === 'performance' ? 'text-purple-400' : ''}`}
-                onClick={() => setSelectedSection('performance')}
-              >
-                <h3 className="text-xl font-semibold text-purple-400 mb-2">Performance</h3>
-                <p className="text-gray-300">Live improvise avec contrôleur MIDI pour une interactivité totale</p>
-              </div>
+        {/* Main content flex-auto to push footer to bottom */}
+        <main className="flex-auto">
+          {/* Hero Section */}
+          <section className={`${styles.heroSection} mt-0`}>
+            <div className={styles.posterCollage} ref={backgroundRef}>
+              {posterImages.map((src, i) => (
+                <Image
+                  key={i}
+                  src={src}
+                  alt={`Poster ${i + 1}`}
+                  fill
+                  className={styles.posterImage}
+                  priority={i < 3}
+                />
+              ))}
             </div>
             
-            <div>
-              <div className="mb-4 flex gap-4">
-                <button
-                  onClick={() => setSelectedSection('code')}
-                  className={`px-4 py-2 rounded-md transition-all ${
-                    selectedSection === 'code'
-                      ? 'bg-purple-500 text-white'
-                      : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
-                  }`}
-                >
-                  Code
-                </button>
-                <button
-                  onClick={() => setSelectedSection('potentiel')}
-                  className={`px-4 py-2 rounded-md transition-all ${
-                    selectedSection === 'potentiel'
-                      ? 'bg-purple-500 text-white'
-                      : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
-                  }`}
-                >
-                  Samples
-                </button>
-              </div>
-              {renderSectionContent()}
-            </div>
-          </div>
-        </section>
-        
-        {/* Section 2: Find me */}
-        <section className={styles.sectionContainer}>
-          <h2 className="text-3xl font-bold mb-8 text-center">
-            <span className="bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent">
-              Tracks
-            </span>
-          </h2>
-          <div className={styles.albumGrid}>
-            {albums.map(album => (
-              <div 
-                key={album.id} 
-                className={`${styles.albumCard} group relative overflow-hidden aspect-square`}
-              >
-                <Image
-                  src={album.image}
-                  alt={album.title}
-                  fill
-                  className={`${styles.albumImage} object-cover transition-opacity duration-300 group-hover:opacity-50`}
-                />
-                <div className="absolute inset-0 flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/60">
-                  <div className={styles.playerContainer}>
-                    {album.links.map(link => (
-                      <a
-                        key={link.platform}
-                        href={link.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`${styles.playerButton} text-white hover:text-purple-400`}
-                      >
-                        {link.icon}
-                        <span className="ml-2">{link.platform}</span>
-                      </a>
-                    ))}
+            {/* Audio element */}
+            <audio 
+              ref={audioRef} 
+              src="/parvagues.mp3" 
+              loop 
+              onPlay={() => setIsPlaying(true)}
+              onPause={() => setIsPlaying(false)}
+            />
+            
+            <div className={styles.contentOverlay}>
+              <div className={styles.heroContent}>
+                {/* Left side: Title and content */}
+                <div className="md:w-1/2">
+                  <h1 className={`${styles.heroTitle} ${styles.glitchEffect}`}>
+                    ParVagues
+                  </h1>
+                  <p className={styles.heroSubtitle}>
+                    Livecoding de musique open-source avec TidalCycles et contrôleur MIDI
+                  </p>
+                  <a href="#section1" onClick={scrollToSection} className={styles.plungeButton}>
+                    Plonger ↓
+                  </a>
+                </div>
+                
+                {/* Right side: Code sample with play overlay */}
+                <div className="md:w-1/2 relative">
+                  <div className="relative">
+                    <CodeBlock height="300px" isTerminal={true}>
+                      {tidalCode}
+                    </CodeBlock>
+                    
+                    {/* Pretty Play overlay */}
+                    <button
+                      onClick={toggleAudio}
+                      className="absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center transition-all duration-300 hover:bg-black/80 group"
+                    >
+                      <div className="bg-gradient-to-br from-purple-500 to-pink-500 rounded-full p-8 shadow-xl shadow-purple-500/50 transition-all duration-300 group-hover:scale-110 group-hover:shadow-2xl group-hover:shadow-purple-500/30">
+                        {isPlaying ? (
+                          <MdPause className="w-16 h-16 text-white" />
+                        ) : (
+                          <MdPlayArrow className="w-16 h-16 text-white" />
+                        )}
+                      </div>
+                      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-sm text-purple-300 opacity-0 group-hover:opacity-100 transition-opacity">
+                        {isPlaying ? 'Pause' : 'Écouter le mix'}
+                      </div>
+                    </button>
                   </div>
                 </div>
-                <h3 className="absolute bottom-0 left-0 right-0 p-2 text-lg font-semibold text-white bg-black/50 text-center group-hover:hidden">
-                  {album.title}
-                </h3>
               </div>
-            ))}
-          </div>
-        </section>
+            </div>
+          </section>
+          
+          {/* Section 1: Interactive Sections */}
+          <section id="section1" className={styles.sectionContainer}>
+            <div className={styles.splitSection}>
+              <div>
+                <div 
+                  className={`${styles.bulletPoint} cursor-pointer ${selectedSection === 'potentiel' ? 'text-purple-400' : ''}`}
+                  onClick={() => setSelectedSection('potentiel')}
+                >
+                  <h3 className="text-xl font-semibold text-purple-400 mb-2">Potentiel</h3>
+                  <p className="text-gray-300">Samples et synthés SuperCollider pour une palette sonore infinie</p>
+                </div>
+                
+                <div 
+                  className={`${styles.bulletPoint} cursor-pointer ${selectedSection === 'composition' ? 'text-purple-400' : ''}`}
+                  onClick={() => setSelectedSection('composition')}
+                >
+                  <h3 className="text-xl font-semibold text-purple-400 mb-2">Composition</h3>
+                  <p className="text-gray-300">Code Haskell TidalCycles pour des patterns algorithmiques complexes</p>
+                </div>
+                
+                <div 
+                  className={`${styles.bulletPoint} cursor-pointer ${selectedSection === 'performance' ? 'text-purple-400' : ''}`}
+                  onClick={() => setSelectedSection('performance')}
+                >
+                  <h3 className="text-xl font-semibold text-purple-400 mb-2">Performance</h3>
+                  <p className="text-gray-300">Live improvise avec contrôleur MIDI pour une interactivité totale</p>
+                </div>
+              </div>
+              
+              <div>
+                <div className="mb-4 flex gap-4">
+                  <button
+                    onClick={() => setSelectedSection('code')}
+                    className={`px-4 py-2 rounded-md transition-all ${
+                      selectedSection === 'code'
+                        ? 'bg-purple-500 text-white'
+                        : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+                    }`}
+                  >
+                    Code
+                  </button>
+                  <button
+                    onClick={() => setSelectedSection('potentiel')}
+                    className={`px-4 py-2 rounded-md transition-all ${
+                      selectedSection === 'potentiel'
+                        ? 'bg-purple-500 text-white'
+                        : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+                    }`}
+                  >
+                    Samples
+                  </button>
+                </div>
+                {renderSectionContent()}
+              </div>
+            </div>
+          </section>
+          
+          {/* Section 2: Music */}
+          <section id="music" className={styles.sectionContainer}>
+            <h2 className="text-3xl font-bold mb-8 text-center">
+              <span className="bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent">
+                Tracks
+              </span>
+            </h2>
+            <div className={styles.albumGrid}>
+              {albums.map(album => (
+                <div 
+                  key={album.id} 
+                  className={`${styles.albumCard} group relative overflow-hidden aspect-square`}
+                >
+                  <Image
+                    src={album.image}
+                    alt={album.title}
+                    fill
+                    className={`${styles.albumImage} object-cover transition-opacity duration-300 group-hover:opacity-50`}
+                  />
+                  <div className="absolute inset-0 flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/60">
+                    <div className={styles.playerContainer}>
+                      {album.links.map(link => (
+                        <a
+                          key={link.platform}
+                          href={link.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`${styles.playerButton} text-white hover:text-purple-400`}
+                        >
+                          {link.icon}
+                          <span className="ml-2">{link.platform}</span>
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                  <h3 className="absolute bottom-0 left-0 right-0 p-2 text-lg font-semibold text-white bg-black/50 text-center group-hover:hidden">
+                    {album.title}
+                  </h3>
+                </div>
+              ))}
+            </div>
+          </section>
+          
+          {/* Section 3: Performances */}
+          <section id="performances" className={styles.sectionContainer}>
+            <h2 className="text-3xl font-bold mb-8 text-center">
+              <span className="bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent">
+                Performances
+              </span>
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {posterImages.map((src, index) => (
+                <div key={index} className="relative aspect-[3/4] rounded-lg overflow-hidden group">
+                  <Image
+                    src={src}
+                    alt={`Performance ${index + 1}`}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity">
+                  </div>
+                  <div className="absolute bottom-0 left-0 w-full p-4 text-white">
+                    <h3 className="text-xl font-bold mb-1">Live {2022 + Math.floor(index/2)}</h3>
+                    <p className="text-sm opacity-80">Algorave Paris</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+          
+          {/* Section 4: About */}
+          <section id="about" className={`${styles.sectionContainer} pb-24`}>
+            <h2 className="text-3xl font-bold mb-8 text-center">
+              <span className="bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent">
+                À propos
+              </span>
+            </h2>
+            <div className="max-w-3xl mx-auto text-gray-300 space-y-4">
+              <p>
+                ParVagues est un projet de musique algorithmique qui utilise le live coding pour créer des performances immersives et uniques. 
+                Chaque set est programmé en direct avec le langage TidalCycles, basé sur Haskell, qui permet de créer des patterns rythmiques et mélodiques complexes.
+              </p>
+              <p>
+                L'approche créative combine improvisation, expérimentation sonore et visualisation du code pour une expérience audiovisuelle complète.
+                Le code source est projeté pendant les performances, rendant visible le processus de création musicale.
+              </p>
+              <blockquote className="border-l-4 border-purple-500 pl-4 italic my-6">
+                "La programmation en direct permet une interaction unique avec le public. Chaque performance est une exploration nouvelle de l'espace sonore algorithmique."
+              </blockquote>
+              <p>
+                ParVagues se produit régulièrement dans des festivals d'art numérique, événements algorave et espaces dédiés aux nouvelles formes d'expression musicale.
+              </p>
+            </div>
+          </section>
+        </main>
+        
+        {/* Footer - not sticky */}
+        <ParVaguesFooter />
       </div>
     </>
   );

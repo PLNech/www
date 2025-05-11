@@ -186,23 +186,17 @@ export default function Live({ data, slug, images }) {
       >
         {/* Background poster image with blur */}
         {posterImage && (
-          <div className="absolute inset-0 overflow-hidden z-0">
-            <div className="absolute inset-0 w-[120%] h-[120%] -left-[10%] -top-[10%]">
-              <Image
+          <div className={styles.posterBackground}>
+            <Image
                 src={posterImage}
                 alt={data.frontmatter.title}
                 fill
-                className="object-cover opacity-40"
-                style={{ 
-                  filter: 'blur(24px)',
-                  transform: 'scale(1.1)',
-                }}
+                className={styles.posterImage}
               />
-            </div>
-            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/90"></div>
+            <div className={styles.posterGradient}></div>
           </div>
         )}
-        
+
         {/* Use the ParVaguesHeader component */}
         <ParVaguesHeader isSticky={isHeaderSticky} eventName={data.frontmatter.title} />
         
@@ -223,12 +217,12 @@ export default function Live({ data, slug, images }) {
                 {/* Left column: Title and info (3/5 width) */}
                 <div className="md:col-span-3 p-8 md:p-10">
                   <h1 className="text-4xl md:text-5xl font-bold mb-4">
-                    <span className={`bg-gradient-to-r from-purple-400 via-pink-500 to-purple-600 bg-clip-text text-transparent ${styles.glitchEffect}`}>
+                    <span className={`bg-gradient-to-r from-purple-400 via-pink-500 to-purple-600 bg-clip-text text-transparent z-10 ${styles.glitchEffect}`}>
                       {data.frontmatter.title}
                     </span>
                   </h1>
-                  <h2 className="text-2xl md:text-3xl font-bold mb-4 text-gray-200">
-                    {data.frontmatter.subtitle || 'Événement ParVagues'}
+                  <h2 className="text-2xl md:text-3xl font-bold mb-4 text-gray-200 z-10">
+                    {data.frontmatter.subtitle || 'ParVagues'}
                   </h2>
                   <div className="text-gray-300 mb-6">
                     <p className="text-xl">{data.frontmatter.location}</p>
@@ -403,7 +397,8 @@ export default function Live({ data, slug, images }) {
               )}
             </article>
           </main>
-          
+        
+
           {/* Footer */}
           <footer className={styles.footer}>
             <p className="text-gray-400">© {new Date().getFullYear()} ParVagues</p>
