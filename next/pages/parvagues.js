@@ -2,13 +2,14 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect, useRef } from 'react';
-import { getAllLives } from '../lib/livesData';
-import styles from '../styles/parvagues.module.css';
+import { getAllLives } from '@/lib/livesData';
+import styles from '@/styles/parvagues.module.css';
 import dynamic from 'next/dynamic';
+import ParVaguesHeader from '@/components/ParVaguesHeader';
 
 // React Icons imports
 import { FaSpotify, FaDeezer, FaYoutube, FaApple, FaAmazon, FaInstagram, FaTwitter, FaEnvelope } from 'react-icons/fa';
-  import { SiTidal, SiBluesky, SiMastodon } from 'react-icons/si';
+import { SiTidal, SiBluesky, SiMastodon } from 'react-icons/si';
 import { MdPlayArrow, MdPause } from 'react-icons/md';
 
 // Dynamically import Prism.js with no SSR
@@ -86,6 +87,7 @@ export default function ParVagues({ lives }) {
   const [selectedSection, setSelectedSection] = useState('code');
   const [sectionImages, setSectionImages] = useState([]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isHeaderSticky, setIsHeaderSticky] = useState(false);
   const backgroundRef = useRef(null);
   const audioRef = useRef(null);
   
@@ -173,6 +175,21 @@ d4 $ note ("<e3 fs3 <gs3 d4> <a3 df4>>" - 12)
     return () => clearInterval(interval);
   }, []);
   
+  // Fix scroll handling for sticky header
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const threshold = window.innerHeight * 0.7; // Lower threshold to 70% of viewport height
+      setIsHeaderSticky(scrollPosition > threshold);
+    };
+    
+    // Initial check
+    handleScroll();
+    
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+  
   const scrollToSection = (e) => {
     e.preventDefault();
     const section = document.getElementById('section1');
@@ -199,8 +216,9 @@ d4 $ note ("<e3 fs3 <gs3 d4> <a3 df4>>" - 12)
   
   const albums = [
     {
-      id: 'livecoding',
+      id: '2024_opal',
       title: 'Livecoding (Opal Festival 2024)',
+      image: '/images/parvagues/albums/2024_opal/cover.jpg',
       links: [
         { platform: 'YouTube', url: 'https://www.youtube.com/playlist?list=OLAK5uy_l4MF3OCIXcdPMpsHGVX2Q9MiX6oU1zT6g', icon: <FaYoutube /> },
         { platform: 'Deezer', url: 'https://www.deezer.com/us/album/656760591', icon: <FaDeezer /> },
@@ -211,8 +229,9 @@ d4 $ note ("<e3 fs3 <gs3 d4> <a3 df4>>" - 12)
       ]
     },
     {
-      id: 'connexion',
+      id: '2023_connexion',
       title: 'Connexion Etablie EP',
+      image: '/images/parvagues/albums/2023_connexion/cover.jpg',
       links: [
         { platform: 'YouTube', url: 'https://www.youtube.com/watch?v=VODSdQKrzyw&list=OLAK5uy_nzlx3b7YJYzrbagXF5swhENsCg5vJkT_Q', icon: <FaYoutube /> },
         { platform: 'Spotify', url: 'https://open.spotify.com/album/4uzSN6Uv9IwcYeHdRtkUmM', icon: <FaSpotify /> },
@@ -249,24 +268,45 @@ d4 $ note ("<e3 fs3 <gs3 d4> <a3 df4>>" - 12)
         );
       case 'carousel':
         return (
-          <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow-xl">
-            {sectionImages.map((image, index) => (
-              <Image
-                key={image}
-                src={image}
-                alt={`${selectedSection} ${index + 1}`}
-                fill
-                className={`object-cover transition-opacity duration-500 ${
-                  index === currentImageIndex ? 'opacity-100' : 'opacity-0'
-                }`}
-              />
+          <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow-xl group">
+            {albums.map((album, index) => (
+              <div key={album.id} className="absolute inset-0">
+                <Image
+                  src={album.image}
+                  alt={album.title}
+                  fill
+                  className={`object-cover transition-all duration-500 group-hover:blur-sm group-hover:opacity-40 ${
+                    index === currentAlbumIndex ? 'opacity-100' : 'opacity-0'
+                  }`}
+                />
+                {index === currentAlbumIndex && (
+                  <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                    <div className="text-white text-center">
+                      <h3 className="text-2xl font-bold mb-4">{album.title}</h3>
+                      <div className="flex justify-center space-x-4">
+                        {album.links.map((link) => (
+                          <a 
+                            key={link.platform} 
+                            href={link.url} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="text-3xl hover:text-purple-400 transition-colors"
+                          >
+                            {link.icon}
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
             ))}
             <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
-              {sectionImages.map((_, index) => (
+              {albums.map((_, index) => (
                 <div
                   key={index}
                   className={`w-2 h-2 rounded-full transition-all ${
-                    index === currentImageIndex
+                    index === currentAlbumIndex
                       ? 'bg-purple-400 w-6'
                       : 'bg-gray-400'
                   }`}
@@ -294,11 +334,14 @@ d4 $ note ("<e3 fs3 <gs3 d4> <a3 df4>>" - 12)
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
       
-      <div className="min-h-screen bg-black text-white">
-        {/* Sticky CTA */}
+      <div className="min-h-screen bg-black text-white relative">
+        {/* Replace static CTA with ParVaguesHeader component */}
+        <ParVaguesHeader isSticky={isHeaderSticky} />
+        
+        {/* Fixed top CTA that shows only when not in sticky mode */}
         <a 
           href="mailto:parvagues@nech.pl?subject=Booking Request&body=Bonjour,%0D%0A%0D%0AJe souhaiterais discuter d'une possibilité de performance live coding."
-          className={styles.ctaButton}
+          className={`${styles.ctaButton} ${isHeaderSticky ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
         >
           <FaEnvelope className="inline mr-2" />
           Invoquer un live
@@ -436,19 +479,19 @@ d4 $ note ("<e3 fs3 <gs3 d4> <a3 df4>>" - 12)
               Tracks
             </span>
           </h2>
-          
           <div className={styles.albumGrid}>
             {albums.map(album => (
-              <div key={album.id} className={styles.albumCard}>
-                <h3 className="text-lg font-semibold mb-3">{album.title}</h3>
-                {!showPlayers[album.id] ? (
-                  <button
-                    onClick={() => togglePlayer(album.id)}
-                    className="text-purple-400 hover:text-purple-300 text-sm transition-colors flex items-center gap-2"
-                  >
-                    <MdPlayArrow /> Afficher les lecteurs
-                  </button>
-                ) : (
+              <div 
+                key={album.id} 
+                className={`${styles.albumCard} group relative overflow-hidden aspect-square`}
+              >
+                <Image
+                  src={album.image}
+                  alt={album.title}
+                  fill
+                  className={`${styles.albumImage} object-cover transition-opacity duration-300 group-hover:opacity-50`}
+                />
+                <div className="absolute inset-0 flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/60">
                   <div className={styles.playerContainer}>
                     {album.links.map(link => (
                       <a
@@ -456,50 +499,21 @@ d4 $ note ("<e3 fs3 <gs3 d4> <a3 df4>>" - 12)
                         href={link.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className={styles.playerButton}
+                        className={`${styles.playerButton} text-white hover:text-purple-400`}
                       >
                         {link.icon}
-                        <span>{link.platform}</span>
+                        <span className="ml-2">{link.platform}</span>
                       </a>
                     ))}
                   </div>
-                )}
+                </div>
+                <h3 className="absolute bottom-0 left-0 right-0 p-2 text-lg font-semibold text-white bg-black/50 text-center group-hover:hidden">
+                  {album.title}
+                </h3>
               </div>
             ))}
           </div>
         </section>
-        
-        {/* Section 3: Reach me */}
-        <section className={styles.sectionContainer}>
-          <h2 className="text-3xl font-bold mb-8 text-center">
-            <span className="bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent">
-              Reach me
-            </span>
-          </h2>
-          
-          <div className={styles.socialLinks}>
-            {socialLinks.map(link => (
-              <a 
-                key={link.label}
-                href={link.url} 
-                className={styles.socialLink}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {link.icon}
-                <span>{link.label}</span>
-              </a>
-            ))}
-          </div>
-        </section>
-        
-        {/* Footer */}
-        <footer className={styles.footer}>
-          <p className="text-gray-400">© {new Date().getFullYear()} ParVagues</p>
-          <Link href="/" className="mt-4 inline-block text-gray-500 text-sm hover:text-purple-400 transition-colors">
-            [more PLN Works]
-          </Link>
-        </footer>
       </div>
     </>
   );
