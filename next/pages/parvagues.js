@@ -332,7 +332,7 @@ d4 $ note ("<e3 fs3 <gs3 d4> <a3 df4>>" - 12)
                     <GlitchText 
                       text="ParVagues" 
                       className={styles.glitchEffect} 
-                      burstFrequency={450} 
+                      burstFrequency={4500} 
                     />
                   </h1>
                   <p className={styles.heroSubtitle}>
