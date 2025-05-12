@@ -474,23 +474,32 @@ d4 $ note ("<e3 fs3 <gs3 d4> <a3 df4>>" - 12)
             </h2>
             <div className="max-w-3xl mx-auto text-gray-300 space-y-4">
               <p>
-                ParVagues est un projet de musique algorithmique qui utilise le live coding pour créer des performances immersives et uniques. 
-                Chaque set est programmé en direct avec le langage TidalCycles, basé sur Haskell, qui permet de créer des patterns rythmiques et mélodiques complexes.
+                ParVagues, c'est des ondes qui naissent dans un océan binaire pour parfois s'échouer sur vos plages sonores.
               </p>
               <p>
-                L'approche créative combine improvisation, expérimentation sonore et visualisation du code pour une expérience audiovisuelle complète.
-                Le code source est projeté pendant les performances, rendant visible le processus de création musicale.
+                Codé avec TidalCycles, chaque enregistrement est issu d'une structure algorithmique, au code source libre et réutilisable.
               </p>
-              <blockquote className="border-l-4 border-purple-500 pl-4 italic my-6">
-                "La programmation en direct permet une interaction unique avec le public. Chaque performance est une exploration nouvelle de l'espace sonore algorithmique."
-              </blockquote>
               <p>
-                ParVagues se produit régulièrement dans des festivals d'art numérique, événements algorave et espaces dédiés aux nouvelles formes d'expression musicale.
+                En particulier, ParVagues existe grâce :
+              </p>
+              <ul className="list-disc pl-6 space-y-2">
+                <li>à <a href="https://tidalcycles.org" className="text-purple-400 hover:text-purple-300">Yaxu</a> et la <a href="https://tidalcycles.org/community" className="text-purple-400 hover:text-purple-300">communauté TidalCycles</a></li>
+                <li>à <a href="https://supercollider.github.io" className="text-purple-400 hover:text-purple-300">SuperCollider</a> et les <a href="https://github.com/supercollider/sc3-plugins" className="text-purple-400 hover:text-purple-300">SC3-Plugins</a></li>
+                <li>à <a href="https://github.com/musikinformatik/SuperDirt" className="text-purple-400 hover:text-purple-300">SuperDirt</a> et ses samples</li>
+                <li>au Santa Clara Laptop Orchestra (<a href="https://www.scu.edu/cas/music/ensembles/sclork/" className="text-purple-400 hover:text-purple-300">www.scu.edu/cas/music/ensembles/sclork/</a>)</li>
+                <li>aux projets <a href="https://pickleddiscs.bandcamp.com/album/blood-sport-sample-pack" className="text-purple-400 hover:text-purple-300">BloodSport Samples</a> et <a href="https://hydrogen-music.org/" className="text-purple-400 hover:text-purple-300">Hydrogen</a></li>
+              </ul>
+              <p>
+                Le résultat final est publié sous license CC-BY-SA : <br />
+                vous êtes libres de les récupérer, modifier et repartager, tant que vous mentionnez leur origine.
+              </p>
+              <p>
+                Le code source final de chaque partition est disponible sur <a href="https://nech.pl/parvagues" className="text-purple-400 hover:text-purple-300">nech.pl/parvagues</a>.<br/>
+                Les enregistrements originaux sont disponibles sur demande.
               </p>
             </div>
           </section>
         </main>
-        
         {/* Footer - not sticky */}
         <ParVaguesFooter />
       </div>
