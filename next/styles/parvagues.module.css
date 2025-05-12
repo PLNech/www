@@ -168,6 +168,30 @@
   box-shadow: 0 10px 20px rgba(217, 0, 255, 0.3);
 }
 
+.outlineButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: white;
+  border: 1px solid rgba(217, 0, 255, 0.5);
+  background: rgba(217, 0, 255, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.outlineButton:hover {
+  background: rgba(217, 0, 255, 0.2);
+  border-color: var(--neon-high);
+  color: var(--neon-high);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(217, 0, 255, 0.2);
+}
+
 .sectionContainer {
   padding: 5rem 1rem;
   max-width: 1200px;
@@ -508,3 +532,24 @@
   height: auto;
   filter: drop-shadow(0 0 10px rgba(217, 0, 255, 0.5));
 }
+
+/* Shine animation for album covers 
+NOTE: KEPT HERE FOR REFERENCE, THESE ARE COPIED IN THE MAIN GLOBAL.CSS 
+AS MODULE CSS FORBIDS ROOT VARIABLES
+@keyframes shine {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+:global(.hover\:shadow-glow:hover) {
+  box-shadow: 0 0 15px rgba(217, 0, 255, 0.7);
+}
+
+:global(.animate-shine) {
+  animation: shine 1.5s ease-in-out;
+}
+*/

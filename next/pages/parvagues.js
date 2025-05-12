@@ -60,33 +60,31 @@ export default function ParVagues({ lives }) {
   const [tidalCode, setTidalCode] = useState('');
   const [showPlayers, setShowPlayers] = useState({});
   const [isPlaying, setIsPlaying] = useState(false);
-  const [selectedSection, setSelectedSection] = useState('code');
+  const [selectedSection, setSelectedSection] = useState('potentiel');
   const [sectionImages, setSectionImages] = useState([]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [currentAlbumIndex, setCurrentAlbumIndex] = useState(0);
   const backgroundRef = useRef(null);
   const audioRef = useRef(null);
   
+  // Filter future events
+  const futureEvents = lives.filter(live => {
+    return new Date(live.date) > new Date();
+  });
+
   // Define section content
   const sections = {
-    code: {
+    potentiel: {
       type: 'image',
       image: '/images/parvagues/samples.png'
     },
-    midi: {
-      type: 'carousel',
-      images: [
-        '/images/parvagues/studio1.jpg',
-        '/images/parvagues/gear1.jpg',
-        '/images/parvagues/gear2.jpg'
-      ]
+    composition: {
+      type: 'image',
+      image: '/images/parvagues/gear1.jpg'
     },
     performance: {
-      type: 'carousel',
-      images: [
-        '/images/parvagues/live.jpg',
-        '/images/parvagues/code_overlay.jpg'
-      ]
+      type: 'image',
+      image: '/images/parvagues/live.jpg'
     }
   };
   
@@ -228,76 +226,18 @@ d4 $ note ("<e3 fs3 <gs3 d4> <a3 df4>>" - 12)
     const sectionContent = sections[selectedSection];
     if (!sectionContent) return null;
     
-    switch (sectionContent.type) {
-      case 'image':
-        return (
-          <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow-xl">
-            <Image
-              src={sectionContent.image}
-              alt={selectedSection}
-              fill
-              className="object-cover"
-            />
-          </div>
-        );
-      case 'carousel':
-        return (
-          <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow-xl group">
-            {albums.map((album, index) => (
-              <div key={album.id} className="absolute inset-0">
-                <Image
-                  src={album.image}
-                  alt={album.title}
-                  fill
-                  className={`object-cover transition-all duration-500 group-hover:blur-sm group-hover:opacity-40 ${
-                    index === currentAlbumIndex ? 'opacity-100' : 'opacity-0'
-                  }`}
-                />
-                {index === currentAlbumIndex && (
-                  <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
-                    <div className="text-white text-center">
-                      <h3 className="text-2xl font-bold mb-4">{album.title}</h3>
-                      <div className="flex justify-center space-x-4">
-                        {album.links.map((link) => (
-                          <a 
-                            key={link.platform} 
-                            href={link.url} 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className="text-3xl hover:text-purple-400 transition-colors"
-                          >
-                            {link.icon}
-                          </a>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </div>
-            ))}
-            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
-              {albums.map((_, index) => (
-                <div
-                  key={index}
-                  className={`w-2 h-2 rounded-full transition-all ${
-                    index === currentAlbumIndex
-                      ? 'bg-purple-400 w-6'
-                      : 'bg-gray-400'
-                  }`}
-                />
-              ))}
-            </div>
-          </div>
-        );
-      case 'code':
-        return (
-          <CodeBlock height="400px" isTerminal={true}>
-            {sectionContent.content || 'Chargement du code...'}
-          </CodeBlock>
-        );
-      default:
-        return null;
-    }
+    // For any section type, display the image
+    return (
+      <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow-xl">
+        <Image
+          src={sectionContent.image}
+          alt={selectedSection}
+          fill
+          className="object-cover"
+          priority={true}
+        />
+      </div>
+    );
   };
   
   return (
@@ -353,9 +293,17 @@ d4 $ note ("<e3 fs3 <gs3 d4> <a3 df4>>" - 12)
                   <p className={styles.heroSubtitle}>
                     Livecoding de musique open-source avec TidalCycles et contrôleur MIDI
                   </p>
-                  <a href="#section1" onClick={scrollToSection} className={styles.plungeButton}>
-                    Plonger ↓
-                  </a>
+                  <div className="flex flex-col sm:flex-row gap-4 mt-6">
+                    <a href="#section1" onClick={scrollToSection} className={styles.plungeButton}>
+                      Plonger ↓
+                    </a>
+                    {futureEvents.length > 0 && (
+                      <Link href="#performances" className={`${styles.outlineButton} group`}>
+                        <span>LIVE</span>
+                        <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-purple-500 to-pink-500 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
+                      </Link>
+                    )}
+                  </div>
                 </div>
                 
                 {/* Right side: Code sample with play overlay */}
@@ -429,41 +377,99 @@ d4 $ note ("<e3 fs3 <gs3 d4> <a3 df4>>" - 12)
                 Tracks
               </span>
             </h2>
-            <div className={styles.albumGrid}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {albums.map(album => (
                 <div 
                   key={album.id} 
-                  className={`${styles.albumCard} group relative overflow-hidden aspect-square`}
+                  className="relative rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:transform hover:scale-[1.02] group"
                 >
-                  <Image
-                    src={album.image}
-                    alt={album.title}
-                    fill
-                    className={`${styles.albumImage} object-cover transition-opacity duration-300 group-hover:opacity-50`}
-                  />
-                  <div className="absolute inset-0 flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/60">
-                    <div className={styles.playerContainer}>
+                  <div className="relative aspect-square w-full">
+                    <Image
+                      src={album.image}
+                      alt={album.title}
+                      fill
+                      className="object-cover transition-all duration-300 group-hover:brightness-75"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-70"></div>
+                  </div>
+                  
+                  <div className="absolute bottom-0 left-0 right-0 p-4">
+                    <h3 className="text-xl font-bold text-white mb-2">{album.title}</h3>
+                    
+                    <div className="flex flex-wrap gap-2 mt-3">
                       {album.links.map(link => (
                         <a
                           key={link.platform}
                           href={link.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className={`${styles.playerButton} text-white hover:text-purple-400`}
+                          className="bg-black/50 backdrop-blur-sm hover:bg-purple-500/70 text-white rounded-full p-2 transition-all duration-300 hover:shadow-glow"
+                          title={link.platform}
                         >
-                          {link.icon}
-                          <span className="ml-2">{link.platform}</span>
+                          <span className="text-xl">{link.icon}</span>
                         </a>
                       ))}
                     </div>
                   </div>
-                  <h3 className="absolute bottom-0 left-0 right-0 p-2 text-lg font-semibold text-white bg-black/50 text-center group-hover:hidden">
-                    {album.title}
-                  </h3>
+                  
+                  {/* Shine effect overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shine pointer-events-none"></div>
                 </div>
               ))}
             </div>
+            
+            <div className="flex justify-center mt-10">
+              <a href="https://www.open.audio/parvagues" target="_blank" rel="noopener noreferrer" className={styles.outlineButton}>
+                Tous les albums
+              </a>
+            </div>
           </section>
+          
+          {/* Section: Performances */}
+          {futureEvents.length > 0 && (
+            <section id="performances" className={styles.sectionContainer}>
+              <h2 className="text-3xl font-bold mb-8 text-center">
+                <span className="bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent">
+                  Prochains Événements
+                </span>
+              </h2>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {futureEvents.slice(0, 3).map(live => (
+                  <Link href={`/parvagues/lives/${live.slug}`} key={live.slug} legacyBehavior>
+                    <a className="block bg-black/30 border border-purple-500/20 rounded-lg overflow-hidden hover:border-purple-500/70 transition-all hover:shadow-glow hover:-translate-y-1">
+                      <div className="relative h-40">
+                        <Image 
+                          src={`/images/parvagues/lives/${live.year}/${live.slug}/poster.jpg`}
+                          alt={live.title}
+                          fill
+                          className="object-cover"
+                        />
+                        <div className="absolute top-2 right-2 bg-black/60 text-white text-xs px-2 py-1 rounded">
+                          {new Date(live.date).toLocaleDateString('fr-FR', {
+                            day: 'numeric',
+                            month: 'short',
+                            year: 'numeric'
+                          })}
+                        </div>
+                      </div>
+                      <div className="p-4">
+                        <h3 className="text-lg font-bold text-white">{live.title}</h3>
+                        <p className="text-purple-300 text-sm mt-1">{live.location}</p>
+                        <p className="text-gray-400 text-sm mt-2 line-clamp-2">{live.description}</p>
+                      </div>
+                    </a>
+                  </Link>
+                ))}
+              </div>
+              
+              <div className="flex justify-center mt-10">
+                <Link href="/parvagues/lives" className={styles.outlineButton}>
+                  Voir tous les événements
+                </Link>
+              </div>
+            </section>
+          )}
           
           {/* Section 3: About */}
           <section id="about" className={`${styles.sectionContainer} pb-24`}>

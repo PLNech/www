@@ -1,6 +1,6 @@
 ---
 title: "[38C3] Secret Toilet Rave"
-date: "2025-12-28"
+date: "2024-12-28"
 time: "01:37"
 location: "Hamburg, Germany"
 address: "CCH, Hamburg"
