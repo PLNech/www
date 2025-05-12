@@ -115,6 +115,44 @@ d4 $ note ("<e3 fs3 <gs3 d4> <a3 df4>>" - 12)
   }, [selectedSection]);
   
   // Carousel effect for section images
+  // next/pages/parvagues.js (snippet from useEffect for backgroundRef)
+  useEffect(() => {
+    if (!backgroundRef.current) return;
+    
+    const images = backgroundRef.current.children;
+    if (images.length === 0) return; // Guard against no images
+
+    let index = 0;
+    
+    // Initial setup for the very first image
+    for (let i = 0; i < images.length; i++) {
+      images[i].style.opacity = '0'; // Ensure all are initially transparent
+    }
+    if (images[index]) {
+       images[index].style.opacity = '0.7'; // Make the first one visible
+    }
+    
+    const cycle = () => {
+      // Current image fades out
+      if (images[index]) {
+        images[index].style.opacity = '0';
+      }
+      
+      index = (index + 1) % images.length;
+      
+      // Next image fades in
+      if (images[index]) {
+        images[index].style.opacity = '0.7';
+      }
+    };
+    
+    // Call cycle once to set the initial state correctly after a brief moment
+    // setTimeout(cycle, 100); // Or let the interval handle the first full cycle
+    
+    const interval = setInterval(cycle, 3000); // Start cycling after 3s
+    return () => clearInterval(interval);
+  }, []); // Removed sectionImages.length from dependencies as it's not used here
+
   useEffect(() => {
     if (sectionImages.length > 1) {
       const interval = setInterval(() => {
@@ -133,30 +171,7 @@ d4 $ note ("<e3 fs3 <gs3 d4> <a3 df4>>" - 12)
       return () => clearInterval(interval);
     }
   }, []);
-  
-  // Animate background images
-  useEffect(() => {
-    if (!backgroundRef.current) return;
-    
-    const images = backgroundRef.current.children;
-    let index = 0;
-    
-    const cycle = () => {
-      for (let i = 0; i < images.length; i++) {
-        if (i === index) {
-          images[i].style.opacity = '0.7';
-          images[i].style.transition = 'opacity 0.5s ease';
-        } else {
-          images[i].style.opacity = '0';
-        }
-      }
-      index = (index + 1) % images.length;
-    };
-    
-    const interval = setInterval(cycle, 3000);
-    return () => clearInterval(interval);
-  }, []);
-  
+
   const scrollToSection = (e) => {
     e.preventDefault();
     const section = document.getElementById('section1');
@@ -381,7 +396,7 @@ d4 $ note ("<e3 fs3 <gs3 d4> <a3 df4>>" - 12)
                   onClick={() => setSelectedSection('potentiel')}
                 >
                   <h3 className="text-xl font-semibold text-purple-400 mb-2">Potentiel</h3>
-                  <p className="text-gray-300">Samples et synthés SuperCollider pour une palette sonore infinie</p>
+                  <p className="text-gray-300">Samples glanés et synthés SuperCollider</p>
                 </div>
                 
                 <div 
@@ -389,7 +404,7 @@ d4 $ note ("<e3 fs3 <gs3 d4> <a3 df4>>" - 12)
                   onClick={() => setSelectedSection('composition')}
                 >
                   <h3 className="text-xl font-semibold text-purple-400 mb-2">Composition</h3>
-                  <p className="text-gray-300">Code Haskell TidalCycles pour des patterns algorithmiques complexes</p>
+                  <p className="text-gray-300">Code Haskell TidalCycles + input MIDI</p>
                 </div>
                 
                 <div 
@@ -397,7 +412,7 @@ d4 $ note ("<e3 fs3 <gs3 d4> <a3 df4>>" - 12)
                   onClick={() => setSelectedSection('performance')}
                 >
                   <h3 className="text-xl font-semibold text-purple-400 mb-2">Performance</h3>
-                  <p className="text-gray-300">Live improvise avec contrôleur MIDI pour une interactivité totale</p>
+                  <p className="text-gray-300">Performance live avec improvisation au contrôleur MIDI</p>
                 </div>
               </div>
               

@@ -21,15 +21,6 @@ export default function ParVaguesFooter() {
       <div className={styles.neonGradient}></div>
       
       <div className="max-w-6xl mx-auto px-4 relative z-10">
-      <div className="relative">
-          <Image 
-            src="/images/parvagues/logo_text.png" 
-            alt="ParVagues Logo" 
-            width={48}
-            height={48}
-            className="object-contain" 
-          />
-        </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* About Column */}
           <div>
@@ -41,6 +32,16 @@ export default function ParVaguesFooter() {
 
           {/* Social Column */}
           <div className="flex flex-col items-center md:items-end">
+          <div className="flex justify-center mb-4 md:mb-0 md:absolute md:left-1/2 md:transform md:-translate-x-1/2">
+          <Image 
+            src="/images/parvagues/logo_text.png" 
+            alt="ParVagues Logo" 
+            width={96}
+            height={96}
+            className="md:mt-16" 
+          />
+        </div>
+
             <div className="flex flex-wrap gap-4 justify-center md:justify-end">
               {socialLinks.map((link, index) => (
                 <a 
