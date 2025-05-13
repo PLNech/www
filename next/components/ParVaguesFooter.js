@@ -25,22 +25,24 @@ export default function ParVaguesFooter() {
           {/* About Column */}
           <div>
             <p className="text-gray-400 text-sm mb-4">
-              Livecoding de musique open-source avec TidalCycles et contrôleur MIDI.<br />
-              Performances algorithmiques et création sonore en direct.
+              Livecoding de musique libre<br />
+              Performances algorithmiques en direct.
             </p>
           </div>
 
           {/* Social Column */}
           <div className="flex flex-col items-center md:items-end">
-          <div className="flex justify-center mb-4 md:mb-0 md:absolute md:left-1/2 md:transform md:-translate-x-1/2">
-          <Image 
-            src="/images/parvagues/logo_text.png" 
-            alt="ParVagues Logo" 
-            width={96}
-            height={96}
-            className="md:mt-16" 
-          />
-        </div>
+            <div className="flex justify-center w-full">
+              <div className="relative">
+                <Image 
+                  src="/images/parvagues/logo.png" 
+                  alt="ParVagues Logo" 
+                  width={240}
+                  height={240}
+                  className="mx-auto mb-4" 
+                />
+              </div>
+            </div>
 
             <div className="flex flex-wrap gap-4 justify-center md:justify-end">
               {socialLinks.map((link, index) => (
@@ -60,30 +62,26 @@ export default function ParVaguesFooter() {
         </div>
 
         {/* Navigation Links - more compact */}
-        <div className="w-full bg-black py-4 my-4">
-          <div className="flex justify-center items-center space-x-4 text-xs tracking-widest uppercase flex-wrap">
-            <Link href="/parvagues#music" className="text-gray-300 hover:text-[#ff3d7b] transition-colors">
+        <div className="w-full bg-black py-4">
+          <div className="flex justify-center items-center space-x-8 text-xs tracking-widest uppercase flex-wrap">
+            <Link href="/parvagues#music" className="text-gray-300 hover:text-[#ff3d7b] transition-colors tracking-wider px-3">
               MUSIQUE
             </Link>
-            <Link href="/parvagues#performances" className="text-gray-300 hover:text-[#ff3d7b] transition-colors">
+            <Link href="/parvagues#performances" className="text-gray-300 hover:text-[#ff3d7b] transition-colors tracking-wider px-3">
               PERFORMANCES
             </Link>
-            <Link href="/parvagues#about" className="text-gray-300 hover:text-[#ff3d7b] transition-colors">
+            <Link href="/parvagues#about" className="text-gray-300 hover:text-[#ff3d7b] transition-colors tracking-wider px-3">
               À PROPOS
             </Link>
             <a 
               href="mailto:parvagues@nech.pl?subject=Booking Request" 
-              className="text-gray-300 hover:text-[#ff3d7b] transition-colors"
+              className="text-gray-300 hover:text-[#ff3d7b] transition-colors tracking-wider px-3"
             >
               RÉSERVER
             </a>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="border-t border-gray-800 mt-4 pt-4 text-center text-gray-500 text-xs">
-          <p>© {year} ParVagues. All code is open-source.</p>
-        </div>
       </div>
     </footer>
   );

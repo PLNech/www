@@ -75,16 +75,28 @@ export default function ParVagues({ lives }) {
   // Define section content
   const sections = {
     potentiel: {
-      type: 'image',
-      image: '/images/parvagues/samples.png'
+      type: 'carousel',
+      images: [
+        '/images/parvagues/samples.png',
+        '/images/parvagues/code.png',
+        '/images/parvagues/code2.png',
+        '/images/parvagues/code_dense.png'
+      ]
     },
     composition: {
-      type: 'image',
-      image: '/images/parvagues/gear1.jpg'
+      type: 'carousel',
+      images: [
+        '/images/parvagues/gear1.jpg',
+        '/images/parvagues/gear2.jpg',
+        '/images/parvagues/studio1.jpg'
+      ]
     },
     performance: {
-      type: 'image',
-      image: '/images/parvagues/live.jpg'
+      type: 'carousel',
+      images: [
+        '/images/parvagues/live.jpg',
+        '/images/parvagues/code_overlay.jpg'
+      ]
     }
   };
   
@@ -112,53 +124,27 @@ d4 $ note ("<e3 fs3 <gs3 d4> <a3 df4>>" - 12)
     }
   }, [selectedSection]);
   
-  // Carousel effect for section images
-  // next/pages/parvagues.js (snippet from useEffect for backgroundRef)
+  // Auto-advance carousel for section images
   useEffect(() => {
-    if (!backgroundRef.current) return;
-    
-    const images = backgroundRef.current.children;
-    if (images.length === 0) return; // Guard against no images
-
-    let index = 0;
-    
-    // Initial setup for the very first image
-    for (let i = 0; i < images.length; i++) {
-      images[i].style.opacity = '0'; // Ensure all are initially transparent
-    }
-    if (images[index]) {
-       images[index].style.opacity = '0.7'; // Make the first one visible
-    }
-    
-    const cycle = () => {
-      // Current image fades out
-      if (images[index]) {
-        images[index].style.opacity = '0';
-      }
-      
-      index = (index + 1) % images.length;
-      
-      // Next image fades in
-      if (images[index]) {
-        images[index].style.opacity = '0.7';
-      }
-    };
-    
-    // Call cycle once to set the initial state correctly after a brief moment
-    // setTimeout(cycle, 100); // Or let the interval handle the first full cycle
-    
-    const interval = setInterval(cycle, 3000); // Start cycling after 3s
-    return () => clearInterval(interval);
-  }, []); // Removed sectionImages.length from dependencies as it's not used here
-
-  useEffect(() => {
-    if (sectionImages.length > 1) {
+    if (sections[selectedSection]?.images?.length > 1) {
       const interval = setInterval(() => {
-        setCurrentImageIndex(prev => (prev + 1) % sectionImages.length);
-      }, 4000);
+        setCurrentImageIndex(prev => (prev + 1) % sections[selectedSection].images.length);
+      }, 2500);
+      
       return () => clearInterval(interval);
     }
-  }, [sectionImages.length]);
+  }, [selectedSection, sections]);
+
+  // Carousel navigation functions
+  const nextSectionImage = () => {
+    const imagesArray = sections[selectedSection].images;
+    setCurrentImageIndex(prev => (prev + 1) % imagesArray.length);
+  };
+  
+  const prevSectionImage = () => {
+    const imagesArray = sections[selectedSection].images;
+    setCurrentImageIndex(prev => (prev === 0 ? imagesArray.length - 1 : prev - 1));
+  };
 
   // Carousel effect for albums
   useEffect(() => {
@@ -226,16 +212,47 @@ d4 $ note ("<e3 fs3 <gs3 d4> <a3 df4>>" - 12)
     const sectionContent = sections[selectedSection];
     if (!sectionContent) return null;
     
-    // For any section type, display the image
     return (
-      <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow-xl">
-        <Image
-          src={sectionContent.image}
-          alt={selectedSection}
-          fill
-          className="object-cover"
-          priority={true}
-        />
+      <div className="w-full rounded-lg overflow-hidden shadow-xl">
+        <div className="relative w-full bg-black flex items-center justify-center">
+          <div className="w-[30vw] h-[30vw] max-w-[30vw] max-h-[30vw] flex items-center justify-center p-4">
+            <div className="relative w-full h-full flex items-center justify-center">
+              <Image
+                src={sectionContent.images[currentImageIndex]}
+                alt={selectedSection}
+                width={1280}
+                height={1280}
+                className="w-full h-full object-contain"
+                priority={true}
+              />
+            </div>
+          </div>
+          {sectionContent.images.length > 1 && (
+            <>
+              {/* Left arrow */}
+              <button 
+                onClick={prevSectionImage} 
+                className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 p-2 rounded-full transition-colors"
+                aria-label="Image précédente"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+              
+              {/* Right arrow */}
+              <button 
+                onClick={nextSectionImage} 
+                className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 p-2 rounded-full transition-colors"
+                aria-label="Image suivante"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            </>
+          )}
+        </div>
       </div>
     );
   };
@@ -250,7 +267,6 @@ d4 $ note ("<e3 fs3 <gs3 d4> <a3 df4>>" - 12)
       </Head>
       
       <div className="flex flex-col min-h-screen bg-black text-white">
-        {/* Apply proper sticky header */}
         <ParVaguesHeader />
         
         {/* Main content flex-auto to push footer to bottom */}
@@ -340,26 +356,35 @@ d4 $ note ("<e3 fs3 <gs3 d4> <a3 df4>>" - 12)
             <div className={styles.splitSection}>
               <div>
                 <div 
-                  className={`${styles.bulletPoint} cursor-pointer ${selectedSection === 'potentiel' ? 'text-purple-400 border-l-2 border-purple-400 pl-4' : ''}`}
+                  className={`${styles.bulletPoint} cursor-pointer transition-all duration-300 hover:bg-purple-500/10 rounded-lg ${selectedSection === 'potentiel' ? 'text-purple-400 border-l-2 border-purple-400 pl-4' : ''}`}
                   onClick={() => setSelectedSection('potentiel')}
                 >
-                  <h3 className="text-xl font-semibold text-purple-400 mb-2">Potentiel</h3>
+                  <h3 className="text-xl font-semibold text-purple-400 mb-2 group relative inline-block">
+                    Potentiel
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-500 group-hover:w-full transition-all duration-300"></span>
+                  </h3>
                   <p className="text-gray-300">Samples glanés et synthés SuperCollider</p>
                 </div>
                 
                 <div 
-                  className={`${styles.bulletPoint} cursor-pointer ${selectedSection === 'composition' ? 'text-purple-400 border-l-2 border-purple-400 pl-4' : ''}`}
+                  className={`${styles.bulletPoint} cursor-pointer transition-all duration-300 hover:bg-purple-500/10 rounded-lg ${selectedSection === 'composition' ? 'text-purple-400 border-l-2 border-purple-400 pl-4' : ''}`}
                   onClick={() => setSelectedSection('composition')}
                 >
-                  <h3 className="text-xl font-semibold text-purple-400 mb-2">Composition</h3>
+                  <h3 className="text-xl font-semibold text-purple-400 mb-2 group relative inline-block">
+                    Composition
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-500 group-hover:w-full transition-all duration-300"></span>
+                  </h3>
                   <p className="text-gray-300">Code Haskell TidalCycles + input MIDI</p>
                 </div>
                 
                 <div 
-                  className={`${styles.bulletPoint} cursor-pointer ${selectedSection === 'performance' ? 'text-purple-400 border-l-2 border-purple-400 pl-4' : ''}`}
+                  className={`${styles.bulletPoint} cursor-pointer transition-all duration-300 hover:bg-purple-500/10 rounded-lg ${selectedSection === 'performance' ? 'text-purple-400 border-l-2 border-purple-400 pl-4' : ''}`}
                   onClick={() => setSelectedSection('performance')}
                 >
-                  <h3 className="text-xl font-semibold text-purple-400 mb-2">Performance</h3>
+                  <h3 className="text-xl font-semibold text-purple-400 mb-2 group relative inline-block">
+                    Performance
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-500 group-hover:w-full transition-all duration-300"></span>
+                  </h3>
                   <p className="text-gray-300">Performance live avec improvisation au contrôleur MIDI</p>
                 </div>
               </div>

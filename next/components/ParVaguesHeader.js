@@ -31,28 +31,30 @@ export default function ParVaguesHeader({ eventName = null, title = null }) {
   const headerTitle = title || eventName || 'ParVagues';
   
   return (
-    <header 
-      className="sticky top-0 left-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-[#d900ff]/20 shadow-lg transition-all duration-300"
-    >
-      <div className="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
-        <div className="flex items-center gap-2">
-          <Link href="/parvagues" className="flex items-center">
+    <header className="sticky top-0 left-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-[#d900ff]/20">
+      <div className={`${styles.neonGradient} opacity-5`}></div>
+      <div className="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center relative">
+        <div className="flex items-center">
+          <Link href="/parvagues" className="flex items-center group">
             <div className="h-10 w-auto relative">
               <Image 
                 src="/images/parvagues/logo_transparent.png" 
                 alt="ParVagues Logo" 
-                width={40}
-                height={40}
-                className="object-contain" 
+                width={200}
+                height={200}
+                className="object-contain transition-all duration-300 group-hover:filter group-hover:drop-shadow-[0_0_8px_rgba(217,0,255,0.7)]" 
               />
             </div>
             
-            {/* Title animation based on scroll */}
             <div className="overflow-hidden ml-2">
               <span 
-                className={`text-[#d900ff] text-xl font-bold transform transition-all duration-500 ${
+                className={`text-white font-bold transition-all duration-500 ${
                   showInHeader ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8'
                 }`}
+                style={{ 
+                  textShadow: '0 0 5px rgba(217, 0, 255, 0.7), 0 0 10px rgba(217, 0, 255, 0.5)',
+                  color: 'var(--neon-high)'
+                }}
               >
                 {headerTitle}
               </span>
@@ -61,27 +63,27 @@ export default function ParVaguesHeader({ eventName = null, title = null }) {
         </div>
         
         {/* Navigation Links */}
-        <div className="hidden md:flex items-center space-x-6 text-sm">
-          <Link href="/parvagues#music" className="text-white hover:text-[#ff3d7b] transition-colors">
+        <nav className="hidden md:flex items-center space-x-6 text-sm tracking-wider">
+          <Link href="/parvagues#music" className="text-gray-300 hover:text-[#ff3d7b] transition-colors">
             Music
           </Link>
-          <Link href="/parvagues#performances" className="text-white hover:text-[#ff3d7b] transition-colors">
+          <Link href="/parvagues#performances" className="text-gray-300 hover:text-[#ff3d7b] transition-colors">
             Performances
           </Link>
-          <Link href="/parvagues#about" className="text-white hover:text-[#ff3d7b] transition-colors">
+          <Link href="/parvagues#about" className="text-gray-300 hover:text-[#ff3d7b] transition-colors">
             About
           </Link>
-        </div>
+        </nav>
         
         {/* CTA button */}
         <a 
-          href="mailto:parvagues@nech.pl?subject=Booking Request&body=Bonjour,%0D%0A%0D%0AJe souhaiterais discuter d'une possibilité de performance live coding."
-          className={`${styles.ctaButton} ${showInHeader ? 'scale-90' : 'scale-100'} transition-transform duration-300`}
+          href="/book"
+          className={`${styles.outlineButton} py-2 px-4 text-sm`}
         >
           <FaEnvelope className="inline mr-2" />
-          {showInHeader ? 'Invoquer' : 'Invoquer un live'}
+          Book
         </a>
       </div>
     </header>
   );
-} 
+}
