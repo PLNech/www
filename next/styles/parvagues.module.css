@@ -560,3 +560,7 @@ AS MODULE CSS FORBIDS ROOT VARIABLES
   text-decoration-color: var(--neon-down);
   text-decoration-thickness: 3px;
 }
+
+img.live-gallery-image {
+  max-width: 1em;
+}

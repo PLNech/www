@@ -2,10 +2,10 @@
 title: "AlgoRave Lyon 2025"
 date: "2025-05-25"
 time: "XX:XX"
-location: "Venue TBD"
-address: "Lyon, France"
-description: "Live algorithmic performance"
-# ctaURL: "https://nech.pl/algorave-lyon"
+location: "GR TBD"
+address: " GRRRND ZERO VAULX, 56 - 60 Avenue Bohlen, Vaulx-en-Velin"
+description: "AlgoRave 18h-06h avec musique installations et performances audiovisuelles."
+ctaURL: "https://www.grrrndzero.org/index.php/2672-sam-24-05-algorave"
 # ctaText: "Plus d'infos"
 teasing1: |
   # AlgoRave preparation

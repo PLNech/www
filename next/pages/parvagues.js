@@ -438,7 +438,7 @@ d4 $ note ("<e3 fs3 <gs3 d4> <a3 df4>>" - 12)
               
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {futureEvents.slice(0, 3).map(live => (
-                  <Link href={`/parvagues/lives/${live.slug}`} key={live.slug} legacyBehavior>
+                  <Link href={`/parvagues/live/${live.slug}`} key={live.slug} legacyBehavior>
                     <a className="block bg-black/30 border border-purple-500/20 rounded-lg overflow-hidden hover:border-purple-500/70 transition-all hover:shadow-glow hover:-translate-y-1">
                       <div className="relative h-40">
                         <img 

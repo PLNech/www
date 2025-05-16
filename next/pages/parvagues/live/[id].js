@@ -67,7 +67,7 @@ export default function Live({ data, slug, images }) {
           teasings.push(data.frontmatter.teasing2);
         }
         
-        if (daysDiff <= 7 && data.frontmatter.teasing3) {
+        if (daysDiff <= 2 && data.frontmatter.teasing3) {
           teasings.push(data.frontmatter.teasing3);
         }
         
@@ -239,10 +239,10 @@ export default function Live({ data, slug, images }) {
         <main className="flex-auto">
           {/* Hero Section - More compact */}
           <section className="relative min-h-[60vh] md:min-h-[50vh] flex items-center overflow-hidden">
-            {/* Background Image with gradient overlay */}
-            {posterImage && (
-              <div className="absolute inset-0 z-0">
-                <Image
+            {/* FIXME: Rewrite the Background Image with gradient overlay */}
+            {/* {posterImage && (
+              <div className="z-0">
+                <img
                   src={posterImage}
                   alt={data.frontmatter.title}
                   fill
@@ -251,7 +251,7 @@ export default function Live({ data, slug, images }) {
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black"></div>
               </div>
-            )}
+            )} */}
             
             <div className="container mx-auto px-4 py-8 relative z-10">
               <div className="max-w-5xl mx-auto">
@@ -426,11 +426,11 @@ export default function Live({ data, slug, images }) {
                       <div className="grid grid-cols-3 gap-2">
                         {images.slice(0, 3).map((image, i) => (
                           <div key={i} className="relative aspect-square rounded overflow-hidden">
-                            <Image
+                            <img
                               src={image}
                               alt={`${data.frontmatter.title} - image ${i+1}`}
                               fill
-                              className="object-cover hover:scale-110 transition-transform duration-300"
+                              className="live-gallery-image object-cover hover:scale-110 transition-transform duration-300 max-w-sm"
                             />
                           </div>
                         ))}
@@ -483,8 +483,8 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   try {
-    const liveData = getLiveData(params.id);
-    const images = getLivesImages(params.id);
+    const liveData = await getLiveData(params.id);
+    const images = await getLivesImages(params.id);
     
     return {
       props: {
