@@ -56,8 +56,8 @@
 }
 
 .heroContent {
-  padding: 2rem 3rem;
-  max-width: 1400px;
+  /* max width should be 80% */
+  max-width: 80%;
   margin: 0 auto;
   width: 100%;
   min-height: 100vh;
@@ -553,3 +553,10 @@ AS MODULE CSS FORBIDS ROOT VARIABLES
   animation: shine 1.5s ease-in-out;
 }
 */
+
+#section1 > .h3 {
+  margin: 1em 0;
+  text-decoration-line: underline;
+  text-decoration-color: var(--neon-down);
+  text-decoration-thickness: 3px;
+}

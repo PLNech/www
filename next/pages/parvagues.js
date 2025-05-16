@@ -77,25 +77,21 @@ export default function ParVagues({ lives }) {
     potentiel: {
       type: 'carousel',
       images: [
-        '/images/parvagues/samples.png',
-        '/images/parvagues/code.png',
-        '/images/parvagues/code2.png',
-        '/images/parvagues/code_dense.png'
+        '/images/parvagues/samples_crop.png',
+        // '/images/parvagues/code.png',
       ]
     },
     composition: {
       type: 'carousel',
       images: [
-        '/images/parvagues/gear1.jpg',
-        '/images/parvagues/gear2.jpg',
-        '/images/parvagues/studio1.jpg'
+        '/images/parvagues/gear1_crop.jpg',
       ]
     },
     performance: {
       type: 'carousel',
       images: [
-        '/images/parvagues/live.jpg',
-        '/images/parvagues/code_overlay.jpg'
+        // '/images/parvagues/live.jpg',
+        '/images/parvagues/hands.jpg'
       ]
     }
   };
@@ -211,48 +207,40 @@ d4 $ note ("<e3 fs3 <gs3 d4> <a3 df4>>" - 12)
   const renderSectionContent = () => {
     const sectionContent = sections[selectedSection];
     if (!sectionContent) return null;
-    
+
     return (
-      <div className="w-full rounded-lg overflow-hidden shadow-xl">
-        <div className="relative w-full bg-black flex items-center justify-center">
-          <div className="w-[30vw] h-[30vw] max-w-[30vw] max-h-[30vw] flex items-center justify-center p-4">
-            <div className="relative w-full h-full flex items-center justify-center">
-              <Image
-                src={sectionContent.images[currentImageIndex]}
-                alt={selectedSection}
-                width={1280}
-                height={1280}
-                className="w-full h-full object-contain"
-                priority={true}
-              />
-            </div>
-          </div>
-          {sectionContent.images.length > 1 && (
-            <>
-              {/* Left arrow */}
-              <button 
-                onClick={prevSectionImage} 
-                className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 p-2 rounded-full transition-colors"
-                aria-label="Image précédente"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                </svg>
-              </button>
-              
-              {/* Right arrow */}
-              <button 
-                onClick={nextSectionImage} 
-                className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 p-2 rounded-full transition-colors"
-                aria-label="Image suivante"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </button>
-            </>
-          )}
+      <div className="w-full flex flex-col items-center">
+        {/* Image Frame: 4/3 aspect ratio, max-width 50vw */}
+        <div className="w-full max-w-[50vw] aspect-[4/3] bg-black rounded-lg overflow-hidden shadow-xl mb-4">
+          <img
+            src={sectionContent.images[currentImageIndex]}
+            alt={selectedSection}
+            className="w-full h-full object-cover"
+          />
         </div>
+        
+        {sectionContent.images.length > 1 && (
+          <div className="flex items-center">
+            <button 
+              onClick={prevSectionImage} 
+              className="bg-black/30 hover:bg-black/50 p-2 rounded-full transition-colors mx-2"
+              aria-label="Image précédente"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            <button 
+              onClick={nextSectionImage} 
+              className="bg-black/30 hover:bg-black/50 p-2 rounded-full transition-colors mx-2"
+              aria-label="Image suivante"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+        )}
       </div>
     );
   };
@@ -275,7 +263,7 @@ d4 $ note ("<e3 fs3 <gs3 d4> <a3 df4>>" - 12)
           <section className={`${styles.heroSection} mt-0`}>
             <div className={styles.posterCollage} ref={backgroundRef}>
               {posterImages.map((src, i) => (
-                <Image
+                <img
                   key={i}
                   src={src}
                   alt={`Poster ${i + 1}`}
@@ -356,10 +344,10 @@ d4 $ note ("<e3 fs3 <gs3 d4> <a3 df4>>" - 12)
             <div className={styles.splitSection}>
               <div>
                 <div 
-                  className={`${styles.bulletPoint} cursor-pointer transition-all duration-300 hover:bg-purple-500/10 rounded-lg ${selectedSection === 'potentiel' ? 'text-purple-400 border-l-2 border-purple-400 pl-4' : ''}`}
+                  className={`cursor-pointer transition-all duration-300 hover:bg-purple-500/10 rounded-lg p-2 ${selectedSection === 'potentiel' ? 'text-purple-400 border-l-2 border-purple-400 pl-4' : ''}`}
                   onClick={() => setSelectedSection('potentiel')}
                 >
-                  <h3 className="text-xl font-semibold text-purple-400 mb-2 group relative inline-block">
+                  <h3 className={`${styles.bulletPoint} text-xl font-semibold text-purple-400 mb-2 group relative inline-block`} style={{ margin: '1em 0', textDecorationLine: 'underline', textDecorationColor: 'darkviolet', textDecorationThickness: '3px' }}>
                     Potentiel
                     <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-500 group-hover:w-full transition-all duration-300"></span>
                   </h3>
@@ -367,10 +355,10 @@ d4 $ note ("<e3 fs3 <gs3 d4> <a3 df4>>" - 12)
                 </div>
                 
                 <div 
-                  className={`${styles.bulletPoint} cursor-pointer transition-all duration-300 hover:bg-purple-500/10 rounded-lg ${selectedSection === 'composition' ? 'text-purple-400 border-l-2 border-purple-400 pl-4' : ''}`}
+                  className={`cursor-pointer transition-all duration-300 hover:bg-purple-500/10 rounded-lg p-2 ${selectedSection === 'composition' ? 'text-purple-400 border-l-2 border-purple-400 pl-4' : ''}`}
                   onClick={() => setSelectedSection('composition')}
                 >
-                  <h3 className="text-xl font-semibold text-purple-400 mb-2 group relative inline-block">
+                  <h3 className={`${styles.bulletPoint} text-xl font-semibold text-purple-400 mb-2 group relative inline-block`} style={{ margin: '1em 0', textDecorationLine: 'underline', textDecorationColor: 'darkviolet', textDecorationThickness: '3px' }}>
                     Composition
                     <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-500 group-hover:w-full transition-all duration-300"></span>
                   </h3>
@@ -378,10 +366,10 @@ d4 $ note ("<e3 fs3 <gs3 d4> <a3 df4>>" - 12)
                 </div>
                 
                 <div 
-                  className={`${styles.bulletPoint} cursor-pointer transition-all duration-300 hover:bg-purple-500/10 rounded-lg ${selectedSection === 'performance' ? 'text-purple-400 border-l-2 border-purple-400 pl-4' : ''}`}
+                  className={`cursor-pointer transition-all duration-300 hover:bg-purple-500/10 rounded-lg p-2 ${selectedSection === 'performance' ? 'text-purple-400 border-l-2 border-purple-400 pl-4' : ''}`}
                   onClick={() => setSelectedSection('performance')}
                 >
-                  <h3 className="text-xl font-semibold text-purple-400 mb-2 group relative inline-block">
+                  <h3 className={`${styles.bulletPoint} text-xl font-semibold text-purple-400 mb-2 group relative inline-block`} style={{ margin: '1em 0', textDecorationLine: 'underline', textDecorationColor: 'darkviolet', textDecorationThickness: '3px' }}>
                     Performance
                     <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-500 group-hover:w-full transition-all duration-300"></span>
                   </h3>
@@ -399,55 +387,44 @@ d4 $ note ("<e3 fs3 <gs3 d4> <a3 df4>>" - 12)
           <section id="music" className={styles.sectionContainer}>
             <h2 className="text-3xl font-bold mb-8 text-center">
               <span className="bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent">
-                Tracks
+                Sorties
               </span>
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {albums.map(album => (
-                <div 
-                  key={album.id} 
-                  className="relative rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:transform hover:scale-[1.02] group"
-                >
-                  <div className="relative aspect-square w-full">
-                    <Image
-                      src={album.image}
-                      alt={album.title}
-                      fill
-                      className="object-cover transition-all duration-300 group-hover:brightness-75"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-70"></div>
+            <div className="grid grid-cols-2 gap-6 justify-center items-stretch max-w-4xl mx-auto">
+            {albums.map(album => (
+              <div 
+                key={album.id} 
+                className="flex justify-center w-xs py-4">
+                
+                <Image 
+                  src={album.image}
+                  alt={album.title} 
+                  width={480}
+                  height={480}
+                  className="mx-auto mb-4" 
+                />
+
+                
+                <div className="flex flex-col items-center text-center">
+                  <h3 className="text-lg font-bold text-white mb-3 truncate w-full">{album.title}</h3>
+                  <div className="flex flex-wrap gap-2 justify-center">
+                    {album.links.map(link => (
+                      <a
+                        key={link.platform}
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="bg-black/50 backdrop-blur-sm hover:bg-purple-500/70 text-white rounded-full p-2 transition-all duration-300 hover:shadow-glow"
+                        title={link.platform}
+                      >
+                        <span className="text-xl">{link.icon}</span>
+                      </a>
+                    ))}
                   </div>
-                  
-                  <div className="absolute bottom-0 left-0 right-0 p-4">
-                    <h3 className="text-xl font-bold text-white mb-2">{album.title}</h3>
-                    
-                    <div className="flex flex-wrap gap-2 mt-3">
-                      {album.links.map(link => (
-                        <a
-                          key={link.platform}
-                          href={link.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="bg-black/50 backdrop-blur-sm hover:bg-purple-500/70 text-white rounded-full p-2 transition-all duration-300 hover:shadow-glow"
-                          title={link.platform}
-                        >
-                          <span className="text-xl">{link.icon}</span>
-                        </a>
-                      ))}
-                    </div>
-                  </div>
-                  
-                  {/* Shine effect overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shine pointer-events-none"></div>
                 </div>
-              ))}
-            </div>
-            
-            <div className="flex justify-center mt-10">
-              <a href="https://www.open.audio/parvagues" target="_blank" rel="noopener noreferrer" className={styles.outlineButton}>
-                Tous les albums
-              </a>
-            </div>
+              </div>
+            ))}
+          </div>
           </section>
           
           {/* Section: Performances */}
@@ -464,7 +441,7 @@ d4 $ note ("<e3 fs3 <gs3 d4> <a3 df4>>" - 12)
                   <Link href={`/parvagues/lives/${live.slug}`} key={live.slug} legacyBehavior>
                     <a className="block bg-black/30 border border-purple-500/20 rounded-lg overflow-hidden hover:border-purple-500/70 transition-all hover:shadow-glow hover:-translate-y-1">
                       <div className="relative h-40">
-                        <Image 
+                        <img 
                           src={`/images/parvagues/lives/${live.year}/${live.slug}/poster.jpg`}
                           alt={live.title}
                           fill
@@ -488,11 +465,12 @@ d4 $ note ("<e3 fs3 <gs3 d4> <a3 df4>>" - 12)
                 ))}
               </div>
               
-              <div className="flex justify-center mt-10">
+              {/* TODO: Consider a 'all lives' page */}
+              {/* <div className="flex justify-center mt-10">
                 <Link href="/parvagues/lives" className={styles.outlineButton}>
                   Voir tous les événements
                 </Link>
-              </div>
+              </div> */}
             </section>
           )}
           
