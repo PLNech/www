@@ -1,0 +1,28 @@
+/* Add the ParVagues color variables globally */
+:root {
+  --neon-down: #8900b3;
+  --neon-low: #a700d1;
+  --neon-high: #d900ff;
+  --coral: #ff3d7b;
+  --biomod: #5bc091;
+  --cigarette: #ff8c00;
+} 
+
+
+/* Shine animation for album covers */
+@keyframes shine {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+:global(.hover\:shadow-glow:hover) {
+  box-shadow: 0 0 15px rgba(217, 0, 255, 0.7);
+}
+
+:global(.animate-shine) {
+  animation: shine 1.5s ease-in-out;
+}

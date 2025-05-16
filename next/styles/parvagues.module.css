@@ -1,0 +1,566 @@
+/* ParVagues specific styles */
+/* New Color Palette */
+
+/* Fixing CSS Modules compatibility - defining colors in a local class */
+.colorRoot {
+  --neon-down: #8900b3;
+  --neon-low: #a700d1;
+  --neon-high: #d900ff;
+  --coral: #ff3d7b;
+  --biomod: #5bc091;
+  --cigarette: #ff8c00;
+}
+
+/* This class can be added to the main container to provide color variables to all children */
+.colorContainer {
+  composes: colorRoot;
+}
+
+.heroSection {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  padding-top: 2rem;
+}
+
+.heroTitle {
+  font-size: clamp(4rem, 9vw, 9rem);
+  font-weight: 800;
+  margin-bottom: 1.5rem 0;
+  padding-top: 0.5em;
+  padding-bottom: 0.1em;
+  -webkit-background-clip: text;
+  background-clip: text;
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+  text-shadow: 0 0 10px rgba(217, 0, 255, 0.5);
+}
+
+.bgImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.4;
+  filter: blur(8px);
+  transform: scale(1.1);
+}
+
+.contentOverlay {
+  position: relative;
+  z-index: 10;
+  min-height: 100vh;
+  background: linear-gradient(135deg, rgba(9,9,11,0.95) 0%, rgba(137,0,179,0.9) 50%, rgba(9,9,11,0.95) 100%);
+}
+
+.heroContent {
+  /* max width should be 80% */
+  max-width: 80%;
+  margin: 0 auto;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4rem;
+}
+
+@media (max-width: 768px) {
+  .heroContent {
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+  }
+}
+
+
+.heroSubtitle {
+  font-size: clamp(1.125rem, 3vw, 1.5rem);
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 600px;
+  line-height: 1.5;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.heroSubtitle::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 60%;
+  height: 3px;
+  background: var(--coral);
+  border-radius: 3px;
+  box-shadow: 0 0 10px var(--coral);
+}
+
+.ctaButton {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 50;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(217, 0, 255, 0.3);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  color: var(--neon-high);
+  transition: all 0.3s ease;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.ctaButton:hover {
+  background: rgba(217, 0, 255, 0.1);
+  border-color: var(--neon-high);
+  color: var(--coral);
+  box-shadow: 0 0 15px rgba(217, 0, 255, 0.5);
+}
+
+.plungeButton {
+  display: inline-flex;
+  align-items: center;
+  background: linear-gradient(45deg, var(--neon-low), var(--coral));
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  gap: 0.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.plungeButton::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, var(--neon-down), var(--neon-high), var(--coral), var(--cigarette));
+  z-index: -1;
+  animation: rotate 3s linear infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 0.6rem;
+}
+
+.plungeButton:hover::before {
+  opacity: 1;
+}
+
+@keyframes rotate {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 200% 200%;
+  }
+}
+
+.plungeButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(217, 0, 255, 0.3);
+}
+
+.outlineButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: white;
+  border: 1px solid rgba(217, 0, 255, 0.5);
+  background: rgba(217, 0, 255, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.outlineButton:hover {
+  background: rgba(217, 0, 255, 0.2);
+  border-color: var(--neon-high);
+  color: var(--neon-high);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(217, 0, 255, 0.2);
+}
+
+.sectionContainer {
+  padding: 5rem 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.splitSection {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .splitSection {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+.bulletPoint {
+  margin-bottom: 1.5rem;
+  padding-left: 2rem;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.bulletPoint::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--neon-high);
+  font-weight: bold;
+}
+
+.codeContainer {
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(217, 0, 255, 0.2);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 5px 15px rgba(137, 0, 179, 0.2);
+}
+
+.terminalContainer {
+  background: #1e1e1e;
+  border: 1px solid #333;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.terminalHeader {
+  background: #262626;
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #444;
+}
+
+.terminalControls {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.redCircle, .yellowCircle, .greenCircle {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.redCircle {
+  background: var(--coral);
+}
+
+.yellowCircle {
+  background: var(--cigarette);
+}
+
+.greenCircle {
+  background: var(--biomod);
+}
+
+.terminalTitle {
+  font-family: monospace;
+  font-size: 0.875rem;
+  color: #ddd;
+}
+
+.terminalContainer pre {
+  background: #1e1e1e;
+  color: #f8f8f2;
+  padding: 1rem;
+  margin: 0;
+  font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.codeContainer pre {
+  max-height: inherit;
+  overflow-y: auto;
+  margin: 0;
+  padding: 1rem;
+}
+
+.codeContainer::-webkit-scrollbar,
+.terminalContainer pre::-webkit-scrollbar {
+  width: 6px;
+}
+
+.codeContainer::-webkit-scrollbar-track,
+.terminalContainer pre::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.codeContainer::-webkit-scrollbar-thumb,
+.terminalContainer pre::-webkit-scrollbar-thumb {
+  background: var(--neon-high);
+  border-radius: 3px;
+}
+
+.albumGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.albumCard {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(217, 0, 255, 0.2);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.albumCard:hover {
+  background: rgba(217, 0, 255, 0.05);
+  border-color: var(--neon-high);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(217, 0, 255, 0.2);
+}
+
+.playerContainer {
+  margin-top: 1rem;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.playerButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  padding: 0.5rem 0.75rem;
+  transition: all 0.3s ease;
+  font-size: 0.875rem;
+  border-radius: 0.25rem;
+  background: rgba(217, 0, 255, 0.1);
+  border: 1px solid rgba(217, 0, 255, 0.2);
+}
+
+.playerButton:hover {
+  color: var(--neon-high);
+  background: rgba(217, 0, 255, 0.2);
+  border-color: var(--neon-high);
+  transform: translateY(-1px);
+  box-shadow: 0 0 10px rgba(217, 0, 255, 0.3);
+}
+
+.socialLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.socialLink {
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.socialLink:hover {
+  color: var(--neon-high);
+  border-color: var(--neon-high);
+  background: rgba(217, 0, 255, 0.05);
+  transform: translateY(-2px);
+}
+
+.bulletPoint.cursor-pointer:hover {
+  background: rgba(217, 0, 255, 0.05);
+  border-radius: 0.5rem;
+}
+
+.footer {
+  text-align: center;
+  padding: 2rem;
+  border-top: 1px solid rgba(217, 0, 255, 0.1);
+  background: rgba(0, 0, 0, 0.5);
+}
+
+
+.posterCollage {
+  position: absolute;
+  inset: 0;
+  opacity: 0.6; /* Base opacity for the container */
+  filter: grayscale(100%) brightness(0.3) contrast(1.2);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+
+.posterBackground {
+  position: absolute;
+  inset: 0;
+  opacity: 0.6;
+  filter: grayscale(100%) brightness(0.3) contrast(1.2);
+}
+
+.posterImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0; /* Initial opacity to be controlled by JS */
+  /* The transition for opacity is now handled by the JS effect, 
+     but you can keep a CSS transition if preferred for when JS changes style.opacity */
+  transition: opacity 0.5s ease; 
+}
+
+.posterGradient {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(217, 0, 255, 0.2), rgba(0, 0, 0, 0.9));
+}
+
+.highlightText {
+  position: relative;
+  display: inline-block;
+}
+
+.highlightText::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--coral);
+  border-radius: 2px;
+  box-shadow: 0 0 8px var(--coral);
+}
+
+.glitchEffect {
+  position: relative;
+  display: inline-block;
+  animation: subtle-pulse 4s infinite alternate;
+  letter-spacing: -0.03em;
+  color: white;
+  text-shadow: 
+    0 0 5px rgba(217, 0, 255, 0.7), 
+    0 0 10px rgba(217, 0, 255, 0.5);
+  font-weight: 900;
+}
+
+@keyframes subtle-pulse {
+  0% {
+    text-shadow: 
+      0 0 5px rgba(217, 0, 255, 0.7), 
+      0 0 10px rgba(217, 0, 255, 0.5);
+  }
+  100% {
+    text-shadow: 
+      0 0 8px rgba(217, 0, 255, 0.9), 
+      0 0 15px rgba(217, 0, 255, 0.7),
+      0 0 25px rgba(217, 0, 255, 0.5);
+  }
+}
+
+.glitchEffect::before,
+.glitchEffect::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+}
+
+.glitchEffect::before {
+  left: 2px;
+  text-shadow: -2px 0 var(--coral);
+  clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+}
+
+.glitchEffect::after {
+  left: -2px;
+  text-shadow: -2px 0 var(--neon-high);
+  clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+}
+
+.neonGradient {
+  background: linear-gradient(90deg, 
+    var(--neon-down), 
+    var(--neon-low), 
+    var(--neon-high), 
+    var(--coral)
+  );
+  opacity: 0.15;
+  position: absolute;
+  inset: 0;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.logoContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 300px;
+  margin-bottom: 2rem;
+}
+
+.logoImage {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 0 10px rgba(217, 0, 255, 0.5));
+}
+
+/* Shine animation for album covers 
+NOTE: KEPT HERE FOR REFERENCE, THESE ARE COPIED IN THE MAIN GLOBAL.CSS 
+AS MODULE CSS FORBIDS ROOT VARIABLES
+@keyframes shine {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+:global(.hover\:shadow-glow:hover) {
+  box-shadow: 0 0 15px rgba(217, 0, 255, 0.7);
+}
+
+:global(.animate-shine) {
+  animation: shine 1.5s ease-in-out;
+}
+*/
+
+#section1 > .h3 {
+  margin: 1em 0;
+  text-decoration-line: underline;
+  text-decoration-color: var(--neon-down);
+  text-decoration-thickness: 3px;
+}
+
+img.live-gallery-image {
+  max-width: 1em;
+}

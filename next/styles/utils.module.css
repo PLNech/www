@@ -365,7 +365,6 @@
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
-
 /* Hover Popup Styles */
 .hoverReveal {
   position: relative;
@@ -474,12 +473,18 @@
 .hoverPopup {
   position: absolute;
   left: 50%;
-  bottom: calc(100% + 15px);
   transform: translateX(-50%);
   z-index: 100;
   
-  min-width: 380px;
-  max-width: 500px;
+  min-width: 250px;
+  max-width: 30vw;
+  width: max-content;
+  max-height: 80vh;
+  overflow: hidden;
+  
+  top: 10vh;
+  bottom: auto;
+  margin: 0 10vw;
   
   animation: fadeIn 0.2s ease-in-out;
 }
@@ -573,12 +578,25 @@
 /* Mobile responsiveness */
 @media (max-width: 768px) {
   .hoverPopup {
-    min-width: 280px;
-    max-width: 340px;
+    min-width: auto;
+    max-width: calc(100vw - 40px); /* 20px margin on each side */
+    width: max-content;
+    left: 50%;
+    transform: translateX(-50%);
   }
   
   .popupContent {
     padding: 0.8rem;
     font-size: 0.9rem;
+  }
+
+  .popupLinks {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .popupLinks a {
+    text-align: center;
+    width: 100%;
   }
 }

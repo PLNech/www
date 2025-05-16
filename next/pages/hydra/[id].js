@@ -39,7 +39,6 @@ export async function getStaticPaths() {
 }
 
 export default function Hydra({ hydraData, sourceCode }) {
-  const [showCode, setShowCode] = useState(false);
   
   return (
     <Layout>
@@ -74,31 +73,15 @@ export default function Hydra({ hydraData, sourceCode }) {
   );
 }
 
-
 // Suggestion for later:
-// 
-// Dynamic import with SSR disabled
+// TODO: refactor to Dynamic import with SSR enabled.
+// DISCUSS: What would be the benefit of this?
+// AI opinion: It would be better to use a dynamic import with SSR enabled, 
+// >because the HydraSynth component is not needed on the server side.
+// >It's a client-side component that needs to be rendered on the client side.
+// >So it's better to use a dynamic import with SSR enabled.
+// Human: Ok -> TODO for next time someone changes this file, please do refactor to Dynamic import with SSR enabled.
 // const HydraSynth = dynamic(
 //   () => import('../../components/hydra-view'),
 //   { ssr: false }
 // )
-// 
-// export default function Hydra({ hydraData, sourceCode }) {
-//   const canvasRef = useRef(null);
-// 
-//   return (
-//     <Layout>
-//       {/* ... rest of your component ... */}
-// 
-//       {/* Now this will only run on the client side */}
-//       <HydraSynth 
-//         width={700} 
-//         height={475}
-//         canvasRef={canvasRef} 
-//         source={hydraData.source} 
-//       />
-// 
-//       {/* ... rest of your component ... */}
-//     </Layout>
-//   );
-// }
