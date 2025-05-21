@@ -34,8 +34,8 @@ export default function ParVaguesFooter() {
           </div>
 
           {/* Logo Column (New) */}
-          <div className="md:col-span-1 flex flex-col items-center justify-center"> {/* Centering logo */}
-            <div className="relative mb-4">
+          <div className="md:col-span-1 flex flex-col items-center justify-center"> {/* This centers the block below */}
+            <div className="relative mb-4 flex justify-center"> {/* This ensures the image within this block is centered */}
               <Image 
                 src="/images/parvagues/logo.png" 
                 alt="ParVagues Logo" 

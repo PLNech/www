@@ -168,13 +168,14 @@
   box-shadow: 0 10px 20px rgba(217, 0, 255, 0.3);
 }
 
+/* This is the .outlineButton style used by the header's Book button */
 .outlineButton {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem 2rem;
-  border-radius: 0.5rem;
-  font-weight: 600;
+  /* padding is controlled by Tailwind classes in the component (py-2 px-3 sm:px-4) */
+  border-radius: 0.375rem; /* Tailwind's rounded-md */
+  font-weight: 500; /* Tailwind's font-medium equivalent */
   text-decoration: none;
   color: white;
   border: 1px solid rgba(217, 0, 255, 0.5);
@@ -188,8 +189,8 @@
   background: rgba(217, 0, 255, 0.2);
   border-color: var(--neon-high);
   color: var(--neon-high);
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(217, 0, 255, 0.2);
+  transform: translateY(-1px); /* Subtle lift */
+  box-shadow: 0 3px 10px rgba(217, 0, 255, 0.2); /* Subtle shadow */
 }
 
 .sectionContainer {
@@ -572,11 +573,14 @@ img.live-gallery-image {
   display: flex;
   margin-left: -1rem; /* gutter size offset */
   width: auto;
+  position: relative; /* Added for Masonry to correctly position its items */
 }
 
 .galleryGridColumn {
   padding-left: 1rem; /* gutter size */
   background-clip: padding-box;
+  /* Ensure columns establish a formatting context for their children if needed */
+  /* display: block; /* This is default for divs, but can be explicit */
 }
 
 .galleryCard {
@@ -641,21 +645,24 @@ img.live-gallery-image {
 }
 
 
-/* Styles for the updated ParVaguesHeader */
+/* Styles for the ParVaguesHeader */
 .headerContainer {
-  /* Ensuring vertical alignment for items if needed, though Tailwind's `items-center` on the child div should handle this. */
-  /* Example: display: flex; align-items: center; */
-  /* Height is controlled by Tailwind's h-16 class in the component */
+  /* This class is applied to the <header> element. */
+  /* Tailwind classes already handle sticky, z-index, background, border. */
+  /* No specific additional styles needed here for the new layout. */
 }
 
 .navLink {
-  /* Individual styling for nav links if required beyond Tailwind classes */
-  /* Example: padding: 0.5rem 1rem; */
-  /* The space-x-6 on the parent nav element in JSX handles spacing between links */
+  /* This class is applied to individual navigation Links (<a> tags). */
+  /* Tailwind classes handle text color, hover, transition, padding. */
+  /* No specific additional styles needed here unless further customization is desired. */
+  /* e.g., text-decoration: none; (though Next/Link handles this) */
 }
 
+/* .bookButton is a supplementary class for the CTA Link. */
+/* It's used alongside .outlineButton. */
+/* .outlineButton provides the base style, .bookButton can be for specific tweaks. */
 .bookButton {
-  /* Specific adjustments for the book button if necessary */
-  /* Example: ensure it aligns well with the new header height */
-  /* padding-top: 0.5rem; padding-bottom: 0.5rem; /* Adjust if default py-2 is too large */
+  /* Tailwind classes handle padding, font size, flex items, whitespace. */
+  /* No specific additional styles needed here for the new layout. */
 }
