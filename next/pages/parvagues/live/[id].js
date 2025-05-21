@@ -258,81 +258,75 @@ export default function Live({ data, slug, images }) {
                 <div className="grid md:grid-cols-2 gap-6 items-center">
                   {/* Left Side: Event Info */}
                   <div>
-                    <h1 className="text-4xl md:text-5xl font-bold mb-2 text-white">{data.frontmatter.title}</h1>
+                    <h1 className="text-4xl md:text-6xl font-bold mb-3 text-white">{data.frontmatter.title}</h1>
                     
-                    {pastEvent ? (
-                      <div className="inline-block bg-gray-800 text-white text-sm px-3 py-1 rounded-full mb-4">
+                    {!pastEvent && (
+                      <h2 className="text-2xl md:text-4xl font-semibold mb-3 text-purple-300">
+                        {timeToEvent === 0 ? "Aujourd'hui !" : `Dans ${timeString}`}
+                      </h2>
+                    )}
+                    {pastEvent && (
+                       <h2 className="text-xl md:text-2xl font-semibold mb-3 text-gray-500">
                         Événement passé
-                      </div>
-                    ) : (
-                      <div className="inline-block bg-purple-800 text-white text-sm px-3 py-1 rounded-full mb-4">
-                        {timeToEvent === 0 ? "Aujourd'hui" : `Dans ${timeString}`}
-                      </div>
+                       </h2>
                     )}
                     
-                    <div className="flex flex-col space-y-2 mb-4">
+                    <h3 className="text-lg md:text-xl text-gray-400 mb-4">
+                      {data.frontmatter.venue || 'Lieu à annoncer'}
+                      {data.frontmatter.city && `, ${data.frontmatter.city}`}
+                    </h3>
+                    
+                    <div className="flex flex-col space-y-1 mb-6 text-sm"> {/* Reduced space-y and mb */}
                       <div className="flex items-center">
-                        <span className="text-purple-400 w-24">Date:</span>
+                        <span className="text-purple-400 w-20">Date:</span> {/* Reduced width */}
                         <span>{formatEventDate(data.frontmatter.date)}</span>
                       </div>
-                      
-                      <div className="flex items-center">
-                        <span className="text-purple-400 w-24">Lieu:</span>
-                        <span>{data.frontmatter.venue || 'À annoncer'}</span>
-                      </div>
-                      
-                      {data.frontmatter.city && (
-                        <div className="flex items-center">
-                          <span className="text-purple-400 w-24">Ville:</span>
-                          <span>{data.frontmatter.city}</span>
-                        </div>
-                      )}
                     </div>
                     
                     {/* Action Buttons */}
-                    <div className="flex flex-wrap gap-2 mt-4">
+                    <div className="flex flex-wrap gap-3 mt-6"> {/* Increased gap and mt */}
                       {data.frontmatter.ticketLink && !pastEvent && (
-                        <a 
-                          href={data.frontmatter.ticketLink} 
-                          target="_blank" 
+                        <a
+                          href={data.frontmatter.ticketLink}
+                          target="_blank"
                           rel="noopener noreferrer"
-                          className="bg-gradient-to-r from-purple-600 to-pink-600 px-4 py-2 rounded-md text-white font-medium hover:from-purple-700 hover:to-pink-700 transition-all shadow-lg"
+                          className="bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-3 rounded-lg text-white font-semibold hover:from-purple-700 hover:to-pink-700 transition-all shadow-lg hover:shadow-xl text-base" // Increased padding, font-size, rounded
                         >
                           Billets
                         </a>
                       )}
-                      
+
                       {data.frontmatter.eventLink && (
-                        <a 
-                          href={data.frontmatter.eventLink} 
-                          target="_blank" 
+                        <a
+                          href={data.frontmatter.eventLink}
+                          target="_blank"
                           rel="noopener noreferrer"
-                          className="bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-md text-white font-medium transition-all"
+                          className="bg-gray-700 hover:bg-gray-600 px-5 py-3 rounded-lg text-white font-medium transition-all shadow-md hover:shadow-lg text-base" // Increased padding, font-size, adjusted colors
                         >
-                          Info Event
+                          Plus d'Infos
                         </a>
                       )}
-                      
-                      <a 
-                        href="#details-section" 
+
+                      <a
+                        href="#details-section"
                         onClick={scrollToSection}
-                        className="bg-transparent border border-purple-500 hover:bg-purple-900/30 px-4 py-2 rounded-md text-white font-medium transition-all"
+                        className="bg-transparent border-2 border-purple-500 hover:bg-purple-500/20 px-5 py-3 rounded-lg text-purple-300 hover:text-white font-medium transition-all text-base" // Increased padding, font-size, border
                       >
-                        Détails
+                        Voir les Détails
                       </a>
                     </div>
                   </div>
-                  
+
                   {/* Right Side: Upcoming Drops or Latest Teasing */}
-                  <div>
+                  <div className="mt-6 md:mt-0"> {/* Added margin top for small screens */}
                     {!pastEvent && upcomingDrops.length > 0 ? (
-                      <div className="bg-black/60 backdrop-blur p-4 rounded-lg border border-purple-500/30">
-                        <h3 className="text-lg font-semibold text-purple-400 mb-3">Prochains drops</h3>
-                        <ul className="space-y-2">
+                      <div className="bg-black/70 backdrop-blur-md p-6 rounded-xl border border-purple-500/40 shadow-xl"> {/* Enhanced styling */}
+                        <h3 className="text-xl font-bold text-purple-300 mb-4">Prochains Drops</h3> {/* Enhanced styling */}
+                        <ul className="space-y-3">
                           {upcomingDrops.map((drop, i) => (
-                            <li key={i} className="flex items-center justify-between bg-black/50 p-2 rounded">
-                              <span className="text-sm">{drop.name}</span>
-                              <span className="text-xs bg-purple-900/60 px-2 py-1 rounded">
+                            <li key={i} className="flex items-center justify-between bg-gray-800/70 p-3 rounded-md shadow"> {/* Enhanced styling */}
+                              <span className="text-sm font-medium text-gray-200">{drop.name}</span>
+                              <span className="text-xs bg-purple-700/80 text-white px-3 py-1 rounded-full font-semibold"> {/* Enhanced styling */}
                                 {getTimeDifferenceString(drop.date)}
                               </span>
                             </li>
@@ -340,13 +334,17 @@ export default function Live({ data, slug, images }) {
                         </ul>
                       </div>
                     ) : teasingsToShow.length > 0 ? (
-                      <div className="bg-black/60 backdrop-blur p-4 rounded-lg border border-purple-500/30">
-                        <h3 className="text-lg font-semibold text-purple-400 mb-2">
-                          {pastEvent ? "Highlights" : "Teasing"}
+                      <div className="bg-black/70 backdrop-blur-md p-6 rounded-xl border border-purple-500/40 shadow-xl"> {/* Enhanced styling */}
+                        <h3 className="text-xl font-bold text-purple-300 mb-3"> {/* Enhanced styling */}
+                          {pastEvent ? "Highlights" : "Dernier Teasing"}
                         </h3>
-                        <div dangerouslySetInnerHTML={renderMarkdown(teasingsToShow[0])} className="prose prose-sm prose-invert max-w-none" />
+                        <div dangerouslySetInnerHTML={renderMarkdown(teasingsToShow[0])} className="prose prose-base prose-invert max-w-none leading-relaxed" /> {/* Increased prose size, leading */}
                       </div>
-                    ) : null}
+                    ) : (
+                      <div className="bg-black/70 backdrop-blur-md p-6 rounded-xl border border-purple-500/40 shadow-xl text-gray-400">
+                        <p>Plus de détails à venir prochainement...</p>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -418,44 +416,13 @@ export default function Live({ data, slug, images }) {
                       />
                     </div>
                   )}
-                  
-                  {/* Mini Gallery - Limited to 3 images */}
-                  {images && images.length > 0 && (
-                    <div className="bg-gray-900/40 rounded-lg p-4">
-                      <h3 className="text-lg font-semibold text-purple-400 mb-2">Photos</h3>
-                      <div className="grid grid-cols-3 gap-2">
-                        {images.slice(0, 3).map((image, i) => (
-                          <div key={i} className="relative aspect-square rounded overflow-hidden">
-                            <img
-                              src={image}
-                              alt={`${data.frontmatter.title} - image ${i+1}`}
-                              fill
-                              className="live-gallery-image object-cover hover:scale-110 transition-transform duration-300 max-w-sm"
-                            />
-                          </div>
-                        ))}
-                      </div>
-                      {images.length > 3 && (
-                        <div className="mt-2 text-center">
-                          <button 
-                            onClick={() => {
-                              const gallery = document.getElementById('full-gallery');
-                              gallery?.scrollIntoView({ behavior: 'smooth' });
-                            }}
-                            className="text-xs text-purple-400 hover:text-purple-300"
-                          >
-                            Voir les {images.length} photos →
-                          </button>
-                        </div>
-                      )}
-                    </div>
-                  )}
+                  {/* Artists / Other sidebar content can go here if needed */}
                 </div>
               </div>
               
-              {/* Full Gallery - only if more than 3 images */}
-              {images && images.length > 3 && (
-                <div id="full-gallery" className="max-w-5xl mx-auto mt-8">
+              {/* Full Image Gallery - Render if images exist */}
+              {images && images.length > 0 && (
+                <div id="full-gallery" className="max-w-6xl mx-auto mt-12 pt-8 border-t border-purple-500/20"> {/* Increased max-width and added top margin/padding/border */}
                   <ImageGallery images={images} slug={slug} />
                 </div>
               )}

@@ -67,10 +67,10 @@ export default function ParVagues({ lives }) {
   const backgroundRef = useRef(null);
   const audioRef = useRef(null);
   
-  // Filter future events
+  // Filter future events and sort them by date in ascending order
   const futureEvents = lives.filter(live => {
     return new Date(live.date) > new Date();
-  });
+  }).sort((a, b) => new Date(a.date) - new Date(b.date));
 
   // Define section content
   const sections = {
@@ -119,6 +119,20 @@ d4 $ note ("<e3 fs3 <gs3 d4> <a3 df4>>" - 12)
       setCurrentImageIndex(0);
     }
   }, [selectedSection]);
+
+  // Auto-toggling for sections (Potentiel, Composition, Performance)
+  const sectionOrder = ['potentiel', 'composition', 'performance'];
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setSelectedSection(currentSection => {
+        const currentIndex = sectionOrder.indexOf(currentSection);
+        const nextIndex = (currentIndex + 1) % sectionOrder.length;
+        return sectionOrder[nextIndex];
+      });
+    }, 5000); // 5 seconds
+
+    return () => clearInterval(intervalId); // Cleanup on component unmount or when selectedSection changes
+  }, [selectedSection]); // Re-run effect (and reset timer) when selectedSection changes
   
   // Auto-advance carousel for section images
   useEffect(() => {
@@ -176,7 +190,10 @@ d4 $ note ("<e3 fs3 <gs3 d4> <a3 df4>>" - 12)
     }
   };
   
-  const albums = [
+  // Define the desired order of platforms
+  const platformOrder = ['YouTube', 'Deezer', 'Spotify', 'Apple', 'Tidal', 'Amazon'];
+  
+  const albumsData = [
     {
       id: '2024_opal',
       title: 'Livecoding (Opal Festival 2024)',
@@ -203,6 +220,19 @@ d4 $ note ("<e3 fs3 <gs3 d4> <a3 df4>>" - 12)
       ]
     }
   ];
+
+  // Sort the links for each album
+  const albums = albumsData.map(album => ({
+    ...album,
+    links: album.links.sort((a, b) => {
+      const indexA = platformOrder.indexOf(a.platform);
+      const indexB = platformOrder.indexOf(b.platform);
+      // If a platform is not in platformOrder, keep its relative order towards the end
+      if (indexA === -1) return 1;
+      if (indexB === -1) return -1;
+      return indexA - indexB;
+    })
+  }));
   
   const renderSectionContent = () => {
     const sectionContent = sections[selectedSection];
@@ -343,40 +373,40 @@ d4 $ note ("<e3 fs3 <gs3 d4> <a3 df4>>" - 12)
           <section id="section1" className={styles.sectionContainer}>
             <div className={styles.splitSection}>
               <div>
-                <div 
-                  className={`cursor-pointer transition-all duration-300 hover:bg-purple-500/10 rounded-lg p-2 ${selectedSection === 'potentiel' ? 'text-purple-400 border-l-2 border-purple-400 pl-4' : ''}`}
+                <div
+                  className={`cursor-pointer transition-all duration-300 hover:bg-purple-500/10 rounded-lg p-2 ${selectedSection === 'potentiel' ? 'text-purple-400 border-l-2 border-purple-400 pl-4' : 'text-gray-400 border-l-2 border-transparent'}`}
                   onClick={() => setSelectedSection('potentiel')}
                 >
-                  <h3 className={`${styles.bulletPoint} text-xl font-semibold text-purple-400 mb-2 group relative inline-block`} style={{ margin: '1em 0', textDecorationLine: 'underline', textDecorationColor: 'darkviolet', textDecorationThickness: '3px' }}>
+                  <h3 className={`${styles.bulletPoint} text-xl font-semibold mb-2 group relative inline-block ${selectedSection === 'potentiel' ? 'text-purple-400' : 'text-gray-400'}`} style={{ margin: '1em 0', textDecorationLine: 'underline', textDecorationColor: 'darkviolet', textDecorationThickness: '3px' }}>
                     Potentiel
                     <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-500 group-hover:w-full transition-all duration-300"></span>
                   </h3>
-                  <p className="text-gray-300">Samples glanés et synthés SuperCollider</p>
+                  <p className={`${selectedSection === 'potentiel' ? 'text-gray-300' : 'text-gray-500'}`}>Samples glanés et synthés SuperCollider</p>
                 </div>
-                
-                <div 
-                  className={`cursor-pointer transition-all duration-300 hover:bg-purple-500/10 rounded-lg p-2 ${selectedSection === 'composition' ? 'text-purple-400 border-l-2 border-purple-400 pl-4' : ''}`}
+
+                <div
+                  className={`cursor-pointer transition-all duration-300 hover:bg-purple-500/10 rounded-lg p-2 ${selectedSection === 'composition' ? 'text-purple-400 border-l-2 border-purple-400 pl-4' : 'text-gray-400 border-l-2 border-transparent'}`}
                   onClick={() => setSelectedSection('composition')}
                 >
-                  <h3 className={`${styles.bulletPoint} text-xl font-semibold text-purple-400 mb-2 group relative inline-block`} style={{ margin: '1em 0', textDecorationLine: 'underline', textDecorationColor: 'darkviolet', textDecorationThickness: '3px' }}>
+                  <h3 className={`${styles.bulletPoint} text-xl font-semibold mb-2 group relative inline-block ${selectedSection === 'composition' ? 'text-purple-400' : 'text-gray-400'}`} style={{ margin: '1em 0', textDecorationLine: 'underline', textDecorationColor: 'darkviolet', textDecorationThickness: '3px' }}>
                     Composition
                     <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-500 group-hover:w-full transition-all duration-300"></span>
                   </h3>
-                  <p className="text-gray-300">Code Haskell TidalCycles + input MIDI</p>
+                  <p className={`${selectedSection === 'composition' ? 'text-gray-300' : 'text-gray-500'}`}>Code Haskell TidalCycles + input MIDI</p>
                 </div>
-                
-                <div 
-                  className={`cursor-pointer transition-all duration-300 hover:bg-purple-500/10 rounded-lg p-2 ${selectedSection === 'performance' ? 'text-purple-400 border-l-2 border-purple-400 pl-4' : ''}`}
+
+                <div
+                  className={`cursor-pointer transition-all duration-300 hover:bg-purple-500/10 rounded-lg p-2 ${selectedSection === 'performance' ? 'text-purple-400 border-l-2 border-purple-400 pl-4' : 'text-gray-400 border-l-2 border-transparent'}`}
                   onClick={() => setSelectedSection('performance')}
                 >
-                  <h3 className={`${styles.bulletPoint} text-xl font-semibold text-purple-400 mb-2 group relative inline-block`} style={{ margin: '1em 0', textDecorationLine: 'underline', textDecorationColor: 'darkviolet', textDecorationThickness: '3px' }}>
+                  <h3 className={`${styles.bulletPoint} text-xl font-semibold mb-2 group relative inline-block ${selectedSection === 'performance' ? 'text-purple-400' : 'text-gray-400'}`} style={{ margin: '1em 0', textDecorationLine: 'underline', textDecorationColor: 'darkviolet', textDecorationThickness: '3px' }}>
                     Performance
                     <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-500 group-hover:w-full transition-all duration-300"></span>
                   </h3>
-                  <p className="text-gray-300">Performance live avec improvisation au contrôleur MIDI</p>
+                  <p className={`${selectedSection === 'performance' ? 'text-gray-300' : 'text-gray-500'}`}>Performance live avec improvisation au contrôleur MIDI</p>
                 </div>
               </div>
-              
+
               <div>
                 {renderSectionContent()}
               </div>

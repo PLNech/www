@@ -562,5 +562,100 @@ AS MODULE CSS FORBIDS ROOT VARIABLES
 }
 
 img.live-gallery-image {
-  max-width: 1em;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Image Gallery Styles */
+.galleryGrid {
+  display: flex;
+  margin-left: -1rem; /* gutter size offset */
+  width: auto;
+}
+
+.galleryGridColumn {
+  padding-left: 1rem; /* gutter size */
+  background-clip: padding-box;
+}
+
+.galleryCard {
+  /* Base card styling if needed beyond Tailwind */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.galleryCard:hover {
+  transform: translateY(-5px);
+}
+
+.pngBackground {
+  background-color: #e9e9e9; /* Light gray background for PNG cards */
+}
+
+.pngBackgroundModal {
+  background-color: #cccccc; /* Slightly darker gray for modal PNG background for contrast */
+}
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000; /* High z-index */
+  padding: 1rem;
+}
+
+.modalContent {
+  position: relative;
+  padding: 1rem; /* Padding around the image in modal */
+  border-radius: 0.5rem; /* Rounded corners for the modal content box */
+  max-width: 95vw;
+  max-height: 95vh;
+  display: flex; /* Allow image to determine size up to max */
+  align-items: center;
+  justify-content: center;
+}
+
+.modalCloseButton {
+  position: absolute;
+  top: -10px; /* Position outside the content padding */
+  right: -5px;
+  background: rgba(30, 30, 30, 0.8);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 1.5rem;
+  line-height: 28px; /* Vertically center times symbol */
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+.modalCloseButton:hover {
+  background-color: var(--neon-high); /* Use theme color */
+  color: black;
+}
+
+
+/* Styles for the updated ParVaguesHeader */
+.headerContainer {
+  /* Ensuring vertical alignment for items if needed, though Tailwind's `items-center` on the child div should handle this. */
+  /* Example: display: flex; align-items: center; */
+  /* Height is controlled by Tailwind's h-16 class in the component */
+}
+
+.navLink {
+  /* Individual styling for nav links if required beyond Tailwind classes */
+  /* Example: padding: 0.5rem 1rem; */
+  /* The space-x-6 on the parent nav element in JSX handles spacing between links */
+}
+
+.bookButton {
+  /* Specific adjustments for the book button if necessary */
+  /* Example: ensure it aligns well with the new header height */
+  /* padding-top: 0.5rem; padding-bottom: 0.5rem; /* Adjust if default py-2 is too large */
 }
