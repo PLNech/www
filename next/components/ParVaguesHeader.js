@@ -34,39 +34,38 @@ export default function ParVaguesHeader({ eventName = null, title = null }) {
     <header className="sticky top-0 left-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-[#d900ff]/20">
       <div className={`${styles.neonGradient} opacity-5 absolute inset-0`}></div>
       <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-        {/* Logo and Title with Navigation */}
-        <div className="flex items-center justify-between w-full">
-          <Link href="/parvagues" className="flex items-center group">
-            <div className="h-10 w-10 relative flex-shrink-0">
-              <Image 
-                src="/images/parvagues/logo.png" 
-                alt="ParVagues Logo" 
-                width={48}
-                height={48}
-                className="object-contain transition-all duration-300 group-hover:filter group-hover:drop-shadow-[0_0_8px_rgba(217,0,255,0.7)]" 
-              />
-            </div>
-            
-            <div className="overflow-hidden ml-2">
-              <span 
-                className={`text-white font-bold transition-all duration-500 ${
-                  showInHeader || !isHome ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8'
-                }`}
-                style={{ 
-                  textShadow: '0 0 5px rgba(217, 0, 255, 0.7), 0 0 10px rgba(217, 0, 255, 0.5)',
-                  color: 'var(--neon-high)'
-                }}
-              >
-                {headerTitle}
-              </span>
-            </div>
-          </Link>
+        {/* Logo and Title */}
+        <Link href="/parvagues" className="flex items-center group">
+          <div className="h-10 w-10 relative flex-shrink-0">
+            <Image
+              src="/images/parvagues/logo.png"
+              alt="ParVagues Logo"
+              width={48}
+              height={48}
+              className="object-contain transition-all duration-300 group-hover:filter group-hover:drop-shadow-[0_0_8px_rgba(217,0,255,0.7)]"
+            />
+          </div>
           
-          {/* Navigation and CTA */}
-          <div className="flex items-center space-x-6">
-            {/* Navigation Links */}
-            <nav className="flex items-center space-x-6 text-sm tracking-wider">
-              <Link href="/parvagues#music" className="text-gray-300 hover:text-[#ff3d7b] transition-colors">
+          <div className="overflow-hidden ml-2">
+            <span
+              className={`text-white font-bold transition-all duration-500 ${
+                showInHeader || !isHome ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8'
+              }`}
+              style={{
+                textShadow: '0 0 5px rgba(217, 0, 255, 0.7), 0 0 10px rgba(217, 0, 255, 0.5)',
+                color: 'var(--neon-high)'
+              }}
+            >
+              {headerTitle}
+            </span>
+          </div>
+        </Link>
+
+        {/* Navigation and CTA Container */}
+        <div className={`${styles.navAndCtaContainer} flex items-center space-x-6`}>
+          {/* Navigation Links */}
+          <nav className={`${styles.headerNavLinks} flex items-center space-x-6 text-sm tracking-wider`}>
+            <Link href="/parvagues#music" className="text-gray-300 hover:text-[#ff3d7b] transition-colors">
                 Music
               </Link>
               <Link href="/parvagues#performances" className="text-gray-300 hover:text-[#ff3d7b] transition-colors">
@@ -85,7 +84,7 @@ export default function ParVaguesHeader({ eventName = null, title = null }) {
               <FaEnvelope className="mr-2 flex-shrink-0" />
               <span>Book</span>
             </Link>
-          </div>
+          {/* End Navigation and CTA Container */}
         </div>
       </div>
     </header>

@@ -533,6 +533,46 @@
   filter: drop-shadow(0 0 10px rgba(217, 0, 255, 0.5));
 }
 
+/* Styles for Header Navigation and CTA */
+.navAndCtaContainer {
+  display: flex;
+  align-items: center;
+  /* Tailwind 'space-x-6' on the container in JS handles horizontal spacing between nav and button */
+}
+
+.headerNavLinks {
+  display: flex;
+  align-items: center;
+   /* Tailwind 'space-x-6' on the nav element in JS handles horizontal spacing for individual links */
+}
+
+/* Responsive adjustments for header navigation */
+@media (max-width: 768px) { /* Breakpoint for tablets and mobiles */
+  .navAndCtaContainer {
+    flex-direction: column;
+    align-items: flex-end; /* Align stacked items (nav block and button) to the right */
+    gap: 1rem; /* Space between the nav links block and the CTA button when stacked */
+    margin-top: 0.5rem; /* Add some space above when it stacks */
+     /* width: 100%; */ /* Optional: if it needs to span width for alignment */
+  }
+
+  .headerNavLinks {
+    flex-direction: column; /* Stack individual nav links */
+    align-items: flex-end; /* Align text of nav links to the right */
+    gap: 0.75rem; /* Space between stacked nav links */
+    width: 100%; /* Ensure it takes width to allow text alignment */
+  }
+
+  /* Adjust .outlineButton for stacked layout if needed */
+  .navAndCtaContainer .outlineButton { /* More specific selector for the button in header */
+    width: auto; /* Allow button to size to its content, or set to 100% if full-width desired */
+    padding: 0.75rem 1.5rem; /* Adjust padding for smaller screens if needed */
+    font-size: 0.875rem; /* Adjust font size for smaller screens if needed */
+    /* justify-content: center; */ /* Uncomment if width is 100% and text needs centering */
+  }
+}
+/* End Styles for Header Navigation and CTA */
+
 /* Shine animation for album covers 
 NOTE: KEPT HERE FOR REFERENCE, THESE ARE COPIED IN THE MAIN GLOBAL.CSS 
 AS MODULE CSS FORBIDS ROOT VARIABLES
