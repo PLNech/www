@@ -242,6 +242,7 @@
 
 .gallery a { /* Specific for youtube links if not using background images */
   background-color: #333; /* Darker for video links */
+  height: 30px;
   color: #fff;
 }
 .gallery a:hover {

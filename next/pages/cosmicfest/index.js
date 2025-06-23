@@ -61,8 +61,10 @@ export default function CosmicFestHome() {
         <header className={styles.hero}>
           {/* Hero image is set via CSS background for now */}
           <h1>🌠 cosmicfest 🌌</h1>
-          <p>ondes de rythmes, océan et code.<br />21 juin, labenne océan.</p>
-          <h3>🪐</h3>
+          <h3 style={{ paddingTop: '1em' }}>
+            ondes de rythmes, plages sonores, et code source.
+          </h3>
+          <h2>21 juin, labenne océan.<br />🪐</h2>
         </header>
 
         <section className={styles.section} id="lineup">
