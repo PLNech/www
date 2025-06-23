@@ -33,7 +33,7 @@
   height: 80vh; /* Taller hero */
   min-height: 400px;
   background-color: #3498db; /* Placeholder - vibrant blue, like deep ocean */
-  background-image: url('/images/cosmicfest/hero-placeholder.jpg'); /* User will replace */
+  background-image: url('/images/cosmicfest/hero.jpg');
   background-size: cover;
   background-position: center 60%; /* Focus slightly lower than true center */
   display: flex;
@@ -148,7 +148,7 @@
 
 .ctaButton {
   display: inline-block;
-  background-color: #e74c3c; /* Coral/Red for strong CTA */
+  background-color: #007ef9; /* Coral/Red for strong CTA */
   color: white;
   padding: 0.8rem 2.5rem; /* Adjusted padding */
   border-radius: 50px; /* Pill shape */
@@ -279,10 +279,10 @@
 }
 
 /* Accessibility: Focus indicator */
-:global(a:focus), :global(button:focus), :global(input:focus) {
-  outline: 2px solid #3498db;
-  outline-offset: 2px;
-}
+/*:global(a:focus), :global(button:focus), :global(input:focus) {*/
+/*  outline: 2px solid #3498db;*/
+/*  outline-offset: 2px;*/
+/*}*/
 
 /* Responsive adjustments for smaller screens */
 @media (max-width: 768px) {

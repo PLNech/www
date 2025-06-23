@@ -20,28 +20,32 @@ export default function CosmicFestHome() {
   const nextFestivalDate = getNextJune21st();
 
   const lineup2024 = [
-    { artist: "Hugo", description: "live guitare, compos et reprises" },
-    { artist: "Flo", description: "live machines downtempo" },
-    { artist: "ParVagues", description: "livecoding breakbeat to techno nujazz" },
-    { artist: "DJ @marion.lhn", description: "set drum-n-bass" },
-    { artist: "Kevin & Pipou", description: "lights et visuels interactifs" },
-    { artist: "PLN", description: "visuels Hydra.js" },
+    { artist: "Hugo", description: "live guitare, compos et reprises", emojis:"🎸🎙️" },
+    { artist: "Flo", description: "live machines downtempo", emojis:"⚙️🎛" },
+    { artist: "ParVagues", description: "livecoding breakbeat to techno nujazz", emojis:"💻🎛️" },
+    { artist: "DJ @marion.lhn", description: "set drum-n-bass",  emojis: "💻📀" },
+    { artist: "Kevin & Pipou", description: "lights et visuels interactifs", emojis:"💻📽️" },
+    { artist: "PLN", description: "visuels Hydra.js", emojis:"💻📽" },
   ];
 
   // Placeholder data for v0
   const v0_content = {
     photos: [
-      { src: '/images/cosmicfest/v0-photo-1-placeholder.jpg', alt: 'ambiance cosmicfest v0 - photo 1' },
-      { src: '/images/cosmicfest/v0-photo-2-placeholder.jpg', alt: 'ambiance cosmicfest v0 - photo 2' },
-      { src: '/images/cosmicfest/v0-photo-3-placeholder.jpg', alt: 'ambiance cosmicfest v0 - photo 3' },
+      { src: '/images/cosmicfest/v0_hugo.jpg', alt: 'v0 ~ hugo à la guitare' },
+      { src: '/images/cosmicfest/v0_parvagues_lineup.jpg', alt: 'v0 ~ parvagues ~ line-up' },
+      { src: '/images/cosmicfest/hero.gif', alt: 'v0 ~ le off au bunker' },
     ],
     videos: [
-      { id: 'YOUTUBE_VIDEO_ID_V0_PERFORMANCE_1', title: 'live performance v0 - artiste x' },
-      { id: 'YOUTUBE_VIDEO_ID_V0_PERFORMANCE_2', title: 'live performance v0 - artiste y' },
+      { id: '6uoO282xJXM', src: '/images/cosmicfest/v0_parvagues_lineup_crop.jpg', title: 'scene v0 - parvagues livecoding' },
+      // { id: 'YOUTUBE_VIDEO_ID_V0_PERFORMANCE_2', title: 'live performance v0 - artiste y' },
     ],
-    aftermovie: { id: 'YOUTUBE_VIDEO_ID_V0_AFTERMOVIE', title: 'aftermovie cosmicfest v0' },
+    aftermovie: { id: 'YOUTUBE_VIDEO_ID_V0_AFTERMOVIE', title: 'aftermovie cosmicfest v0', released: false },
     lineup: [
-      "Artiste Alpha (DJ Set)", "Groupe Beta (Live Band)", "Performeur Gamma (Visuals)"
+      "20h ~ hugo ~ guitare",
+      "21h ~ flo ~ downtempo",
+      "22h ~ parvagues ~ livecoding",
+      "23h ~ marion.lhn ~ set dnb",
+      "00+ ~ jam"
     ]
   };
 
@@ -56,8 +60,9 @@ export default function CosmicFestHome() {
       <main className={styles.main}>
         <header className={styles.hero}>
           {/* Hero image is set via CSS background for now */}
-          <h1>cosmicfest</h1>
-          <p>ondes de rythmes, océan et code. 21 juin, labenne océan.</p>
+          <h1>🌠 cosmicfest 🌌</h1>
+          <p>ondes de rythmes, océan et code.<br />21 juin, labenne océan.</p>
+          <h3>🪐</h3>
         </header>
 
         <section className={styles.section} id="lineup">
@@ -66,14 +71,15 @@ export default function CosmicFestHome() {
             {lineup2024.map((item, index) => (
               <div key={index} className={styles.card}>
                 <h3>{item.artist}</h3>
-                <p>{item.description}</p>
+                <p>{item.description}</p><br/>
+                <p>~ {item.emojis} ~</p>
               </div>
             ))}
           </div>
         </section>
 
         <section className={styles.section} id="v0">
-          <h2>retour sur la v0 ({nextFestivalDate.getFullYear() -1 })</h2>
+          <h2>souvenirs de la v0 ({nextFestivalDate.getFullYear() -1 })</h2>
 
           <h3>photos v0</h3>
           <div className={styles.gallery}>
@@ -89,16 +95,18 @@ export default function CosmicFestHome() {
           <h3 style={{marginTop: '2rem'}}>vidéos v0</h3>
           <div className={styles.gallery}>
             {/* Aftermovie */}
-            <div>
-              <a href={`https://www.youtube.com/watch?v=${v0_content.aftermovie.id}`} target="_blank" rel="noopener noreferrer">
-                {v0_content.aftermovie.title} (placeholder: {v0_content.aftermovie.id})
-              </a>
-            </div>
+            {v0_content.aftermovie.released && (
+              <div>
+                <a href={`https://www.youtube.com/watch?v=${v0_content.aftermovie.id}`} target="_blank" rel="noopener noreferrer">
+                  {v0_content.aftermovie.title} (placeholder: {v0_content.aftermovie.id})
+                </a>
+              </div>
+            )}
             {/* Other videos */}
             {v0_content.videos.map((video, index) => (
-              <div key={index}>
+              <div key={index} style={{backgroundImage: `url(${video.src})`, backgroundSize: 'cover', backgroundPosition: 'center', height: '150px'}}>
                 <a href={`https://www.youtube.com/watch?v=${video.id}`} target="_blank" rel="noopener noreferrer">
-                  {video.title} (placeholder: {video.id})
+                  {video.title}
                 </a>
               </div>
             ))}
@@ -113,26 +121,26 @@ export default function CosmicFestHome() {
         </section>
 
         <section className={styles.section} id="next-edition">
-          <h2>prochaine édition: {nextFestivalDate.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' })}</h2>
-          <Countdown targetDate={nextFestivalDate.toISOString()} />
+          <h2>prochaine édition:<br/>{nextFestivalDate.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' })}</h2>
           <div className={styles.countdownContainer}> {/* Added class for styling countdown section */}
             <Countdown targetDate={nextFestivalDate.toISOString()} />
           </div>
           <div style={{textAlign: 'center', marginTop: '2rem'}}>
             <button className={styles.ctaButton} onClick={() => alert('waitlist bientôt disponible!')}>
-              rejoins la waitlist
+              prends la prochaine vague
             </button>
             <p className={styles.waitlistMessage}>
-              psst... cosmicfest c'est sur invitation seulement. <br/>
-              une vibe lowkey riders, mais super exclusive.
+              pas de billetterie - cosmicfest c'est sur invitation. <br/>
+              riders, come to the storm.
             </p>
           </div>
         </section>
 
         <section className={styles.section} id="off-festival">
-          <h2>et le off?</h2>
+          <h2>🏄🏻‍♀️ et le off? 🏄🏽</h2>
           <p style={{textAlign: 'center', fontStyle: 'italic'}}>
-            des rumeurs parlent d'un festival off sur la plage le dimanche soir, après le démontage... chut.
+            🌊 RDV sur la plage ~ le dimanche soir après le démontage 🌊<br />
+            🔊 pour le <b>dernier</b> live ~ au <b>bunker</b> 🔊
           </p>
         </section>
 
@@ -140,12 +148,10 @@ export default function CosmicFestHome() {
 
       <footer className={styles.footer}>
         <a
-          href="https://parvagues.com" // Assuming you might want to link back
-          target="_blank"
-          rel="noopener noreferrer"
+          href="/parvagues/"
         >
-          propulsé par l'esprit de{' '}
-          <span style={{marginLeft: '0.5rem', fontWeight: 'bold'}}>parvagues</span>
+          vibe ~
+          <span style={{fontWeight: 'bold'}}>parvagues</span>
           {/* <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} /> You can use ParVagues logo here */}
         </a>
       </footer>
