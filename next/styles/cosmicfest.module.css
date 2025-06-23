@@ -1,0 +1,305 @@
+/* Styles for cosmicfest */
+/* vibe: Surfers cross Techno; années 60 cross cyberpunk, Biarritz cross Paris cross Berlin cross Bayonne, Waves of rhythms, ocean and code, VibeCoding meets LiveCoding meets SkateBoarding meets Rock Climbing on former german bunkers meets long nights of chats and fun and drinks and dance and love and freedom */
+/* aesthetic: lowercase, light theme, chill et oceanique, mais pas cliche baba cool, juste posé. */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+
+/*
+  font-family: 'Montserrat', sans-serif; // For general text, headings
+  font-family: 'Space Mono', monospace; // For techy bits, or accent text
+*/
+
+.container {
+  padding: 0;
+  margin: 0;
+  background-color: #fafafa; /* Light, slightly off-white for a softer feel */
+  color: #2c3e50; /* Dark blue-grey, less harsh than black */
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
+  text-transform: lowercase; /* Global lowercase aesthetic */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  flex: 1; /* Ensures footer stays at bottom */
+  /* padding: 4rem 0; remove default padding to allow full-width hero */
+}
+
+.hero {
+  width: 100%;
+  height: 80vh; /* Taller hero */
+  min-height: 400px;
+  background-color: #3498db; /* Placeholder - vibrant blue, like deep ocean */
+  background-image: url('/images/cosmicfest/hero.jpg');
+  background-size: cover;
+  background-position: center 60%; /* Focus slightly lower than true center */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center content vertically */
+  align-items: center; /* Center content horizontally */
+  text-align: center;
+  color: #ffffff;
+  padding: 2rem;
+  position: relative; /* For potential overlay or pseudo-elements */
+}
+
+.hero::before { /* Subtle vignette or color overlay */
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.2); /* Dark overlay to help text pop */
+  /* background: linear-gradient(to bottom, rgba(52, 152, 219, 0.1), rgba(26, 82, 118, 0.5)); /* Ocean gradient overlay */
+}
+
+.hero h1 {
+  font-family: 'Space Mono', monospace;
+  font-size: clamp(2.5rem, 8vw, 5.5rem); /* Responsive font size */
+  margin-bottom: 0.5rem;
+  text-shadow: 0px 2px 8px rgba(0,0,0,0.7);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  z-index: 1; /* Above overlay */
+}
+
+.hero p {
+  font-size: clamp(1rem, 3vw, 1.5rem);
+  text-shadow: 0px 1px 4px rgba(0,0,0,0.6);
+  max-width: 600px; /* Keep tagline readable */
+  font-weight: 400;
+  z-index: 1; /* Above overlay */
+}
+
+.section {
+  margin: 3rem auto; /* More vertical space between sections */
+  padding: 2rem clamp(1rem, 5vw, 3rem); /* Responsive horizontal padding */
+  max-width: 1000px; /* Max content width */
+  background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white for depth */
+  border-radius: 12px; /* Softer corners */
+  box-shadow: 0 8px 25px rgba(44, 62, 80, 0.08); /* Softer, more diffused shadow */
+}
+
+.section h2 {
+  font-family: 'Space Mono', monospace;
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  margin-bottom: 2rem; /* More space after heading */
+  color: #2980b9; /* Ocean blue, slightly darker than hero for contrast */
+  text-align: center;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.grid {
+  display: grid; /* Using grid for more control */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive columns */
+  gap: 1.5rem; /* Space between cards */
+}
+
+.card {
+  background-color: #ffffff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(44, 62, 80, 0.05);
+  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+  text-align: left;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(44, 62, 80, 0.1);
+}
+
+.card h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.4rem; /* Slightly larger */
+  margin-bottom: 0.75rem;
+  color: #16a085; /* Teal/Turquoise for a fresh vibe */
+  font-weight: 700; /* Bolder artist names */
+}
+
+.card p {
+  font-size: 0.95rem;
+  color: #34495e; /* Slightly lighter text for description */
+}
+
+.countdownContainer { /* Renamed to avoid conflict if .countdown is too generic */
+  text-align: center;
+  margin: 2.5rem 0;
+  padding: 2rem;
+  background-color: rgba(236, 240, 241, 0.7); /* Light grey, slightly transparent */
+  border-radius: 8px;
+}
+/* Style for individual countdown items is in Countdown.js for now, can be moved here */
+.countdownContainer span div:first-child { /* The number */
+  font-family: 'Space Mono', monospace;
+  color: #e67e22; /* Warm orange, like sunset */
+  font-size: clamp(2rem, 6vw, 3.5rem);
+}
+.countdownContainer span div:last-child { /* The label (jours, heures) */
+  color: #7f8c8d; /* Muted grey */
+  font-size: clamp(0.7rem, 2vw, 0.9rem);
+}
+
+
+.ctaButton {
+  display: inline-block;
+  background-color: #007ef9; /* Coral/Red for strong CTA */
+  color: white;
+  padding: 0.8rem 2.5rem; /* Adjusted padding */
+  border-radius: 50px; /* Pill shape */
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: 700; /* Bolder CTA text */
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(231, 76, 60, 0.3);
+  font-family: 'Montserrat', sans-serif; /* Consistent font */
+}
+
+.ctaButton:hover {
+  background-color: #c0392b; /* Darker red on hover */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(231, 76, 60, 0.4);
+}
+
+.waitlistMessage {
+  text-align: center;
+  margin-top: 1.5rem; /* More space */
+  font-style: normal; /* Less italic, more direct */
+  color: #7f8c8d; /* Muted grey */
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.footer {
+  width: 100%;
+  padding: 2.5rem 1rem; /* More padding */
+  border-top: 1px solid #ecf0f1; /* Lighter border */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff; /* Clean white footer */
+  color: #95a5a6; /* Muted text color for footer */
+  font-size: 0.9rem;
+}
+
+.footer a {
+  text-decoration: none;
+  color: #3498db; /* Link color for parvagues */
+  transition: color 0.2s ease;
+}
+.footer a:hover {
+  color: #2980b9; /* Darker blue on hover */
+}
+.footer span {
+  margin-left: 0.3rem;
+  font-weight: 400; /* Normal weight for 'parvagues' in footer */
+}
+
+
+/* Image gallery styles */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Slightly smaller min for more items */
+  gap: 1rem;
+}
+
+.gallery div, .gallery a { /* Target divs for background images, and links for youtube placeholders */
+  width: 100%;
+  height: 180px; /* Taller gallery items */
+  border-radius: 8px; /* Consistent rounding */
+  background-color: #ecf0f1; /* Light placeholder color */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #7f8c8d;
+  overflow: hidden; /* Ensure content fits */
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery div:hover, .gallery a:hover {
+  transform: scale(1.03);
+  box-shadow: 0 5px 15px rgba(44, 62, 80, 0.1);
+}
+
+.gallery div span, .gallery a { /* For text overlay on images/video placeholders */
+  color: #fff;
+  background-color: rgba(0,0,0,0.6);
+  padding: 0.3em 0.6em;
+  border-radius: 4px;
+  z-index: 1;
+  text-decoration: none; /* For links */
+}
+
+.gallery a { /* Specific for youtube links if not using background images */
+  background-color: #333; /* Darker for video links */
+  color: #fff;
+}
+.gallery a:hover {
+  background-color: #444;
+}
+
+/* Section specific styling for V0 */
+#v0 h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.2rem;
+  color: #2c3e50;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  text-align: left;
+  font-weight: 700;
+  border-bottom: 1px solid #ecf0f1;
+  padding-bottom: 0.5rem;
+}
+#v0 ul {
+  list-style: none;
+  padding-left: 0;
+  text-align: left;
+}
+#v0 li {
+  padding: 0.3rem 0;
+  color: #34495e;
+}
+
+/* Festival Off */
+#off-festival p {
+  font-family: 'Space Mono', monospace;
+  color: #9b59b6; /* Mysterious purple */
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+/* Accessibility: Focus indicator */
+/*:global(a:focus), :global(button:focus), :global(input:focus) {*/
+/*  outline: 2px solid #3498db;*/
+/*  outline-offset: 2px;*/
+/*}*/
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+  .hero {
+    height: 70vh; /* Adjust hero height */
+  }
+  .section {
+    margin: 2rem auto;
+    padding: 1.5rem clamp(0.5rem, 3vw, 1.5rem);
+  }
+  .grid {
+    grid-template-columns: 1fr; /* Stack cards on smaller screens */
+  }
+  .card {
+    width: auto; /* Full width */
+  }
+  .countdownContainer span div:first-child { /* The number */
+    font-size: clamp(1.8rem, 5vw, 3rem);
+  }
+}
