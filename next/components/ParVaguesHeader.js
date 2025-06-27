@@ -78,13 +78,13 @@ export default function ParVaguesHeader({ eventName = null, title = null }) {
             </nav>
             
             {/* CTA button */}
-            <Link 
-              href="/book"
+            <a
+              href="mailto:parvagues@nech.pl?subject=Booking%20Request"
               className={`${styles.outlineButton} py-2 px-4 text-sm flex items-center whitespace-nowrap`}
             >
               <FaEnvelope className="mr-2 flex-shrink-0" />
               <span>Book</span>
-            </Link>
+            </a>
           </div>
         </div>
       </div>

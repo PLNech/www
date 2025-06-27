@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { FaEnvelope, FaInstagram, FaTwitter } from 'react-icons/fa';
+import { FaEnvelope, FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
 import { SiMastodon, SiBluesky } from 'react-icons/si';
 import styles from '@/styles/parvagues.module.css';
 
@@ -11,7 +11,8 @@ export default function ParVaguesFooter() {
     { icon: <SiMastodon />, label: 'mastodon', url: 'https://chaos.social/@PixelNoir' },
     { icon: <FaTwitter />, label: 'twitter', url: 'https://x.com/ParVagues' },
     { icon: <SiBluesky />, label: 'bluesky', url: '#' },
-    { icon: <FaInstagram />, label: 'instagram', url: 'https://instagram.com/parvagues.mp3' }
+    { icon: <FaInstagram />, label: 'instagram', url: 'https://instagram.com/parvagues.mp3' },
+    { icon: <FaYoutube />, label: 'youtube', url: 'https://www.youtube.com/@parvagues' }
   ];
 
   const year = new Date().getFullYear();
