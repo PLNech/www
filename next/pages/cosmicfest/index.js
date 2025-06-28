@@ -127,15 +127,17 @@ export default function CosmicFestHome() {
             ))}
           </ul>
 
-          <h3 style={{marginTop: '2rem'}}>live@cosmicfest v0 (audio)</h3>
+          <h3 style={{marginTop: '2rem'}}>audio ~ ParVagues</h3>
           <p>
-            écoutez le live track-par-track (qualité master via Bandcamp) ou en version mix continu ci-dessous (téléchargement gratuit activé sur SoundCloud).
+            ecoute chaque piste ~ ecoute le set entier ~ telecharge le tout
           </p>
-          <div className={styles.audioEmbed}>
-            <iframe title="Bandcamp player for Parvagues live at Cosmicfest" style={{border: 0, width: "100%", maxWidth: "350px", height: "470px"}} src="https://bandcamp.com/EmbeddedPlayer/album=644862623/size=large/bgcol=333333/linkcol=0f91ff/tracklist=true/artwork=small/transparent=true/" seamless><a href="https://parvagues.bandcamp.com/album/live-cosmicfest">live@cosmicfest by ParVagues</a></iframe>
-          </div>
-          <div className={styles.audioEmbed} style={{marginTop: "2rem"}}>
-            <iframe title="Soundcloud player for Parvagues live at Cosmicfest" width="100%" height="450" scrolling="no" frameBorder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2121089043&color=%233e00f7&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe><div style={{fontSize: "10px", color: "#cccccc",lineBreak: "anywhere",wordBreak: "normal",overflow: "hidden",whiteSpace: "nowrap",textOverflow: "ellipsis", fontFamily: "Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif",fontWeight: "100"}}><a href="https://soundcloud.com/parvagues" title="ParVagues" target="_blank" rel="noopener noreferrer" style={{color: "#cccccc", textDecoration: "none"}}>ParVagues</a> · <a href="https://soundcloud.com/parvagues/cosmicfest" title="Live@cosmicfest 🌊🌅" target="_blank" rel="noopener noreferrer" style={{color: "#cccccc", textDecoration: "none"}}>Live@cosmicfest 🌊🌅</a></div>
+          <div className={styles.audioPlayersContainer}>
+            <div className={`${styles.audioEmbed} ${styles.bandcampPlayer}`}>
+              <iframe title="Bandcamp player for Parvagues live at Cosmicfest" style={{border: 0, width: "100%", maxWidth: "350px", height: "470px"}} src="https://bandcamp.com/EmbeddedPlayer/album=644862623/size=large/bgcol=333333/linkcol=0f91ff/tracklist=true/artwork=small/transparent=true/" seamless><a href="https://parvagues.bandcamp.com/album/live-cosmicfest">live@cosmicfest by ParVagues</a></iframe>
+            </div>
+            <div className={`${styles.audioEmbed} ${styles.soundcloudPlayer}`}>
+              <iframe title="Soundcloud player for Parvagues live at Cosmicfest" width="100%" height="450" scrolling="no" frameBorder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2121089043&color=%233e00f7&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe><div style={{fontSize: "10px", color: "#cccccc",lineBreak: "anywhere",wordBreak: "normal",overflow: "hidden",whiteSpace: "nowrap",textOverflow: "ellipsis", fontFamily: "Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif",fontWeight: "100"}}><a href="https://soundcloud.com/parvagues" title="ParVagues" target="_blank" rel="noopener noreferrer" style={{color: "#cccccc", textDecoration: "none"}}>ParVagues</a> · <a href="https://soundcloud.com/parvagues/cosmicfest" title="Live@cosmicfest 🌊🌅" target="_blank" rel="noopener noreferrer" style={{color: "#cccccc", textDecoration: "none"}}>Live@cosmicfest 🌊🌅</a></div>
+            </div>
           </div>
         </section>
 

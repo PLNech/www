@@ -196,10 +196,69 @@
   font-size: 0.9rem;
 }
 
-.audioEmbed {
+.audioEmbed { /* This class is now on the individual player wrappers */
   display: flex;
   justify-content: center;
-  margin: 1rem 0;
+  /* margin: 1rem 0; Retained for stacking, but might be overridden by flex container gap or item margins */
+}
+
+.audioPlayersContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; /* Allow players to wrap to next line if not enough space */
+  justify-content: space-around; /* Distribute space around players */
+  align-items: flex-start; /* Align items to the top if heights differ slightly */
+  gap: 2rem; /* Spacing between players when side-by-side */
+  margin-top: 1.5rem; /* Space above the container */
+}
+
+.bandcampPlayer, .soundcloudPlayer {
+  flex: 1 1 350px; /* Grow, shrink, with a base width related to Bandcamp's max-width */
+  min-width: 300px; /* Ensure they don't get too squished before wrapping */
+  margin: 0.5rem; /* Add some margin around each player for spacing */
+}
+
+.bandcampPlayer iframe {
+  max-width: 100%; /* Ensure iframe is responsive within its container */
+}
+
+.soundcloudPlayer iframe {
+  width: 100%; /* Ensure iframe takes full width of its container */
+  min-height: 450px; /* Maintain its intended height */
+}
+
+
+/* Media query for smaller screens to stack players */
+@media (max-width: 768px) { /* Breakpoint can be adjusted based on when it looks best */
+  .audioPlayersContainer {
+    flex-direction: column;
+    align-items: center; /* Center players when stacked */
+  }
+  .bandcampPlayer, .soundcloudPlayer {
+    flex-basis: auto; /* Reset flex-basis for stacked layout */
+    width: 100%; /* Make players take full width when stacked */
+    max-width: 400px; /* Optional: constrain max width when stacked, e.g. for SoundCloud visual player */
+    margin: 1rem 0; /* Adjust margin for vertical stacking */
+  }
+  .hero {
+    height: 70vh; /* Adjust hero height */
+  }
+  .section {
+    margin: 2rem auto;
+    padding: 1.5rem clamp(0.5rem, 3vw, 1.5rem);
+  }
+  .grid {
+    grid-template-columns: 1fr; /* Stack cards on smaller screens */
+  }
+  .card {
+    width: auto; /* Full width */
+  }
+  .card h3 {
+    font-size: 1.1rem; /* Further reduce font size on small screens for title/emojis */
+  }
+  .countdownContainer span div:first-child { /* The number */
+    font-size: clamp(1.8rem, 5vw, 3rem);
+  }
 }
 
 .footer a {
@@ -219,14 +278,14 @@
 /* Image gallery styles */
 .gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Slightly smaller min for more items */
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Increased min item width */
   gap: 1rem;
 }
 
 /* Common styles for all gallery items (photos and video links) */
 .galleryItem {
   width: 100%;
-  height: 180px; /* Taller gallery items */
+  height: 200px; /* Increased height */
   border-radius: 8px; /* Consistent rounding */
   background-color: #ecf0f1; /* Light placeholder color for items without BG image */
   display: flex; /* Enables flexbox for content alignment */
