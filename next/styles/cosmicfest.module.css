@@ -212,19 +212,27 @@
   margin-top: 1.5rem; /* Space above the container */
 }
 
-.bandcampPlayer, .soundcloudPlayer {
-  flex: 1 1 350px; /* Grow, shrink, with a base width related to Bandcamp's max-width */
-  min-width: 300px; /* Ensure they don't get too squished before wrapping */
-  margin: 0.5rem; /* Add some margin around each player for spacing */
+.bandcampPlayer {
+  flex: 1 1 350px;
+  min-width: 300px;
+  margin: 0.5rem;
+}
+.soundcloudPlayer {
+  flex: 1 1 450px; /* Adjusted flex-basis for SoundCloud player */
+  min-width: 300px; /* Still allow shrinking if necessary */
+  max-width: 450px; /* Ensure it doesn't grow beyond 450px unless flex grow allows */
+  margin: 0.5rem;
 }
 
 .bandcampPlayer iframe {
-  max-width: 100%; /* Ensure iframe is responsive within its container */
+  max-width: 100%; /* Responsive within its container */
+  /* width and height are set inline on the iframe by Bandcamp's embed usually, or by our style attribute */
 }
 
 .soundcloudPlayer iframe {
-  width: 100%; /* Ensure iframe takes full width of its container */
-  min-height: 450px; /* Maintain its intended height */
+  width: 450px;
+  height: 450px;
+  max-width: 100%; /* Allows it to shrink if container is smaller than 450px */
 }
 
 
@@ -307,6 +315,7 @@
   background-position: center;
   justify-content: center; /* Center content horizontally (span) */
   align-items: flex-end;  /* Align content (span) to the bottom */
+  min-height: 150px; /* Ensure a minimum height as per user feedback, though .galleryItem height should cover this */
 }
 
 /* Styling for the text overlay (alt text) on photo items */
@@ -335,6 +344,85 @@
 .galleryVideoLink:hover {
   background-color: #444;
   /* Potentially darken the background image or text background on hover too */
+}
+
+/* Styles for Photo Modal */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.85); /* Darker overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure it's on top */
+  cursor: pointer; /* Indicate overlay can be clicked to close */
+}
+
+.modalContent {
+  background-color: #2c3e50; /* Dark theme for modal content box */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+  position: relative; /* For close button positioning */
+  cursor: default; /* Reset cursor for content area */
+  max-width: 90vw; /* Max width relative to viewport width */
+  max-height: 90vh; /* Max height relative to viewport height */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modalImageContainer {
+  width: 100%; /* Container takes width of modalContent or image's intrinsic */
+  max-height: calc(85vh - 80px); /* Adjust based on padding and caption height */
+  display: flex; /* Helps with centering the image if it's smaller than container */
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* In case image is larger than this container */
+}
+
+/* next/image specific styling might need to target its internal structure if needed,
+   but objectFit="contain" and layout="intrinsic" should handle most cases.
+   The parent .modalImageContainer will constrain its max size. */
+.modalImageContainer img { /* Targets the actual img tag from Next/Image */
+  max-width: 100%;
+  max-height: 100%; /* Ensure image scales down to fit container */
+  object-fit: contain; /* Redundant with next/image prop but good fallback */
+}
+
+
+.modalCloseButton {
+  position: absolute;
+  top: -10px; /* Position outside slightly or adjust padding */
+  right: -10px;
+  background: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  font-size: 1.8rem;
+  line-height: 30px; /* Center the '×' */
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  transition: background-color 0.2s ease;
+  z-index: 1001; /* Above modal content */
+}
+
+.modalCloseButton:hover {
+  background-color: #c0392b;
+}
+
+.modalCaption {
+  color: #ecf0f1; /* Light text for caption */
+  text-align: center;
+  margin-top: 10px;
+  font-size: 0.9rem;
+  max-width: 100%;
 }
 
 /* Styling for the text overlay on video links (if they have a background image) */

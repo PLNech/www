@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Image from 'next/image'; // Using Next.js Image component for optimization
+import { useState, useEffect } from 'react'; // Added useState and useEffect
 import styles from '../../styles/cosmicfest.module.css';
 import Countdown from '../../components/cosmicfest/Countdown';
 // import ParVaguesFooter from '../../components/ParVaguesFooter'; // Optional: if you want to reuse the main site footer
@@ -18,6 +19,41 @@ const getNextJune21st = () => {
 
 export default function CosmicFestHome() {
   const nextFestivalDate = getNextJune21st();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalImageSrc, setModalImageSrc] = useState('');
+  const [modalImageAlt, setModalImageAlt] = useState('');
+
+  const openModal = (src, alt) => {
+    setModalImageSrc(src);
+    setModalImageAlt(alt);
+    setIsModalOpen(true);
+    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setModalImageSrc('');
+    setModalImageAlt('');
+    document.body.style.overflow = 'auto'; // Restore background scrolling
+  };
+
+  useEffect(() => {
+    const handleEsc = (event) => {
+      if (event.key === 'Escape' && isModalOpen) {
+        closeModal();
+      }
+    };
+    window.addEventListener('keydown', handleEsc);
+
+    // Cleanup function to remove listener
+    return () => {
+      window.removeEventListener('keydown', handleEsc);
+      // Ensure body overflow is reset if component unmounts while modal is open
+      if (isModalOpen) {
+        document.body.style.overflow = 'auto';
+      }
+    };
+  }, [isModalOpen]); // Dependency array includes isModalOpen
 
   const lineup2024 = [
     { artist: "Hugo", description: "live guitare, compos et reprises", emojis:"🎸🎙️" },
@@ -86,9 +122,16 @@ export default function CosmicFestHome() {
           <h3>photos v0</h3>
           <div className={styles.gallery}>
             {v0_content.photos.map((photo, index) => (
-              <div key={index} className={styles.galleryPhotoItem} style={{backgroundImage: `url(${photo.src})`}}>
-                 {/* <Image src={photo.src} alt={photo.alt} width={200} height={150} objectFit="cover" /> */}
-                 {/* Using div with background for now, as next/image needs actual image dimensions for non-fill */}
+              <div
+                key={photo.src} // Using src as key for stability if array order changes but src is unique
+                className={`${styles.galleryItem} ${styles.galleryPhotoItem}`} // Ensure both classes are applied
+                style={{backgroundImage: `url(${photo.src})`}}
+                onClick={() => openModal(photo.src, photo.alt)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(photo.src, photo.alt); } }}
+                aria-label={`View image: ${photo.alt}`}
+              >
                  <span>{photo.alt}</span>
               </div>
             ))}
@@ -136,7 +179,7 @@ export default function CosmicFestHome() {
               <iframe title="Bandcamp player for Parvagues live at Cosmicfest" style={{border: 0, width: "100%", maxWidth: "350px", height: "470px"}} src="https://bandcamp.com/EmbeddedPlayer/album=644862623/size=large/bgcol=333333/linkcol=0f91ff/tracklist=true/artwork=small/transparent=true/" seamless><a href="https://parvagues.bandcamp.com/album/live-cosmicfest">live@cosmicfest by ParVagues</a></iframe>
             </div>
             <div className={`${styles.audioEmbed} ${styles.soundcloudPlayer}`}>
-              <iframe title="Soundcloud player for Parvagues live at Cosmicfest" width="100%" height="450" scrolling="no" frameBorder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2121089043&color=%233e00f7&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe><div style={{fontSize: "10px", color: "#cccccc",lineBreak: "anywhere",wordBreak: "normal",overflow: "hidden",whiteSpace: "nowrap",textOverflow: "ellipsis", fontFamily: "Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif",fontWeight: "100"}}><a href="https://soundcloud.com/parvagues" title="ParVagues" target="_blank" rel="noopener noreferrer" style={{color: "#cccccc", textDecoration: "none"}}>ParVagues</a> · <a href="https://soundcloud.com/parvagues/cosmicfest" title="Live@cosmicfest 🌊🌅" target="_blank" rel="noopener noreferrer" style={{color: "#cccccc", textDecoration: "none"}}>Live@cosmicfest 🌊🌅</a></div>
+              <iframe title="Soundcloud player for Parvagues live at Cosmicfest" width="450" height="450" scrolling="no" frameBorder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2121089043&color=%233e00f7&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe><div style={{fontSize: "10px", color: "#cccccc",lineBreak: "anywhere",wordBreak: "normal",overflow: "hidden",whiteSpace: "nowrap",textOverflow: "ellipsis", fontFamily: "Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif",fontWeight: "100"}}><a href="https://soundcloud.com/parvagues" title="ParVagues" target="_blank" rel="noopener noreferrer" style={{color: "#cccccc", textDecoration: "none"}}>ParVagues</a> · <a href="https://soundcloud.com/parvagues/cosmicfest" title="Live@cosmicfest 🌊🌅" target="_blank" rel="noopener noreferrer" style={{color: "#cccccc", textDecoration: "none"}}>Live@cosmicfest 🌊🌅</a></div>
             </div>
           </div>
         </section>
@@ -169,6 +212,23 @@ export default function CosmicFestHome() {
         </section>
 
       </main>
+
+      {isModalOpen && (
+        <div className={styles.modalOverlay} onClick={closeModal} role="dialog" aria-modal="true" aria-label={modalImageAlt || 'Image viewer'}>
+          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+            <button className={styles.modalCloseButton} onClick={closeModal} aria-label="Close image viewer">
+              &times;
+            </button>
+            {/* For Next/Image, provide intrinsic image width/height if known, or use layout fill with sized parent.
+                Using layout="responsive" with some default aspect ratio here.
+                Actual display size will be controlled by CSS for modalImage container. */}
+            <div className={styles.modalImageContainer}>
+              <Image src={modalImageSrc} alt={modalImageAlt} layout="intrinsic" width={1200} height={900} objectFit="contain" />
+            </div>
+            {modalImageAlt && <p className={styles.modalCaption}>{modalImageAlt}</p>}
+          </div>
+        </div>
+      )}
 
       <footer className={styles.footer}>
         <a
