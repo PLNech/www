@@ -102,7 +102,7 @@
 
 .card {
   background-color: #ffffff;
-  padding: 1.5rem;
+  padding: 1rem; /* Reduced padding */
   border-radius: 8px;
   box-shadow: 0 4px 15px rgba(44, 62, 80, 0.05);
   transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
@@ -116,15 +116,22 @@
 
 .card h3 {
   font-family: 'Montserrat', sans-serif;
-  font-size: 1.4rem; /* Slightly larger */
-  margin-bottom: 0.75rem;
+  font-size: 1.25rem; /* Reduced font size */
+  margin-bottom: 0.5rem; /* Reduced margin */
   color: #16a085; /* Teal/Turquoise for a fresh vibe */
   font-weight: 700; /* Bolder artist names */
 }
 
 .card p {
-  font-size: 0.95rem;
+  font-size: 0.9rem; /* Reduced font size */
+  line-height: 1.4; /* Added for better readability with smaller font */
   color: #34495e; /* Slightly lighter text for description */
+}
+
+/* Specific styling for the emoji line in the card */
+.card p:last-child {
+  margin-top: 0.5rem; /* Add some space above the emoji line */
+  margin-bottom: 0; /* Remove bottom margin if it's the last element */
 }
 
 .countdownContainer { /* Renamed to avoid conflict if .countdown is too generic */
@@ -189,6 +196,12 @@
   font-size: 0.9rem;
 }
 
+.audioEmbed {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
 .footer a {
   text-decoration: none;
   color: #3498db; /* Link color for parvagues */
@@ -210,44 +223,75 @@
   gap: 1rem;
 }
 
-.gallery div, .gallery a { /* Target divs for background images, and links for youtube placeholders */
+/* Common styles for all gallery items (photos and video links) */
+.galleryItem {
   width: 100%;
   height: 180px; /* Taller gallery items */
   border-radius: 8px; /* Consistent rounding */
-  background-color: #ecf0f1; /* Light placeholder color */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  font-size: 0.9rem;
-  color: #7f8c8d;
+  background-color: #ecf0f1; /* Light placeholder color for items without BG image */
+  display: flex; /* Enables flexbox for content alignment */
   overflow: hidden; /* Ensure content fits */
-  position: relative;
+  position: relative; /* For absolute positioning of children or pseudo-elements */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-decoration: none; /* Remove underline from links if .galleryItem is an <a> */
+  color: #7f8c8d; /* Default text color, useful for video links */
 }
 
-.gallery div:hover, .gallery a:hover {
+.galleryItem:hover {
   transform: scale(1.03);
   box-shadow: 0 5px 15px rgba(44, 62, 80, 0.1);
 }
 
-.gallery div span, .gallery a { /* For text overlay on images/video placeholders */
-  color: #fff;
-  background-color: rgba(0,0,0,0.6);
-  padding: 0.3em 0.6em;
-  border-radius: 4px;
-  z-index: 1;
-  text-decoration: none; /* For links */
+/* Specific styles for photo items (divs with background images) */
+.galleryPhotoItem {
+  background-size: cover;
+  background-position: center;
+  justify-content: center; /* Center content horizontally (span) */
+  align-items: flex-end;  /* Align content (span) to the bottom */
 }
 
-.gallery a { /* Specific for youtube links if not using background images */
-  background-color: #333; /* Darker for video links */
-  height: 30px;
+/* Styling for the text overlay (alt text) on photo items */
+.galleryPhotoItem span {
   color: #fff;
+  background-color: rgba(0,0,0,0.7); /* Slightly darker for better contrast */
+  padding: 0.4em 0.8em; /* Increased padding */
+  border-radius: 4px 4px 0 0; /* Rounded top corners if at bottom edge */
+  width: 100%; /* Make span take full width of the item */
+  text-align: center;
+  font-size: 0.85rem; /* Slightly smaller font for alt text */
+  z-index: 1;
+  box-sizing: border-box; /* Ensure padding doesn't increase width beyond 100% */
 }
-.gallery a:hover {
+
+/* Specific styles for video link items (<a> tags) */
+.galleryVideoLink { /* This will be used for the <a> tags for videos */
+  justify-content: center; /* Center text horizontally */
+  align-items: center;   /* Center text vertically */
+  text-align: center;
+  font-size: 0.9rem;
+  background-color: #333; /* Darker for video links */
+  color: #fff; /* Text color for video links */
+  /* height: 180px; Inherits from galleryItem. If different height is needed, uncomment and set. */
+}
+.galleryVideoLink:hover {
   background-color: #444;
+  /* Potentially darken the background image or text background on hover too */
 }
+
+/* Styling for the text overlay on video links (if they have a background image) */
+.galleryVideoLink span {
+  color: #fff;
+  background-color: rgba(0,0,0,0.7); /* Consistent with photo item caption background */
+  padding: 0.4em 0.8em;
+  border-radius: 4px;
+  z-index: 1;
+  box-sizing: border-box;
+  max-width: 90%; /* Prevent text from touching edges if too long */
+  text-align: center; /* Ensure text within span is centered */
+}
+
+/* Remove the old generic .gallery a and .gallery div span if they are fully replaced */
+/* The old .gallery a styling for height:30px is now incorporated or decided by .galleryVideoLink with .galleryItem height */
 
 /* Section specific styling for V0 */
 #v0 h3 {

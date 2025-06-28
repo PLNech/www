@@ -72,9 +72,9 @@ export default function CosmicFestHome() {
           <div className={styles.grid}>
             {lineup2024.map((item, index) => (
               <div key={index} className={styles.card}>
-                <h3>{item.artist}</h3>
-                <p>{item.description}</p><br/>
-                <p>~ {item.emojis} ~</p>
+                <h3>{item.artist} <span className={styles.cardEmojis}>~ {item.emojis} ~</span></h3>
+                <p>{item.description}</p>
+                {/* The emoji line is now part of the h3, the extra <p> for emojis and <br/> are removed */}
               </div>
             ))}
           </div>
@@ -86,10 +86,10 @@ export default function CosmicFestHome() {
           <h3>photos v0</h3>
           <div className={styles.gallery}>
             {v0_content.photos.map((photo, index) => (
-              <div key={index} style={{backgroundImage: `url(${photo.src})`, backgroundSize: 'cover', backgroundPosition: 'center', height: '150px'}}>
+              <div key={index} className={styles.galleryPhotoItem} style={{backgroundImage: `url(${photo.src})`}}>
                  {/* <Image src={photo.src} alt={photo.alt} width={200} height={150} objectFit="cover" /> */}
                  {/* Using div with background for now, as next/image needs actual image dimensions for non-fill */}
-                 <span style={{color: '#fff', backgroundColor: 'rgba(0,0,0,0.5)', padding: '2px'}}>{photo.alt}</span>
+                 <span>{photo.alt}</span>
               </div>
             ))}
           </div>
@@ -106,11 +106,17 @@ export default function CosmicFestHome() {
             )}
             {/* Other videos */}
             {v0_content.videos.map((video, index) => (
-              <div key={index} style={{backgroundImage: `url(${video.src})`, backgroundSize: 'cover', backgroundPosition: 'center', height: '150px'}}>
-                <a href={`https://www.youtube.com/watch?v=${video.id}`} target="_blank" rel="noopener noreferrer">
-                  {video.title}
-                </a>
-              </div>
+              <a
+                key={index}
+                href={`https://www.youtube.com/watch?v=${video.id}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`${styles.galleryItem} ${styles.galleryVideoLink}`}
+                style={video.src ? {backgroundImage: `url(${video.src})`} : {}} // Apply BG only if src exists
+                aria-label={`Watch video: ${video.title}`}
+              >
+                <span>{video.title}</span> {/* Span for styling the text overlay */}
+              </a>
             ))}
           </div>
 
@@ -120,6 +126,17 @@ export default function CosmicFestHome() {
               <li key={index}>{artist}</li>
             ))}
           </ul>
+
+          <h3 style={{marginTop: '2rem'}}>live@cosmicfest v0 (audio)</h3>
+          <p>
+            écoutez le live track-par-track (qualité master via Bandcamp) ou en version mix continu ci-dessous (téléchargement gratuit activé sur SoundCloud).
+          </p>
+          <div className={styles.audioEmbed}>
+            <iframe title="Bandcamp player for Parvagues live at Cosmicfest" style={{border: 0, width: "100%", maxWidth: "350px", height: "470px"}} src="https://bandcamp.com/EmbeddedPlayer/album=644862623/size=large/bgcol=333333/linkcol=0f91ff/tracklist=true/artwork=small/transparent=true/" seamless><a href="https://parvagues.bandcamp.com/album/live-cosmicfest">live@cosmicfest by ParVagues</a></iframe>
+          </div>
+          <div className={styles.audioEmbed} style={{marginTop: "2rem"}}>
+            <iframe title="Soundcloud player for Parvagues live at Cosmicfest" width="100%" height="450" scrolling="no" frameBorder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2121089043&color=%233e00f7&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe><div style={{fontSize: "10px", color: "#cccccc",lineBreak: "anywhere",wordBreak: "normal",overflow: "hidden",whiteSpace: "nowrap",textOverflow: "ellipsis", fontFamily: "Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif",fontWeight: "100"}}><a href="https://soundcloud.com/parvagues" title="ParVagues" target="_blank" rel="noopener noreferrer" style={{color: "#cccccc", textDecoration: "none"}}>ParVagues</a> · <a href="https://soundcloud.com/parvagues/cosmicfest" title="Live@cosmicfest 🌊🌅" target="_blank" rel="noopener noreferrer" style={{color: "#cccccc", textDecoration: "none"}}>Live@cosmicfest 🌊🌅</a></div>
+          </div>
         </section>
 
         <section className={styles.section} id="next-edition">
@@ -128,9 +145,12 @@ export default function CosmicFestHome() {
             <Countdown targetDate={nextFestivalDate.toISOString()} />
           </div>
           <div style={{textAlign: 'center', marginTop: '2rem'}}>
-            <button className={styles.ctaButton} onClick={() => alert('waitlist bientôt disponible!')}>
-              prends la prochaine vague
-            </button>
+           <a
+             href="mailto:cosmic@nech.pl?subject=je%20suis%20cosmic%20car...&body=voila%20mon%20cot%C3%A9%20cosmique%20%3A%20..."
+             className={styles.ctaButton}
+           >
+             prends la prochaine vague
+           </a>
             <p className={styles.waitlistMessage}>
               pas de billetterie - cosmicfest c'est sur invitation. <br/>
               riders, come to the storm.
