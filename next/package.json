@@ -5,7 +5,12 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "preview:link": "vercel link --yes",
+    "preview:env:pull": "vercel env pull .env.local",
+    "deploy:preview": "vercel --yes",
+    "deploy:prod": "vercel --prod --yes",
+    "platform:build": "vercel build"
   },
   "engines": {
     "node": ">=18.17.0"
@@ -34,6 +39,7 @@
   },
   "devDependencies": {
     "@types/react": "^18.2.61",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "vercel": "^39"
   }
 }

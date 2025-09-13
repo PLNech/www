@@ -1,0 +1,76 @@
+---
+description: Project-wide standards to keep Next.js app stable, Yarn-only, and Vercel deploys safe
+globs:
+alwaysApply: true
+---
+# Node & runtime
+- Use Node 20 LTS (recommended) or at minimum >= 18.18 to satisfy Next.js 15.
+- Align .nvmrc with package.json "engines" (prefer `20.x`). Do not downgrade Node.
+- In Vercel, set Node 20 runtime (Project Settings > Build & Development Settings).
+
+# Package manager — Yarn only
+- Use Yarn (classic) exclusively; keep `yarn.lock` as the single source of truth.
+- Do not add or commit `package-lock.json`, `pnpm-lock.yaml`, or any other lockfile.
+- Install deterministically with: `yarn install --frozen-lockfile`.
+- In CI/Vercel, rely on Yarn workflows; do not invoke npm or pnpm.
+
+# Next.js project structure
+- The app root is fixed at `next/`. Run all app commands from `next/` (or use `--cwd next`).
+- Do not move the app to repository root or create additional app roots.
+- Keep the webpack alias mapping `@ → next/` intact in `next/next.config.js`.
+
+# Imports alias
+- Prefer `@/xxx` imports (e.g., `@/components/Button`) instead of deep `../../` relative paths.
+- When moving files, update imports to keep using `@/`.
+
+# Global CSS policy
+- Only import global CSS from `next/pages/_app.js`.
+- Convert all other styles to CSS Modules or component-scoped CSS.
+- Do not add new global CSS imports in pages/components.
+- Note: This complements the existing rule in `.cursor/rules/no-global-css.mdc`.
+
+# Content and static assets
+- Markdown/MDX content lives under `next/content/**`.
+- Static assets belong in `next/public/**` and should be referenced with `/...` paths.
+- Avoid hotlinking for persistent assets; store them in `next/public`.
+
+# Environment & secrets
+- Do not commit `.env*` files. Manage secrets in Vercel Environment Variables (Production / Preview).
+- For local development, sync envs from Vercel: `vercel env pull .env.local` (via local CLI).
+- Never hardcode secrets or tokens in code or content.
+
+# Vercel deploy policy (Preview-first)
+- Default to Preview deploys for every branch:
+  - From `next/`: `vercel` (or `yarn vercel` if CLI is a devDependency).
+  - Share the Preview URL in PRs for review.
+- Promote to Production only after approval:
+  - From `main` branch: `vercel --prod` (or `yarn vercel --prod`).
+- Ensure Vercel Project “Root Directory” is set to `next/`.
+- Use `vercel build` locally to reproduce platform builds when debugging.
+
+# Scripts & CI conventions (Yarn)
+- Local dev: run from `next/` → `yarn dev`
+- Build locally/CI: from `next/` → `yarn build`
+- Deterministic install: `yarn install --frozen-lockfile`
+- Optional (recommended) devDependencies/scripts in `next/package.json` to keep Yarn-only workflow:
+  - Add devDependency: `"vercel": "^39"` (or current)
+  - Scripts:
+    - `"preview:link": "vercel link --yes"`
+    - `"preview:env:pull": "vercel env pull .env.local"`
+    - `"deploy:preview": "vercel --yes"`
+    - `"deploy:prod": "vercel --prod --yes"`
+    - `"platform:build": "vercel build"`
+  - Then use: `yarn preview:env:pull`, `yarn deploy:preview`, etc.
+- Do not introduce npm-based CI steps (`npm ci`, `npx`, etc.) in this repo.
+
+# PR & release guardrails
+- All PRs must include a working Vercel Preview URL for reviewers.
+- Do not merge if Preview build fails or diverges from local due to engine/lockfile drift.
+- Production deploys happen via `vercel --prod` after merge to `main` and review.
+
+# Quick checklist for new devs
+- `nvm use 20`
+- `cd next && yarn install --frozen-lockfile`
+- `yarn dev`
+- (optional first time) `yarn preview:link` then `yarn preview:env:pull`
+- `yarn deploy:preview` to share a link before `yarn deploy:prod`

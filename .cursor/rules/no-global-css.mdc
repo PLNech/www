@@ -1,8 +1,19 @@
 ---
-description: 
-globs: *.css
-alwaysApply: false
+description: Enforce Next.js global CSS rule — only import global CSS from pages/_app.js
+globs:
+alwaysApply: true
 ---
-# AVoid global css:
-Global CSS cannot be imported from files other than your Custom <App>. Due to the Global nature of stylesheets, and to avoid conflicts, Please move all first-party global CSS imports to pages/_app.js. Or convert the import to Component-Level CSS (CSS Modules).
+# Avoid global CSS outside Custom App
+- Global CSS must only be imported from `next/pages/_app.js`.
+- Do not import global styles from other pages or components.
+- Prefer CSS Modules or component-scoped CSS for local styles.
 
+# Rationale
+- Next.js enforces a single global stylesheet entrypoint to avoid style conflicts and runtime errors.
+- This keeps styles isolated and reduces regressions for new devs.
+
+# Allowed imports in _app.js (example)
+- `import 'bootstrap/dist/css/bootstrap.css'`
+- `import '@/styles/globals.css'`
+- `import '@/styles/main.css'`
+- `import '@/styles/masonry.css'`

@@ -1,0 +1,26 @@
+---
+description: Enforce Next.js app root, directory layout, and command locations
+globs:
+alwaysApply: true
+---
+# App root and command execution
+- The Next.js app root is `next/`. Do not move the app to the repository root or create additional app roots.
+- Run all app commands from `next/` (or use `--cwd next` if invoking from repo root):
+  - `yarn dev`, `yarn build`, `yarn start`
+  - `vercel`, `vercel --prod`, `vercel build`
+
+# Directory layout conventions
+- Pages and routes live in `next/pages/**`.
+- Reusable UI in `next/components/**`.
+- Utility code in `next/lib/**`.
+- Global and module styles in `next/styles/**` (only import global CSS from `pages/_app.js`).
+- Static assets in `next/public/**` referenced with absolute paths like `/images/...`.
+- Markdown/MDX content in `next/content/**` (do not scatter content elsewhere).
+
+# Path alias
+- Keep webpack alias `@` → `next/` in `next/next.config.js`.
+- Prefer imports like `@/components/Button` over deep relative paths.
+
+# Build/deploy stability
+- Do not introduce separate Next.js app roots or change the root in Vercel settings (must be `next/`).
+- Avoid build-time network fetches for core UI assets; ensure they live in `next/public/**`.

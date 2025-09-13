@@ -1,2 +1,18 @@
 node_modules/
 .vercel
+
+# Env files (managed via Vercel, never commit)
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+.env.*.local
+
+# Yarn-only policy: ignore other lockfiles
+package-lock.json
+pnpm-lock.yaml
+npm-shrinkwrap.json
+
+# OS/editor noise
+.DS_Store

@@ -1,0 +1,29 @@
+---
+description: Enforce Vercel preview-first deploy policy with Yarn-only workflow
+globs:
+alwaysApply: true
+---
+# Vercel deploy policy (Preview-first)
+- Always create a Preview deployment before Production.
+- Run all Vercel CLI commands from `next/` (or use `--cwd next` if invoking from repo root).
+- Ensure Vercel Project “Root Directory” is set to `next/` in Vercel settings.
+
+# Commands (Yarn-only)
+- Preview (default): `vercel` (or `yarn vercel` if CLI is a devDependency)
+- Promote to Production (after approval): `vercel --prod` (or `yarn vercel --prod`)
+- Link project: `vercel link --yes`
+- Sync envs locally: `vercel env pull .env.local`
+- Reproduce platform build locally: `vercel build`
+
+# Guardrails
+- Do not run `--prod` from feature branches.
+- Include the Preview URL in PR description for review.
+- Do not merge if Preview build fails or diverges from local due to engine/lockfile drift.
+
+# Node & runtime
+- Use Node 20.x runtime in Vercel.
+- Local devs use `nvm use 20` before running Yarn commands.
+
+# Yarn-only install in CI/Vercel
+- Use `yarn install --frozen-lockfile`
+- Do not invoke npm or pnpm in this repo.

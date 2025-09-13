@@ -1,0 +1,25 @@
+---
+description: Keep Markdown content in next/content and static assets in next/public with predictable paths
+globs:
+alwaysApply: true
+---
+# Content location (Markdown/MDX)
+- Store all site content in `next/content/**` (e.g., posts, poems, talks, hydras, lives).
+- Do not scatter Markdown/MDX outside `next/content/**`.
+- When adding new sections, create a folder under `next/content/SECTION_NAME`.
+
+# Static assets (images, gifs, icons, files)
+- Place all static assets under `next/public/**`.
+- Reference assets with absolute paths (e.g., `/images/...`) rather than relative filesystem paths.
+- Prefer `next/image` where applicable for image optimization; fall back to `<img>` when necessary.
+
+# Hotlinking
+- Avoid hotlinking for persistent assets (images/gifs used in content or UI). Copy them into `next/public/**`.
+
+# Organization conventions
+- Use `next/public/images/SECTION/...` for section-specific assets (e.g., `parvagues`, `hydras`, `lives`, `posts`).
+- Keep large/rarely used files out of git history when possible (use external storage/CDN), but link them in content.
+
+# Build/deploy stability
+- Do not fetch remote static assets at build time for core UI; ensure assets are present in `next/public/**`.
+- Keep filenames stable to avoid cache-busting issues unless intentionally versioning assets.

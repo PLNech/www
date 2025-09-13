@@ -1,7 +1,9 @@
 ---
-description: 
-globs: 
+description: Enforce @/ alias usage for imports in Next.js app
+globs:
 alwaysApply: true
 ---
 # Use @/ syntax for imports in Next.js projects
-- Always use `@/components/xxx` syntax, not the `../../components/xxx` syntax.
+- Always use `@/components/...`, `@/lib/...`, etc. Avoid long `../../` relative paths.
+- Keep the webpack alias mapping `@ → next/` intact in `next/next.config.js`.
+- When moving files, update imports to continue using the `@/` alias.

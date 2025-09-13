@@ -1,0 +1,23 @@
+---
+description: Enforce Yarn (classic) as the only package manager and prevent lockfile drift
+globs:
+alwaysApply: true
+---
+# Yarn-only policy
+- Use Yarn (classic) exclusively for installs and scripts.
+- Keep `yarn.lock` as the single source of truth.
+
+# Disallow other lockfiles
+- Do not add or commit `package-lock.json`, `pnpm-lock.yaml`, or any other lockfile.
+- If such files appear (e.g., in `next/` or repo root), remove them to avoid engine/lockfile drift.
+
+# Deterministic installs
+- Install with: `yarn install --frozen-lockfile`
+- In CI and Vercel, rely on Yarn. Do not invoke npm or pnpm.
+
+# Scripts
+- Run all app scripts from `next/` (or use `--cwd next`), e.g.:
+  - `yarn dev`
+  - `yarn build`
+  - `yarn start`
+  - `yarn deploy:preview` / `yarn deploy:prod` (if defined)
