@@ -31,3 +31,4 @@ yarn-error.log*
 
 # LLM exchanges
 code2prompt.json
+.vercel

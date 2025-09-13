@@ -27,66 +27,61 @@ function useScrolledPast(threshold = 100) {
 export default function ParVaguesHeader({ eventName = null, title = null }) {
   const router = useRouter();
   const isHome = router.pathname === '/parvagues';
-  const showInHeader = useScrolledPast(300);
+  const showInHeader = useScrolledPast(300); // Threshold for showing title on scroll
   const headerTitle = title || eventName || 'ParVagues';
-  
+
   return (
-    <header className="sticky top-0 left-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-[#d900ff]/20">
+    <header className={`sticky top-0 left-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-[#d900ff]/20 ${styles.headerContainer}`}>
       <div className={`${styles.neonGradient} opacity-5 absolute inset-0`}></div>
-      <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-        {/* Logo and Title with Navigation */}
-        <div className="flex items-center justify-between w-full">
-          <Link href="/parvagues" className="flex items-center group">
-            <div className="h-10 w-10 relative flex-shrink-0">
-              <Image 
-                src="/images/parvagues/logo.png" 
-                alt="ParVagues Logo" 
-                width={48}
-                height={48}
-                className="object-contain transition-all duration-300 group-hover:filter group-hover:drop-shadow-[0_0_8px_rgba(217,0,255,0.7)]" 
-              />
-            </div>
-            
-            <div className="overflow-hidden ml-2">
-              <span 
-                className={`text-white font-bold transition-all duration-500 ${
-                  showInHeader || !isHome ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8'
-                }`}
-                style={{ 
-                  textShadow: '0 0 5px rgba(217, 0, 255, 0.7), 0 0 10px rgba(217, 0, 255, 0.5)',
-                  color: 'var(--neon-high)'
-                }}
-              >
-                {headerTitle}
-              </span>
-            </div>
-          </Link>
-          
-          {/* Navigation and CTA */}
-          <div className="flex items-center space-x-6">
-            {/* Navigation Links */}
-            <nav className="flex items-center space-x-6 text-sm tracking-wider">
-              <Link href="/parvagues#music" className="text-gray-300 hover:text-[#ff3d7b] transition-colors">
-                Music
-              </Link>
-              <Link href="/parvagues#performances" className="text-gray-300 hover:text-[#ff3d7b] transition-colors">
-                Performances
-              </Link>
-              <Link href="/parvagues#about" className="text-gray-300 hover:text-[#ff3d7b] transition-colors">
-                About
-              </Link>
-            </nav>
-            
-            {/* CTA button */}
-            <a
-              href="mailto:parvagues@nech.pl?subject=Booking%20Request"
-              className={`${styles.outlineButton} py-2 px-4 text-sm flex items-center whitespace-nowrap`}
-            >
-              <FaEnvelope className="mr-2 flex-shrink-0" />
-              <span>Book</span>
-            </a>
+      <div className="max-w-full mx-auto px-4 sm:px-6 flex items-center justify-between h-16"> {/* Adjusted padding for responsiveness */}
+        {/* Logo and Title */}
+        <Link href="/parvagues" className="flex items-center group flex-shrink-0"> {/* Added flex-shrink-0 */}
+          <div className="h-10 w-10 relative"> {/* Simplified logo div */}
+            <Image
+              src="/images/parvagues/logo.png"
+              alt="ParVagues Logo"
+              width={40}
+              height={40}
+              className="object-contain transition-all duration-300 group-hover:filter group-hover:drop-shadow-[0_0_8px_rgba(217,0,255,0.7)]"
+            />
           </div>
-        </div>
+          <div className="overflow-hidden ml-3">
+            <span
+              className={`text-white font-bold transition-all duration-500 whitespace-nowrap ${ /* Added whitespace-nowrap */
+                showInHeader || !isHome ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full'
+              }`}
+              style={{
+                textShadow: '0 0 5px rgba(217, 0, 255, 0.7), 0 0 10px rgba(217, 0, 255, 0.5)',
+                color: 'var(--neon-high)'
+              }}
+            >
+              {headerTitle}
+            </span>
+          </div>
+        </Link>
+
+        {/* Navigation Links */}
+        {/* Ensure this nav doesn't cause overflow issues on very small screens - links might need to wrap or hide */}
+        <nav className="flex-grow flex justify-center items-center space-x-4 md:space-x-6 text-sm tracking-wider mx-2 sm:mx-4"> {/* Added horizontal margin */}
+          <Link href="/parvagues#music" className={`${styles.navLink} text-gray-300 hover:text-[#ff3d7b] transition-colors px-2 py-1 sm:px-3`}> {/* Added padding for touch targets */}
+            Music
+          </Link>
+          <Link href="/parvagues#performances" className={`${styles.navLink} text-gray-300 hover:text-[#ff3d7b] transition-colors px-2 py-1 sm:px-3`}>
+            Performances
+          </Link>
+          <Link href="/parvagues#about" className={`${styles.navLink} text-gray-300 hover:text-[#ff3d7b] transition-colors px-2 py-1 sm:px-3`}>
+            About
+          </Link>
+        </nav>
+
+        {/* CTA button */}
+        <Link
+          href="/book"
+          className={`${styles.outlineButton} ${styles.bookButton} py-2 px-3 sm:px-4 text-xs sm:text-sm flex items-center whitespace-nowrap flex-shrink-0`} /* Adjusted padding, font size, added flex-shrink-0 */
+        >
+          <FaEnvelope className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" /> {/* Responsive icon size */}
+          <span>Book</span>
+        </Link>
       </div>
     </header>
   );
