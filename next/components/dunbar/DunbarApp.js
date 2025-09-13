@@ -4,6 +4,8 @@ import { useDunbarStore } from '@/components/dunbar/useDunbarStore';
 import dynamic from 'next/dynamic';
 import { makeExportPayload } from '@/lib/dunbar';
 import { generateDemoPayload } from '@/lib/dunbar-demo';
+import { useRouter } from 'next/router';
+import { friendSlug, eventSlug } from '@/lib/dunbar';
 
 // Lazy-load heavy tabs if needed (Network uses d3)
 const NetworkTab = dynamic(() => import('@/components/dunbar/NetworkTab'), { ssr: false });
@@ -43,6 +45,7 @@ function Tabs({ tab, setTab }) {
 }
 
 export default function DunbarApp() {
+  const router = useRouter();
   const { state, friends, selectedFriendId, actions, derived } = useDunbarStore();
   const [tab, setTab] = useState('friends');
   const [authed, setAuthed] = useState(false);
@@ -122,10 +125,62 @@ export default function DunbarApp() {
   const openFriendDetail = (friendId) => {
     actions.selectFriend(friendId);
     setTab('friends');
+    const f = friends.find((x) => x.id === friendId);
+    if (f) {
+      router.push(`/dunbar/friend/${friendSlug(f)}`, undefined, { shallow: true });
+    }
+  };
+
+  const openEventDetail = (evLike) => {
+    // evLike may be from merged index or minimal shape
+    const id = evLike?.id;
+    const e = (derived.eventIndex || []).find((x) => x.id === id) || evLike;
+    if (!e) return;
+    setTab('events');
+    actions.selectEvent(e.id);
+    router.push(`/dunbar/event/${eventSlug(e)}`, undefined, { shallow: true });
   };
 
   if (!authed) {
-    return (
+    // Deep-link handling: friend/event/search routes hydrate initial tab/selection
+  useEffect(() => {
+    if (!router || !router.asPath) return;
+    const as = router.asPath || '';
+    // friend route
+    const friendMatch = as.match(/\/dunbar\/friend\/([^/?#]+)/);
+    if (friendMatch) {
+      const slug = friendMatch[1];
+      // suffix-based lookup (last 6 chars of id)
+      const suff = slug.split('-').pop();
+      const f = friends.find((x) => String(x.id).endsWith(suff)) ||
+                friends.find((x) => friendSlug(x) === slug);
+      if (f) {
+        actions.selectFriend(f.id);
+        setTab('friends');
+      }
+      return;
+    }
+    // event route
+    const eventMatch = as.match(/\/dunbar\/event\/([^/?#]+)/);
+    if (eventMatch) {
+      const slug = eventMatch[1];
+      const suff = slug.split('-').pop();
+      const e = (derived.eventIndex || []).find((x) => String(x.id).endsWith(suff));
+      if (e) {
+        setTab('events');
+        actions.selectEvent(e.id);
+      }
+      return;
+    }
+    // search route
+    const searchMatch = as.match(/\/dunbar\/search/);
+    if (searchMatch) {
+      setTab('search');
+      return;
+    }
+  }, [router?.asPath, friends, derived.eventIndex, actions]);
+
+  return (
       <div className={styles.lockWrap}>
         <h2 className={styles.title}>Dunbar</h2>
         <p>Privacy-first relationship navigator. Local-only storage.</p>
@@ -181,6 +236,7 @@ export default function DunbarApp() {
               friends={friends}
               onToggleRel={(a, b) => actions.toggleRelationship(a, b)}
               onAddEvent={(payload) => actions.addEvent(payload)}
+              onUpdateEvent={(id, patch) => actions.updateEvent(id, patch)}
               onRename={(id, name) => actions.renameFriend(id, name)}
               onSetBirthday={(id, ymd) => actions.setBirthday(id, ymd)}
               onSetNotes={(id, notes) => actions.setFriendNotes(id, notes)}
@@ -195,6 +251,7 @@ export default function DunbarApp() {
         <SearchTab
           friends={friends}
           openFriend={openFriendDetail}
+          openEvent={openEventDetail}
         />
       )}
 
@@ -202,7 +259,10 @@ export default function DunbarApp() {
         <EventsTab
           friends={friends}
           addEvent={(payload) => actions.addEvent(payload)}
+          updateEvent={(id, patch) => actions.updateEvent(id, patch)}
+          selectedEventId={state.selectedEventId}
           eventIndex={derived.eventIndex}
+          openEvent={openEventDetail}
         />
       )}
 
@@ -223,7 +283,7 @@ export default function DunbarApp() {
       )}
 
       {tab === 'stats' && (
-        <StatsTab stats={derived.stats} anniversaries={derived.anniversaries} />
+        <StatsTab stats={derived.stats} anniversaries={derived.anniversaries} openFriend={openFriendDetail} />
       )}
     </div>
   );

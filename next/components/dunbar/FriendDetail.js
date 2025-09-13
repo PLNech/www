@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import styles from '@/styles/dunbar.module.css';
-import { isoDate, sortEventsDesc, extractTags } from '@/lib/dunbar';
+import { isoDate, sortEventsDesc, extractTags, eventSlug } from '@/lib/dunbar';
 
 
 export default function FriendDetail({
@@ -16,6 +16,7 @@ export default function FriendDetail({
   const [date, setDate] = useState(() => new Date().toISOString().slice(0, 10));
   const [notes, setNotes] = useState('');
   const [location, setLocation] = useState('');
+  const [title, setTitle] = useState('');
   const [friendNotes, setFriendNotes] = useState('');
   const [birthday, setBirthday] = useState('');
   const relScrollRef = useRef(null);
@@ -192,15 +193,18 @@ export default function FriendDetail({
     if (!friend) return;
     const dateISO = new Date(date).toISOString();
     const n = notes.trim();
-    if (!dateISO || !n) return;
+    const t = title.trim();
+    if (!dateISO || !t || !n) return;
     onAddEvent?.({
       date: dateISO,
+      title: t,
       notes: n,
       location: location.trim() || undefined,
       participants: [friend.id],
     });
-    // reset notes only; keep date for faster entry
+    // reset notes/title only; keep date for faster entry
     setNotes('');
+    setTitle('');
   };
 
   if (!friend) {
@@ -434,6 +438,15 @@ export default function FriendDetail({
             />
           </div>
           <div className={styles.row} style={{ marginBottom: 8 }}>
+            <input
+              className={styles.input}
+              placeholder="Title (required)"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              style={{ width: '100%' }}
+            />
+          </div>
+          <div className={styles.row} style={{ marginBottom: 8 }}>
             <textarea
               className={styles.textarea}
               placeholder="Notes (required)"
@@ -443,7 +456,7 @@ export default function FriendDetail({
             />
           </div>
           <div className={styles.row} style={{ marginBottom: 12 }}>
-            <button className={styles.btn} onClick={submitEvent} disabled={!notes.trim()}>
+            <button className={styles.btn} onClick={submitEvent} disabled={!title.trim() || !notes.trim()}>
               Add Event
             </button>
           </div>
@@ -454,6 +467,13 @@ export default function FriendDetail({
               <div key={e.id + e.date} className={styles.timelineEvent}>
                 <div className={styles.timelineDate}>
                   {isoDate(e.date)}
+                </div>
+                <div
+                  style={{ fontWeight: 700, cursor: 'pointer' }}
+                  onClick={() => (window.location.href = `/dunbar/event/${eventSlug(e)}`)}
+                  title="Open event details"
+                >
+                  {e.title || '(untitled)'}
                 </div>
                 <div style={{ whiteSpace: 'pre-wrap' }}>
                   {renderNotesWithTags(e.notes || '')}

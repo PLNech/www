@@ -67,24 +67,33 @@ export function buildSearchData(friends = []) {
 
     // Aggregate tags from events + friend notes + rich profile
     const aggTags = new Set();
-    const addTagsFrom = (txt) => {
-      for (const t of extractTagsFromText(txt || '')) aggTags.add(t);
+    const addTagsFromAny = (val) => {
+      if (Array.isArray(val)) {
+        for (const item of val) {
+          for (const t of extractTagsFromText(String(item || ''))) aggTags.add(t);
+        }
+      } else {
+        for (const t of extractTagsFromText(String(val || ''))) aggTags.add(t);
+      }
     };
-    addTagsFrom(f.notes);
-    addTagsFrom(f.likes);
-    addTagsFrom(f.dislikes);
-    addTagsFrom(f.foodLikes);
-    addTagsFrom(f.foodDislikes);
-    addTagsFrom(f.futureIdeas);
-    addTagsFrom(f.quotes);
+    addTagsFromAny(f.notes);
+    addTagsFromAny(f.likes);
+    addTagsFromAny(f.dislikes);
+    addTagsFromAny(f.foodLikes);
+    addTagsFromAny(f.foodDislikes);
+    addTagsFromAny(f.futureIdeas);
+    addTagsFromAny(f.quotes);
 
-    for (const ev of f.events || []) addTagsFrom(ev.notes);
+    for (const ev of f.events || []) {
+      addTagsFromAny(ev.notes);
+      addTagsFromAny(ev.title);
+    }
 
     // Compose an extended notes blob to improve recall
     const profileBlob = [
       f.notes,
-      f.likes,
-      f.dislikes,
+      Array.isArray(f.likes) ? f.likes.join(', ') : f.likes,
+      Array.isArray(f.dislikes) ? f.dislikes.join(', ') : f.dislikes,
       f.foodLikes,
       f.foodDislikes,
       f.futureIdeas,
@@ -94,7 +103,7 @@ export function buildSearchData(friends = []) {
       f.carModel,
     ]
       .filter(Boolean)
-      .join(' \n');
+      .join(' \\n');
 
     const friendDoc = {
       id: `friend:${f.id}`,
@@ -138,6 +147,7 @@ export function buildSearchData(friends = []) {
       id: `event:${e.id}`,
       kind: 'event',
       refId: e.id,
+      title: e.title || '',
       notes: e.notes || '',
       location: e.location || '',
       tags,
@@ -188,9 +198,9 @@ export function buildSearchIndexes(friends = []) {
   });
   const eventIndex = makeMiniSearch(
     eventDocs,
-    ['notes', 'location', 'tags', 'participantNames'],
-    ['id', 'kind', 'refId', 'tags', 'participantNames', 'date'],
-    { tags: 2, participantNames: 1.5 }
+    ['title', 'notes', 'location', 'tags', 'participantNames'],
+    ['id', 'kind', 'refId', 'title', 'tags', 'participantNames', 'date'],
+    { title: 3, tags: 2, participantNames: 1.5 }
   );
 
   return { friendIndex, eventIndex, tagSet, personSet, friendDocs, eventDocs };

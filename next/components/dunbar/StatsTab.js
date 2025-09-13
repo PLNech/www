@@ -2,7 +2,7 @@ import React from 'react';
 import styles from '@/styles/dunbar.module.css';
 import { isoDate } from '@/lib/dunbar';
 
-export default function StatsTab({ stats, anniversaries = [] }) {
+export default function StatsTab({ stats, anniversaries = [], openFriend }) {
   if (!stats) return null;
   const items = [
     { label: 'Connections', value: stats.connections },
@@ -44,7 +44,13 @@ export default function StatsTab({ stats, anniversaries = [] }) {
                 <div className={styles.timelineDate}>{day}</div>
                 {items.map((it, idx) => (
                   <div key={day + '-' + idx} className={styles.timelineEvent}>
-                    <div style={{ fontWeight: 700 }}>{it.friendName}</div>
+                    <div
+                      style={{ fontWeight: 700, cursor: 'pointer' }}
+                      title="Ouvrir la fiche ami·e"
+                      onClick={() => openFriend?.(it.friendId)}
+                    >
+                      {it.friendName}
+                    </div>
                     <div style={{ color: '#555' }}>{it.label}</div>
                     {/* Anchor event preview if provided */}
                     {it.anchorTitle || (it.anchorTags && it.anchorTags.length > 0) ? (

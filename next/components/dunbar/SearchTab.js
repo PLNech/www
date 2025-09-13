@@ -8,7 +8,7 @@ import {
   suggestPersons,
 } from '@/lib/dunbar-search';
 
-export default function SearchTab({ friends, openFriend }) {
+export default function SearchTab({ friends, openFriend, openEvent }) {
   const [q, setQ] = useState('');
   const [includeTags, setIncludeTags] = useState(new Set());
   const [excludeTags, setExcludeTags] = useState(new Set());
@@ -183,6 +183,13 @@ export default function SearchTab({ friends, openFriend }) {
               {(results.events || []).map((e) => (
                 <div key={e.id} className={styles.timelineEvent}>
                   <div className={styles.timelineDate}>{e.date}</div>
+                  <div
+                    style={{ fontWeight: 700, cursor: 'pointer' }}
+                    onClick={() => openEvent?.(e)}
+                    title="Ouvrir l’événement"
+                  >
+                    {e.title || '(untitled)'}
+                  </div>
                   <div style={{ whiteSpace: 'pre-wrap' }}>
                     {renderNotesWithTags(e.notes || '')}
                   </div>

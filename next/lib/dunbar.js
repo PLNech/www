@@ -73,6 +73,41 @@ export function extractTags(text = '') {
   return Array.from(tags);
 }
 
+// Slugify helper for URLs
+export function slugify(text = '') {
+  const s = String(text || '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+  return s || 'x';
+}
+
+// Event slug helper: stable and mostly human — title slug + short id suffix
+export function eventSlug(evOrTitle, idMaybe) {
+  if (typeof evOrTitle === 'object' && evOrTitle) {
+    const title = evOrTitle.title || '';
+    const id = evOrTitle.id || '';
+    return `${slugify(title)}-${String(id).slice(-6)}`;
+  }
+  const title = String(evOrTitle || '');
+  const id = String(idMaybe || '');
+  return `${slugify(title)}-${id.slice(-6)}`;
+}
+
+// Friend slug helper: name slug + short id suffix
+export function friendSlug(friendOrName, idMaybe) {
+  if (typeof friendOrName === 'object' && friendOrName) {
+    const name = friendOrName.name || '';
+    const id = friendOrName.id || '';
+    return `${slugify(name)}-${String(id).slice(-6)}`;
+  }
+  const name = String(friendOrName || '');
+  const id = String(idMaybe || '');
+  return `${slugify(name)}-${id.slice(-6)}`;
+}
+
 // Quick-date helpers (ISO YYYY-MM-DD) — Paris local calendar
 export function todayISO() {
   return isoDate(new Date(), TIMEZONE);
@@ -209,16 +244,17 @@ export function makeExportPayload(state) {
     birthday: f.birthday || null,
     notes: f.notes || '',
     // rich profile
-    likes: f.likes || '',
-    dislikes: f.dislikes || '',
+    likes: Array.isArray(f.likes) ? f.likes : (f.likes ? String(f.likes).split(/[,\\n]/).map(s => s.trim()).filter(Boolean) : []),
+    dislikes: Array.isArray(f.dislikes) ? f.dislikes : (f.dislikes ? String(f.dislikes).split(/[,\\n]/).map(s => s.trim()).filter(Boolean) : []),
     foodLikes: f.foodLikes || '',
     foodDislikes: f.foodDislikes || '',
     wifiPassword: f.wifiPassword || '',
     carModel: f.carModel || '',
     workplace: f.workplace || '',
     schedule: f.schedule || '',
-    futureIdeas: f.futureIdeas || '',
-    quotes: f.quotes || '',
+    futureIdeas: Array.isArray(f.futureIdeas) ? f.futureIdeas : (f.futureIdeas ? String(f.futureIdeas).split(/[,\n]/).map(s => s.trim()).filter(Boolean) : []),
+    quotes: Array.isArray(f.quotes) ? f.quotes : (f.quotes ? String(f.quotes).split(/[,\n]/).map(s => s.trim()).filter(Boolean) : []),
+    projects: Array.isArray(f.projects) ? f.projects : (f.projects ? String(f.projects).split(/[,\n]/).map(s => s.trim()).filter(Boolean) : []),
     importantDates: Array.isArray(f.importantDates) ? f.importantDates.map(x => ({
       date: x?.date || null,
       label: x?.label || '',
@@ -239,6 +275,7 @@ export function makeExportPayload(state) {
     events: Array.isArray(f.events) ? f.events.map(ev => ({
       id: ev.id,
       date: ev.date,
+      title: ev.title || '',
       notes: ev.notes,
       location: ev.location,
       participants: Array.isArray(ev.participants) ? [...ev.participants] : [],
@@ -263,16 +300,17 @@ export function normalizeImportedPayload(payload) {
     birthday: f.birthday || null,
     notes: f.notes || '',
     // rich profile (defaults)
-    likes: f.likes || '',
-    dislikes: f.dislikes || '',
+    likes: Array.isArray(f.likes) ? f.likes : (f.likes ? String(f.likes).split(/[,\\n]/).map(s => s.trim()).filter(Boolean) : []),
+    dislikes: Array.isArray(f.dislikes) ? f.dislikes : (f.dislikes ? String(f.dislikes).split(/[,\\n]/).map(s => s.trim()).filter(Boolean) : []),
     foodLikes: f.foodLikes || '',
     foodDislikes: f.foodDislikes || '',
     wifiPassword: f.wifiPassword || '',
     carModel: f.carModel || '',
     workplace: f.workplace || '',
     schedule: f.schedule || '',
-    futureIdeas: f.futureIdeas || '',
-    quotes: f.quotes || '',
+    futureIdeas: Array.isArray(f.futureIdeas) ? f.futureIdeas : (f.futureIdeas ? String(f.futureIdeas).split(/[,\n]/).map(s => s.trim()).filter(Boolean) : []),
+    quotes: Array.isArray(f.quotes) ? f.quotes : (f.quotes ? String(f.quotes).split(/[,\n]/).map(s => s.trim()).filter(Boolean) : []),
+    projects: Array.isArray(f.projects) ? f.projects : (f.projects ? String(f.projects).split(/[,\n]/).map(s => s.trim()).filter(Boolean) : []),
     importantDates: Array.isArray(f.importantDates) ? f.importantDates.map(x => ({
       date: x?.date || null,
       label: x?.label || '',
@@ -293,6 +331,7 @@ export function normalizeImportedPayload(payload) {
     events: Array.isArray(f.events) ? f.events.map(ev => ({
       id: ev.id,
       date: ev.date,
+      title: ev.title || '',
       notes: ev.notes || '',
       location: ev.location,
       participants: Array.isArray(ev.participants) ? ev.participants : [],

@@ -43,6 +43,7 @@ function computeLastInteraction(friend) {
 const initialState = {
   friends: [],
   selectedFriendId: null,
+  selectedEventId: null,
 };
 
 function reducer(state, action) {
@@ -59,16 +60,17 @@ function reducer(state, action) {
         birthday: null,
         notes: '',
         // rich profile fields
-        likes: '',
-        dislikes: '',
+        likes: [],
+        dislikes: [],
         foodLikes: '',
         foodDislikes: '',
         wifiPassword: '',
         carModel: '',
         workplace: '',
         schedule: '',
-        futureIdeas: '',
-        quotes: '',
+        futureIdeas: [],
+        quotes: [],
+        projects: [],
         importantDates: [], // [{ date: 'YYYY-MM-DD', label: string }]
         gifts: [],          // [{ date, occasion, description, image }]
         postcards: [],      // [{ date, location, description, image }]
@@ -122,6 +124,10 @@ function reducer(state, action) {
       const id = action.payload?.id ?? null;
       return { ...state, selectedFriendId: id };
     }
+    case 'SELECT_EVENT': {
+      const id = action.payload?.id ?? null;
+      return { ...state, selectedEventId: id };
+    }
     case 'TOGGLE_REL': {
       const a = action.payload?.aId;
       const b = action.payload?.bId;
@@ -142,10 +148,10 @@ function reducer(state, action) {
       return { ...state, friends };
     }
     case 'ADD_EVENT': {
-      const { date, notes, participants = [], location } = action.payload || {};
+      const { date, title, notes, participants = [], location } = action.payload || {};
       // Normalize to YYYY-MM-DD (Paris local semantics handled at render/grouping time)
       const dateStr = typeof date === 'string' ? date.slice(0, 10) : isoDate(date);
-      if (!dateStr || !notes || !participants.length) return state;
+      if (!dateStr || !String(title || '').trim() || !String(notes || '').trim() || !participants.length) return state;
 
       const eventId = uuid();
       // Create one logical event id applied to each participant for deduplication across views
@@ -154,6 +160,7 @@ function reducer(state, action) {
           const ev = {
             id: eventId,
             date: dateStr,
+            title: String(title),
             notes: String(notes),
             location: location ? String(location) : undefined,
             participants: [...participants],
@@ -164,6 +171,65 @@ function reducer(state, action) {
         }
         return f;
       });
+      return { ...state, friends, selectedEventId: eventId };
+    }
+    case 'UPDATE_EVENT': {
+      const { id, patch } = action.payload || {};
+      if (!id || !patch) return state;
+
+      // Find a canonical copy of the event to merge with
+      let canonical = null;
+      for (const f of state.friends) {
+        const found = (f.events || []).find((e) => e.id === id);
+        if (found) {
+          canonical = found;
+          break;
+        }
+      }
+      if (!canonical) return state;
+
+      const nextParticipants = Array.isArray(patch.participants)
+        ? [...patch.participants]
+        : [...(canonical.participants || [])];
+
+      // Normalized updated event object
+      const updated = {
+        ...canonical,
+        ...patch,
+        participants: nextParticipants,
+      };
+
+      const participantSet = new Set(nextParticipants);
+
+      const friends = state.friends.map((f) => {
+        const hasBefore = (f.events || []).some((e) => e.id === id);
+        const shouldHave = participantSet.has(f.id);
+
+        // Remove if no longer participant
+        if (hasBefore && !shouldHave) {
+          const events = (f.events || []).filter((e) => e.id !== id);
+          const lastInteraction = computeLastInteraction({ ...f, events });
+          return { ...f, events, lastInteraction };
+        }
+
+        // Add if newly participant
+        if (!hasBefore && shouldHave) {
+          const events = Array.isArray(f.events) ? [...f.events, updated] : [updated];
+          const lastInteraction = computeLastInteraction({ ...f, events });
+          return { ...f, events, lastInteraction };
+        }
+
+        // Update if present and still participant
+        if (hasBefore && shouldHave) {
+          const events = (f.events || []).map((e) => (e.id === id ? updated : e));
+          const lastInteraction = computeLastInteraction({ ...f, events });
+          return { ...f, events, lastInteraction };
+        }
+
+        // Neither before nor after → unchanged
+        return f;
+      });
+
       return { ...state, friends };
     }
     case 'UPDATE_FRIEND': {
@@ -224,6 +290,8 @@ export function useDunbarStore() {
   const selectFriend = useCallback((id) => dispatch({ type: 'SELECT_FRIEND', payload: { id } }), []);
   const toggleRelationship = useCallback((aId, bId) => dispatch({ type: 'TOGGLE_REL', payload: { aId, bId } }), []);
   const addEvent = useCallback((payload) => dispatch({ type: 'ADD_EVENT', payload }), []);
+  const selectEvent = useCallback((id) => dispatch({ type: 'SELECT_EVENT', payload: { id } }), []);
+  const updateEvent = useCallback((id, patch) => dispatch({ type: 'UPDATE_EVENT', payload: { id, patch } }), []);
   const resetData = useCallback(() => {
     if (typeof window !== 'undefined') {
       const ok = window.confirm('This will clear all Dunbar data. Continue?');
@@ -377,6 +445,7 @@ export function useDunbarStore() {
     state,
     friends: state.friends,
     selectedFriendId: state.selectedFriendId,
+    selectedEventId: state.selectedEventId,
     actions: {
       addFriend,
       removeFriend,
@@ -387,6 +456,8 @@ export function useDunbarStore() {
       selectFriend,
       toggleRelationship,
       addEvent,
+      selectEvent,
+      updateEvent,
       resetData,
       loadFromPayload,
     },

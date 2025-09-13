@@ -10,11 +10,12 @@ import {
 } from '@/lib/dunbar';
 import { extractTags } from '@/lib/dunbar';
 
-export default function EventsTab({ friends, addEvent, eventIndex }) {
+export default function EventsTab({ friends, addEvent, updateEvent, selectedEventId, eventIndex, openEvent }) {
   // Creation form state
   const [date, setDate] = useState(todayISO());
   const [notes, setNotes] = useState('');
   const [location, setLocation] = useState('');
+  const [title, setTitle] = useState('');
   const [filter, setFilter] = useState('');
   const [selected, setSelected] = useState(() => new Set());
 
@@ -38,13 +39,14 @@ export default function EventsTab({ friends, addEvent, eventIndex }) {
   };
 
   const selectedCount = selected.size;
-  const canCreate = selectedCount > 0 && notes.trim().length > 0;
+  const canCreate = selectedCount > 0 && notes.trim().length > 0 && title.trim().length > 0;
 
   const createEvent = () => {
     if (!canCreate) return;
     const dateISO = new Date(date).toISOString();
     addEvent({
       date: dateISO,
+      title: title.trim(),
       notes: notes.trim(),
       location: location.trim() || undefined,
       participants: Array.from(selected),
@@ -55,6 +57,56 @@ export default function EventsTab({ friends, addEvent, eventIndex }) {
 
   // Timeline groups from merged eventIndex
   const groups = useMemo(() => groupEventsByDay(eventIndex), [eventIndex]);
+
+  // Selected event editor state
+  const selectedEvent = useMemo(
+    () => (selectedEventId ? (eventIndex || []).find((e) => e.id === selectedEventId) : null),
+    [eventIndex, selectedEventId]
+  );
+  const [edit, setEdit] = useState(() => ({
+    id: null,
+    date: todayISO(),
+    title: '',
+    notes: '',
+    location: '',
+    participants: new Set(),
+  }));
+  // Hydrate editor when selected changes
+  useMemo(() => {
+    if (!selectedEvent) return edit;
+    const e = selectedEvent;
+    setEdit({
+      id: e.id,
+      date: e.date,
+      title: e.title || '',
+      notes: e.notes || '',
+      location: e.location || '',
+      participants: new Set(e.participants || []),
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedEventId]);
+
+  const toggleEditParticipant = (id) => {
+    setEdit((prev) => {
+      const p = new Set(prev.participants);
+      if (p.has(id)) p.delete(id);
+      else p.add(id);
+      return { ...prev, participants: p };
+    });
+  };
+
+  const canSaveEdit = !!edit.id && String(edit.title || '').trim() && String(edit.notes || '').trim();
+
+  const saveEdit = () => {
+    if (!canSaveEdit) return;
+    updateEvent?.(edit.id, {
+      date: edit.date,
+      title: edit.title.trim(),
+      notes: edit.notes.trim(),
+      location: edit.location.trim() || undefined,
+      participants: Array.from(edit.participants),
+    });
+  };
 
   // Render notes with inline #tags highlighted
   const renderNotesWithTags = (text = '') => {
@@ -110,6 +162,15 @@ export default function EventsTab({ friends, addEvent, eventIndex }) {
           />
         </div>
         <div className={styles.row} style={{ marginBottom: 8 }}>
+          <input
+            className={styles.input}
+            placeholder="Title (required)"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            style={{ width: '100%' }}
+          />
+        </div>
+        <div className={styles.row} style={{ marginBottom: 8 }}>
           <textarea
             className={styles.textarea}
             placeholder="Notes (required)"
@@ -156,9 +217,83 @@ export default function EventsTab({ friends, addEvent, eventIndex }) {
         </div>
       </div>
 
-      {/* Timeline */}
+      {/* Timeline + Editor */}
       <div className={styles.card}>
         <div className={styles.cardHeader}>Timeline</div>
+
+        {/* Event Editor */}
+        {selectedEvent ? (
+          <div className={styles.card} style={{ marginBottom: 12 }}>
+            <div className={styles.cardHeader}><span>Edit Event</span></div>
+            <div className={styles.row} style={{ marginBottom: 8, flexWrap: 'wrap' }}>
+              <input
+                lang="fr-FR"
+                type="date"
+                className={styles.input}
+                value={edit.date}
+                onChange={(e) => setEdit({ ...edit, date: e.target.value })}
+              />
+              <input
+                className={styles.input}
+                placeholder="Location (optional)"
+                value={edit.location}
+                onChange={(e) => setEdit({ ...edit, location: e.target.value })}
+                style={{ minWidth: 160 }}
+              />
+            </div>
+            <div className={styles.row} style={{ marginBottom: 8 }}>
+              <input
+                className={styles.input}
+                placeholder="Title (required)"
+                value={edit.title}
+                onChange={(e) => setEdit({ ...edit, title: e.target.value })}
+                style={{ width: '100%' }}
+              />
+            </div>
+            <div className={styles.row} style={{ marginBottom: 8 }}>
+              <textarea
+                className={styles.textarea}
+                placeholder="Notes (required)"
+                value={edit.notes}
+                onChange={(e) => setEdit({ ...edit, notes: e.target.value })}
+                style={{ width: '100%' }}
+              />
+            </div>
+
+            <div className={styles.card} style={{ marginTop: 8 }}>
+              <div className={styles.cardHeader}>
+                <span>Participants ({edit.participants.size})</span>
+                <input
+                  className={styles.input}
+                  placeholder="Filter…"
+                  value={filter}
+                  onChange={(e) => setFilter(e.target.value)}
+                />
+              </div>
+              <div className={styles.scroll}>
+                {filteredFriends.map((f) => {
+                  const checked = edit.participants.has(f.id);
+                  return (
+                    <label key={f.id} className={styles.switchRow} style={{ cursor: 'pointer' }}>
+                      <input
+                        type="checkbox"
+                        checked={checked}
+                        onChange={() => toggleEditParticipant(f.id)}
+                      />
+                      <span style={{ fontWeight: 600, marginLeft: 8 }}>{f.name}</span>
+                    </label>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div className={styles.row} style={{ marginTop: 12 }}>
+              <button className={styles.btn} onClick={saveEdit} disabled={!canSaveEdit}>
+                Save Changes
+              </button>
+            </div>
+          </div>
+        ) : null}
         <div className={styles.timeline}>
           {groups.map((g) => (
             <div key={g.dateKey} className={styles.timelineGroup}>
@@ -169,7 +304,14 @@ export default function EventsTab({ friends, addEvent, eventIndex }) {
                   .filter(Boolean);
                 return (
                   <div key={e.id + e.date} className={styles.timelineEvent}>
-                    <div><strong>{names.join(', ') || 'Unknown'}</strong></div>
+                    <div
+                      style={{ fontWeight: 700, cursor: 'pointer' }}
+                      onClick={() => openEvent?.(e)}
+                      title="Open event details"
+                    >
+                      {e.title || '(untitled)'}
+                    </div>
+                    <div className={styles.itemMeta}>{names.join(', ') || 'Unknown'}</div>
                     <div style={{ whiteSpace: 'pre-wrap' }}>
                       {renderNotesWithTags(e.notes || '')}
                     </div>

@@ -12,6 +12,18 @@ export const twitterHandle = "@PaulLouisNech";
 export const description = "PLN's Selected Works";
 
 export default function Layout({ children, home }) {
+  // Simple feedback launcher: prompts for text then opens default mail client
+  const handleFeedbackMail = () => {
+    try {
+      const txt = typeof window !== 'undefined' ? window.prompt('Feedback for Dunbar (will open your email client):', '') : '';
+      const subject = 'Dunbar feedback';
+      const url = typeof window !== 'undefined' ? window.location.href : '';
+      const body = `${txt ? txt + '\\n\\n' : ''}From: ${url}`;
+      const mailto = `mailto:dunbar@nech.pl?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      if (typeof window !== 'undefined') window.location.href = mailto;
+    } catch {}
+  };
+
   return (
     <div className={styles.container}>
       <Head>
@@ -86,6 +98,16 @@ export default function Layout({ children, home }) {
         >
           ▲
         </a>
+        {' '}|{' '}
+        <button
+          type="button"
+          onClick={handleFeedbackMail}
+          className={utilStyles.backButton}
+          style={{ cursor: 'pointer', border: 'none', background: 'transparent', padding: 0 }}
+          title="Send feedback about Dunbar"
+        >
+          Feedback (dunbar@nech.pl)
+        </button>
       </footer>
     </div>
   );

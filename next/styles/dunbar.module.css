@@ -250,6 +250,17 @@
   color: #2c5530;
   font-size: 0.8rem;
   line-height: 1.4;
+  gap: 6px;
+}
+.tagClose {
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: #2c5530;
+  font-weight: 800;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
 }
 
 .badge {
@@ -399,6 +410,11 @@
   justify-content: center;
   font-weight: 700;
   color: #333;
+  transition: transform 80ms ease, background 120ms ease;
+}
+.ctrlBtn:active {
+  transform: scale(0.96);
+  background: #f6f6f6;
 }
 
 .ctrlWide {
