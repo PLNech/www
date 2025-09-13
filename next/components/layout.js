@@ -7,7 +7,7 @@ import Router from 'next/router'
 
 const name = "PLN";
 export const siteTitle = "PLN's Works";
-export const siteURL = "https://me.plnech.fr";
+export const siteURL = "https://me.nech.pl";
 export const twitterHandle = "@PaulLouisNech";
 export const description = "PLN's Selected Works";
 
@@ -78,7 +78,7 @@ export default function Layout({ children, home }) {
         </div>
       )}
       <footer>
-        PLN 2024 | ☇
+        PLN 2025 | ☇
         <a
           href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
           target="_blank"
