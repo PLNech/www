@@ -9,6 +9,7 @@ import {
   isoDate,
 } from '@/lib/dunbar';
 import { extractTags } from '@/lib/dunbar';
+import { detectLang, topKeywordsForDocs, extractTopics } from '@/lib/dunbar-nlp';
 
 export default function EventsTab({ friends, addEvent, updateEvent, selectedEventId, eventIndex, openEvent }) {
   // Creation form state
@@ -57,6 +58,36 @@ export default function EventsTab({ friends, addEvent, updateEvent, selectedEven
 
   // Timeline groups from merged eventIndex
   const groups = useMemo(() => groupEventsByDay(eventIndex), [eventIndex]);
+
+  // NLP: keywords per event (TF-IDF over corpus) and language guess
+  const keywordData = useMemo(() => {
+    const docs = (eventIndex || []).map((e) => ({
+      id: e.id,
+      text: `${e.title || ''} ${e.notes || ''}`,
+    }));
+    const corpusText = docs.map((d) => d.text).join(' ');
+    const lang = detectLang(corpusText) || null;
+    const top = topKeywordsForDocs(docs, { lang, topK: 6 });
+    const byId = new Map(top.map((d) => [d.id, d.keywords]));
+    return { byId, lang };
+  }, [eventIndex]);
+
+  // Topics (beta) — computed on demand
+  const [topics, setTopics] = useState([]);
+  const [topicsLoading, setTopicsLoading] = useState(false);
+  const runTopics = async () => {
+    try {
+      setTopicsLoading(true);
+      const docs = (eventIndex || []).map((e) => ({
+        id: e.id,
+        text: `${e.title || ''} ${e.notes || ''}`,
+      }));
+      const res = await extractTopics(docs, { topics: 5, termsPerTopic: 6, lang: keywordData.lang || null });
+      setTopics(res);
+    } finally {
+      setTopicsLoading(false);
+    }
+  };
 
   // Selected event editor state
   const selectedEvent = useMemo(
@@ -219,7 +250,26 @@ export default function EventsTab({ friends, addEvent, updateEvent, selectedEven
 
       {/* Timeline + Editor */}
       <div className={styles.card}>
-        <div className={styles.cardHeader}>Timeline</div>
+        <div className={styles.cardHeader}>
+          <span>Timeline</span>
+          <button
+            className={styles.btnSecondary}
+            onClick={runTopics}
+            disabled={topicsLoading || !(eventIndex || []).length}
+            title="Compute topics from titles+notes (local)"
+          >
+            {topicsLoading ? 'Topics…' : 'Topics (beta)'}
+          </button>
+        </div>
+        {topics && topics.length > 0 ? (
+          <div className={styles.tagRow} style={{ margin: '8px 0' }}>
+            {topics.map((t, i) => (
+              <span key={i} className={styles.tagChip} title={t.terms.map(([term]) => term).join(', ')}>
+                Topic {i + 1}: {t.terms.slice(0, 3).map(([term]) => term).join(' / ')}
+              </span>
+            ))}
+          </div>
+        ) : null}
 
         {/* Event Editor */}
         {selectedEvent ? (
@@ -325,6 +375,16 @@ export default function EventsTab({ friends, addEvent, updateEvent, selectedEven
                         <div className={styles.tagRow}>
                           {tags.slice(0, 10).map((t) => (
                             <span key={t} className={styles.tagChip}>#{t}</span>
+                          ))}
+                        </div>
+                      ) : null;
+                    })()}
+                    {(() => {
+                      const kws = keywordData.byId.get(e.id) || [];
+                      return kws.length ? (
+                        <div className={styles.tagRow} style={{ marginTop: 4 }}>
+                          {kws.slice(0, 6).map(([term]) => (
+                            <span key={term} className={styles.tagChip}>{term}</span>
                           ))}
                         </div>
                       ) : null;

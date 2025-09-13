@@ -4,6 +4,7 @@ import styles from "./layout.module.css";
 import utilStyles from "../styles/utils.module.css";
 import Link from "next/link";
 import Router from 'next/router'
+import { useRouter } from 'next/router'
 
 const name = "PLN";
 export const siteTitle = "PLN's Works";
@@ -12,6 +13,9 @@ export const twitterHandle = "@PaulLouisNech";
 export const description = "PLN's Selected Works";
 
 export default function Layout({ children, home }) {
+  const router = useRouter();
+  const path = router?.asPath || router?.pathname || '';
+  const isDunbar = path.startsWith('/dunbar');
   // Simple feedback launcher: prompts for text then opens default mail client
   const handleFeedbackMail = () => {
     try {
@@ -98,16 +102,20 @@ export default function Layout({ children, home }) {
         >
           ▲
         </a>
-        {' '}|{' '}
-        <button
-          type="button"
-          onClick={handleFeedbackMail}
-          className={utilStyles.backButton}
-          style={{ cursor: 'pointer', border: 'none', background: 'transparent', padding: 0 }}
-          title="Send feedback about Dunbar"
-        >
-          Feedback (dunbar@nech.pl)
-        </button>
+        {isDunbar && (
+          <>
+            {' '}|{' '}
+            <button
+              type="button"
+              onClick={handleFeedbackMail}
+              className={utilStyles.backButton}
+              style={{ cursor: 'pointer', border: 'none', background: 'transparent', padding: 0 }}
+              title="Send feedback about Dunbar"
+            >
+              Feedback (dunbar@nech.pl)
+            </button>
+          </>
+        )}
       </footer>
     </div>
   );

@@ -7,6 +7,7 @@ import {
   suggestTags,
   suggestPersons,
 } from '@/lib/dunbar-search';
+import { tokenize } from '@/lib/dunbar-nlp';
 
 export default function SearchTab({ friends, openFriend, openEvent }) {
   const [q, setQ] = useState('');
@@ -74,6 +75,35 @@ export default function SearchTab({ friends, openFriend, openEvent }) {
       parts.push(<span key={`t-end`}>{text.slice(lastIndex)}</span>);
     }
     return <>{parts}</>;
+  };
+
+  // Query tokens for highlight (non-hashtag, length>=3)
+  const queryTokens = useMemo(
+    () =>
+      tokenize(q || '', { keepHashtags: true, removeDiacritics: true }).filter(
+        (t) => !t.startsWith('#') && t.length >= 3
+      ),
+    [q]
+  );
+
+  const escapeRegExp = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+  const renderHighlight = (text = '', tokens = []) => {
+    if (!tokens || tokens.length === 0) return text;
+    const pattern = new RegExp(`(${tokens.map(escapeRegExp).join('|')})`, 'gi');
+    const parts = String(text).split(pattern);
+    const tokenSet = new Set(tokens.map((t) => t.toLowerCase()));
+    return (
+      <>
+        {parts.map((part, i) =>
+          tokenSet.has(String(part).toLowerCase()) ? (
+            <mark key={i} style={{ backgroundColor: '#fff2a8', padding: '0 2px' }}>{part}</mark>
+          ) : (
+            <span key={i}>{part}</span>
+          )
+        )}
+      </>
+    );
   };
 
   const tagSuggestions = useMemo(() => (indexes ? suggestTags(indexes, q) : []), [indexes, q]);
@@ -162,7 +192,7 @@ export default function SearchTab({ friends, openFriend, openEvent }) {
             <div className={styles.listScroll} style={{ maxHeight: '50vh' }}>
               {(results.friends || []).map((f) => (
                 <div key={f.id} className={styles.listItem} onClick={() => openFriend?.(f.refId)}>
-                  <div className={styles.itemTitle}>{f.name}</div>
+                  <div className={styles.itemTitle}>{renderHighlight(f.name, queryTokens)}</div>
                   {(f.tags && f.tags.length) ? (
                     <div className={styles.tagRow}>
                       {f.tags.slice(0, 8).map((t) => (
@@ -188,7 +218,7 @@ export default function SearchTab({ friends, openFriend, openEvent }) {
                     onClick={() => openEvent?.(e)}
                     title="Ouvrir l’événement"
                   >
-                    {e.title || '(untitled)'}
+                    {renderHighlight(e.title || '(untitled)', queryTokens)}
                   </div>
                   <div style={{ whiteSpace: 'pre-wrap' }}>
                     {renderNotesWithTags(e.notes || '')}

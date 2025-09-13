@@ -141,8 +141,7 @@ export default function DunbarApp() {
     router.push(`/dunbar/event/${eventSlug(e)}`, undefined, { shallow: true });
   };
 
-  if (!authed) {
-    // Deep-link handling: friend/event/search routes hydrate initial tab/selection
+  // Deep-link handling: friend/event/search routes hydrate initial tab/selection
   useEffect(() => {
     if (!router || !router.asPath) return;
     const as = router.asPath || '';
@@ -179,6 +178,8 @@ export default function DunbarApp() {
       return;
     }
   }, [router?.asPath, friends, derived.eventIndex, actions]);
+
+  if (!authed) {
 
   return (
       <div className={styles.lockWrap}>
@@ -283,7 +284,12 @@ export default function DunbarApp() {
       )}
 
       {tab === 'stats' && (
-        <StatsTab stats={derived.stats} anniversaries={derived.anniversaries} openFriend={openFriendDetail} />
+        <StatsTab
+          stats={derived.stats}
+          anniversaries={derived.anniversaries}
+          eventIndex={derived.eventIndex}
+          openFriend={openFriendDetail}
+        />
       )}
     </div>
   );

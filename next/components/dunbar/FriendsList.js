@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import styles from '@/styles/dunbar.module.css';
+import { extractLocations } from '@/lib/dunbar-nlp';
 
 export default function FriendsList({
   friends,
@@ -34,6 +35,22 @@ export default function FriendsList({
     if (!q) return friends;
     return friends.filter((f) => f.name.toLowerCase().includes(q));
   }, [friends, filter]);
+
+  // Offline location mentions per friend (from notes + events)
+  const locByFriend = useMemo(() => {
+    const m = new Map();
+    for (const f of friends) {
+      let text = '';
+      text += ' ' + (f.notes || '');
+      for (const ev of f.events || []) {
+        text += ' ' + (ev.title || '') + ' ' + (ev.notes || '') + ' ' + (ev.location || '');
+      }
+      const locs = extractLocations(text).map((l) => l.name);
+      const uniq = Array.from(new Set(locs));
+      m.set(f.id, uniq);
+    }
+    return m;
+  }, [friends]);
 
   const handleAdd = () => {
     const n = name.trim();
@@ -143,6 +160,10 @@ export default function FriendsList({
                 )}
                 <div className={styles.itemMeta}>
                   &nbsp;·&nbsp;{evCount} events · {connCount} connections
+                  {(() => {
+                    const locs = locByFriend.get(f.id) || [];
+                    return locs.length ? <> · 📍 {locs.slice(0, 2).join(', ')}</> : null;
+                  })()}
                 </div>
                 <div className={styles.itemRight} aria-hidden>›</div>
                 <button
