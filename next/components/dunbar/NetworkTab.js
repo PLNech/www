@@ -62,7 +62,7 @@ export default function NetworkTab({ friends, toggleRel, openFriendDetail }) {
   };
 
   // Simulation setup/refresh
-  const [physicsOn, setPhysicsOn] = useState(true);
+  const physicsOn = true;
   useEffect(() => {
     let stopped = false;
     let sim;
@@ -82,11 +82,7 @@ export default function NetworkTab({ friends, toggleRel, openFriendDetail }) {
         .force('center', d3force.forceCenter(0, 0))
         .force('collide', d3force.forceCollide(18));
 
-      if (!physicsOn) {
-        sim.alphaTarget(0).stop();
-      } else {
-        sim.alpha(0.8).alphaTarget(0.03).restart();
-      }
+      sim.alpha(0.8).alphaTarget(0.03).restart();
 
       sim.on('tick', () => {
         if (stopped) return;
@@ -110,7 +106,7 @@ export default function NetworkTab({ friends, toggleRel, openFriendDetail }) {
       simRef.current = null;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [nodes, links, physicsOn]); // rebuild when graph or physics toggles
+  }, [nodes, links]); // rebuild when graph updates
 
   // Drawing
   const requestDraw = () => {
@@ -180,11 +176,13 @@ export default function NetworkTab({ friends, toggleRel, openFriendDetail }) {
       ctx.fill();
     }
 
-    // Labels (keep readable irrespective of zoom)
-    ctx.scale(1 / transform.k, 1 / transform.k); // neutralize zoom for label size
+    // Labels: world coords, offset by node radius; keep pixel size constant with inverse scaling
     for (const n of nodes) {
       const s = getNodeState(n.id);
-      drawLabel(ctx, n.name, transform.k * s.x + transform.x, transform.k * s.y + transform.y - 14, '#333');
+      const r = nodeRadius(n.id);
+      const fontPx = 12 / transform.k;
+      const yOff = (r + 6) / transform.k; // a bit above the node
+      drawLabel(ctx, n.name, s.x, s.y - yOff, '#333', fontPx);
     }
 
     ctx.restore();
@@ -237,7 +235,7 @@ export default function NetworkTab({ friends, toggleRel, openFriendDetail }) {
         const s = getNodeState(id);
         stateRef.current.dragOffset = { x: s.x - x, y: s.y - y };
         // Nudge simulation
-        if (simRef.current && physicsOn) {
+        if (simRef.current) {
           simRef.current.alphaTarget(0.1).restart();
         }
       }
@@ -319,21 +317,33 @@ export default function NetworkTab({ friends, toggleRel, openFriendDetail }) {
     requestDraw();
   };
 
+  const zoomAt = (factor, sx, sy) => {
+    const rect = canvasRef.current?.getBoundingClientRect();
+    const cx = rect ? rect.width / 2 : 0;
+    const cy = rect ? rect.height / 2 : 0;
+    const px = sx ?? cx;
+    const py = sy ?? cy;
+    setTransform((t) => {
+      const newK = clamp(t.k * factor, 0.2, 4);
+      const wx0 = (px - t.x) / t.k;
+      const wy0 = (py - t.y) / t.k;
+      const x = px - wx0 * newK;
+      const y = py - wy0 * newK;
+      return { k: newK, x, y };
+    });
+  };
+
+  const panBy = (dx, dy) => {
+    setTransform(t => ({ ...t, x: t.x + dx, y: t.y + dy }));
+  };
+
   const onWheel = (e) => {
     e.preventDefault();
     const rect = canvasRef.current.getBoundingClientRect();
     const sx = e.clientX - rect.left;
     const sy = e.clientY - rect.top;
-
     const factor = Math.exp(-e.deltaY * 0.0015);
-    const newK = clamp(transform.k * factor, 0.2, 4);
-
-    // zoom to cursor
-    const wx0 = (sx - transform.x) / transform.k;
-    const wy0 = (sy - transform.y) / transform.k;
-    const x = sx - wx0 * newK;
-    const y = sy - wy0 * newK;
-    setTransform({ k: newK, x, y });
+    zoomAt(factor, sx, sy);
   };
 
   // Overlay draw (draft link)
@@ -368,16 +378,27 @@ export default function NetworkTab({ friends, toggleRel, openFriendDetail }) {
     ctx.restore();
   });
 
+  // Keyboard navigation scoped to container
+  const onKeyDown = (e) => {
+    const PAN = 40;
+    if (e.key === 'ArrowLeft') setTransform(t => ({ ...t, x: t.x + PAN }));
+    else if (e.key === 'ArrowRight') setTransform(t => ({ ...t, x: t.x - PAN }));
+    else if (e.key === 'ArrowUp') setTransform(t => ({ ...t, y: t.y + PAN }));
+    else if (e.key === 'ArrowDown') setTransform(t => ({ ...t, y: t.y - PAN }));
+    else if (e.key === '+' || e.key === '=') zoomAt(1.2);
+    else if (e.key === '-' || e.key === '_') zoomAt(1 / 1.2);
+    else if (e.key === '0') setTransform({ k: 1, x: 0, y: 0 });
+    else if (e.key.toLowerCase() === 'e') setEditMode(v => !v);
+  };
+
+  // Focus container on mount so arrows/+/− work immediately
+  useEffect(() => {
+    containerRef.current?.focus();
+  }, []);
+
   return (
     <div>
       <div className={styles.graphToolbar}>
-        <button
-          className={styles.btnSecondary}
-          onClick={() => setPhysicsOn(v => !v)}
-          title="Toggle physics simulation"
-        >
-          Physics: {physicsOn ? 'On' : 'Off'}
-        </button>
         <button
           className={styles.btnSecondary}
           onClick={() => setEditMode(v => !v)}
@@ -393,6 +414,11 @@ export default function NetworkTab({ friends, toggleRel, openFriendDetail }) {
       <div
         ref={containerRef}
         className={styles.canvasWrap}
+        tabIndex={0}
+        role="application"
+        aria-label="Network graph"
+        onKeyDown={onKeyDown}
+        style={{ outline: 'none' }}
       >
         <canvas
           ref={canvasRef}
@@ -403,6 +429,17 @@ export default function NetworkTab({ friends, toggleRel, openFriendDetail }) {
           onMouseUp={onMouseUp}
           onWheel={onWheel}
         />
+        <div className={styles.floatingControls}>
+          <button className={styles.ctrlBtn} onClick={() => panBy(-40, 0)} aria-label="Pan left">←</button>
+          <button className={styles.ctrlBtn} onClick={() => panBy(0, -40)} aria-label="Pan up">↑</button>
+          <button className={styles.ctrlBtn} onClick={() => panBy(40, 0)} aria-label="Pan right">→</button>
+          <button className={styles.ctrlBtn} onClick={() => zoomAt(1 / 1.2)} aria-label="Zoom out">−</button>
+          <button className={styles.ctrlBtn} onClick={() => setTransform({ k: 1, x: 0, y: 0 })} aria-label="Reset">⟲</button>
+          <button className={styles.ctrlBtn} onClick={() => zoomAt(1.2)} aria-label="Zoom in">＋</button>
+          <button className={`${styles.ctrlBtn} ${styles.ctrlWide}`} onClick={() => setEditMode(v => !v)} aria-label="Toggle edit">
+            {editMode ? 'Edit:ON' : 'Edit:OFF'}
+          </button>
+        </div>
       </div>
     </div>
   );

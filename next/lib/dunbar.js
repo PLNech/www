@@ -62,6 +62,17 @@ export function firstWords(text, n = 3) {
   return words.slice(0, n).join(' ');
 }
 
+// Extract hashtags (lowercased, without #)
+export function extractTags(text = '') {
+  const tags = new Set();
+  const re = /#([\p{L}\p{N}_-]+)/gu;
+  let m;
+  while ((m = re.exec(text))) {
+    tags.add(m[1].toLowerCase());
+  }
+  return Array.from(tags);
+}
+
 // Quick-date helpers (ISO YYYY-MM-DD) — Paris local calendar
 export function todayISO() {
   return isoDate(new Date(), TIMEZONE);
@@ -195,6 +206,35 @@ export function makeExportPayload(state) {
   const friends = (state.friends || []).map(f => ({
     id: f.id,
     name: f.name,
+    birthday: f.birthday || null,
+    notes: f.notes || '',
+    // rich profile
+    likes: f.likes || '',
+    dislikes: f.dislikes || '',
+    foodLikes: f.foodLikes || '',
+    foodDislikes: f.foodDislikes || '',
+    wifiPassword: f.wifiPassword || '',
+    carModel: f.carModel || '',
+    workplace: f.workplace || '',
+    schedule: f.schedule || '',
+    futureIdeas: f.futureIdeas || '',
+    quotes: f.quotes || '',
+    importantDates: Array.isArray(f.importantDates) ? f.importantDates.map(x => ({
+      date: x?.date || null,
+      label: x?.label || '',
+    })) : [],
+    gifts: Array.isArray(f.gifts) ? f.gifts.map(x => ({
+      date: x?.date || null,
+      occasion: x?.occasion || '',
+      description: x?.description || '',
+      image: x?.image || '',
+    })) : [],
+    postcards: Array.isArray(f.postcards) ? f.postcards.map(x => ({
+      date: x?.date || null,
+      location: x?.location || '',
+      description: x?.description || '',
+      image: x?.image || '',
+    })) : [],
     relationships: Array.from(f.relationships || []),
     events: Array.isArray(f.events) ? f.events.map(ev => ({
       id: ev.id,
@@ -220,6 +260,35 @@ export function normalizeImportedPayload(payload) {
   const friends = friendsRaw.map(f => ({
     id: f.id,
     name: f.name || '',
+    birthday: f.birthday || null,
+    notes: f.notes || '',
+    // rich profile (defaults)
+    likes: f.likes || '',
+    dislikes: f.dislikes || '',
+    foodLikes: f.foodLikes || '',
+    foodDislikes: f.foodDislikes || '',
+    wifiPassword: f.wifiPassword || '',
+    carModel: f.carModel || '',
+    workplace: f.workplace || '',
+    schedule: f.schedule || '',
+    futureIdeas: f.futureIdeas || '',
+    quotes: f.quotes || '',
+    importantDates: Array.isArray(f.importantDates) ? f.importantDates.map(x => ({
+      date: x?.date || null,
+      label: x?.label || '',
+    })) : [],
+    gifts: Array.isArray(f.gifts) ? f.gifts.map(x => ({
+      date: x?.date || null,
+      occasion: x?.occasion || '',
+      description: x?.description || '',
+      image: x?.image || '',
+    })) : [],
+    postcards: Array.isArray(f.postcards) ? f.postcards.map(x => ({
+      date: x?.date || null,
+      location: x?.location || '',
+      description: x?.description || '',
+      image: x?.image || '',
+    })) : [],
     relationships: new Set(Array.isArray(f.relationships) ? f.relationships : []),
     events: Array.isArray(f.events) ? f.events.map(ev => ({
       id: ev.id,
@@ -234,4 +303,198 @@ export function normalizeImportedPayload(payload) {
     friends,
     selectedFriendId: payload.selectedFriendId || null,
   };
+}
+
+// ------------------------------
+// Anniversaries helpers (birthday / half-birthday / 6m-12m since first/last events)
+// ------------------------------
+function parseYMD(ymd) {
+  if (!ymd) return null;
+  // Interpret as UTC midnight to avoid TZ drift across locales
+  const [y, m, d] = String(ymd).split('-').map(v => parseInt(v, 10));
+  if (!y || !m || !d) return null;
+  return new Date(Date.UTC(y, (m - 1), d));
+}
+
+function toYMD(date) {
+  if (!date || isNaN(date.getTime())) return '';
+  // Keep using local Paris label elsewhere; for storage we use YYYY-MM-DD UTC
+  const yyyy = date.getUTCFullYear();
+  const mm = String(date.getUTCMonth() + 1).padStart(2, '0');
+  const dd = String(date.getUTCDate()).padStart(2, '0');
+  return `${yyyy}-${mm}-${dd}`;
+}
+
+function addMonthsUTC(date, n) {
+  const d = new Date(date.getTime());
+  const y = d.getUTCFullYear();
+  const m = d.getUTCMonth();
+  const day = d.getUTCDate();
+  // Move to first of target month then clamp day
+  const target = new Date(Date.UTC(y, m + n, 1));
+  const lastDay = new Date(Date.UTC(target.getUTCFullYear(), target.getUTCMonth() + 1, 0)).getUTCDate();
+  target.setUTCDate(Math.min(day, lastDay));
+  return target;
+}
+
+function daysDiffUTC(a, b) {
+  const MS = 24 * 60 * 60 * 1000;
+  const at = Date.UTC(a.getUTCFullYear(), a.getUTCMonth(), a.getUTCDate());
+  const bt = Date.UTC(b.getUTCFullYear(), b.getUTCMonth(), b.getUTCDate());
+  return Math.round((bt - at) / MS);
+}
+
+function nextMultipleMonthAnniv(baseYMD, stepMonths, today = new Date()) {
+  const base = parseYMD(baseYMD);
+  if (!base) return null;
+  let candidate = new Date(base.getTime());
+  // Increase by step until >= today
+  while (candidate < today) {
+    candidate = addMonthsUTC(candidate, stepMonths);
+  }
+  return candidate;
+}
+
+function nextBirthday(birthdayYMD, today = new Date()) {
+  const b = parseYMD(birthdayYMD);
+  if (!b) return null;
+  const year = today.getUTCFullYear();
+  let next = new Date(Date.UTC(year, b.getUTCMonth(), b.getUTCDate()));
+  if (next < today) {
+    next = new Date(Date.UTC(year + 1, b.getUTCMonth(), b.getUTCDate()));
+  }
+  return next;
+}
+
+function nextHalfBirthday(birthdayYMD, today = new Date()) {
+  const b = parseYMD(birthdayYMD);
+  if (!b) return null;
+  const nextB = nextBirthday(birthdayYMD, today);
+  const half = addMonthsUTC(nextB, -6); // the previous half-birthday relative to next birthday
+  // Ensure we pick the next upcoming within the next cycle
+  if (half >= today) return half;
+  return addMonthsUTC(half, 12);
+}
+
+/**
+ * Compute upcoming anniversaries in the next `windowDays` days.
+ * Returns sorted array of:
+ * { date: 'YYYY-MM-DD', friendId, friendName, kind: 'birthday'|'half-birthday'|'first-6m'|'first-12m'|'last-6m'|'last-12m', label }
+ */
+export function computeUpcomingAnniversaries(friends = [], windowDays = 21) {
+  const today = new Date();
+  const items = [];
+
+  for (const f of friends || []) {
+    // birthday + half-birthday
+    if (f.birthday) {
+      const nb = nextBirthday(f.birthday, today);
+      const nh = nextHalfBirthday(f.birthday, today);
+      if (nb) {
+        const d = daysDiffUTC(today, nb);
+        if (d >= 0 && d <= windowDays) {
+          items.push({
+            date: toYMD(nb),
+            friendId: f.id,
+            friendName: f.name,
+            kind: 'birthday',
+            label: `Anniversaire de ${f.name}`,
+          });
+        }
+      }
+      if (nh) {
+        const d = daysDiffUTC(today, nh);
+        if (d >= 0 && d <= windowDays) {
+          items.push({
+            date: toYMD(nh),
+            friendId: f.id,
+            friendName: f.name,
+            kind: 'half-birthday',
+            label: `Demi‑anniversaire de ${f.name}`,
+          });
+        }
+      }
+    }
+
+    // First & last event anchors
+    if (Array.isArray(f.events) && f.events.length) {
+      const evs = (f.events || [])
+        .map(e => ({ ...e, _t: parseYMD(e.date) }))
+        .filter(e => !!e._t)
+        .sort((a, b) => a._t - b._t);
+      const first = evs.length ? evs[0]._t : null;
+      const last = evs.length ? evs[evs.length - 1]._t : null;
+      const firstEv = evs.length ? evs[0] : null;
+      const lastEv = evs.length ? evs[evs.length - 1] : null;
+
+      if (first) {
+        const n6 = nextMultipleMonthAnniv(toYMD(first), 6, today);
+        const n12 = nextMultipleMonthAnniv(toYMD(first), 12, today);
+        if (n6) {
+          const d = daysDiffUTC(today, n6);
+          if (d >= 0 && d <= windowDays) {
+            items.push({
+              date: toYMD(n6),
+              friendId: f.id,
+              friendName: f.name,
+              kind: 'first-6m',
+              label: `6 mois depuis le 1er événement avec ${f.name}`,
+              anchorTitle: firstEv ? firstWords(firstEv.notes || '', 5) : '',
+              anchorTags: firstEv ? extractTags(firstEv.notes || '') : [],
+            });
+          }
+        }
+        if (n12) {
+          const d = daysDiffUTC(today, n12);
+          if (d >= 0 && d <= windowDays) {
+            items.push({
+              date: toYMD(n12),
+              friendId: f.id,
+              friendName: f.name,
+              kind: 'first-12m',
+              label: `1 an depuis le 1er événement avec ${f.name}`,
+              anchorTitle: firstEv ? firstWords(firstEv.notes || '', 5) : '',
+              anchorTags: firstEv ? extractTags(firstEv.notes || '') : [],
+            });
+          }
+        }
+      }
+
+      if (last) {
+        const n6 = nextMultipleMonthAnniv(toYMD(last), 6, today);
+        const n12 = nextMultipleMonthAnniv(toYMD(last), 12, today);
+        if (n6) {
+          const d = daysDiffUTC(today, n6);
+          if (d >= 0 && d <= windowDays) {
+            items.push({
+              date: toYMD(n6),
+              friendId: f.id,
+              friendName: f.name,
+              kind: 'last-6m',
+              label: `6 mois depuis le dernier événement avec ${f.name}`,
+              anchorTitle: lastEv ? firstWords(lastEv.notes || '', 5) : '',
+              anchorTags: lastEv ? extractTags(lastEv.notes || '') : [],
+            });
+          }
+        }
+        if (n12) {
+          const d = daysDiffUTC(today, n12);
+          if (d >= 0 && d <= windowDays) {
+            items.push({
+              date: toYMD(n12),
+              friendId: f.id,
+              friendName: f.name,
+              kind: 'last-12m',
+              label: `1 an depuis le dernier événement avec ${f.name}`,
+              anchorTitle: lastEv ? firstWords(lastEv.notes || '', 5) : '',
+              anchorTags: lastEv ? extractTags(lastEv.notes || '') : [],
+            });
+          }
+        }
+      }
+    }
+  }
+
+  items.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+  return items;
 }

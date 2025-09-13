@@ -8,6 +8,7 @@ import {
   groupEventsByDay,
   isoDate,
 } from '@/lib/dunbar';
+import { extractTags } from '@/lib/dunbar';
 
 export default function EventsTab({ friends, addEvent, eventIndex }) {
   // Creation form state
@@ -55,6 +56,30 @@ export default function EventsTab({ friends, addEvent, eventIndex }) {
   // Timeline groups from merged eventIndex
   const groups = useMemo(() => groupEventsByDay(eventIndex), [eventIndex]);
 
+  // Render notes with inline #tags highlighted
+  const renderNotesWithTags = (text = '') => {
+    const re = /(#([\p{L}\p{N}_-]+))/gu;
+    const parts = [];
+    let lastIndex = 0;
+    let m;
+    while ((m = re.exec(text))) {
+      if (m.index > lastIndex) {
+        parts.push(<span key={`t-${lastIndex}`}>{text.slice(lastIndex, m.index)}</span>);
+      }
+      const full = m[1];
+      parts.push(
+        <span key={`tag-${m.index}`} className={styles.tagChip} style={{ marginRight: 6 }}>
+          {full}
+        </span>
+      );
+      lastIndex = m.index + full.length;
+    }
+    if (lastIndex < text.length) {
+      parts.push(<span key={`t-end`}>{text.slice(lastIndex)}</span>);
+    }
+    return <>{parts}</>;
+  };
+
   return (
     <div className={styles.twoCol} style={{ gap: 16 }}>
       {/* New Event Builder */}
@@ -70,6 +95,7 @@ export default function EventsTab({ friends, addEvent, eventIndex }) {
         </div>
         <div className={styles.row} style={{ marginBottom: 8, flexWrap: 'wrap' }}>
           <input
+            lang="fr-FR"
             type="date"
             className={styles.input}
             value={date}
@@ -144,10 +170,23 @@ export default function EventsTab({ friends, addEvent, eventIndex }) {
                 return (
                   <div key={e.id + e.date} className={styles.timelineEvent}>
                     <div><strong>{names.join(', ') || 'Unknown'}</strong></div>
-                    <div style={{ whiteSpace: 'pre-wrap' }}>{e.notes}</div>
+                    <div style={{ whiteSpace: 'pre-wrap' }}>
+                      {renderNotesWithTags(e.notes || '')}
+                    </div>
                     {e.location ? (
                       <div style={{ color: '#555', marginTop: 4 }}>📍 {e.location}</div>
                     ) : null}
+                    {/* Tag chips */}
+                    {(() => {
+                      const tags = extractTags(e.notes || '');
+                      return tags.length ? (
+                        <div className={styles.tagRow}>
+                          {tags.slice(0, 10).map((t) => (
+                            <span key={t} className={styles.tagChip}>#{t}</span>
+                          ))}
+                        </div>
+                      ) : null;
+                    })()}
                     <div style={{ color: '#888', marginTop: 4, fontSize: 12 }}>
                       {isoDate(e.date)}
                     </div>

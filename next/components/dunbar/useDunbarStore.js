@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useReducer, useRef } from 'react';
-import { normalizeImportedPayload } from '@/lib/dunbar';
+import { normalizeImportedPayload, isoDate } from '@/lib/dunbar';
+import { computeUpcomingAnniversaries } from '@/lib/dunbar';
 
 const LS_KEY = 'dunbar-state-v1';
 
@@ -55,6 +56,22 @@ function reducer(state, action) {
       const newFriend = {
         id: uuid(),
         name,
+        birthday: null,
+        notes: '',
+        // rich profile fields
+        likes: '',
+        dislikes: '',
+        foodLikes: '',
+        foodDislikes: '',
+        wifiPassword: '',
+        carModel: '',
+        workplace: '',
+        schedule: '',
+        futureIdeas: '',
+        quotes: '',
+        importantDates: [], // [{ date: 'YYYY-MM-DD', label: string }]
+        gifts: [],          // [{ date, occasion, description, image }]
+        postcards: [],      // [{ date, location, description, image }]
         relationships: new Set(),
         events: [],
         lastInteraction: null,
@@ -88,6 +105,19 @@ function reducer(state, action) {
       const friends = state.friends.map((f) => (f.id === id ? { ...f, name: n } : f));
       return { ...state, friends };
     }
+    case 'SET_BIRTHDAY': {
+      const { id, birthday } = action.payload || {};
+      if (!id) return state;
+      const b = birthday ? String(birthday).slice(0, 10) : null;
+      const friends = state.friends.map((f) => (f.id === id ? { ...f, birthday: b } : f));
+      return { ...state, friends };
+    }
+    case 'SET_FRIEND_NOTES': {
+      const { id, notes } = action.payload || {};
+      if (!id) return state;
+      const friends = state.friends.map((f) => (f.id === id ? { ...f, notes: String(notes || '') } : f));
+      return { ...state, friends };
+    }
     case 'SELECT_FRIEND': {
       const id = action.payload?.id ?? null;
       return { ...state, selectedFriendId: id };
@@ -113,8 +143,9 @@ function reducer(state, action) {
     }
     case 'ADD_EVENT': {
       const { date, notes, participants = [], location } = action.payload || {};
-      const dateISO = date ? new Date(date).toISOString() : null;
-      if (!dateISO || !notes || !participants.length) return state;
+      // Normalize to YYYY-MM-DD (Paris local semantics handled at render/grouping time)
+      const dateStr = typeof date === 'string' ? date.slice(0, 10) : isoDate(date);
+      if (!dateStr || !notes || !participants.length) return state;
 
       const eventId = uuid();
       // Create one logical event id applied to each participant for deduplication across views
@@ -122,7 +153,7 @@ function reducer(state, action) {
         if (participants.includes(f.id)) {
           const ev = {
             id: eventId,
-            date: dateISO,
+            date: dateStr,
             notes: String(notes),
             location: location ? String(location) : undefined,
             participants: [...participants],
@@ -133,6 +164,12 @@ function reducer(state, action) {
         }
         return f;
       });
+      return { ...state, friends };
+    }
+    case 'UPDATE_FRIEND': {
+      const { id, patch } = action.payload || {};
+      if (!id || !patch) return state;
+      const friends = state.friends.map((f) => (f.id === id ? { ...f, ...patch } : f));
       return { ...state, friends };
     }
     case 'RESET': {
@@ -198,6 +235,14 @@ export function useDunbarStore() {
 
   const renameFriend = useCallback((id, name) => {
     dispatch({ type: 'RENAME_FRIEND', payload: { id, name } });
+  }, []);
+
+  const setBirthday = useCallback((id, birthday) => {
+    dispatch({ type: 'SET_BIRTHDAY', payload: { id, birthday } });
+  }, []);
+
+  const setFriendNotes = useCallback((id, notes) => {
+    dispatch({ type: 'SET_FRIEND_NOTES', payload: { id, notes } });
   }, []);
 
   const loadFromPayload = useCallback((payload) => {
@@ -267,24 +312,36 @@ export function useDunbarStore() {
     };
   }, [state.friends]);
 
-  // Orbits (last 90 days)
+  // Orbits (close = 5+ in 90d OR 10+ in 365d OR 20+ total)
   const orbitBuckets = useMemo(() => {
     const now = Date.now();
     const ninety = 90 * 24 * 60 * 60 * 1000;
-    const counts = state.friends.map((f) => {
-      const c = (f.events || []).reduce((acc, e) => {
+    const year = 365 * 24 * 60 * 60 * 1000;
+
+    const metrics = state.friends.map((f) => {
+      const evs = Array.isArray(f.events) ? f.events : [];
+      let c90 = 0;
+      let c365 = 0;
+      for (const e of evs) {
         const t = new Date(e.date).getTime();
-        return acc + (now - t <= ninety ? 1 : 0);
-      }, 0);
-      return { id: f.id, name: f.name, count90: c };
+        if (!isNaN(t)) {
+          const dt = now - t;
+          if (dt <= ninety) c90 += 1;
+          if (dt <= year) c365 += 1;
+        }
+      }
+      const total = evs.length;
+      return { id: f.id, c90, c365, total };
     });
+
     const inner = [];
     const middle = [];
     const outer = [];
-    for (const it of counts) {
-      if (it.count90 >= 5) inner.push(it.id);
-      else if (it.count90 >= 2) middle.push(it.id);
-      else outer.push(it.id);
+    for (const m of metrics) {
+      const isInner = m.c90 >= 5 || m.c365 >= 10 || m.total >= 20;
+      if (isInner) inner.push(m.id);
+      else if (m.c90 >= 2) middle.push(m.id);
+      else outer.push(m.id);
     }
     return { inner, middle, outer };
   }, [state.friends]);
@@ -307,6 +364,15 @@ export function useDunbarStore() {
     return merged;
   }, [state.friends]);
 
+  // Anniversaries and reminders (next 21 days)
+  const anniversaries = useMemo(() => {
+    return computeUpcomingAnniversaries(state.friends, 21);
+  }, [state.friends]);
+
+  const updateFriend = useCallback((id, patch) => {
+    dispatch({ type: 'UPDATE_FRIEND', payload: { id, patch } });
+  }, []);
+
   return {
     state,
     friends: state.friends,
@@ -315,6 +381,9 @@ export function useDunbarStore() {
       addFriend,
       removeFriend,
       renameFriend,
+      setBirthday,
+      setFriendNotes,
+      updateFriend,
       selectFriend,
       toggleRelationship,
       addEvent,
@@ -330,6 +399,7 @@ export function useDunbarStore() {
       stats,
       orbitBuckets,
       eventIndex,
+      anniversaries,
     },
   };
 }

@@ -1,0 +1,30 @@
+---
+description: Prevent mixing Next.js data-fetching strategies per page and enforce client-only for Dunbar
+globs:
+alwaysApply: true
+---
+# Next.js data fetching guardrails
+
+- Do not export multiple data fetching methods from the same page:
+  - Never mix `getServerSideProps` with `getStaticProps`/`getStaticPaths` in a single file.
+  - Each page must choose exactly one strategy or none.
+
+- Dunbar page policy (`next/pages/dunbar/**`):
+  - Client-only app. Do NOT export `getServerSideProps`, `getStaticProps`, or `getStaticPaths` from any file under `next/pages/dunbar/**`.
+  - All data is local (localStorage). Use client-side effects/hooks only.
+  - Keep Dunbar free of SSR/SSG to avoid hydration and strategy conflicts.
+
+- Content pages policy (posts, poems, talks, hydra, parvagues):
+  - Static generation is allowed and encouraged on those sections where already used.
+  - If server-side rendering is introduced on any non-Dunbar page, ensure no SSG export is present in the same file.
+
+# Debugging stale strategy errors
+
+- If you see: “You can not use getStaticProps or getStaticPaths with getServerSideProps” after removing an export:
+  - Stop the dev server and clear the Next.js cache: remove `next/.next/`
+  - Restart the dev server to ensure no stale compiled artifacts remain.
+
+# Rationale
+
+- Dunbar is a local-first, privacy-first client app. SSR/SSG unintentionally introduced on that route causes strategy conflicts in Next.js.
+- Limiting data fetching exports ensures predictable build/runtime behavior and avoids “stale” mismatches across HMR/webpack caches.

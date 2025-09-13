@@ -3,6 +3,7 @@ import styles from '@/styles/dunbar.module.css';
 import { useDunbarStore } from '@/components/dunbar/useDunbarStore';
 import dynamic from 'next/dynamic';
 import { makeExportPayload } from '@/lib/dunbar';
+import { generateDemoPayload } from '@/lib/dunbar-demo';
 
 // Lazy-load heavy tabs if needed (Network uses d3)
 const NetworkTab = dynamic(() => import('@/components/dunbar/NetworkTab'), { ssr: false });
@@ -13,12 +14,14 @@ const EventsTab = dynamic(() => import('@/components/dunbar/EventsTab'), { ssr: 
 import FriendsList from '@/components/dunbar/FriendsList';
 import FriendDetail from '@/components/dunbar/FriendDetail';
 import StatsTab from '@/components/dunbar/StatsTab';
+import SearchTab from '@/components/dunbar/SearchTab';
 
 const PASSWORD = 'freehugs4all';
 
 function Tabs({ tab, setTab }) {
   const items = [
     { id: 'friends', label: 'Friends' },
+    { id: 'search', label: 'Search' },
     { id: 'events', label: 'Events' },
     { id: 'orbits', label: 'Orbits' },
     { id: 'network', label: 'Network' },
@@ -48,10 +51,12 @@ export default function DunbarApp() {
   const fileInputRef = useRef(null);
 
   // Password gate: prompt once per session
+  // Dev convenience: auto-unlock on localhost or NODE_ENV=development to enable automated preview
   useEffect(() => {
     if (typeof window === 'undefined') return;
     const stored = window.sessionStorage.getItem('dunbarAuthed');
-    if (stored === '1') {
+    const isDev = process.env.NODE_ENV === 'development' || window.location.hostname === 'localhost';
+    if (stored === '1' || isDev) {
       setAuthed(true);
       return;
     }
@@ -104,6 +109,15 @@ export default function DunbarApp() {
     }
   };
 
+  const onDemo = () => {
+    if (typeof window !== 'undefined') {
+      const ok = window.confirm('Remplacer les données actuelles par une démo de 50 profils ?');
+      if (!ok) return;
+    }
+    const payload = generateDemoPayload(50);
+    actions.loadFromPayload(payload);
+  };
+
   // Navigation from viz → friend detail
   const openFriendDetail = (friendId) => {
     actions.selectFriend(friendId);
@@ -138,6 +152,7 @@ export default function DunbarApp() {
             onChange={onImportFile}
             style={{ display: 'none' }}
           />
+          <button className={styles.btnSecondary} onClick={onDemo}>Demo</button>
           <button className={styles.btnSecondary} onClick={actions.resetData}>Reset Data</button>
         </div>
       </div>
@@ -167,10 +182,20 @@ export default function DunbarApp() {
               onToggleRel={(a, b) => actions.toggleRelationship(a, b)}
               onAddEvent={(payload) => actions.addEvent(payload)}
               onRename={(id, name) => actions.renameFriend(id, name)}
+              onSetBirthday={(id, ymd) => actions.setBirthday(id, ymd)}
+              onSetNotes={(id, notes) => actions.setFriendNotes(id, notes)}
+              onUpdateFriend={(id, patch) => actions.updateFriend(id, patch)}
               // scroll preservation inside relationship list handled internally
             />
           </div>
         </div>
+      )}
+
+      {tab === 'search' && (
+        <SearchTab
+          friends={friends}
+          openFriend={openFriendDetail}
+        />
       )}
 
       {tab === 'events' && (
@@ -198,7 +223,7 @@ export default function DunbarApp() {
       )}
 
       {tab === 'stats' && (
-        <StatsTab stats={derived.stats} />
+        <StatsTab stats={derived.stats} anniversaries={derived.anniversaries} />
       )}
     </div>
   );

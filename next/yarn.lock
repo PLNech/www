@@ -3061,6 +3061,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"minisearch@npm:^7.1.2":
+  version: 7.1.2
+  resolution: "minisearch@npm:7.1.2"
+  checksum: 10c0/039f494927a4a932c168654ba8ff434d2be6af8e3393b29577d54da64cd64d6ae9bfbf33b7cd7bdc1783cb354d67c5dc99bac1305599d8d653933676f2d1a355
+  languageName: node
+  linkType: hard
+
 "minizlib@npm:^1.3.3":
   version: 1.3.3
   resolution: "minizlib@npm:1.3.3"
@@ -3511,6 +3518,7 @@ __metadata:
     gray-matter: "npm:^4.0.3"
     hydra-synth: "npm:^1.3.29"
     marked: "npm:^15.0.11"
+    minisearch: "npm:^7.1.2"
     next: "npm:^15.3.0"
     prismjs: "npm:^1.30.0"
     react: "npm:^18.2.0"
@@ -3523,6 +3531,8 @@ __metadata:
     react-syntax-highlighter: "npm:^15.5.0"
     remark: "npm:^14.0.0"
     remark-html: "npm:^15.0.0"
+    snowball-stemmers: "npm:^0.6.0"
+    stopword: "npm:^3.1.5"
     swiper: "npm:^11.2.6"
     typescript: "npm:^5.3.3"
     vercel: "npm:^39"
@@ -4175,6 +4185,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"snowball-stemmers@npm:^0.6.0":
+  version: 0.6.0
+  resolution: "snowball-stemmers@npm:0.6.0"
+  checksum: 10c0/36cdd4f24fd0651cfd0e4f9dd96719831b44e5c552b36645a13bc9c395f3aa610f2a8da03ff5027a50d025993d1c5d19ccbebc23bd5d45686eb6aa457e896cd8
+  languageName: node
+  linkType: hard
+
 "source-map-js@npm:^1.0.2":
   version: 1.2.1
   resolution: "source-map-js@npm:1.2.1"
@@ -4214,6 +4231,13 @@ __metadata:
   version: 1.5.0
   resolution: "statuses@npm:1.5.0"
   checksum: 10c0/e433900956357b3efd79b1c547da4d291799ac836960c016d10a98f6a810b1b5c0dcc13b5a7aa609a58239b5190e1ea176ad9221c2157d2fd1c747393e6b2940
+  languageName: node
+  linkType: hard
+
+"stopword@npm:^3.1.5":
+  version: 3.1.5
+  resolution: "stopword@npm:3.1.5"
+  checksum: 10c0/b252d9fa1b3cee80746529465416ca22f60c77ae2076340cb83d3d5329baaa6658e1e641b7cd194257b9d4d2f4f2829210398a1553ab212c5f8d3606e54795df
   languageName: node
   linkType: hard
 

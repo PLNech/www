@@ -36,6 +36,7 @@ const RAW_RUNTIME_STATE =
           ["gray-matter", "npm:4.0.3"],\
           ["hydra-synth", "npm:1.3.29"],\
           ["marked", "npm:15.0.11"],\
+          ["minisearch", "npm:7.1.2"],\
           ["next", "virtual:599f9545309f05166d506895056809d0f5971d8f55d13475681739816b4bb6745eb725b53ed2108e22ea4ce46b8a2c491882d38a9948455117b545da3880eea7#npm:15.3.0"],\
           ["prismjs", "npm:1.30.0"],\
           ["react", "npm:18.3.1"],\
@@ -48,6 +49,8 @@ const RAW_RUNTIME_STATE =
           ["react-syntax-highlighter", "virtual:599f9545309f05166d506895056809d0f5971d8f55d13475681739816b4bb6745eb725b53ed2108e22ea4ce46b8a2c491882d38a9948455117b545da3880eea7#npm:15.6.1"],\
           ["remark", "npm:14.0.3"],\
           ["remark-html", "npm:15.0.2"],\
+          ["snowball-stemmers", "npm:0.6.0"],\
+          ["stopword", "npm:3.1.5"],\
           ["swiper", "npm:11.2.6"],\
           ["typescript", "patch:typescript@npm%3A5.8.3#optional!builtin<compat/typescript>::version=5.8.3&hash=d69c25"],\
           ["vercel", "npm:39.4.2"]\
@@ -3632,6 +3635,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["minisearch", [\
+      ["npm:7.1.2", {\
+        "packageLocation": "../../../../.yarn/berry/cache/minisearch-npm-7.1.2-58be9ecf87-10c0.zip/node_modules/minisearch/",\
+        "packageDependencies": [\
+          ["minisearch", "npm:7.1.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["minizlib", [\
       ["npm:1.3.3", {\
         "packageLocation": "../../../../.yarn/berry/cache/minizlib-npm-1.3.3-b590e5bfb8-10c0.zip/node_modules/minizlib/",\
@@ -4129,6 +4141,7 @@ const RAW_RUNTIME_STATE =
           ["gray-matter", "npm:4.0.3"],\
           ["hydra-synth", "npm:1.3.29"],\
           ["marked", "npm:15.0.11"],\
+          ["minisearch", "npm:7.1.2"],\
           ["next", "virtual:599f9545309f05166d506895056809d0f5971d8f55d13475681739816b4bb6745eb725b53ed2108e22ea4ce46b8a2c491882d38a9948455117b545da3880eea7#npm:15.3.0"],\
           ["prismjs", "npm:1.30.0"],\
           ["react", "npm:18.3.1"],\
@@ -4141,6 +4154,8 @@ const RAW_RUNTIME_STATE =
           ["react-syntax-highlighter", "virtual:599f9545309f05166d506895056809d0f5971d8f55d13475681739816b4bb6745eb725b53ed2108e22ea4ce46b8a2c491882d38a9948455117b545da3880eea7#npm:15.6.1"],\
           ["remark", "npm:14.0.3"],\
           ["remark-html", "npm:15.0.2"],\
+          ["snowball-stemmers", "npm:0.6.0"],\
+          ["stopword", "npm:3.1.5"],\
           ["swiper", "npm:11.2.6"],\
           ["typescript", "patch:typescript@npm%3A5.8.3#optional!builtin<compat/typescript>::version=5.8.3&hash=d69c25"],\
           ["vercel", "npm:39.4.2"]\
@@ -4922,6 +4937,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["snowball-stemmers", [\
+      ["npm:0.6.0", {\
+        "packageLocation": "../../../../.yarn/berry/cache/snowball-stemmers-npm-0.6.0-a7cb233480-10c0.zip/node_modules/snowball-stemmers/",\
+        "packageDependencies": [\
+          ["snowball-stemmers", "npm:0.6.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["source-map-js", [\
       ["npm:1.2.1", {\
         "packageLocation": "../../../../.yarn/berry/cache/source-map-js-npm-1.2.1-b9a47d7e1a-10c0.zip/node_modules/source-map-js/",\
@@ -4970,6 +4994,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../../.yarn/berry/cache/statuses-npm-1.5.0-f88f91b2e9-10c0.zip/node_modules/statuses/",\
         "packageDependencies": [\
           ["statuses", "npm:1.5.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["stopword", [\
+      ["npm:3.1.5", {\
+        "packageLocation": "../../../../.yarn/berry/cache/stopword-npm-3.1.5-5ae2cdc824-10c0.zip/node_modules/stopword/",\
+        "packageDependencies": [\
+          ["stopword", "npm:3.1.5"]\
         ],\
         "linkType": "HARD"\
       }]\
