@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic';
 import { makeExportPayload } from '@/lib/dunbar';
 import { generateDemoPayload } from '@/lib/dunbar-demo';
 import { useRouter } from 'next/router';
-import { friendSlug, eventSlug } from '@/lib/dunbar';
+import { friendSlug, eventSlug, resolveFriendBySlug } from '@/lib/dunbar';
 
 // Lazy-load heavy tabs if needed (Network uses d3)
 const NetworkTab = dynamic(() => import('@/components/dunbar/NetworkTab'), { ssr: false });
@@ -20,7 +20,7 @@ import SearchTab from '@/components/dunbar/SearchTab';
 
 const PASSWORD = 'freehugs4all';
 
-function Tabs({ tab, setTab }) {
+function Tabs({ tab, onTabChange }) {
   const items = [
     { id: 'friends', label: 'Friends' },
     { id: 'search', label: 'Search' },
@@ -35,7 +35,7 @@ function Tabs({ tab, setTab }) {
         <button
           key={it.id}
           className={`${styles.tabBtn} ${tab === it.id ? styles.tabActive : ''}`}
-          onClick={() => setTab(it.id)}
+          onClick={() => onTabChange?.(it.id)}
         >
           {it.label}
         </button>
@@ -50,6 +50,9 @@ export default function DunbarApp() {
   const [tab, setTab] = useState('friends');
   const [authed, setAuthed] = useState(false);
   const [lockError, setLockError] = useState('');
+  // Slug resolution banner for not found / collisions
+  const [notFoundSlug, setNotFoundSlug] = useState('');
+  const [collisionCandidates, setCollisionCandidates] = useState([]);
   const friendsListScrollRef = useRef(0);
   const fileInputRef = useRef(null);
 
@@ -127,7 +130,7 @@ export default function DunbarApp() {
     setTab('friends');
     const f = friends.find((x) => x.id === friendId);
     if (f) {
-      router.push(`/dunbar/friend/${friendSlug(f)}`, undefined, { shallow: true });
+      router.push(`/dunbar/friends/${friendSlug(f)}`, undefined, { shallow: true });
     }
   };
 
@@ -141,25 +144,76 @@ export default function DunbarApp() {
     router.push(`/dunbar/event/${eventSlug(e)}`, undefined, { shallow: true });
   };
 
-  // Deep-link handling: friend/event/search routes hydrate initial tab/selection
+  // Deep-link handling: friend/event + section routes hydrate initial tab/selection
   useEffect(() => {
-    if (!router || !router.asPath) return;
+    if (!router) return;
     const as = router.asPath || '';
-    // friend route
-    const friendMatch = as.match(/\/dunbar\/friend\/([^/?#]+)/);
-    if (friendMatch) {
-      const slug = friendMatch[1];
-      // suffix-based lookup (last 6 chars of id)
-      const suff = slug.split('-').pop();
-      const f = friends.find((x) => String(x.id).endsWith(suff)) ||
-                friends.find((x) => friendSlug(x) === slug);
-      if (f) {
-        actions.selectFriend(f.id);
+
+    // Path-based deep links (only set tab when path encodes a section)
+    if (/\/dunbar\/friends(\/?$|\/)/.test(as)) {
+      setTab('friends');
+    } else if (/\/dunbar\/network(\/?$|\/)/.test(as)) {
+      setTab('network');
+    } else if (/\/dunbar\/orbits(\/?$|\/)/.test(as)) {
+      setTab('orbits');
+    } else if (/\/dunbar(\/?$)/.test(as)) {
+      // Root explicit → events
+      setTab('events');
+    }
+    // Note: no path for 'search' or 'stats' on purpose; do not override tab in those cases.
+
+    // friend by pretty slug under /dunbar/friends/:slug
+    const friendPretty = as.match(/\/dunbar\/friends\/([^/?#]+)/);
+    if (friendPretty) {
+      const slug = friendPretty[1];
+      const { match, collisions } = resolveFriendBySlug(friends, slug);
+      if (match) {
+        actions.selectFriend(match.id);
+        setNotFoundSlug('');
+        setCollisionCandidates([]);
+        setTab('friends');
+      } else if (collisions.length > 1) {
+        // present chooser and suggest deduplication
+        setNotFoundSlug(slug);
+        setCollisionCandidates(collisions);
+        setTab('friends');
+      } else {
+        // not found → show banner and stay on friends list
+        setNotFoundSlug(slug);
+        setCollisionCandidates([]);
         setTab('friends');
       }
       return;
     }
-    // event route
+
+    // legacy friend route (/dunbar/friend/:slug-idSuffix) — keep for backward compat
+    const friendLegacy = as.match(/\/dunbar\/friend\/([^/?#]+)/);
+    if (friendLegacy) {
+      const slug = friendLegacy[1];
+      // Try pretty resolver first (in case suffix-less was typed)
+      const { match, collisions } = resolveFriendBySlug(friends, slug);
+      if (match) {
+        actions.selectFriend(match.id);
+        setNotFoundSlug('');
+        setCollisionCandidates([]);
+        setTab('friends');
+        return;
+      }
+      // Fallback to suffix-based lookup (last 6 chars of id)
+      const suff = slug.split('-').pop();
+      const f = friends.find((x) => String(x.id).endsWith(suff));
+      if (f) {
+        actions.selectFriend(f.id);
+        setTab('friends');
+        return;
+      }
+      setNotFoundSlug(slug);
+      setCollisionCandidates(collisions || []);
+      setTab('friends');
+      return;
+    }
+
+    // event route (kept)
     const eventMatch = as.match(/\/dunbar\/event\/([^/?#]+)/);
     if (eventMatch) {
       const slug = eventMatch[1];
@@ -169,12 +223,6 @@ export default function DunbarApp() {
         setTab('events');
         actions.selectEvent(e.id);
       }
-      return;
-    }
-    // search route
-    const searchMatch = as.match(/\/dunbar\/search/);
-    if (searchMatch) {
-      setTab('search');
       return;
     }
   }, [router?.asPath, friends, derived.eventIndex, actions]);
@@ -190,6 +238,23 @@ export default function DunbarApp() {
       </div>
     );
   }
+
+  // Path-only URL sync per spec:
+  // /dunbar (events) • /dunbar/friends • /dunbar/friends/:slug • /dunbar/orbits • /dunbar/network
+  // Note: search & stats have no dedicated paths; don't touch URL for them to avoid snap-back.
+  const handleTabChange = (nextTab) => {
+    setTab(nextTab);
+    if (nextTab === 'friends') {
+      router.replace('/dunbar/friends', undefined, { shallow: true, scroll: false });
+    } else if (nextTab === 'orbits') {
+      router.replace('/dunbar/orbits', undefined, { shallow: true, scroll: false });
+    } else if (nextTab === 'network') {
+      router.replace('/dunbar/network', undefined, { shallow: true, scroll: false });
+    } else if (nextTab === 'events') {
+      router.replace('/dunbar', undefined, { shallow: true, scroll: false });
+    }
+    // For 'search' and 'stats' do nothing to URL (stay on current path)
+  };
 
   return (
     <div className={styles.container}>
@@ -213,7 +278,37 @@ export default function DunbarApp() {
         </div>
       </div>
 
-      <Tabs tab={tab} setTab={setTab} />
+      {/* Not-found / collisions banner (friends slug) */}
+      {notFoundSlug ? (
+        <div className={styles.banner} style={{ marginBottom: 8 }}>
+          {collisionCandidates.length > 1 ? (
+            <>
+              Multiple friends share the slug “{notFoundSlug}”. This is suspicious — consider renaming duplicates.
+              <div className={styles.row} style={{ marginTop: 6, flexWrap: 'wrap' }}>
+                {collisionCandidates.slice(0, 6).map((f) => (
+                  <button
+                    key={f.id}
+                    className={styles.btnSecondary}
+                    onClick={() => {
+                      actions.selectFriend(f.id);
+                      setNotFoundSlug('');
+                      setCollisionCandidates([]);
+                      // update URL to pretty /dunbar/friends/:slug for the chosen one
+                      router.push(`/dunbar/friends/${friendSlug(f)}`, undefined, { shallow: true });
+                    }}
+                  >
+                    Open “{f.name}”
+                  </button>
+                ))}
+              </div>
+            </>
+          ) : (
+            <>Friend “{notFoundSlug}” not found. Showing Friends list.</>
+          )}
+        </div>
+      ) : null}
+
+      <Tabs tab={tab} onTabChange={handleTabChange} />
 
       {tab === 'friends' && (
         <div className={styles.twoCol}>
@@ -221,7 +316,18 @@ export default function DunbarApp() {
             <FriendsList
               friends={friends}
               selectedFriendId={selectedFriendId}
-              onSelect={(id) => actions.selectFriend(id)}
+              onSelect={(id) => {
+                actions.selectFriend(id);
+                const f = friends.find((x) => x.id === id);
+                if (f) {
+                  // Pretty URL for friend selection within Friends tab (no remount)
+                  router.replace(
+                    `/dunbar/friends/${friendSlug(f)}`,
+                    undefined,
+                    { shallow: true, scroll: false }
+                  );
+                }
+              }}
               onAddFriend={(name) => actions.addFriend(name)}
               onRemoveFriend={(id) => actions.removeFriend(id)}
               onRename={(id, name) => actions.renameFriend(id, name)}

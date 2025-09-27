@@ -96,16 +96,29 @@ export function eventSlug(evOrTitle, idMaybe) {
   return `${slugify(title)}-${id.slice(-6)}`;
 }
 
-// Friend slug helper: name slug + short id suffix
-export function friendSlug(friendOrName, idMaybe) {
-  if (typeof friendOrName === 'object' && friendOrName) {
-    const name = friendOrName.name || '';
-    const id = friendOrName.id || '';
-    return `${slugify(name)}-${String(id).slice(-6)}`;
-  }
-  const name = String(friendOrName || '');
-  const id = String(idMaybe || '');
-  return `${slugify(name)}-${id.slice(-6)}`;
+/**
+ * Friend slug helper:
+ * New policy: slug is just the kebab-cased name (no id suffix).
+ * This keeps URLs pretty and stable under /dunbar/friends/:slug
+ */
+export function friendSlug(friendOrName) {
+  const name = typeof friendOrName === 'object' && friendOrName ? (friendOrName.name || '') : String(friendOrName || '');
+  return slugify(name);
+}
+
+/**
+ * Resolve friend by slugified name.
+ * - Returns { match, collisions }:
+ *   - match: the unique friend if exactly one slug matches; otherwise null
+ *   - collisions: array of friends if multiple share the same slug (sus → prompt user to rename)
+ */
+export function resolveFriendBySlug(friends = [], slug = '') {
+  const s = String(slug || '').toLowerCase().trim();
+  if (!s) return { match: null, collisions: [] };
+  const matches = friends.filter((f) => slugify(f.name) === s);
+  if (matches.length === 1) return { match: matches[0], collisions: [] };
+  if (matches.length > 1) return { match: null, collisions: matches };
+  return { match: null, collisions: [] };
 }
 
 // Quick-date helpers (ISO YYYY-MM-DD) — Paris local calendar

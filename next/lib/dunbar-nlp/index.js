@@ -293,9 +293,21 @@ export async function extractTopics(
   docs = [],
   { topics = 5, termsPerTopic = 6, lang = null } = {}
 ) {
-  // Attempt dynamic LDA if user installs a tiny LDA package like 'lda'
+  // Feature flag: disable LDA by default to prevent bundler warnings if package isn't installed
+  // Enable by setting NEXT_PUBLIC_ENABLE_LDA=true in env and adding `yarn add lda`
+  if (!process.env.NEXT_PUBLIC_ENABLE_LDA) {
+    return fallbackTopics(docs, { topics, termsPerTopic, lang });
+  }
+
+  // Attempt dynamic LDA if enabled and available
   try {
-    const mod = await import('lda'); // will throw if not installed
+    // Avoid Next/Webpack trying to statically resolve 'lda' during build:
+    // - Use eval(import)
+    // - Avoid literal specifier by constructing the string
+    // eslint-disable-next-line no-eval
+    const dynamicImport = (0, eval)('import');
+    const spec = 'ld' + 'a';
+    const mod = await dynamicImport(spec);
     const lda = mod.default || mod;
     // 'lda' expects an array of documents (strings). Signature: lda(docs, numberOfTopics, termsPerTopic, alpha?, eta?, random?)
     const topicSets = lda(
