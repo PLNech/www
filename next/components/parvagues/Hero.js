@@ -9,41 +9,51 @@ export default function Hero() {
           src="/images/parvagues/lives/2024/ccc_release_party/poster.png"
           alt=""
           fill
-          className="object-cover opacity-25 filter brightness-75"
+          className="object-cover opacity-10"
           priority
-          quality={60}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[var(--surface)] via-[var(--surface)]/70 to-[var(--surface)]" />
+        {/* Heavy overlay to kill poster text bleed */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: 'linear-gradient(to bottom, var(--surface) 0%, rgba(10,10,10,0.85) 40%, rgba(10,10,10,0.85) 60%, var(--surface) 100%)',
+          }}
+        />
       </div>
 
       {/* Content */}
-      <div className="relative z-10 text-center px-6 max-w-3xl">
+      <div className="relative z-10 text-center px-6 max-w-4xl">
         <h1
-          className="font-display text-[clamp(4rem,15vw,10rem)] font-extrabold leading-[0.85] tracking-tight"
+          className="font-display font-extrabold leading-none tracking-tight"
           style={{
+            fontSize: 'clamp(5rem, 15vw, 12rem)',
             textShadow: '0 0 80px rgba(217,0,255,0.2), 0 0 160px rgba(217,0,255,0.08)',
           }}
         >
           ParVagues
         </h1>
 
-        <div className="h-px w-24 mx-auto bg-gradient-to-r from-transparent via-[var(--neon-high)]/40 to-transparent mt-8 mb-8" />
+        <div
+          className="mx-auto mt-8 mb-8"
+          style={{ width: '6rem', height: '1px', background: 'linear-gradient(to right, transparent, rgba(217,0,255,0.4), transparent)' }}
+        />
 
-        <p className="text-base md:text-lg text-[var(--text-muted)] italic leading-relaxed max-w-xl mx-auto">
+        <p className="text-base md:text-lg italic leading-relaxed max-w-xl mx-auto" style={{ color: 'var(--text-muted)' }}>
           ParVagues, c&apos;est des ondes qui naissent dans un océan binaire
           pour parfois s&apos;échouer sur vos plages sonores.
         </p>
 
-        <div className="mt-14 flex flex-col sm:flex-row gap-4 justify-center">
+        <div className="mt-14 flex flex-col sm:flex-row gap-4 justify-center items-center">
           <a
             href="#tour"
-            className="px-8 py-3.5 bg-white text-[var(--surface)] font-display font-bold text-sm tracking-[0.15em] uppercase rounded-full hover:shadow-[0_0_30px_rgba(255,255,255,0.15)] transition-all duration-300"
+            className="inline-block px-8 py-3.5 bg-white font-display font-bold text-sm tracking-widest uppercase rounded-full transition-all duration-300 hover:shadow-lg"
+            style={{ color: 'var(--surface)' }}
           >
             On Tour
           </a>
           <a
             href="#music"
-            className="px-8 py-3.5 border border-white/25 text-white font-display font-bold text-sm tracking-[0.15em] uppercase rounded-full hover:bg-white/10 hover:border-white/50 transition-all duration-300"
+            className="inline-block px-8 py-3.5 border border-white/25 text-white font-display font-bold text-sm tracking-widest uppercase rounded-full hover:bg-white/10 hover:border-white/50 transition-all duration-300"
           >
             Écouter
           </a>
@@ -52,7 +62,7 @@ export default function Hero() {
 
       {/* Scroll indicator */}
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10">
-        <div className="w-px h-12 bg-gradient-to-b from-transparent to-white/30 animate-pulse" />
+        <div className="animate-pulse" style={{ width: '1px', height: '3rem', background: 'linear-gradient(to bottom, transparent, rgba(255,255,255,0.3))' }} />
       </div>
     </section>
   );

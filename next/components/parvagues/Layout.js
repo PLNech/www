@@ -36,7 +36,7 @@ export default function Layout({ children, title = 'ParVagues' }) {
       <Head>
         <title>{title}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="ParVagues — Livecoding de musique électronique. Ondes binaires, plages sonores." />
+        <meta name="description" content="ParVagues - Livecoding de musique électronique. Ondes binaires, plages sonores." />
         <meta property="og:title" content={title} />
         <meta property="og:type" content="music.musician" />
         <link rel="icon" href="/images/parvagues/logo.png" />

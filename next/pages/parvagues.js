@@ -8,7 +8,7 @@ import BookingForm from '@/components/parvagues/BookingForm';
 
 export default function ParVagues({ lives }) {
   return (
-    <Layout title="ParVagues — Musique Algorithmique">
+    <Layout title="ParVagues - Musique Algorithmique">
       <Hero />
       <TourTimeline lives={lives} />
       <MusicSection />

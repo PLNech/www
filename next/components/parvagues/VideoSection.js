@@ -4,7 +4,7 @@ import { FaPlay } from 'react-icons/fa';
 const videos = [
   {
     id: 'toplap-fromscratch-dec2025-parvagues',
-    title: 'From Scratch — Jungle 🐅',
+    title: 'From Scratch: Jungle 🐅',
     subtitle: 'TOPLAP Stream · Orléans',
     date: 'Déc 2025',
   },

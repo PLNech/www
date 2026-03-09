@@ -100,7 +100,10 @@ const streamingPlatforms = [
 function AlbumCard({ album }) {
   return (
     <div className="group">
-      <div className="aspect-square relative rounded-xl overflow-hidden mb-5 bg-[var(--surface-raised)]">
+      <div
+        className="relative rounded-xl overflow-hidden mb-5"
+        style={{ aspectRatio: '1', backgroundColor: 'var(--surface-raised)' }}
+      >
         <Image
           src={album.image}
           alt={album.title}

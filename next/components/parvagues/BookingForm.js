@@ -31,7 +31,7 @@ export default function BookingForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = new FormData(e.target);
-    const subject = encodeURIComponent(`Booking: ${data.get('eventType') || 'Inquiry'} — ${data.get('venue') || 'TBD'}`);
+    const subject = encodeURIComponent(`Booking: ${data.get('eventType') || 'Inquiry'} - ${data.get('venue') || 'TBD'}`);
     const body = encodeURIComponent(
       `Nom: ${data.get('name')}\nEmail: ${data.get('email')}\nType: ${data.get('eventType')}\nDate: ${data.get('date')}\nLieu: ${data.get('venue')}\nBudget: ${data.get('budget')}\n\n${data.get('message')}`
     );
