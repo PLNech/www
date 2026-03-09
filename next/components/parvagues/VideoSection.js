@@ -63,14 +63,21 @@ function VideoCard({ video }) {
     <div>
       <button
         onClick={() => setLoaded(true)}
-        className="aspect-video w-full bg-white/[0.03] border border-white/[0.06] rounded-xl flex flex-col items-center justify-center gap-3 cursor-pointer group transition-all duration-300 hover:bg-white/[0.05] hover:border-white/[0.12]"
+        className="aspect-video w-full rounded-xl overflow-hidden relative cursor-pointer group transition-all duration-300 hover:ring-1 hover:ring-[var(--neon-high)]/30"
       >
-        <div className="w-14 h-14 rounded-full bg-white/[0.06] flex items-center justify-center group-hover:bg-[var(--neon-high)]/15 group-hover:scale-110 transition-all duration-300">
-          <FaPlay className="w-4 h-4 text-white/60 group-hover:text-white ml-0.5 transition-colors" />
+        {/* Thumbnail from archive.org */}
+        <img
+          src={`https://archive.org/services/img/${video.id}`}
+          alt={video.title}
+          className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-300"
+          loading="lazy"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
+          <div className="w-14 h-14 rounded-full bg-black/40 backdrop-blur-sm border border-white/10 flex items-center justify-center group-hover:bg-[var(--neon-high)]/20 group-hover:scale-110 group-hover:border-[var(--neon-high)]/30 transition-all duration-300">
+            <FaPlay className="w-4 h-4 text-white/80 group-hover:text-white ml-0.5 transition-colors" />
+          </div>
         </div>
-        <span className="text-[11px] text-[var(--text-muted)] tracking-wider group-hover:text-white/60 transition-colors">
-          archive.org
-        </span>
       </button>
       <div className="mt-3">
         <h4 className="font-display font-semibold text-sm">{video.title}</h4>
@@ -82,7 +89,8 @@ function VideoCard({ video }) {
 
 export default function VideoSection() {
   return (
-    <section id="video" className="max-w-5xl mx-auto px-6 py-24 md:py-32">
+    <section id="video" className="reveal section-alt py-24 md:py-32">
+      <div className="max-w-5xl mx-auto px-6">
       <h2 className="font-display text-2xl md:text-3xl font-bold tracking-[0.15em] uppercase">
         Video
       </h2>
@@ -92,6 +100,7 @@ export default function VideoSection() {
         {videos.map((video) => (
           <VideoCard key={video.id} video={video} />
         ))}
+      </div>
       </div>
     </section>
   );

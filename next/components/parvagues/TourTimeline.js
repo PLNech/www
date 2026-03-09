@@ -21,7 +21,8 @@ export default function TourTimeline({ lives }) {
   });
 
   return (
-    <section id="tour" className="max-w-5xl mx-auto px-6 py-24 md:py-32">
+    <section id="tour" className="reveal section-alt py-24 md:py-32">
+      <div className="max-w-5xl mx-auto px-6">
       <h2 className="font-display text-2xl md:text-3xl font-bold tracking-widest uppercase">
         On Tour
       </h2>
@@ -96,6 +97,7 @@ export default function TourTimeline({ lives }) {
           </div>
         </div>
       ))}
+      </div>
     </section>
   );
 }

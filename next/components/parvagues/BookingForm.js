@@ -40,7 +40,8 @@ export default function BookingForm() {
   };
 
   return (
-    <section id="booking" className="max-w-5xl mx-auto px-6 py-24 md:py-32">
+    <section id="booking" className="reveal py-24 md:py-32">
+      <div className="max-w-5xl mx-auto px-6">
       <h2 className="font-display text-2xl md:text-3xl font-bold tracking-[0.15em] uppercase">
         Booking
       </h2>
@@ -86,9 +87,9 @@ export default function BookingForm() {
           </div>
 
           <div className="grid sm:grid-cols-2 gap-5">
-            <select name="eventType" required className={selectClass}>
+            <select name="eventType" required defaultValue="" className={selectClass}>
               {eventTypes.map((t) => (
-                <option key={t.value} value={t.value} disabled={!t.value}>
+                <option key={t.value} value={t.value} disabled={!t.value} hidden={!t.value}>
                   {t.label}
                 </option>
               ))}
@@ -107,9 +108,9 @@ export default function BookingForm() {
             className={inputClass}
           />
 
-          <select name="budget" className={selectClass}>
+          <select name="budget" defaultValue="" className={selectClass}>
             {budgetRanges.map((b) => (
-              <option key={b.value} value={b.value} disabled={!b.value}>
+              <option key={b.value} value={b.value} disabled={!b.value} hidden={!b.value}>
                 {b.label}
               </option>
             ))}
@@ -124,13 +125,14 @@ export default function BookingForm() {
 
           <button
             type="submit"
-            className="flex items-center gap-3 px-8 py-3.5 bg-white text-[var(--surface)] font-display font-bold text-sm tracking-[0.15em] uppercase rounded-full hover:shadow-[0_0_30px_rgba(255,255,255,0.15)] transition-all duration-300"
+            className="flex items-center gap-3 px-8 py-3.5 bg-white text-[var(--surface)] font-display font-bold text-sm tracking-[0.15em] uppercase rounded-full hover:bg-[var(--neon-high)] hover:text-white hover:shadow-[0_0_30px_rgba(217,0,255,0.3)] transition-all duration-300"
           >
             <FaEnvelope className="w-4 h-4" />
             Envoyer
           </button>
         </form>
       )}
+      </div>
     </section>
   );
 }

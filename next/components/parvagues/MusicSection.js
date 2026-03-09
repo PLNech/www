@@ -113,14 +113,14 @@ function AlbumCard({ album }) {
         />
       </div>
       <h4 className="font-display font-semibold text-base mb-3">{album.title}</h4>
-      <div className="flex flex-wrap gap-x-4 gap-y-1.5">
+      <div className="flex flex-wrap gap-2">
         {album.links.map((link) => (
           <a
             key={link.platform}
             href={link.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-xs text-[var(--text-muted)] hover:text-[var(--neon-high)] transition-colors duration-200 tracking-wide"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-[11px] text-[var(--text-muted)] border border-white/[0.08] rounded-full hover:text-white hover:border-[var(--neon-high)]/40 hover:bg-[var(--neon-high)]/5 transition-all duration-200 tracking-wide"
           >
             {link.platform}
           </a>
@@ -191,14 +191,15 @@ export default function MusicSection() {
   const activePlatform = streamingPlatforms.find((p) => p.id === activeEmbed);
 
   return (
-    <section id="music" className="max-w-5xl mx-auto px-6 py-24 md:py-32">
+    <section id="music" className="reveal py-24 md:py-32">
+      <div className="max-w-5xl mx-auto px-6">
       {/* Releases */}
       <h2 className="font-display text-2xl md:text-3xl font-bold tracking-[0.15em] uppercase">
         Releases
       </h2>
       <div className="h-px bg-white/10 mt-4 mb-12" />
 
-      <div className="grid md:grid-cols-2 gap-10 md:gap-12 mb-28">
+      <div className="grid md:grid-cols-2 gap-10 md:gap-12 mb-16">
         {albums.map((album) => (
           <AlbumCard key={album.id} album={album} />
         ))}
@@ -233,11 +234,14 @@ export default function MusicSection() {
       </div>
 
       {activePlatform && (
-        <StreamingEmbed
-          platform={activePlatform}
-          onClose={() => setActiveEmbed(null)}
-        />
+        <div className="mt-2 animate-[fadeIn_0.3s_ease-out]">
+          <StreamingEmbed
+            platform={activePlatform}
+            onClose={() => setActiveEmbed(null)}
+          />
+        </div>
       )}
+      </div>
     </section>
   );
 }

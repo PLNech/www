@@ -2,7 +2,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Syne } from 'next/font/google';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { FaEnvelope, FaInstagram, FaYoutube, FaGithub } from 'react-icons/fa';
 import { SiBluesky, SiMastodon } from 'react-icons/si';
 
@@ -31,8 +31,24 @@ export default function Layout({ children, title = 'ParVagues' }) {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  // Scroll-triggered reveal for sections
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+    );
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div className={`${syne.variable} min-h-screen bg-[var(--surface)] text-[var(--text-primary)] selection:bg-[var(--neon-high)]/30 selection:text-white`}>
+    <div className={`${syne.variable} noise-overlay min-h-screen bg-[var(--surface)] text-[var(--text-primary)] selection:bg-[var(--neon-high)]/30 selection:text-white`}>
       <Head>
         <title>{title}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />

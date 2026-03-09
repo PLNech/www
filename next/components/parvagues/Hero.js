@@ -9,7 +9,7 @@ export default function Hero() {
           src="/images/parvagues/lives/2024/ccc_release_party/poster.png"
           alt=""
           fill
-          className="object-cover opacity-10"
+          className="object-cover opacity-20"
           priority
         />
         {/* Heavy overlay to kill poster text bleed */}
@@ -26,7 +26,7 @@ export default function Hero() {
         <h1
           className="font-display font-extrabold leading-none tracking-tight"
           style={{
-            fontSize: 'clamp(5rem, 15vw, 12rem)',
+            fontSize: 'clamp(3rem, 15vw, 12rem)',
             textShadow: '0 0 80px rgba(217,0,255,0.2), 0 0 160px rgba(217,0,255,0.08)',
           }}
         >
