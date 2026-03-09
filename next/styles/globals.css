@@ -1,4 +1,8 @@
-/* Add the ParVagues color variables globally */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ParVagues palette */
 :root {
   --neon-down: #8900b3;
   --neon-low: #a700d1;
@@ -6,7 +10,20 @@
   --coral: #ff3d7b;
   --biomod: #5bc091;
   --cigarette: #ff8c00;
-} 
+  --surface: #0a0a0a;
+  --surface-raised: #111111;
+  --text-primary: #e5e5e5;
+  --text-muted: #737373;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 4.5rem;
+}
+
+.font-display {
+  font-family: var(--font-syne), system-ui, sans-serif;
+}
 
 
 /* Shine animation for album covers */
@@ -14,6 +31,7 @@
   0% {
     transform: translateX(-100%);
   }
+
   100% {
     transform: translateX(100%);
   }
