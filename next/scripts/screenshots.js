@@ -13,9 +13,7 @@
  * Also captures anchored sections (#tour, #music, #video, #booking).
  */
 // Use @playwright/test's bundled browser launcher
-const { chromium } = require('playwright-core');
-// If playwright-core isn't available, fallback:
-// yarn add -D playwright-core
+const { chromium } = require('playwright');
 const path = require('path');
 const fs = require('fs');
 
@@ -32,7 +30,9 @@ const SECTIONS = ['tour', 'music', 'video', 'booking'];
 async function captureViewport({ name, width, height }) {
   const browser = await chromium.launch();
   const page = await browser.newPage({ viewport: { width, height } });
-  await page.goto(BASE_URL, { waitUntil: 'networkidle', timeout: 15000 });
+  await page.goto(BASE_URL, { waitUntil: 'load', timeout: 30000 });
+  // Wait for content to render
+  await new Promise((r) => setTimeout(r, 2000));
 
   // Full-page screenshot
   await page.screenshot({ path: path.join(OUT_DIR, `${name}-full.png`), fullPage: true });
