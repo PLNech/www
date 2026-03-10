@@ -30,9 +30,9 @@ const SECTIONS = ['tour', 'music', 'video', 'booking'];
 async function captureViewport({ name, width, height }) {
   const browser = await chromium.launch();
   const page = await browser.newPage({ viewport: { width, height } });
-  await page.goto(BASE_URL, { waitUntil: 'load', timeout: 30000 });
-  // Wait for content to render
-  await new Promise((r) => setTimeout(r, 2000));
+  await page.goto(BASE_URL, { waitUntil: 'domcontentloaded', timeout: 60000 });
+  // Wait for content to render + images to load
+  await new Promise((r) => setTimeout(r, 3000));
 
   // Full-page screenshot
   await page.screenshot({ path: path.join(OUT_DIR, `${name}-full.png`), fullPage: true });

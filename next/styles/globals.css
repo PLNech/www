@@ -17,6 +17,12 @@
   --text-muted: #737373;
 }
 
+html, body {
+  background-color: #0a0a0a;
+  color: #e5e5e5;
+  color-scheme: dark;
+}
+
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 4.5rem;
@@ -62,14 +68,14 @@ html {
   background-color: #0e0e0e;
 }
 
-/* Scroll-triggered reveal */
-.reveal {
+/* Scroll-triggered reveal — only animate after JS loads */
+.reveal-ready .reveal {
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
-.reveal.visible {
+.reveal-ready .reveal.visible {
   opacity: 1;
   transform: translateY(0);
 }

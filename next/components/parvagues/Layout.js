@@ -2,7 +2,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Syne } from 'next/font/google';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { FaEnvelope, FaInstagram, FaYoutube, FaGithub } from 'react-icons/fa';
 import { SiBluesky, SiMastodon } from 'react-icons/si';
 
@@ -31,8 +31,11 @@ export default function Layout({ children, title = 'ParVagues' }) {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Scroll-triggered reveal for sections
+  // Scroll-triggered reveal for sections (only after JS hydration)
   useEffect(() => {
+    // Mark wrapper so CSS knows JS is ready — sections stay visible without JS
+    document.documentElement.classList.add('reveal-ready');
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -52,6 +55,7 @@ export default function Layout({ children, title = 'ParVagues' }) {
       <Head>
         <title>{title}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="color-scheme" content="dark" />
         <meta name="description" content="ParVagues - Livecoding de musique électronique. Ondes binaires, plages sonores." />
         <meta property="og:title" content={title} />
         <meta property="og:type" content="music.musician" />
