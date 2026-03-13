@@ -645,14 +645,14 @@ export default function Fleurs() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta property="og:title" content="La Fête des Fleurs" />
         <meta property="og:description" content="21 mars · Jour du Printemps · Dès 17 h · Éclosion collective." />
-        <meta property="og:image" content="https://next-eta-three-93.vercel.app/og-fleurs.png" />
+        <meta property="og:image" content="https://me.nech.pl/og-fleurs.png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="La Fête des Fleurs" />
         <meta name="twitter:description" content="21 mars · Jour du Printemps · Dès 17 h" />
-        <meta name="twitter:image" content="https://next-eta-three-93.vercel.app/og-fleurs.png" />
+        <meta name="twitter:image" content="https://me.nech.pl/og-fleurs.png" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
