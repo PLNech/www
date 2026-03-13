@@ -38,6 +38,9 @@ export default function Fleurs() {
         let fallingPetals = [];
         let t = 0;
         let frameDt = 0;
+        let grassGfx;
+        let grassFrame = 99; // force immediate first draw
+        let isMobile = false;
         const WIND_SCALE = 0.003;
         const WIND_SPEED = 0.35;
         let reducedMotion = false;
@@ -255,7 +258,7 @@ export default function Fleurs() {
               }
               // Shed petals while wilting
               this.petalTimer -= frameDt;
-              if (this.petalTimer <= 0 && vitality > 0.05) {
+              if (this.petalTimer <= 0 && vitality > 0.05 && fallingPetals.length < (isMobile ? 30 : 50)) {
                 this.petalTimer = p.random(0.3, 1.0);
                 const outer = this.strokes.filter((s) => !s.isCenter);
                 if (outer.length > 0) {
@@ -341,7 +344,8 @@ export default function Fleurs() {
             this.alpha = p.random(45, 80);
           }
 
-          draw() {
+          draw(g) {
+            const ctx = g || p;
             // Noise-driven wave reveal — grass patches appear progressively
             const reveal = t * 0.55 - p.noise(this.x * 0.004, this.y * 0.004) * 3;
             if (reveal < 0) return;
@@ -351,9 +355,9 @@ export default function Fleurs() {
             const angle = this.baseAngle + wind;
             const ex = this.x + Math.cos(angle) * this.len;
             const ey = this.y + Math.sin(angle) * this.len;
-            p.stroke(this.hue, this.sat, this.bri, this.alpha * revealFade);
-            p.strokeWeight(this.weight);
-            p.line(this.x, this.y, ex, ey);
+            ctx.stroke(this.hue, this.sat, this.bri, this.alpha * revealFade);
+            ctx.strokeWeight(this.weight);
+            ctx.line(this.x, this.y, ex, ey);
           }
         }
 
@@ -444,8 +448,9 @@ export default function Fleurs() {
           const canvas = p.createCanvas(W, H);
           canvas.style("display", "block");
           p.colorMode(p.HSB, 360, 100, 100, 100);
-          p.pixelDensity(Math.min(window.devicePixelRatio, 2));
-          p.frameRate(reducedMotion ? 1 : 30);
+          isMobile = W < 768;
+          p.pixelDensity(isMobile ? 1 : Math.min(window.devicePixelRatio, 2));
+          p.frameRate(reducedMotion ? 1 : (isMobile ? 24 : 30));
 
           buildGround();
           buildVignette();
@@ -454,7 +459,7 @@ export default function Fleurs() {
           const centerY = H * 0.4;
           const clearingR = Math.min(W, H) * 0.32;
 
-          const grassTarget = Math.floor((W * H) / 500);
+          const grassTarget = Math.floor((W * H) / (isMobile ? 900 : 600));
           for (let i = 0; i < grassTarget; i++) {
             const x = p.random(W);
             const y = p.random(H);
@@ -489,6 +494,9 @@ export default function Fleurs() {
             pollen.push(new Pollen(true));
           }
 
+          grassGfx = p.createGraphics(W, H);
+          grassGfx.colorMode(p.HSB, 360, 100, 100, 100);
+
           if (reducedMotion) {
             t = 25;
             drawFrame();
@@ -501,9 +509,16 @@ export default function Fleurs() {
         function drawFrame() {
           p.image(groundBuffer, 0, 0, W, H);
 
-          for (const blade of grasses) {
-            blade.draw();
+          // Grass rendered to offscreen buffer, refreshed periodically
+          grassFrame++;
+          if (grassFrame >= (isMobile ? 5 : 3)) {
+            grassFrame = 0;
+            grassGfx.clear();
+            for (const blade of grasses) {
+              blade.draw(grassGfx);
+            }
           }
+          p.image(grassGfx, 0, 0, W, H);
           p.noStroke();
 
           for (const flower of flowers) {
@@ -587,9 +602,14 @@ export default function Fleurs() {
           if (!containerRef.current) return;
           W = containerRef.current.offsetWidth;
           H = containerRef.current.offsetHeight;
+          isMobile = W < 768;
           p.resizeCanvas(W, H);
           buildGround();
           buildVignette();
+          if (grassGfx) grassGfx.remove();
+          grassGfx = p.createGraphics(W, H);
+          grassGfx.colorMode(p.HSB, 360, 100, 100, 100);
+          grassFrame = 99;
         };
       };
 
