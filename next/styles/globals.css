@@ -1,7 +1,4 @@
-@import "tailwindcss";
-
-@source "../pages/**/*.{js,ts,jsx,tsx}";
-@source "../components/**/*.{js,ts,jsx,tsx}";
+@import "tailwindcss" source("../");
 
 /* ParVagues palette */
 :root {
