@@ -8,7 +8,7 @@ export default function DunbarEventPage() {
     'Dunbar — Event details in the privacy-first relationship navigator prototype. Local-only data, networks, events, and orbits.';
 
   return (
-    <div className="container">
+    <div className="max-w-7xl mx-auto px-4">
       <Layout>
         <Head>
           <title>Dunbar — Event</title>

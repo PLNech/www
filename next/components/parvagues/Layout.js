@@ -51,7 +51,7 @@ export default function Layout({ children, title = 'ParVagues' }) {
   }, []);
 
   return (
-    <div className={`${syne.variable} noise-overlay min-h-screen bg-[var(--surface)] text-[var(--text-primary)] selection:bg-[var(--neon-high)]/30 selection:text-white`}>
+    <div className={`parvagues-root ${syne.variable} noise-overlay min-h-screen bg-[var(--surface)] text-[var(--text-primary)] selection:bg-[var(--neon-high)]/30 selection:text-white`}>
       <Head>
         <title>{title}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />

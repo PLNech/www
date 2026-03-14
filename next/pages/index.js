@@ -22,7 +22,7 @@ export async function getStaticProps() {
 
 export default function Home({ posts, talks }) {
   return (
-    <div className="container">
+    <div className="max-w-7xl mx-auto px-4">
       <Layout home>
         <Head>
           <meta name="viewport" content="width=device-width, initial-scale=1" />

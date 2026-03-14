@@ -16,7 +16,7 @@ import DunbarApp from '@/components/dunbar/DunbarApp';
  */
 export default function DunbarCatchAllPage() {
   return (
-    <div className="container">
+    <div className="max-w-7xl mx-auto px-4">
       <Layout>
         <Head>
           <title>Dunbar</title>

@@ -12,12 +12,13 @@ body {
   box-sizing: border-box;
 }
 
-a {
+/* Scope legacy element styles to non-parvagues pages */
+body:not(:has(.parvagues-root)) a {
   color: #0070f3;
   text-decoration: none;
 }
 
-a:hover {
+body:not(:has(.parvagues-root)) a:hover {
   text-decoration: underline;
 }
 
@@ -26,16 +27,12 @@ img {
   display: block;
 }
 
-header {
+body:not(:has(.parvagues-root)) header {
   margin-bottom: 2em;
 }
 
-main h2 {
+body:not(:has(.parvagues-root)) main h2 {
   margin-bottom: 1em;
-}
-
-main h3 {
-  /* margin: 1em 0; */
 }
 
 h4 {
@@ -50,7 +47,7 @@ p.code {
   font-family: monospace;
 }
 
-section {
+body:not(:has(.parvagues-root)) section {
   margin-bottom: 3em;
 }
 
@@ -58,7 +55,7 @@ small {
   font-size: 1rem;
 }
 
-footer {
+body:not(:has(.parvagues-root)) footer {
   margin-top: 4em;
   text-align: center;
   color: #228;

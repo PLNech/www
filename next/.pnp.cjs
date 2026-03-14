@@ -27,7 +27,6 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./",\
         "packageDependencies": [\
           ["@playwright/test", "npm:1.57.0"],\
-          ["@tailwindcss/aspect-ratio", "virtual:599f9545309f05166d506895056809d0f5971d8f55d13475681739816b4bb6745eb725b53ed2108e22ea4ce46b8a2c491882d38a9948455117b545da3880eea7#npm:0.4.2"],\
           ["@tailwindcss/postcss", "npm:4.1.17"],\
           ["@testing-library/dom", "npm:10.4.1"],\
           ["@testing-library/jest-dom", "npm:6.9.1"],\
@@ -37,7 +36,6 @@ const RAW_RUNTIME_STATE =
           ["@types/node", "npm:24.4.0"],\
           ["@types/react", "npm:18.3.27"],\
           ["autoprefixer", "virtual:599f9545309f05166d506895056809d0f5971d8f55d13475681739816b4bb6745eb725b53ed2108e22ea4ce46b8a2c491882d38a9948455117b545da3880eea7#npm:10.4.22"],\
-          ["bootstrap", "virtual:599f9545309f05166d506895056809d0f5971d8f55d13475681739816b4bb6745eb725b53ed2108e22ea4ce46b8a2c491882d38a9948455117b545da3880eea7#npm:5.3.8"],\
           ["classnames", "npm:2.5.1"],\
           ["d3-force", "npm:3.0.0"],\
           ["d3-zoom", "npm:3.0.0"],\
@@ -2294,28 +2292,6 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
-    ["@tailwindcss/aspect-ratio", [\
-      ["npm:0.4.2", {\
-        "packageLocation": "../../../../.yarn/berry/cache/@tailwindcss-aspect-ratio-npm-0.4.2-f690711eea-10c0.zip/node_modules/@tailwindcss/aspect-ratio/",\
-        "packageDependencies": [\
-          ["@tailwindcss/aspect-ratio", "npm:0.4.2"]\
-        ],\
-        "linkType": "SOFT"\
-      }],\
-      ["virtual:599f9545309f05166d506895056809d0f5971d8f55d13475681739816b4bb6745eb725b53ed2108e22ea4ce46b8a2c491882d38a9948455117b545da3880eea7#npm:0.4.2", {\
-        "packageLocation": "./.yarn/__virtual__/@tailwindcss-aspect-ratio-virtual-82a3764de6/5/.yarn/berry/cache/@tailwindcss-aspect-ratio-npm-0.4.2-f690711eea-10c0.zip/node_modules/@tailwindcss/aspect-ratio/",\
-        "packageDependencies": [\
-          ["@tailwindcss/aspect-ratio", "virtual:599f9545309f05166d506895056809d0f5971d8f55d13475681739816b4bb6745eb725b53ed2108e22ea4ce46b8a2c491882d38a9948455117b545da3880eea7#npm:0.4.2"],\
-          ["@types/tailwindcss", null],\
-          ["tailwindcss", "npm:4.1.17"]\
-        ],\
-        "packagePeers": [\
-          "@types/tailwindcss",\
-          "tailwindcss"\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
     ["@tailwindcss/node", [\
       ["npm:4.1.17", {\
         "packageLocation": "../../../../.yarn/berry/cache/@tailwindcss-node-npm-4.1.17-e51ba6d766-10c0.zip/node_modules/@tailwindcss/node/",\
@@ -3975,28 +3951,6 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["bindings", "npm:1.5.0"],\
           ["file-uri-to-path", "npm:1.0.0"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["bootstrap", [\
-      ["npm:5.3.8", {\
-        "packageLocation": "../../../../.yarn/berry/cache/bootstrap-npm-5.3.8-b7bef82d06-10c0.zip/node_modules/bootstrap/",\
-        "packageDependencies": [\
-          ["bootstrap", "npm:5.3.8"]\
-        ],\
-        "linkType": "SOFT"\
-      }],\
-      ["virtual:599f9545309f05166d506895056809d0f5971d8f55d13475681739816b4bb6745eb725b53ed2108e22ea4ce46b8a2c491882d38a9948455117b545da3880eea7#npm:5.3.8", {\
-        "packageLocation": "./.yarn/__virtual__/bootstrap-virtual-54f2fafa22/5/.yarn/berry/cache/bootstrap-npm-5.3.8-b7bef82d06-10c0.zip/node_modules/bootstrap/",\
-        "packageDependencies": [\
-          ["bootstrap", "virtual:599f9545309f05166d506895056809d0f5971d8f55d13475681739816b4bb6745eb725b53ed2108e22ea4ce46b8a2c491882d38a9948455117b545da3880eea7#npm:5.3.8"],\
-          ["@popperjs/core", null],\
-          ["@types/popperjs__core", null]\
-        ],\
-        "packagePeers": [\
-          "@popperjs/core",\
-          "@types/popperjs__core"\
         ],\
         "linkType": "HARD"\
       }]\
@@ -9462,7 +9416,6 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["pln-www", "workspace:."],\
           ["@playwright/test", "npm:1.57.0"],\
-          ["@tailwindcss/aspect-ratio", "virtual:599f9545309f05166d506895056809d0f5971d8f55d13475681739816b4bb6745eb725b53ed2108e22ea4ce46b8a2c491882d38a9948455117b545da3880eea7#npm:0.4.2"],\
           ["@tailwindcss/postcss", "npm:4.1.17"],\
           ["@testing-library/dom", "npm:10.4.1"],\
           ["@testing-library/jest-dom", "npm:6.9.1"],\
@@ -9472,7 +9425,6 @@ const RAW_RUNTIME_STATE =
           ["@types/node", "npm:24.4.0"],\
           ["@types/react", "npm:18.3.27"],\
           ["autoprefixer", "virtual:599f9545309f05166d506895056809d0f5971d8f55d13475681739816b4bb6745eb725b53ed2108e22ea4ce46b8a2c491882d38a9948455117b545da3880eea7#npm:10.4.22"],\
-          ["bootstrap", "virtual:599f9545309f05166d506895056809d0f5971d8f55d13475681739816b4bb6745eb725b53ed2108e22ea4ce46b8a2c491882d38a9948455117b545da3880eea7#npm:5.3.8"],\
           ["classnames", "npm:2.5.1"],\
           ["d3-force", "npm:3.0.0"],\
           ["d3-zoom", "npm:3.0.0"],\
