@@ -1,8 +1,8 @@
 ---
 title: "AlgoRave Lyon 2025"
-date: "2025-05-25"
-time: "XX:XX"
-location: "GR TBD"
+date: "2025-05-24"
+time: "18:00"
+location: "Vaulx-en-Velin, France"
 address: " GRRRND ZERO VAULX, 56 - 60 Avenue Bohlen, Vaulx-en-Velin"
 description: "AlgoRave 18h-06h avec musique installations et performances audiovisuelles."
 ctaURL: "https://www.grrrndzero.org/index.php/2672-sam-24-05-algorave"
@@ -36,8 +36,9 @@ teasing3: |
   Tonight @ Lyon
   
 video: ""
-audio: ""
+audio: "https://parvagues.bandcamp.com/track/live-algorave-ground-zero-2025"
 archive: ""
+poster: "/images/parvagues/lives/2025/algorave-lyon/poster.jpg"
 tags: ["livecoding", "algorave", "lyon", "tidal"]
 ---
 

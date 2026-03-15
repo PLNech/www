@@ -3,8 +3,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Syne } from 'next/font/google';
 import { useState, useEffect } from 'react';
-import { FaEnvelope, FaInstagram, FaYoutube, FaGithub } from 'react-icons/fa';
-import { SiBluesky, SiMastodon } from 'react-icons/si';
+import { FaEnvelope, FaInstagram, FaYoutube, FaGitlab } from 'react-icons/fa';
+import { SiMastodon } from 'react-icons/si';
 
 const syne = Syne({
   subsets: ['latin'],
@@ -15,8 +15,7 @@ const syne = Syne({
 
 const socials = [
   { href: 'https://instagram.com/parvagues.mp3', icon: FaInstagram, label: 'Instagram' },
-  { href: 'https://bsky.app/profile/nech.pl', icon: SiBluesky, label: 'Bluesky' },
-  { href: 'https://github.com/parvagues', icon: FaGithub, label: 'GitHub' },
+  { href: 'http://nech.pl/Tidal', icon: FaGitlab, label: 'GitLab' },
   { href: 'https://youtube.com/@parvagues', icon: FaYoutube, label: 'YouTube' },
   { href: 'https://chaos.social/@PixelNoir', icon: SiMastodon, label: 'Mastodon' },
 ];

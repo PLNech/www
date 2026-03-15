@@ -1,0 +1,223 @@
+{
+  "gig": "cosmicfest",
+  "title": "Live @ CosmicFest v0",
+  "date": "2025-06-21",
+  "bpmRange": [80, 160],
+  "styleDistribution": {
+    "ambient": 1,
+    "lounge": 3,
+    "breaks": 3,
+    "techno": 2,
+    "dnb": 2,
+    "acid": 1,
+    "drill": 1,
+    "collab": 1
+  },
+  "samplePacks": [
+    { "name": "bassWarsaw", "usage": "primary bass synth across 8+ tracks" },
+    { "name": "FMRhodes1", "usage": "FM piano in insouciance, Mauerpark, and more" },
+    { "name": "airports", "usage": "granular airport ambience in Quand on Décolle" },
+    { "name": "aoc_fr", "usage": "French vocal collages in Fabuleux" },
+    { "name": "orage", "usage": "storm/thunder sample bank — bass, hats, piano, voices in Nuit d'orage" },
+    { "name": "weird_dialogs", "usage": "sci-fi movie dialogs about electricity in Bain électrique" },
+    { "name": "come_bass / come_eguitar / come_voice", "usage": "3-part band sample pack in Venons Ensemble" },
+    { "name": "suns_keys / suns_guitar / suns_voice", "usage": "Leifur James-inspired originals in L'Or Bleu" },
+    { "name": "sunny_bass / sunny_brass", "usage": "custom sunny sample pack in Sunny Side Up" },
+    { "name": "ghost", "usage": "haunted texture from 38C3 in Ghosts reprise" },
+    { "name": "rhadamanthe_melo / rhadamanthe_vocal", "usage": "melodic piano + vocal in Sept 1 and Lady Perplexity" },
+    { "name": "giorgio_syn", "usage": "Moroder tribute synth in Bain électrique and Lady Perplexity" },
+    { "name": "acidOto3092", "usage": "arpeggiated acid synth in Sunny Side Up" },
+    { "name": "moogBass", "usage": "Berlin warmth synth with Leslie/chorus in Mauerpark" },
+    { "name": "bogdan_grime", "usage": "'I'm from Cardiff!' vocals in Jeudi Drill" },
+    { "name": "jungle_breaks / breaks165", "usage": "breakbeat backbone across multiple tracks" },
+    { "name": "temptation", "usage": "melodic sliced samples in Paris" },
+    { "name": "fguitar", "usage": "granular guitar in Bain électrique" },
+    { "name": "armora", "usage": "hawk-like percussion in insouciance" },
+    { "name": "cpluck", "usage": "cello pluck bass in Sept 1" },
+    { "name": "marimba1", "usage": "stereo melody in Jeudi Drill" }
+  ],
+  "tracks": [
+    {
+      "name": "Quand on Décolle",
+      "file": "live/midi/nova/ambient/quand_on_decolle.tidal",
+      "bpm": 120,
+      "style": "ambient",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (120/60/4)", "description": "120 BPM quarter-note pulse" },
+        { "type": "sample", "code": "\"airports\"", "description": "Airport ambience sample for texture" },
+        { "type": "technique", "code": "slow 16 $ chop 16 $ \"airports\"", "description": "Slow granular chopping: 16 slices over 16 cycles" },
+        { "type": "effect", "code": "# delaybus 51 (range 0 0.8 \"^54\") # delaytime \"^34\"", "description": "MIDI-controlled delay send with variable delay time" },
+        { "type": "pattern", "code": "note (\"d3\" + scale \"mixolydian\" (\"[0 4 ... ]\" + ...))", "description": "Mixolydian bassWarsaw line with evolving variations" }
+      ]
+    },
+    {
+      "name": "Fabuleux",
+      "file": "live/midi/nova/lounge/fabuleux.tidal",
+      "bpm": 93,
+      "style": "lounge",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (93/60/4)", "description": "93 BPM, downtempo lounge" },
+        { "type": "sample", "code": "\"aoc_fr\"", "description": "French vocal collages cycled through someCyclesBy" },
+        { "type": "technique", "code": "someCyclesBy \"<0!32 1!32>\" (>| n ...)", "description": "Probabilistic sample switching across 32-cycle blocks" },
+        { "type": "pattern", "code": "note (\"[0,7(<3 5 [5 3] ...>,8,1)]\" + \"<d b4 g4 fs4>\" - 24)", "description": "Euclidean bassWarsaw, Bm-A-G-D progression" },
+        { "type": "effect", "code": "# octerbus 71 (range 0 0.9 \"^55\")", "description": "MIDI-controlled octave effect for voice pitch shifting" }
+      ]
+    },
+    {
+      "name": "Paris",
+      "file": "live/midi/nova/breaks/madeleine_de_paris.tidal",
+      "bpm": 80,
+      "style": "breaks",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (80/60/4)", "description": "80 BPM, mid-tempo breaks" },
+        { "type": "sample", "code": "\"temptation\"", "description": "Temptation melodic samples sliced for narrative" },
+        { "type": "technique", "code": "superimpose ((|* gain ...) . (# n 5) . (|+ note 12))", "description": "Acid superimposition an octave up with MIDI crossfade" },
+        { "type": "pattern", "code": "note (\"d4 a3*<1!12 2!4> ...\") # \"vec2_synth_acid\"", "description": "Acid synth D-A alternation with rare chromatic variations" },
+        { "type": "effect", "code": "# delay 0.5 # delayt \"<0.05 0.1 0.2 0.3 0.4>\" # delayfb 0.8", "description": "Evolving delay time creating shifting rhythmic echoes" }
+      ]
+    },
+    {
+      "name": "Ghosts in the T01l3ts",
+      "file": "live/collab/ccc/ghosts_in_the_toilets.tidal",
+      "bpm": 160,
+      "style": "dnb",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (160/60/4)", "description": "160 BPM fast breakbeat/jungle" },
+        { "type": "sample", "code": "\"ghost\" # n (slow 4 $ \"<0 1 2 3>\")", "description": "Ghost samples: 4 haunted variations" },
+        { "type": "pattern", "code": "note (\"<e3 fs3 <gs3 d4> <a3 df4>>\" - 12) # \"bassWarsaw\"", "description": "Dark chromatic bass with diminished intervals" },
+        { "type": "technique", "code": "slice 16 \"[0 .. 7] . <[0 .. 7]!3 [0 1 . [2 3]]>\"", "description": "16-slice break manipulation with alternate switching" },
+        { "type": "sample", "code": "\"rhadamanthe_vocal:45\"", "description": "Vocal 'self-destruct sequence' drops" }
+      ]
+    },
+    {
+      "name": "Nuit d'orage",
+      "file": "live/midi/nova/techno/techno_orage.tidal",
+      "bpm": 104,
+      "style": "techno",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (104/60/4)", "description": "104 BPM, dark techno" },
+        { "type": "sample", "code": "\"orage\"", "description": "Storm/thunder bank used across all channels" },
+        { "type": "pattern", "code": "n \"<~ 6 7 8 ... 20 ...>\" # \"orage\"", "description": "30+ storm piano samples in evolving narrative arc" },
+        { "type": "technique", "code": "slow 4 $ ply \"4 . 2 0\"", "description": "Breathing rhythm: 4 hits, 2, silence" },
+        { "type": "effect", "code": "# octersubbus 51 # octerbus 52 # crushbus 53", "description": "Triple MIDI effects stack on piano" }
+      ]
+    },
+    {
+      "name": "Bain électrique",
+      "file": "live/midi/nova/breaks/bain_electrique.tidal",
+      "bpm": 128,
+      "style": "breaks",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (128/60/4)", "description": "128 BPM classic electro breaks" },
+        { "type": "sample", "code": "\"weird_dialogs\"", "description": "Sci-fi dialogs about electricity, atomic energy, faith" },
+        { "type": "technique", "code": "slice 16 \"0*[4 <4 4 1 ...>]\" $ chop 16 $ \"fguitar:55\"", "description": "Guitar granularly sliced with complex rhythmic patterns" },
+        { "type": "pattern", "code": "note \"<fs3 [fs3@7 b3] ...>\" # \"giorgio_syn:0\"", "description": "Long-form Giorgio synth bass with chromatic movement" },
+        { "type": "effect", "code": "# octersubbus 5 # octerbus 6", "description": "Global octave bus controlled by single MIDI knob" }
+      ]
+    },
+    {
+      "name": "La fin de l'insouciance",
+      "file": "live/midi/nova/beatober/oct_16_haunted_house_insouciance.tidal",
+      "bpm": 120,
+      "style": "techno",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (120/60/4)", "description": "120 BPM, header: 'Released as: La Fin de l'Insouciance'" },
+        { "type": "pattern", "code": "note \"<c3 c3 c3 c3 gs2 gs2 b2 b2>@5 ef3 d3 ...\" # \"bassWarsaw\"", "description": "Dark C minor bass with Ab and B natural tensions" },
+        { "type": "sample", "code": "\"armora:1\"", "description": "Hawk-like percussion with extreme octave sub" },
+        { "type": "technique", "code": "note (\"<[<g4 ...>@3 ...@2 ...@3] ...>\") # \"FMRhodes1\"", "description": "FM Rhodes bird-call with complex nested timing" },
+        { "type": "effect", "code": "# delaybus 51 # delayt \"<h>\" # delayfb 0.25", "description": "Half-note delay with MIDI-controlled wet on Rhodes" }
+      ]
+    },
+    {
+      "name": "Venons Ensemble",
+      "file": "live/midi/nova/dnb/venons_ensemble.tidal",
+      "bpm": 85,
+      "style": "dnb",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (85/60/4)", "description": "85 BPM (170 double-time), half-time DnB" },
+        { "type": "sample", "code": "\"come_bass\" / \"come_eguitar\" / \"come_voice\"", "description": "Complete 3-part band sample pack" },
+        { "type": "technique", "code": "someCyclesBy (\"^35\" - \"^91\") (>| n ...)", "description": "MIDI-controlled probability for vocal buildup" },
+        { "type": "pattern", "code": "n \"<[0 0]!6 [1 1] <2 [2 2]>>\" # \"come_bass\"", "description": "Slow bass shifting only at bars 7-8" },
+        { "type": "effect", "code": "# crushbus 71 # hpfbus 72", "description": "Dual voice processing: crush + HPF on same knob" }
+      ]
+    },
+    {
+      "name": "L'Or Bleu",
+      "file": "live/midi/nova/lounge/suns_of_gold.tidal",
+      "bpm": 94,
+      "style": "lounge",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (94/60/4)", "description": "94 BPM downtempo — original of 'Blue Gold' collab" },
+        { "type": "sample", "code": "\"suns_keys\" / \"suns_guitar\" / \"suns_voice\"", "description": "3-part Leifur James-inspired sample pack" },
+        { "type": "technique", "code": "loopAt 8 $ chop 16 $ \"suns_keys\"", "description": "8-cycle piano loop chopped into 16 grains" },
+        { "type": "pattern", "code": "note (\"[b,fs6]@1.5 [a,e6]@1.5 ...\" - 24) # \"bassWarsaw\"", "description": "Weighted timing bass (1.5+1.5+3) with Euclidean sub-patterns" },
+        { "type": "effect", "code": "# lesliebus 42 # lrate 0.92 # lsize 1.9", "description": "MIDI Leslie speaker on piano for rotary warmth" }
+      ]
+    },
+    {
+      "name": "Sunny Side Up",
+      "file": "live/midi/nova/lounge/sunny_side_up.tidal",
+      "bpm": 120,
+      "style": "lounge",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (120/60/4)", "description": "120 BPM upbeat lounge" },
+        { "type": "sample", "code": "\"sunny_bass\" / \"sunny_brass\"", "description": "Custom sunny pack with bass and brass" },
+        { "type": "technique", "code": "arp \"up\" $ note (\"0(3,8) ...\" + \"f gs c g\" + 12) # \"acidOto3092\"", "description": "Arpeggiated acid on F-Ab-C-G with Euclidean rhythm" },
+        { "type": "pattern", "code": "n \"<0 0 0 0 1 1 1 <0 1 2 ...>>\" # \"sunny_bass\"", "description": "Bass staying on root for 4 bars then slowly varying" },
+        { "type": "effect", "code": "# octersubbus 42 # octersubsubbus 43", "description": "Dual sub-octave on same knob for massive low end" }
+      ]
+    },
+    {
+      "name": "Premier Septembre",
+      "file": "live/collab/baba/sept1.tidal",
+      "bpm": 120,
+      "style": "collab",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (120/60/4)", "description": "120 BPM, opens with 'À Mon Amour'" },
+        { "type": "sample", "code": "\"rhadamanthe_melo:1\"", "description": "Rhadamanthe piano split into begin/mid/end narrative" },
+        { "type": "technique", "code": "slow 2 \"<begin ~ begin ...>/2\" # cut 51 # begin 0 # end 0.2", "description": "Piano surgically split into 3 cue points" },
+        { "type": "pattern", "code": "note (\"<<[b3@5 a3 b3 a3] ...>> [e3@7 b3]>\") # \"cpluck\"", "description": "Cello pluck B-A oscillation resolving to E" },
+        { "type": "effect", "code": "# cps ((range 60 180 \"^29\")/60/4)", "description": "MIDI live tempo from 60 to 180 BPM — real-time manipulation" }
+      ]
+    },
+    {
+      "name": "Lady Perplexity",
+      "file": "live/midi/nova/breaks/lady_perplexity.tidal",
+      "bpm": 138,
+      "style": "breaks",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (138/60/4)", "description": "138 BPM fast breaks" },
+        { "type": "sample", "code": "\"rhadamanthe_vocal:1\"", "description": "The Lady — vocal chopped into 16 grains over 8 cycles" },
+        { "type": "technique", "code": "sometimesBy \"^55\" (rev) . sometimesBy \"^35\" (juxBy 0.25 ...)", "description": "Triple probability: reversal, stereo micro-loops, euclidean masking" },
+        { "type": "pattern", "code": "note (\"c3 <d3 ... [d3@3 f3]> e3 <g3 b3 a3 c4>\") # \"bassWarsaw\"", "description": "C minor walking bass with chromatic upper voice" },
+        { "type": "effect", "code": "# crushbus 51 (range 16 3.5 \"^54\")", "description": "Bitcrush on Giorgio pad for lo-fi harmonic layer" }
+      ]
+    },
+    {
+      "name": "L'été à Mauerpark",
+      "file": "live/midi/nova/techno/ete_a_mauerpark.tidal",
+      "bpm": 120,
+      "style": "techno",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (120/60/4)", "description": "120 BPM, Berlin-inspired techno" },
+        { "type": "pattern", "code": "note (\"<[g4 c ef@14] ...>\" - 24) # \"[bass2:1,bassWarsaw]\"", "description": "Dual bass on Cm with long sustained notes and brief melodic hits" },
+        { "type": "technique", "code": "arp \"<up!6 down downup>\" $ note (... + \"c'maj'4\" - 12) # \"FMRhodes1\"", "description": "Arpeggiated Rhodes chords cycling up/down/downup" },
+        { "type": "sample", "code": "\"moogBass\"", "description": "Moog with MIDI attack/release, Leslie and chorus" },
+        { "type": "effect", "code": "# lesliebus 102 # chorus (range 0 2 \"^19\")", "description": "Leslie + chorus for Berlin warmth on separate MIDI knobs" }
+      ]
+    },
+    {
+      "name": "Jeudi Drill",
+      "file": "live/collab/raph/jeudrill.tidal",
+      "bpm": 140,
+      "style": "drill",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (140/60/4)", "description": "140 BPM fast drill/grime" },
+        { "type": "sample", "code": "\"bogdan_grime\"", "description": "'I'm from Cardiff!', 'Pints' — grime vocals" },
+        { "type": "technique", "code": "juxBy 0.4 rev $ note ... # \"marimba1\"", "description": "Marimba with stereo juxtaposed reversal at 40%" },
+        { "type": "pattern", "code": "slow 2 $ note (\"<<fs ...>> b4>\" - 12 + 2) # \"giorgio_syn:1\"", "description": "Giorgio bass with long weighted F# notes resolving" },
+        { "type": "effect", "code": "# crushbus 101 # octersub 1", "description": "Bitcrush + sub-octave on 90s synth pad" }
+      ]
+    }
+  ]
+}

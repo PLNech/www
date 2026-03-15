@@ -1,0 +1,148 @@
+{
+  "gig": "ccc-live",
+  "title": "CCC LIVE - Cookie Collective",
+  "date": "2024-10-01",
+  "bpmRange": [120, 160],
+  "styleDistribution": {
+    "nu-jazz": 3,
+    "dnb": 2,
+    "acid-techno": 1,
+    "breakbeat": 1,
+    "hybrid": 2
+  },
+  "samplePacks": [
+    { "name": "nujazz_bass120", "usage": "bass foundation for nu-jazz tracks (Cafe Glace, Salut Nu)" },
+    { "name": "nujazz_bass125", "usage": "bass foundation for Cafe Tiede and Force Motrice" },
+    { "name": "nujazz_keys120/125", "usage": "jazz chord progressions across 4 tracks" },
+    { "name": "jungle_breaks", "usage": "breakbeat layers in Cafe Glace (#22, #79, #19)" },
+    { "name": "vec1_acid / vec2_synth_acid", "usage": "acid bass stack in L'ACID d'abord" },
+    { "name": "suns_keys / suns_guitar", "usage": "Leifur James remix samples in Blue Gold" },
+    { "name": "FMRhodes1/2", "usage": "FM synthesis piano, used in 3+ tracks" },
+    { "name": "bassWarsaw", "usage": "primary bass synth across multiple tracks" },
+    { "name": "fbass", "usage": "chopped bass in Alerte Verte" },
+    { "name": "bass_commodore", "usage": "granular bass in Nuit Agitee" },
+    { "name": "movie_vitality", "usage": "'I WANT TO GO TO MARS' vocal in Nass Revient" },
+    { "name": "giorgio_syn", "usage": "Moroder tribute synth in Force Motrice" },
+    { "name": "cbow", "usage": "cello bow with stutter delay in Force Motrice" },
+    { "name": "meth_bass", "usage": "glitch bass layer in Cafe Glace" }
+  ],
+  "tracks": [
+    {
+      "name": "L'ACID d'abord <3",
+      "file": "live/collab/raph/acidule.tidal",
+      "bpm": 135,
+      "style": "acid-techno",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (135/60/4)", "description": "135 BPM, acid techno tempo" },
+        { "type": "sample", "code": "n \"<30!16 31!16>\" # \"vec2_synth_acid\"", "description": "Layered acid synth voices from vec2 bank, alternating presets every 16 cycles" },
+        { "type": "sample", "code": "\"vec1_acid:40\" # hpf 200 # gain (range 0.6 1.1 \"^53\")", "description": "Secondary acid layer with high-pass filter, MIDI-controlled gain crossfade" },
+        { "type": "technique", "code": ">| note (\"[b d6 b cs6 d6 b cs6 b]*2\" - \"<0!32 12!32>\")", "description": "Overriding note pattern with octave drop alternance every 32 cycles" },
+        { "type": "effect", "code": "# tremdp 4 # tremr 1.8", "description": "Tremolo on the FM Rhodes lead creating a bouncy droplet texture" }
+      ]
+    },
+    {
+      "name": "Alerte Verte",
+      "file": "live/midi/nova/dnb/alerte_verte.tidal",
+      "bpm": 160,
+      "style": "dnb",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (160/60/4)", "description": "160 BPM drum & bass tempo" },
+        { "type": "sample", "code": "$ \"fbass:25\"", "description": "Chopped bass sample sliced into 16 parts via loopAt 4" },
+        { "type": "technique", "code": "$ whenmod 16 12 (struct \"t*<4 4 8 16>\")", "description": "Snare rush building from quarter to 16th notes every 16 cycles" },
+        { "type": "effect", "code": "# leslie \"^34\" # lsize (1 + (slow 16 perlin * 2)) # lrate 6.7", "description": "MIDI-controlled Leslie speaker with perlin-modulated cabinet size" },
+        { "type": "sample", "code": "$ \"[808lc,<~!4 808mc!4>]\" # speed (range 0 2 \"^55\")", "description": "808 clave pattern with MIDI-pitchable speed" }
+      ]
+    },
+    {
+      "name": "Blue Gold",
+      "file": "live/collab/ccc/ccc0.tidal",
+      "bpm": 140,
+      "style": "hybrid",
+      "ingredients": [
+        { "type": "structure", "code": "setcps(140/60/4)", "description": "140 BPM, faster CCC live version of the Leifur James remix" },
+        { "type": "sample", "code": "$ \"suns_keys\" # n \"<0 <1 2> 3 3>\"", "description": "Sampled keys with slice manipulation (8 slices, euclidean patterns)" },
+        { "type": "technique", "code": "$ fast (4/3) $ note (\"<[fs4 <a5!2 gs!4 fs5!4 ...>@3]*4>\")", "description": "Triplet-feel bassline (4/3 speed) with complex ascending/descending notes" },
+        { "type": "sample", "code": "$ \"suns_guitar:0/2\" # octersubbus 71", "description": "Sampled guitar with MIDI-controlled sub-octave destruction" },
+        { "type": "effect", "code": "# crushbus 73 (range 16 2.9 \"^55\")", "description": "MIDI-controlled bitcrush from clean 16-bit to destroyed 2.9-bit" }
+      ]
+    },
+    {
+      "name": "Nuit Agitee",
+      "file": "live/midi/nova/breaks/nuit_agitee.tidal",
+      "bpm": 160,
+      "style": "breakbeat",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (160/60/4)", "description": "160 BPM breakbeat tempo" },
+        { "type": "technique", "code": "let scale = getScale (scaleTable ++ [(\"gameboy\", [1,2,4,5,7,9,11])])", "description": "Custom 'gameboy' scale definition for melodic content" },
+        { "type": "sample", "code": "$ loopAt 8 $ chop 64 $ \"bass_commodore:7\"", "description": "Commodore bass chopped into 64 slices — granular bass texture" },
+        { "type": "effect", "code": "# crushbus 41 # octersubbus 42 # lesliebus 43", "description": "Triple simultaneous bus effects on bass, all MIDI-controlled" },
+        { "type": "sample", "code": "# \"harpsichord2\" # distortbus 51", "description": "Harpsichord lead using gameboy scale with MIDI distortion" }
+      ]
+    },
+    {
+      "name": "Nass Revient de Mars!",
+      "file": "live/dnb/nass_revient.tidal",
+      "bpm": 140,
+      "style": "hybrid",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (140/60/4)", "description": "140 BPM hybrid techno/DNB" },
+        { "type": "technique", "code": "$ superimpose (|+| note \"~ 7(<3!3 5>,8)\")", "description": "Supersaw bassline with euclidean 5th-interval superimposition" },
+        { "type": "sample", "code": "$ \"forgan:24\" # crushbus 5", "description": "Massive organ sample with perlin-noise-driven bitcrush" },
+        { "type": "technique", "code": "arp \"up\" \"<[c'maj'4 c'maj'3]!12 ...>\"", "description": "FM Rhodes arpeggios using chord inversions" },
+        { "type": "sample", "code": "$ \"movie_vitality:10\"", "description": "'I WANT TO GO TO MARS' — movie sample with expanding window" }
+      ]
+    },
+    {
+      "name": "Atelier de Force Motrice",
+      "file": "live/midi/nova/dnb/force_motrice.tidal",
+      "bpm": 125,
+      "style": "nu-jazz",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (125/60/4)", "description": "125 BPM, nu-jazz/breaks territory" },
+        { "type": "sample", "code": "$ chop 16 $ loopAt 4 $ \"nujazz_bass125:1\"", "description": "Nu-jazz bass chopped into 16 slices with MIDI crush and octave" },
+        { "type": "technique", "code": "# modIndex (range 0 2 \"^34\") # \"FMRhodes1\"", "description": "FM Rhodes with MIDI-controlled FM synthesis depth" },
+        { "type": "sample", "code": "$ \"giorgio_syn:22\"", "description": "Giorgio synth (Moroder tribute) with crushable bus effect" },
+        { "type": "effect", "code": "$ stut 4 0.65 \"e\" $ note ... # \"cbow:2\"", "description": "Cello bow with 4-step stutter delay creating ghostly trails" }
+      ]
+    },
+    {
+      "name": "Cafe Tiede",
+      "file": "live/midi/nova/nujazz/cafe_tiede.tidal",
+      "bpm": 125,
+      "style": "nu-jazz",
+      "ingredients": [
+        { "type": "structure", "code": "setcps(125/60/4)", "description": "125 BPM nu-jazz groove" },
+        { "type": "sample", "code": "$ chop 8 $ loopAt 4 $ \"nujazz_bass125:1\"", "description": "Nu-jazz bass with 4-bar loop chopped into 8 slices" },
+        { "type": "sample", "code": "$ chop 8 $ loopAt 2 $ \"nujazz_keys125\" # n \"<56 56 57 ...>\"", "description": "Nu-jazz keys with 9 preset rotations creating chord progressions" },
+        { "type": "effect", "code": "# roombus 110 (slow 16 $ range 0 0.9 saw)", "description": "Slowly building reverb over 16 cycles combined with sine LPF sweep" },
+        { "type": "technique", "code": "$ slice 4 \"<<[0 1 2 3] [0 1 0 1 2 3 2 3]> ...>\"", "description": "Keys with alternating simple/doubled slice patterns" }
+      ]
+    },
+    {
+      "name": "Cafe Glace",
+      "file": "live/midi/nova/nujazz/cafe_glace.tidal",
+      "bpm": 120,
+      "style": "nu-jazz",
+      "ingredients": [
+        { "type": "structure", "code": "setcps(120/60/4)", "description": "120 BPM, cooler than Cafe Tiede" },
+        { "type": "sample", "code": "$ \"nujazz_bass120:4\"", "description": "Nu-jazz bass at 120 BPM with MIDI-controlled bitcrush" },
+        { "type": "technique", "code": "$ midiOn \"^58\" ((# freeze 0.2))", "description": "Spectral freeze effect triggered by MIDI on keys" },
+        { "type": "sample", "code": "$ \"meth_bass\" # crush 8 # lpf (slow 32 $ range 4000 400 sine)", "description": "'UN GLITCH DANS MON CAFE!!?!' — glitch bass with closing filter" },
+        { "type": "technique", "code": "$ midiOn \"^55\" (loopAt 1 . (|> \"jungle_breaks:19\"))", "description": "MIDI-switchable jungle break layers with variable slice density" }
+      ]
+    },
+    {
+      "name": "Salut Nu",
+      "file": "live/midi/nova/nujazz/salut_nu.tidal",
+      "bpm": 120,
+      "style": "nu-jazz",
+      "ingredients": [
+        { "type": "structure", "code": "setcps(120/60/4)", "description": "120 BPM nu-jazz encore" },
+        { "type": "technique", "code": "juxBy 0.9 (mask ... . rev . (|+ note 12) . (|+ pan 0.2))", "description": "MIDI-triggered stereo mirror: reversed, octave-up, panned piano reflection" },
+        { "type": "sample", "code": "$ slice 4 ... $ \"nujazz_keys120\" # n \"<54!16 53!16>\"", "description": "Piano with 16-step slice choreography between two presets" },
+        { "type": "sample", "code": "note ... # \"bassWarsaw\" # octersub 0.5 # squizbus 42", "description": "Warsaw bass with sub-octave and MIDI-controlled squiz distortion" },
+        { "type": "technique", "code": "$ jux rev $ note ... # \"moogBass\" # chorus 0.2 # room 0.8", "description": "'La chorale du jugement' — Moog bass with stereo call-and-response" }
+      ]
+    }
+  ]
+}

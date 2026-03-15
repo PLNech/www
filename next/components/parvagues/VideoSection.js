@@ -4,14 +4,16 @@ import { FaPlay, FaYoutube } from 'react-icons/fa';
 // source: 'archive' (default) | 'youtube'
 // For YouTube: id is the YouTube video ID
 // For archive.org: id is the archive identifier
+const featuredVideo = {
+  id: 'bS5jcIJfU6c',
+  source: 'youtube',
+  title: 'Algorave GZ25',
+  subtitle: 'w/ Pérégrine · Algorave Lyon — European-wide annual event',
+  date: 'Fév 2025',
+  featured: true,
+};
+
 const videos = [
-  {
-    id: 'bS5jcIJfU6c',
-    source: 'youtube',
-    title: 'Algorave GZ25',
-    subtitle: 'w/ Pérégrine · GZ Algorave',
-    date: 'Fév 2025',
-  },
   {
     id: 'toplap-fromscratch-dec2025-parvagues',
     title: 'From Scratch: Jungle 🐅',
@@ -168,6 +170,16 @@ export default function VideoSection() {
         Video
       </h2>
       <div className="h-px bg-white/10 mt-4 mb-12" />
+
+      {/* Featured video — full width */}
+      <div className="mb-12">
+        <div className="relative">
+          <span className="absolute -top-3 left-4 z-10 px-3 py-0.5 text-[10px] tracking-[0.2em] uppercase font-display font-bold rounded-full bg-[var(--neon-high)] text-white">
+            Featured
+          </span>
+          <VideoCard video={featuredVideo} />
+        </div>
+      </div>
 
       <div className="grid sm:grid-cols-2 gap-8 md:gap-10">
         {videos.map((video) => (

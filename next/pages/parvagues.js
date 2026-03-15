@@ -1,6 +1,8 @@
 import { getAllLives } from '@/lib/livesData';
 import Layout from '@/components/parvagues/Layout';
 import Hero from '@/components/parvagues/Hero';
+import BioSection from '@/components/parvagues/BioSection';
+import AsSeenAt from '@/components/parvagues/AsSeenAt';
 import TourTimeline from '@/components/parvagues/TourTimeline';
 import MusicSection from '@/components/parvagues/MusicSection';
 import VideoSection from '@/components/parvagues/VideoSection';
@@ -10,6 +12,8 @@ export default function ParVagues({ lives }) {
   return (
     <Layout title="ParVagues - Musique Algorithmique">
       <Hero />
+      <BioSection />
+      <AsSeenAt />
       <TourTimeline lives={lives} />
       <MusicSection />
       <VideoSection />

@@ -1,0 +1,92 @@
+{
+  "gig": "38c3-toilet",
+  "title": "[38C3] Secret Toilet Rave",
+  "date": "2024-12-28",
+  "bpmRange": [124, 170],
+  "styleDistribution": {
+    "acid-techno": 2,
+    "punk-dnb": 2,
+    "downtempo": 1
+  },
+  "samplePacks": [
+    { "name": "bassWarsaw", "usage": "primary bass synth in Ghosts and L'or Bleu" },
+    { "name": "ghost", "usage": "namesake haunted samples cycled through 4 variations" },
+    { "name": "rhadamanthe_vocal", "usage": "'self-destruct sequence' vocal drops in Ghosts" },
+    { "name": "breaks165 / jungle_breaks", "usage": "breakbeat backbone across multiple tracks" },
+    { "name": "vec1_acid / vec2_synth_acid", "usage": "triple-layered acid bass in Acidulé" },
+    { "name": "FMRhodes1", "usage": "tremolo piano lead in Acidulé" },
+    { "name": "punk", "usage": "punk guitar chops in Nouveau Punk" },
+    { "name": "meth_bass", "usage": "dub-delay bass slices in Pitbul Punk" },
+    { "name": "moog", "usage": "chromatic lead in Pitbul Punk" },
+    { "name": "cpluck", "usage": "'Violoncelle Manouche punko-magique' in Nouveau Punk" },
+    { "name": "90s_synatm", "usage": "atmospheric pads with triple destruction bus" },
+    { "name": "suns_keys / suns_guitar", "usage": "Leifur James remix samples in L'or Bleu" }
+  ],
+  "tracks": [
+    {
+      "name": "Ghosts in the Toilets",
+      "file": "live/collab/ccc/ghosts_in_the_toilets.tidal",
+      "bpm": 160,
+      "style": "dnb",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (160/60/4)", "description": "160 BPM, fast DNB-adjacent tempo" },
+        { "type": "sample", "code": "\"ghost\" # n (slow 4 $ \"<0 1 2 3>\")", "description": "Ghost samples cycling through 4 variations — the track's namesake" },
+        { "type": "technique", "code": "slice 16 \"[0 .. 7] . <[0 .. 7]!3 [0 1 . [2 3]]>\"", "description": "Breakbeat slicer on breaks165 with variable resequencing" },
+        { "type": "effect", "code": "# octersubsub 2 # octersub 2 # sz 0.01 # room 1.0", "description": "Heavy octave sub-bass doubling with tight reverb" },
+        { "type": "pattern", "code": "note (\"<e3 fs3 <gs3 d4> <a3 df4>>\" - 12) # \"bassWarsaw\"", "description": "Dark Warsaw bass with diminished/augmented interval cycle" }
+      ]
+    },
+    {
+      "name": "Nouveau Punk",
+      "file": "live/collab/raph/nouveau_punk.tidal",
+      "bpm": 155,
+      "style": "punk-dnb",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (155/60/4)", "description": "155 BPM — punk energy territory" },
+        { "type": "sample", "code": "chop 4 $ \"punk:0/4\" # crushbus 41 (range 16 1.5 \"^53\")", "description": "Punk guitar chopped with MIDI-controlled bitcrush" },
+        { "type": "pattern", "code": "note \"<e g a <b4 b4>>\" # \"meth_bass:3\" # hpf 2000", "description": "High-passed meth_bass following E-G-A-B progression" },
+        { "type": "technique", "code": "struct \"t(<3!3 5>,8,<0!7 1>)\" $ arp \"up\" ... # \"cpluck:2\"", "description": "Euclidean-rhythmed arpeggiated 'Violoncelle Manouche punko-magique'" },
+        { "type": "effect", "code": "# crushbus 52 # octersubbus 51 # octerbus 53", "description": "Triple MIDI-controlled destruction on 90s_synatm synth" }
+      ]
+    },
+    {
+      "name": "Pitbul Punk",
+      "file": "live/collab/raph/punkachien.tidal",
+      "bpm": 170,
+      "style": "punk-dnb",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (170/60/4)", "description": "170 BPM — full DNB speed, fastest track" },
+        { "type": "pattern", "code": "note (\"d*<3 4 3 2> . ds ds df\" + 2) # \"vec1_acid:11\"", "description": "Acid bassline with variable-density note patterns" },
+        { "type": "technique", "code": "superimpose ((|* gain \"^17\") . (# n 10) . (# legato 0.8))", "description": "Layered acid superimposition with MIDI gain crossfade" },
+        { "type": "sample", "code": "loopAt 2 $ slice 2 $ \"meth_bass:9\" # delay ... # delayfb ...", "description": "Meth bass with building dub-delay wash (0 to 0.8 feedback)" },
+        { "type": "pattern", "code": "note \"<a as <a a df5 df5> <d df>>\" # \"moog\"", "description": "Moog lead with chromatic A-A#-A/Db-D progression" }
+      ]
+    },
+    {
+      "name": "Acidulé",
+      "file": "live/collab/raph/acidule.tidal",
+      "bpm": 135,
+      "style": "acid-techno",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (135/60/4)", "description": "135 BPM acid techno groove" },
+        { "type": "pattern", "code": "n \"<30!16 31!16>\" # \"vec2_synth_acid\"", "description": "Triple-layered acid bass stack: vec2 alternating + two vec1 lines" },
+        { "type": "technique", "code": ">| note (\"[b d6 b cs6 d6 b cs6 b]*2\" - \"<0!32 12!32>\")", "description": "Acid sequence with octave drop every 32 cycles" },
+        { "type": "sample", "code": "note (\"b ~ ~ b ~ ~ <d!7 e6> <~ d>\") # \"FMRhodes1\" # tremdp 4 # tremr 1.8", "description": "FM Rhodes 'Piano lead acidulé' with tremolo droplet texture" },
+        { "type": "pattern", "code": "note (\"<b5!3 <g d>>@7 <c6 c6 cs6 a6>\") # \"moog:0\"", "description": "Caring bass — Moog with chromatic C-C#-A movement" }
+      ]
+    },
+    {
+      "name": "L'or Bleu",
+      "file": "live/collab/mousquetaires/blue_gold.tidal",
+      "bpm": 124,
+      "style": "downtempo",
+      "ingredients": [
+        { "type": "structure", "code": "setcps(124/60/4)", "description": "124 BPM — slowest, most melodic track" },
+        { "type": "sample", "code": "\"suns_keys\" # n \"<0 <1 2> 3 3>\"", "description": "Suns of Gold keyboard stabs with tremolo and euclidean slicing" },
+        { "type": "technique", "code": "fast (4/3) $ note (\"<[fs4 <a5!2 gs!4 fs5!4 ...>@3]*4>\")", "description": "Polymetric (4/3) Warsaw bass — triplets against 4/4 grid" },
+        { "type": "sample", "code": "slice 8 \"<0 1 2 3>(3,8)\" $ \"suns_guitar:2\" # room 0.8", "description": "Euclidean-sliced guitar with lush reverb and L/R panning" },
+        { "type": "effect", "code": "# crushbus 73 (range 16 2.9 \"^55\") # lpfbus 72", "description": "'CRASH/BURN THIS GUITAR' — MIDI-driven total destruction" }
+      ]
+    }
+  ]
+}

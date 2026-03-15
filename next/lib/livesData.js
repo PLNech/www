@@ -60,6 +60,21 @@ export async function getLiveData(slug) {
   throw new Error(`Live with slug "${slug}" not found`);
 }
 
+export function getLiveTracks(slug) {
+  const years = fs.readdirSync(livesDirectory).filter(item =>
+    fs.statSync(path.join(livesDirectory, item)).isDirectory()
+  );
+
+  for (const year of years) {
+    const tracksPath = path.join(livesDirectory, year, slug, 'tracks.json');
+    if (fs.existsSync(tracksPath)) {
+      return JSON.parse(fs.readFileSync(tracksPath, 'utf8'));
+    }
+  }
+
+  return null;
+}
+
 export function getLivesImages(slug) {
   const years = fs.readdirSync(livesDirectory).filter(item => 
     fs.statSync(path.join(livesDirectory, item)).isDirectory()

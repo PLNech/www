@@ -15,6 +15,22 @@ function DeezerIcon({ className }) {
 
 const albums = [
   {
+    id: '2025_cosmicfest',
+    title: 'Live @ CosmicFest',
+    image: '/images/parvagues/albums/2025_cosmicfest/cover.jpg',
+    links: [
+      { platform: 'Bandcamp', url: 'https://parvagues.bandcamp.com/album/live-cosmicfest' },
+    ],
+  },
+  {
+    id: '2025_ton_numero',
+    title: 'Ton Numéro',
+    image: '/images/parvagues/albums/2025_ton_numero/cover.jpg',
+    links: [
+      { platform: 'Bandcamp', url: 'https://parvagues.bandcamp.com/track/ton-num-ro' },
+    ],
+  },
+  {
     id: '2024_opal',
     title: 'Livecoding (Opal Festival 2024)',
     image: '/images/parvagues/albums/2024_opal/cover.jpg',
@@ -55,7 +71,7 @@ const streamingPlatforms = [
     label: 'Bandcamp',
     icon: FaBandcamp,
     color: '#1da0c3',
-    embedUrl: 'https://bandcamp.com/EmbeddedPlayer/album=3869867806/size=large/bgcol=333333/linkcol=a700d1/tracklist=false/transparent=true/',
+    embedUrl: 'https://bandcamp.com/EmbeddedPlayer/album=644862623/size=large/bgcol=0a0a0a/linkcol=a700d1/tracklist=true/transparent=true/',
     embedHeight: 450,
     profileUrl: 'https://parvagues.bandcamp.com/',
   },
@@ -67,16 +83,20 @@ const streamingPlatforms = [
     embedUrl: 'https://open.spotify.com/embed/artist/0kznTQnx5QRhMwktmZboX4?utm_source=generator&theme=0',
     embedHeight: 450,
     profileUrl: 'https://open.spotify.com/artist/0kznTQnx5QRhMwktmZboX4',
+    isPrivacy: true,
+    privacyProvider: 'Spotify',
   },
   {
     id: 'youtube',
     label: 'YouTube',
     icon: FaYoutube,
     color: '#ff0000',
-    embedUrl: 'https://www.youtube.com/embed?listType=user_uploads&list=@parvagues',
+    embedUrl: 'https://www.youtube-nocookie.com/embed/videoseries?list=OLAK5uy_l4MF3OCIXcdPMpsHGVX2Q9MiX6oU1zT6g',
     embedHeight: 400,
     profileUrl: 'https://www.youtube.com/@parvagues/videos',
     isVideo: true,
+    isPrivacy: true,
+    privacyProvider: 'YouTube (Google)',
   },
   {
     id: 'deezer',
@@ -131,12 +151,17 @@ function AlbumCard({ album }) {
 }
 
 function StreamingEmbed({ platform, onClose }) {
-  if (platform.isPrivacy) {
+  const [consent, setConsent] = useState(false);
+  const Icon = platform.icon;
+  const providerName = platform.privacyProvider || platform.label;
+
+  // Privacy-only platforms (no embed, just redirect)
+  if (platform.isPrivacy && !platform.embedUrl) {
     return (
       <div className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-12 text-center">
-        <FaInstagram className="w-10 h-10 text-[var(--text-muted)] mx-auto mb-4" />
+        <Icon className="w-10 h-10 text-[var(--text-muted)] mx-auto mb-4" />
         <p className="text-sm text-[var(--text-muted)] mb-6 max-w-sm mx-auto">
-          Le contenu Instagram se connecte aux serveurs de Meta et peut suivre votre activité.
+          Le contenu {providerName} se connecte à des serveurs tiers et peut suivre votre activité.
         </p>
         <a
           href={platform.profileUrl}
@@ -144,12 +169,41 @@ function StreamingEmbed({ platform, onClose }) {
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 px-6 py-3 text-sm font-display font-semibold tracking-wider rounded-full border border-white/20 hover:bg-white hover:text-[var(--surface)] transition-all duration-300"
         >
-          Voir sur Instagram →
+          Voir sur {platform.label} →
         </a>
       </div>
     );
   }
 
+  // Privacy consent gate (has embed but needs user approval)
+  if (platform.isPrivacy && !consent) {
+    return (
+      <div className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-12 text-center">
+        <Icon className="w-10 h-10 text-[var(--text-muted)] mx-auto mb-4" />
+        <p className="text-sm text-[var(--text-muted)] mb-6 max-w-sm mx-auto">
+          Le contenu {providerName} se connecte à des serveurs tiers et peut suivre votre activité.
+        </p>
+        <div className="flex flex-wrap justify-center gap-4">
+          <button
+            onClick={() => setConsent(true)}
+            className="inline-flex items-center gap-2 px-6 py-3 text-sm font-display font-semibold tracking-wider rounded-full border border-white/20 hover:bg-white hover:text-[var(--surface)] transition-all duration-300"
+          >
+            Charger le lecteur
+          </button>
+          <a
+            href={platform.profileUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-6 py-3 text-sm font-display tracking-wider rounded-full text-[var(--text-muted)] hover:text-white transition-all duration-300"
+          >
+            Voir sur {platform.label} →
+          </a>
+        </div>
+      </div>
+    );
+  }
+
+  // Embed loaded (either no privacy gate, or consent given)
   return (
     <div className="bg-white/[0.03] border border-white/[0.06] rounded-xl overflow-hidden">
       <div style={{ height: platform.isVideo ? undefined : platform.embedHeight }}>
