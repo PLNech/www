@@ -1,7 +1,17 @@
 import { useState } from 'react';
-import { FaPlay } from 'react-icons/fa';
+import { FaPlay, FaYoutube } from 'react-icons/fa';
 
+// source: 'archive' (default) | 'youtube'
+// For YouTube: id is the YouTube video ID
+// For archive.org: id is the archive identifier
 const videos = [
+  {
+    id: 'bS5jcIJfU6c',
+    source: 'youtube',
+    title: 'Algorave GZ25',
+    subtitle: 'w/ Pérégrine · GZ Algorave',
+    date: 'Fév 2025',
+  },
   {
     id: 'toplap-fromscratch-dec2025-parvagues',
     title: 'From Scratch: Jungle 🐅',
@@ -13,6 +23,13 @@ const videos = [
     title: 'Solstice Stream',
     subtitle: 'TOPLAP · Les Carroz (Alps)',
     date: 'Déc 2024',
+  },
+  {
+    id: 'gpstPH1aa54',
+    source: 'youtube',
+    title: 'Live Coding @ Algolia',
+    subtitle: 'Algolia All Hands · Paris',
+    date: 'Oct 2024',
   },
   {
     id: 'toplap20-parvagues---z0rg',
@@ -28,18 +45,72 @@ const videos = [
   },
 ];
 
+function getThumbnail(video) {
+  if (video.source === 'youtube') {
+    return `https://img.youtube.com/vi/${video.id}/hqdefault.jpg`;
+  }
+  return `https://archive.org/services/img/${video.id}`;
+}
+
+function getEmbedUrl(video) {
+  if (video.source === 'youtube') {
+    return `https://www.youtube-nocookie.com/embed/${video.id}?autoplay=1`;
+  }
+  return `https://archive.org/embed/${video.id}`;
+}
+
+function getPrivacyLabel(video) {
+  if (video.source === 'youtube') return 'YouTube (Google)';
+  return 'archive.org';
+}
+
 function VideoCard({ video }) {
+  const [consent, setConsent] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  const isYouTube = video.source === 'youtube';
+
+  // Consent gate for YouTube (privacy)
+  if (isYouTube && !consent && !loaded) {
+    return (
+      <div>
+        <button
+          onClick={() => { setConsent(true); setLoaded(true); }}
+          className="aspect-video w-full rounded-xl overflow-hidden cursor-pointer group transition-all duration-300 hover:ring-1 hover:ring-[var(--neon-high)]/30"
+          style={{ position: 'relative', background: 'var(--surface-raised)' }}
+        >
+          <img
+            src={getThumbnail(video)}
+            alt={video.title}
+            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: 0.4 }}
+            className="group-hover:opacity-60 transition-opacity duration-300"
+            loading="lazy"
+          />
+          <div style={{ position: 'absolute', inset: 0 }} className="bg-gradient-to-t from-black/80 via-black/40 to-black/20" />
+          <div style={{ position: 'absolute', inset: 0 }} className="flex flex-col items-center justify-center gap-3">
+            <div className="w-14 h-14 rounded-full bg-black/40 backdrop-blur-sm border border-white/10 flex items-center justify-center group-hover:bg-red-600/20 group-hover:scale-110 group-hover:border-red-500/30 transition-all duration-300">
+              <FaYoutube className="w-5 h-5 text-red-500/80 group-hover:text-red-400 transition-colors" />
+            </div>
+            <span className="text-[10px] text-white/40 tracking-wider">Cliquer pour charger depuis YouTube</span>
+          </div>
+        </button>
+        <div className="mt-3">
+          <h4 className="font-display font-semibold text-sm">{video.title}</h4>
+          <p className="text-[11px] text-[var(--text-muted)] mt-0.5">{video.subtitle} · {video.date}</p>
+        </div>
+      </div>
+    );
+  }
 
   if (loaded) {
     return (
       <div>
         <div className="aspect-video rounded-xl overflow-hidden bg-black">
           <iframe
-            src={`https://archive.org/embed/${video.id}`}
+            src={getEmbedUrl(video)}
             width="100%"
             height="100%"
             allowFullScreen
+            allow="autoplay; encrypted-media"
             className="w-full h-full"
           />
         </div>
@@ -49,7 +120,7 @@ function VideoCard({ video }) {
             <p className="text-[11px] text-[var(--text-muted)] mt-0.5">{video.subtitle} · {video.date}</p>
           </div>
           <button
-            onClick={() => setLoaded(false)}
+            onClick={() => { setLoaded(false); setConsent(false); }}
             className="text-[11px] text-[var(--text-muted)] hover:text-white transition-colors tracking-wider mt-1"
           >
             Fermer
@@ -59,6 +130,7 @@ function VideoCard({ video }) {
     );
   }
 
+  // Archive.org — no consent needed (privacy-friendly)
   return (
     <div>
       <button
@@ -66,9 +138,8 @@ function VideoCard({ video }) {
         className="aspect-video w-full rounded-xl overflow-hidden cursor-pointer group transition-all duration-300 hover:ring-1 hover:ring-[var(--neon-high)]/30"
         style={{ position: 'relative', background: 'var(--surface-raised)' }}
       >
-        {/* Thumbnail from archive.org */}
         <img
-          src={`https://archive.org/services/img/${video.id}`}
+          src={getThumbnail(video)}
           alt={video.title}
           style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: 0.6 }}
           className="group-hover:opacity-80 transition-opacity duration-300"

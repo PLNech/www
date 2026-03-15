@@ -27,7 +27,7 @@ export default function Hero() {
         <h1
           className="font-display font-extrabold leading-none tracking-tight"
           style={{
-            fontSize: 'clamp(3rem, 15vw, 12rem)',
+            fontSize: 'clamp(3rem, 12vw, 9rem)',
             textShadow: '0 0 80px rgba(217,0,255,0.2), 0 0 160px rgba(217,0,255,0.08)',
           }}
         >
