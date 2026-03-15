@@ -90,7 +90,7 @@ export default function Layout({ children, title = 'ParVagues' }) {
             {['tour', 'music', 'video', 'booking'].map((id) => (
               <a
                 key={id}
-                href={`#${id}`}
+                href={`/parvagues#${id}`}
                 className="text-[var(--text-muted)] hover:text-white transition-colors duration-300"
               >
                 {id}
@@ -99,7 +99,7 @@ export default function Layout({ children, title = 'ParVagues' }) {
           </nav>
 
           <a
-            href="#booking"
+            href="/parvagues#booking"
             className="flex items-center gap-2 px-4 py-2 text-[11px] tracking-[0.15em] uppercase border border-white/20 rounded-full hover:bg-white hover:text-[var(--surface)] transition-all duration-300"
           >
             <FaEnvelope className="w-3 h-3" />
