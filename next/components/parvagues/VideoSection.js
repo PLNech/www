@@ -63,17 +63,19 @@ function VideoCard({ video }) {
     <div>
       <button
         onClick={() => setLoaded(true)}
-        className="aspect-video w-full rounded-xl overflow-hidden relative cursor-pointer group transition-all duration-300 hover:ring-1 hover:ring-[var(--neon-high)]/30"
+        className="aspect-video w-full rounded-xl overflow-hidden cursor-pointer group transition-all duration-300 hover:ring-1 hover:ring-[var(--neon-high)]/30"
+        style={{ position: 'relative', background: 'var(--surface-raised)' }}
       >
         {/* Thumbnail from archive.org */}
         <img
           src={`https://archive.org/services/img/${video.id}`}
           alt={video.title}
-          className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-300"
+          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: 0.6 }}
+          className="group-hover:opacity-80 transition-opacity duration-300"
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-        <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
+        <div style={{ position: 'absolute', inset: 0 }} className="bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+        <div style={{ position: 'absolute', inset: 0 }} className="flex flex-col items-center justify-center gap-3">
           <div className="w-14 h-14 rounded-full bg-black/40 backdrop-blur-sm border border-white/10 flex items-center justify-center group-hover:bg-[var(--neon-high)]/20 group-hover:scale-110 group-hover:border-[var(--neon-high)]/30 transition-all duration-300">
             <FaPlay className="w-4 h-4 text-white/80 group-hover:text-white ml-0.5 transition-colors" />
           </div>

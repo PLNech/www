@@ -22,7 +22,7 @@ body:not(:has(.parvagues-root)) a:hover {
   text-decoration: underline;
 }
 
-img {
+body:not(:has(.parvagues-root)) img {
   max-width: 100%;
   display: block;
 }

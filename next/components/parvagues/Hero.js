@@ -23,7 +23,7 @@ export default function Hero() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 text-center px-6 max-w-4xl">
+      <div className="relative z-10 text-center px-6 w-full">
         <h1
           className="font-display font-extrabold leading-none tracking-tight"
           style={{
