@@ -1,0 +1,158 @@
+{
+  "gig": "la-french-stack",
+  "title": "La French Stack",
+  "date": "2025-05-20",
+  "bpmRange": [85, 160],
+  "styleDistribution": {
+    "techno": 1,
+    "breaks": 2,
+    "nujazz": 3,
+    "lounge": 2,
+    "dnb": 2
+  },
+  "samplePacks": [
+    { "name": "bassWarsaw", "usage": "primary bass synth in Salut Nu, Something about Drums, Venons Ensemble" },
+    { "name": "nujazz_keys120 / nujazz_keys125", "usage": "nu-jazz piano in Salut Nu, Café Tiède" },
+    { "name": "nujazz_bass125", "usage": "sliced jazz upright bass in Café Tiède, Force Motrice" },
+    { "name": "sunny_bass / sunny_brass / acidOto3092", "usage": "custom sunny pack + acid synth in Sunny Side Up" },
+    { "name": "come_bass / come_eguitar / come_voice", "usage": "3-part band sample pack in Venons Ensemble" },
+    { "name": "suns_keys / suns_guitar / suns_voice", "usage": "Leifur James-inspired samples in L'Or Bleu" },
+    { "name": "jungle_breaks / breaks165", "usage": "breakbeat backbone across 7+ tracks" },
+    { "name": "FMRhodes1 / FMRhodes2", "usage": "FM piano in Force Motrice, Something about Drums" },
+    { "name": "giorgio_syn", "usage": "Moroder synth in Bain Électrique and Force Motrice" },
+    { "name": "weird_dialogs", "usage": "sci-fi movie dialogs in Bain Électrique" },
+    { "name": "90s_synatm", "usage": "atmospheric 90s synth in Contre Visite" }
+  ],
+  "tracks": [
+    {
+      "name": "Contre Visite",
+      "file": "live/midi/nova/ambient/contre_visite.tidal",
+      "bpm": 90,
+      "style": "techno",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (90/60/4)", "description": "90 BPM atmospheric techno opener" },
+        { "type": "pattern", "code": "note (scale \"aeolian\" \"<0!3 [0@6 <4 -1>@2]> 2\") # \"90s_synatm:18\"", "description": "Aeolian lead: questioning melody -  'Winds of truth'" },
+        { "type": "sample", "code": "\"90s_synatm:8\" / \"90s_synatm:14\"", "description": "Dual 90s synth: aerial questions and electronic answers" },
+        { "type": "technique", "code": "juxBy 0.5 ((# cut 61) . rev)", "description": "Juxtaposed reversal on lead at 50% stereo" },
+        { "type": "effect", "code": "# delayfb 0.25 # delayt 0.25 # delay 0.8", "description": "Quarter-note delay on answer synth" }
+      ]
+    },
+    {
+      "name": "Bain Électrique",
+      "file": "live/midi/nova/breaks/bain_electrique.tidal",
+      "bpm": 128,
+      "style": "breaks",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (128/60/4)", "description": "128 BPM electro breaks" },
+        { "type": "pattern", "code": "note \"<fs3 [fs3@7 b3] [fs3@7 g3] ...>\" # \"giorgio_syn:0\"", "description": "Giorgio bass: 8-bar chromatic phrase F#-B-G-D" },
+        { "type": "sample", "code": "\"weird_dialogs\"", "description": "Sci-fi dialog narrative about electricity and faith" },
+        { "type": "technique", "code": "slice 16 \"0*[4 <4 4 1 ...>]\" $ chop 16 $ \"fguitar:55\"", "description": "Granular guitar with evolving rhythmic density" },
+        { "type": "effect", "code": "# octersubbus 5 # octerbus 6", "description": "Global octave bus transforms everything on single MIDI knob" }
+      ]
+    },
+    {
+      "name": "Salut Nu",
+      "file": "live/midi/nova/nujazz/salut_nu.tidal",
+      "bpm": 120,
+      "style": "nujazz",
+      "ingredients": [
+        { "type": "structure", "code": "setcps(120/60/4)", "description": "120 BPM nu-jazz" },
+        { "type": "pattern", "code": "note (\"<[a4@4 c5 <c5 d5 c5 fs4>] a4>\" + \"[0,12]\" - 36) # \"bassWarsaw\"", "description": "Warsaw bass with Am melody and chromatic F#4" },
+        { "type": "sample", "code": "\"nujazz_keys120\" / \"nujazz_wahwah125\"", "description": "Jazz keys and wah-wah guitar samples" },
+        { "type": "technique", "code": "midiOn \"^58\" (juxBy 0.9 (... . rev . (|+ note 12)))", "description": "Piano reflected: reversed at 90% stereo, octave up" },
+        { "type": "effect", "code": "# freezebus 51 (range 0 0.7 \"^34\")", "description": "Spectral freeze on piano" }
+      ]
+    },
+    {
+      "name": "Café Tiède",
+      "file": "live/midi/nova/nujazz/cafe_tiede.tidal",
+      "bpm": 125,
+      "style": "nujazz",
+      "ingredients": [
+        { "type": "structure", "code": "setcps(125/60/4)", "description": "125 BPM lukewarm café" },
+        { "type": "pattern", "code": "$ \"nujazz_bass125:1\" # crushbus 41 (range 12 4.5 \"^53\")", "description": "Jazz upright bass with MIDI bitcrush" },
+        { "type": "sample", "code": "\"nujazz_keys125\" / \"jungle_breaks:20\"", "description": "125BPM jazz piano + jungle breaks" },
+        { "type": "technique", "code": "note (\"<c5 g4 <ef4!2 bf4!2> <c4 f4>>\") # \"FMRhodes1\"", "description": "FM Rhodes Cm-G-Eb-Bb-C-F" },
+        { "type": "effect", "code": "# octerbus 71 (range 0 0.5 \"^55\")", "description": "Octave doubling on secondary keys" }
+      ]
+    },
+    {
+      "name": "Force Motrice",
+      "file": "live/midi/nova/dnb/force_motrice.tidal",
+      "bpm": 125,
+      "style": "dnb",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (125/60/4)", "description": "125 BPM DnB -  'Atelier de force motrice'" },
+        { "type": "pattern", "code": "note (\"[g@2 ~!4 <f ~ as5 c6>]\" - 12) # \"FMRhodes1\"", "description": "Sparse FM Rhodes: G sustain then chromatic surprise" },
+        { "type": "sample", "code": "\"nujazz_bass125:1\" / \"giorgio_syn:22\" / \"cbow:2\"", "description": "Jazz bass, Giorgio synth, bowed cello" },
+        { "type": "technique", "code": "midiOff \"^89\" (slice 4 \"1 2*<1 2> 3*<1 4> 4\")", "description": "Bass with doubling/quadrupling slice density" },
+        { "type": "effect", "code": "# crushbus 71 (range 12 3.4 \"^55\")", "description": "Bitcrush on Giorgio Euclidean pad" }
+      ]
+    },
+    {
+      "name": "Sunny Side Up",
+      "file": "live/midi/nova/lounge/sunny_side_up.tidal",
+      "bpm": 120,
+      "style": "lounge",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (120/60/4)", "description": "120 BPM upbeat sunny lounge" },
+        { "type": "sample", "code": "\"sunny_bass\" / \"sunny_brass\"", "description": "Custom sunny pack with brass deployment" },
+        { "type": "technique", "code": "arp \"up\" $ note (... + \"f gs c g\" + 12) # \"acidOto3092\"", "description": "Acid arp on F-Ab-C-G" },
+        { "type": "pattern", "code": "n \"<0 0 0 0 1 1 1 ...>\" # \"sunny_bass\"", "description": "Patient bass: 4 bars root then evolution" },
+        { "type": "effect", "code": "# octersubbus 42 (range 0 2.5 \"^33\")", "description": "Dual sub-octave for massive low end" }
+      ]
+    },
+    {
+      "name": "Venons Ensemble",
+      "file": "live/midi/nova/dnb/venons_ensemble.tidal",
+      "bpm": 85,
+      "style": "dnb",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (85/60/4)", "description": "85 BPM (170 double-time), half-time DnB" },
+        { "type": "sample", "code": "\"come_bass\" / \"come_eguitar\" / \"come_voice\"", "description": "Complete 3-part band sample pack" },
+        { "type": "technique", "code": "someCyclesBy (\"^35\" - \"^91\") (>| n ...)", "description": "MIDI probability control for vocal buildup" },
+        { "type": "pattern", "code": "n \"<[0 0]!6 [1 1] <2 [2 2]>>\" # \"come_bass\"", "description": "Slow bass: shifts only at bars 7-8" },
+        { "type": "effect", "code": "# crushbus 71 (range 16 \"<5 10>\" \"^55\") # hpfbus 72", "description": "Voice crush + HPF on same knob" }
+      ]
+    },
+    {
+      "name": "Something about Drums",
+      "file": "live/midi/nova/dnb/something_about_drums.tidal",
+      "bpm": 160,
+      "style": "nujazz",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (160/60/4)", "description": "160 BPM fast DnB with jazz harmony" },
+        { "type": "pattern", "code": "note (cat [\"[bf3, d4, f4, a4]\", ...] - 12) # \"bassWarsaw\"", "description": "Bbmaj7-Am7-Dm9-G7 jazz chords on Warsaw at half speed" },
+        { "type": "sample", "code": "\"drumtraks:9\" / \"drum:2\"", "description": "DrumTraks snare + drum rolls" },
+        { "type": "technique", "code": "# \"FMRhodes2\" |+ note 2 # modIndex (range 0 2 \"^54\")", "description": "FM Rhodes2 transposed to C" },
+        { "type": "effect", "code": "# delay 0.7 # delayt 0.125 # delayfb 0.5", "description": "Eighth-note delay on moogBass" }
+      ]
+    },
+    {
+      "name": "Permanence",
+      "file": "live/collab/raph/permanence.tidal",
+      "bpm": 150,
+      "style": "dnb",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (150/60/4)", "description": "150 BPM DnB closer" },
+        { "type": "pattern", "code": "note (\"<c4 ef4 <bf3 <g3 g4>> <af3 f4 af3 af4>>\") # \"moogBass\"", "description": "Dark moogBass: C-Eb-Bb/G-Ab/F" },
+        { "type": "sample", "code": "\"bass_nes:1\" / \"fguitar:40\" / \"fsynth\"", "description": "NES bass, distorted guitar, synth pads" },
+        { "type": "technique", "code": "note (\"0@3 0 . <gs4 f4 ef4 d4>\") # \"superfork\"", "description": "Superfork chromatic descent" },
+        { "type": "effect", "code": "# crushbus 51 ... # distortbus 52 ...", "description": "Guitar dual destruction: crush + distort" }
+      ]
+    },
+    {
+      "name": "L'Or Bleu",
+      "file": "live/midi/nova/lounge/suns_of_gold.tidal",
+      "bpm": 94,
+      "style": "lounge",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (94/60/4)", "description": "94 BPM downtempo golden hour" },
+        { "type": "sample", "code": "\"suns_keys\" / \"suns_guitar\" / \"suns_voice\"", "description": "3-part Leifur James-inspired sample pack" },
+        { "type": "technique", "code": "loopAt 8 $ chop 16 $ \"suns_keys\" # lesliebus 42 ...", "description": "8-cycle piano with Leslie modulation" },
+        { "type": "pattern", "code": "note (\"[b,fs6]@1.5 [a,e6]@1.5 ...\" - 24) # \"bassWarsaw\"", "description": "Weighted timing bass (1.5+1.5+3)" },
+        { "type": "effect", "code": "# lesliebus 42 # lrate 0.92 # lsize 1.9", "description": "MIDI Leslie speaker for rotary warmth" }
+      ]
+    }
+  ]
+}

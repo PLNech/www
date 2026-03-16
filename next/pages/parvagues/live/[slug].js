@@ -81,73 +81,122 @@ function TracksSection({ tracks }) {
     );
 }
 
-export default function LiveEvent({ live, images, tracks }) {
-    const [phase, setPhase] = useState('early'); // early, J-14, J-7, J-3, live, post
-    const [isPostEvent, setIsPostEvent] = useState(false);
+function MediaSection({ audio, video, archive }) {
+    const links = [
+        audio && { url: audio, label: detectPlatform(audio) },
+        video && { url: video, label: detectPlatform(video) },
+        archive && { url: archive, label: detectPlatform(archive) },
+    ].filter(Boolean);
+
+    if (links.length === 0) return null;
+
+    // Try to build an inline embed for the first available source
+    const embedSrc = getEmbedUrl(audio || video || archive);
+
+    return (
+        <div className="mb-16">
+            <div className="flex items-center gap-4 mb-6">
+                <h2 className="font-display text-2xl font-bold text-white">
+                    <span className="text-[var(--neon-high)]">▶</span> Écouter
+                </h2>
+                <div className="h-px bg-[var(--neon-high)]/20 flex-grow" />
+            </div>
+            {embedSrc && (
+                <div className="mb-6 rounded-xl overflow-hidden border border-white/[0.06]">
+                    <iframe
+                        src={embedSrc}
+                        width="100%"
+                        height={embedSrc.includes('youtube') ? 315 : 166}
+                        className={embedSrc.includes('youtube') ? 'aspect-video w-full' : ''}
+                        frameBorder="0"
+                        allow="autoplay; encrypted-media"
+                        loading="lazy"
+                        style={{ border: 0 }}
+                    />
+                </div>
+            )}
+            <div className="flex flex-wrap gap-3">
+                {links.map(({ url, label }) => (
+                    <a
+                        key={url}
+                        href={url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-display font-semibold tracking-wider rounded-full border border-white/10 text-[var(--text-muted)] hover:text-white hover:border-[var(--neon-high)]/40 transition-all duration-200"
+                    >
+                        {label} →
+                    </a>
+                ))}
+            </div>
+        </div>
+    );
+}
+
+function detectPlatform(url) {
+    if (!url) return 'Lien';
+    if (url.includes('bandcamp')) return 'Bandcamp';
+    if (url.includes('soundcloud')) return 'SoundCloud';
+    if (url.includes('youtube')) return 'YouTube';
+    if (url.includes('archive.org')) return 'Archive.org';
+    if (url.includes('spotify')) return 'Spotify';
+    return 'Écouter';
+}
+
+function getEmbedUrl(url) {
+    if (!url) return null;
+    if (url.includes('soundcloud.com/')) {
+        return `https://w.soundcloud.com/player/?visual=true&url=${encodeURIComponent(url)}&color=%23a700d1&auto_play=false&show_artwork=true`;
+    }
+    if (url.includes('archive.org/details/')) {
+        const id = url.split('/details/')[1]?.split(/[?#]/)[0];
+        return `https://archive.org/embed/${id}`;
+    }
+    // Bandcamp embeds need numeric IDs — link-only fallback
+    return null;
+}
+
+export default function LiveEvent({ live, images, tracks, isPostEvent: initialPostEvent }) {
+    const [phase, setPhase] = useState(initialPostEvent ? 'post' : 'early');
+    const isPostEvent = initialPostEvent;
 
     useEffect(() => {
-        // Highlight code blocks
         Prism.highlightAll();
     }, [live, phase]);
 
-    useEffect(() => {
-        const checkDate = () => {
-            const now = new Date();
-            const eventDate = new Date(live.date);
-            if (now > eventDate) {
-                setIsPostEvent(true);
-                setPhase('post');
-            }
-        };
-
-        checkDate();
-        const interval = setInterval(checkDate, 60000); // Check every minute
-        return () => clearInterval(interval);
-    }, [live.date]);
-
-    // Determine which content to show based on phase
-    const getTeasingContent = () => {
-        if (isPostEvent) return null;
-
-        // Logic to select teasing content from frontmatter based on phase
-        // Assuming frontmatter has fields like teasing_j7, teasing_j3 etc.
-        // For now, we'll just show the main description + countdown
-        return (
-            <div className="text-center mb-12">
-                <div className="inline-block p-6 bg-black/50 backdrop-blur-md rounded-xl border border-purple-500/30 shadow-[0_0_30px_rgba(137,0,179,0.2)]">
-                    <h3 className="text-purple-400 mb-4 font-mono text-sm">&gt; INITIALIZING_EVENT</h3>
-                    <Countdown targetDate={live.date} onPhaseChange={setPhase} />
-                </div>
-            </div>
-        );
-    };
+    const fm = live.frontmatter;
+    const eventDate = new Date((fm.date || '') + 'T00:00:00');
+    const dateStr = isNaN(eventDate.getTime()) ? null : format(eventDate, 'dd MMMM yyyy', { locale: fr });
+    const hasMedia = fm.audio || fm.video || fm.archive;
+    const title = fm.title || live.slug;
+    const location = fm.location || '';
 
     return (
-        <Layout title={`${live.title} - ParVagues`}>
-            <div className="max-w-4xl mx-auto">
-                {/* Header Info */}
-                <div className="text-center mb-16">
-                    <div className="inline-block px-3 py-1 mb-4 text-xs font-mono text-purple-300 border border-purple-500/30 rounded-full">
-                        {(() => {
-                            const date = new Date(live.date);
-                            return isNaN(date.getTime()) ? 'Date TBD' : format(date, 'dd MMMM yyyy', { locale: fr });
-                        })()}
-                    </div>
-                    <h1 className="text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
-                        {live.title}
+        <Layout title={`${title} - ParVagues`}>
+            <div className="max-w-4xl mx-auto px-6 pt-24 pb-16">
+                {/* Header */}
+                <div className="text-center mb-12">
+                    {dateStr && (
+                        <div className="inline-block px-3 py-1 mb-4 text-xs font-mono text-[var(--neon-high)] border border-[var(--neon-high)]/30 rounded-full">
+                            {dateStr}
+                        </div>
+                    )}
+                    <h1 className="font-display text-4xl md:text-6xl font-extrabold mb-4 tracking-tight">
+                        {title}
                     </h1>
-                    <p className="text-xl text-gray-400 flex items-center justify-center gap-2">
-                        <span className="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></span>
-                        {live.location}
-                    </p>
+                    {location && (
+                        <p className="text-lg text-[var(--text-muted)] flex items-center justify-center gap-2">
+                            <span className="w-2 h-2 bg-[var(--neon-high)] rounded-full" style={{ opacity: isPostEvent ? 0.4 : 1, animation: isPostEvent ? 'none' : 'pulse 2s infinite' }} />
+                            {location}
+                        </p>
+                    )}
                 </div>
 
                 {/* Poster */}
-                {live.frontmatter.poster && (
-                    <div className="mb-16 rounded-2xl overflow-hidden border border-white/[0.06]">
+                {fm.poster && (
+                    <div className="mb-12 rounded-2xl overflow-hidden border border-white/[0.06]">
                         <Image
-                            src={live.frontmatter.poster}
-                            alt={`${live.title} poster`}
+                            src={fm.poster}
+                            alt={`${title} poster`}
                             width={1200}
                             height={1710}
                             className="w-full h-auto"
@@ -156,25 +205,43 @@ export default function LiveEvent({ live, images, tracks }) {
                     </div>
                 )}
 
-                {/* Countdown / Teasing */}
-                {!isPostEvent && getTeasingContent()}
+                {/* Countdown for future events */}
+                {!isPostEvent && (
+                    <div className="text-center mb-12">
+                        <div className="inline-block p-6 bg-black/50 backdrop-blur-md rounded-xl border border-[var(--neon-high)]/30 shadow-[0_0_30px_rgba(137,0,179,0.2)]">
+                            <h3 className="text-[var(--neon-high)] mb-4 font-mono text-sm">&gt; INITIALIZING_EVENT</h3>
+                            <Countdown targetDate={fm.date} onPhaseChange={setPhase} />
+                        </div>
+                    </div>
+                )}
+
+                {/* Audio/Video Recording */}
+                {hasMedia && (
+                    <MediaSection
+                        audio={fm.audio}
+                        video={fm.video}
+                        archive={fm.archive}
+                    />
+                )}
 
                 {/* Main Content */}
-                <div className="prose prose-invert prose-purple max-w-none mb-16 bg-black/30 p-8 rounded-2xl border border-white/5">
-                    <ReactMarkdown>{live.content}</ReactMarkdown>
-                </div>
+                {live.content && live.content.trim() && (
+                    <div className="prose prose-invert prose-purple max-w-none mb-16 bg-black/30 p-8 rounded-2xl border border-white/5">
+                        <ReactMarkdown>{live.content}</ReactMarkdown>
+                    </div>
+                )}
 
                 {/* Tracks & Code */}
                 <TracksSection tracks={tracks} />
 
-                {/* Gallery (Post-event or if images exist) */}
+                {/* Gallery */}
                 {images && images.length > 0 && (
                     <div className="mb-16">
                         <div className="flex items-center gap-4 mb-8">
-                            <h2 className="text-2xl font-bold text-white">
-                                <span className="text-purple-500">#</span> Galerie
+                            <h2 className="font-display text-2xl font-bold text-white">
+                                <span className="text-[var(--neon-high)]">#</span> Galerie
                             </h2>
-                            <div className="h-px bg-purple-500/30 flex-grow"></div>
+                            <div className="h-px bg-[var(--neon-high)]/20 flex-grow" />
                         </div>
                         <ImageGallery images={images} />
                     </div>
@@ -198,11 +265,14 @@ export async function getStaticProps({ params }) {
     const images = getLivesImages(params.slug);
     const tracks = getLiveTracks(params.slug);
 
+    const isPostEvent = new Date() > new Date((live.frontmatter?.date || '2099-01-01') + 'T23:59:59');
+
     return {
         props: {
             live,
             images,
             tracks,
+            isPostEvent,
         },
         revalidate: 60,
     };

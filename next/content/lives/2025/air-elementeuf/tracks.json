@@ -1,0 +1,101 @@
+{
+  "gig": "air-elementeuf",
+  "title": "Air 2025 ELEMENTEUF",
+  "date": "2025-06-15",
+  "bpmRange": [120, 125],
+  "styleDistribution": {
+    "nujazz": 4,
+    "lounge": 1,
+    "collab": 1
+  },
+  "samplePacks": [
+    { "name": "bassWarsaw", "usage": "primary bass in Salut Nu, Café Bouillant" },
+    { "name": "nujazz_keys120 / nujazz_bass120", "usage": "nu-jazz samples in Café Bouillant, Café Glacé" },
+    { "name": "nujazz_keys125 / nujazz_bass125", "usage": "nu-jazz 125BPM samples in Café Tiède" },
+    { "name": "sunny_bass / sunny_brass / acidOto3092", "usage": "sunny pack + acid in Sunny Side Up" },
+    { "name": "FMRhodes1", "usage": "FM piano in Café Tiède" },
+    { "name": "jungle_breaks / breaks165", "usage": "breakbeat rhythms across tracks" },
+    { "name": "rhadamanthe_melo / cpluck", "usage": "piano and cello pluck in Septembre 1er" },
+    { "name": "nujazz_wahwah125", "usage": "wah-wah guitar in Salut Nu" }
+  ],
+  "tracks": [
+    {
+      "name": "Salut Nu",
+      "file": "live/midi/nova/nujazz/salut_nu.tidal",
+      "bpm": 120,
+      "style": "nujazz",
+      "ingredients": [
+        { "type": "structure", "code": "setcps(120/60/4)", "description": "120 BPM nu-jazz opener" },
+        { "type": "pattern", "code": "note (\"<[a4@4 c5 <c5 d5 c5 fs4>] a4>\" + \"[0,12]\" - 36) # \"bassWarsaw\"", "description": "Warsaw bass with Am melody and chromatic F#4 surprise" },
+        { "type": "sample", "code": "\"nujazz_keys120\" / \"nujazz_wahwah125\" / \"nujazz_beats120\"", "description": "Jazz keys, wah guitar, and live beats" },
+        { "type": "technique", "code": "midiOn \"^58\" (juxBy 0.9 (mask ... . rev . (|+ note 12)))", "description": "Piano mirrored: reversed copy at 90% stereo, octave up" },
+        { "type": "effect", "code": "# freezebus 51 (range 0 0.7 \"^34\")", "description": "Spectral freeze on piano samples via MIDI" }
+      ]
+    },
+    {
+      "name": "Sunny Side Up",
+      "file": "live/midi/nova/lounge/sunny_side_up.tidal",
+      "bpm": 120,
+      "style": "lounge",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (120/60/4)", "description": "120 BPM upbeat sunny lounge" },
+        { "type": "sample", "code": "\"sunny_bass\" / \"sunny_brass\"", "description": "Custom sunny pack with deployable brass" },
+        { "type": "technique", "code": "arp \"up\" $ note (\"0(3,8) 0(<3!3 5>,8)\" + \"f gs c g\" + 12) # \"acidOto3092\"", "description": "Acid arp on F-Ab-C-G with Euclidean rhythm" },
+        { "type": "pattern", "code": "n \"<0 0 0 0 1 1 1 <0 1 2 ...>>\" # \"sunny_bass\"", "description": "Patient bass: root for 4 bars then slow evolution" },
+        { "type": "effect", "code": "# octersubbus 42 (range 0 2.5 \"^33\")", "description": "Sub-octave doubling for massive low end" }
+      ]
+    },
+    {
+      "name": "Café Bouillant",
+      "file": "live/midi/nova/nujazz/cafe_bouillant.tidal",
+      "bpm": 120,
+      "style": "nujazz",
+      "ingredients": [
+        { "type": "structure", "code": "setcps(120/60/4)", "description": "120 BPM hot café nu-jazz" },
+        { "type": "pattern", "code": "note (\"e3 <b2!3 <ef3 g3>>\" |+| \"[0 ~ ~ 0 ~ ~ 0 ~] ...\") # \"bassWarsaw\"", "description": "E-B bass with syncopated note triggers and Eb/G alternation" },
+        { "type": "sample", "code": "\"nujazz_keys120\" # n \"<61!24 60!8>\"", "description": "Two piano presets cycling over 32 bars" },
+        { "type": "technique", "code": "$ \"d([16 <16 [8 <8 32 16 32>]>],32,0)\" # \"[rampleS57:2]\"", "description": "Complex Euclidean hi-hat with density evolution" },
+        { "type": "effect", "code": "# crushbus 41 (range 16 3.4 \"^53\")", "description": "MIDI-controlled bitcrush on bass" }
+      ]
+    },
+    {
+      "name": "Café Tiède",
+      "file": "live/midi/nova/nujazz/cafe_tiede.tidal",
+      "bpm": 125,
+      "style": "nujazz",
+      "ingredients": [
+        { "type": "structure", "code": "setcps(125/60/4)", "description": "125 BPM lukewarm café" },
+        { "type": "pattern", "code": "$ \"nujazz_bass125:1\" # crushbus 41 (range 12 4.5 \"^53\")", "description": "Jazz upright bass with bitcrush warmth" },
+        { "type": "sample", "code": "\"nujazz_keys125\" / \"jungle_breaks:20\"", "description": "125BPM jazz piano + jungle breaks" },
+        { "type": "technique", "code": "note (\"<c5 g4 <ef4!2 bf4!2> <c4 f4>>\") # \"FMRhodes1\"", "description": "FM Rhodes Cm-G-Eb-Bb-C-F progression" },
+        { "type": "effect", "code": "# octerbus 71 (range 0 0.5 \"^55\")", "description": "Subtle octave on secondary piano" }
+      ]
+    },
+    {
+      "name": "Café Glacé",
+      "file": "live/midi/nova/nujazz/cafe_glace.tidal",
+      "bpm": 120,
+      "style": "nujazz",
+      "ingredients": [
+        { "type": "structure", "code": "setcps(120/60/4)", "description": "120 BPM iced café nu-jazz -  the cool sibling" },
+        { "type": "pattern", "code": "$ \"nujazz_bass120:4\" # crushbus 41 (range 16 4 \"^53\")", "description": "Sliced 120BPM jazz bass with variable crush and slice speed" },
+        { "type": "sample", "code": "\"nujazz_keys120\" / \"meth_bass\" / \"jungle_breaks:53\"", "description": "Jazz keys, glitched meth bass, and jungle breaks" },
+        { "type": "technique", "code": "$ loopAt 0.25 $ slice 4 \"0 <0!3 1> <0!3 2> 3\" $ \"meth_bass\" # n \"<10!3 [<10 11> 11] 9!24>\"", "description": "Ultra-fast meth bass loop at quarter-cycle with evolving slices -  'UN GLITCH DANS MON CAFE'" },
+        { "type": "effect", "code": "# crushbus 51 (range 16 6.4 \"^54\") # octerbus 52 (range 0 0.7 \"^34\")", "description": "Dual MIDI effects on piano: crush + octave" }
+      ]
+    },
+    {
+      "name": "Septembre 1er",
+      "file": "live/collab/baba/sept1.tidal",
+      "bpm": 120,
+      "style": "collab",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (120/60/4) # cps ((range 60 180 \"^29\")/60/4)", "description": "120 BPM base with MIDI live tempo from 60-180 BPM -  'À Mon Amour'" },
+        { "type": "pattern", "code": "note (\"<<[b3@5 a3 b3 a3] ...>> [e3@7 b3]>\") # \"cpluck\" |+ note 12", "description": "Cello pluck B-A oscillation resolving to E -  handmade bassline" },
+        { "type": "sample", "code": "\"rhadamanthe_melo:1\"", "description": "Piano split into begin/mid/end cue points for narrative arc" },
+        { "type": "technique", "code": "slow 2 \"<begin ~ begin ...>/2\" # cut 51 # begin 0 # end 0.2", "description": "Piano surgically split into 3 sections with slow reveal" },
+        { "type": "effect", "code": "# delaybus 111 \"^30\" # delayt (\"<2!3 3>\"/3) # delayfb 0.5", "description": "MIDI-controlled delay send with triplet-feel delay time" }
+      ]
+    }
+  ]
+}

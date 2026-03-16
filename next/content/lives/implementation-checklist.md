@@ -6,14 +6,14 @@
 - [x] Create `/content/lives/2022/` subdirectory
 - [x] Create `/content/lives/_template.md`
 - [x] Create event metadata files:
-  - [x] `/content/lives/2025/ensad-2025-05-22.md`
-  - [x] `/content/lives/2025/algorave-lyon-2025-XX-XX.md`
+ - [x] `/content/lives/2025/ensad-2025-05-22.md`
+ - [x] `/content/lives/2025/algorave-lyon-2025-XX-XX.md`
 - [x] Create image directories:
-  - [x] `/public/images/parvagues/live-placeholder.jpg`
-  - [x] `/public/images/parvagues/code-sample-1.png`
-  - [x] `/public/images/parvagues/setup-placeholder.jpg`
-  - [x] `/public/images/parvagues/lives/2025/ensad-2025-05-22/`
-  - [x] `/public/images/parvagues/lives/2025/algorave-lyon-2025-XX-XX/`
+ - [x] `/public/images/parvagues/live-placeholder.jpg`
+ - [x] `/public/images/parvagues/code-sample-1.png`
+ - [x] `/public/images/parvagues/setup-placeholder.jpg`
+ - [x] `/public/images/parvagues/lives/2025/ensad-2025-05-22/`
+ - [x] `/public/images/parvagues/lives/2025/algorave-lyon-2025-XX-XX/`
 
 ## Phase 2: Dynamic Live Page Implementation
 - [x] Create `/pages/parvagues/live/[id].js`

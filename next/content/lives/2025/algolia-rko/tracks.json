@@ -1,0 +1,143 @@
+{
+  "gig": "algolia-rko",
+  "title": "Algolia -  RKO 2025",
+  "date": "2025-01-10",
+  "bpmRange": [85, 160],
+  "styleDistribution": {
+    "nujazz": 3,
+    "lounge": 2,
+    "dnb": 2,
+    "techno": 1,
+    "breaks": 1
+  },
+  "samplePacks": [
+    { "name": "nujazz_keys120 / nujazz_bass120", "usage": "nu-jazz piano and bass in Café Bouillant, Café Tiède" },
+    { "name": "bassWarsaw", "usage": "primary bass synth in Café Bouillant, Love First, Sunny Side Up" },
+    { "name": "sunny_bass / sunny_brass / acidOto3092", "usage": "custom sunny pack + acid in Sunny Side Up" },
+    { "name": "jungle_breaks / breaks165", "usage": "breakbeat backbone across multiple tracks" },
+    { "name": "FMRhodes1", "usage": "FM piano in Café Tiède" },
+    { "name": "90s_synatm", "usage": "atmospheric synth in Contre Visite" },
+    { "name": "come_bass / come_eguitar / come_voice", "usage": "band sample pack in Permanence (Venons Ensemble variant)" },
+    { "name": "harpsichord2", "usage": "gameboy-scale harpsichord in Nuit Agitée" },
+    { "name": "nujazz_guitar120 / movie_cat", "usage": "jazz guitar and movie cat samples in Love First" }
+  ],
+  "tracks": [
+    {
+      "name": "Café Bouillant",
+      "file": "live/midi/nova/nujazz/cafe_bouillant.tidal",
+      "bpm": 120,
+      "style": "nujazz",
+      "ingredients": [
+        { "type": "structure", "code": "setcps(120/60/4)", "description": "120 BPM hot café nu-jazz -  hotter than Tiède" },
+        { "type": "pattern", "code": "note (\"e3 <b2!3 <ef3 g3>>\" |+| \"[0 ~ ~ 0 ~ ~ 0 ~] ...\") # \"bassWarsaw\"", "description": "E-B bass alternation with syncopated Euclidean-like note triggers" },
+        { "type": "sample", "code": "\"nujazz_keys120\" # n \"<61!24 60!8>\"", "description": "Two piano presets cycling over 32 bars with room/LPF MIDI control" },
+        { "type": "technique", "code": "$ \"d([16 <16 [8 <8 32 16 32>]>],32,0)\" # \"[rampleS57:2]\"", "description": "Euclidean hi-hat pattern with evolving density: 16/32 to 8/32 variants" },
+        { "type": "effect", "code": "# crushbus 41 (range 16 3.4 \"^53\") # roombus 42 (range 0 0.4 \"^33\")", "description": "MIDI dual control: bitcrush + room reverb on bass" }
+      ]
+    },
+    {
+      "name": "Café Tiède",
+      "file": "live/midi/nova/nujazz/cafe_tiede.tidal",
+      "bpm": 125,
+      "style": "nujazz",
+      "ingredients": [
+        { "type": "structure", "code": "setcps(125/60/4)", "description": "125 BPM nu-jazz -  the lukewarm sibling" },
+        { "type": "pattern", "code": "$ \"nujazz_bass125:1\" # crushbus 41 (range 12 4.5 \"^53\")", "description": "Sliced jazz upright bass with MIDI-controlled bitcrush warmth" },
+        { "type": "sample", "code": "\"nujazz_keys125\" / \"jungle_breaks:20\"", "description": "Jazz piano keys at 125BPM + jungle breaks" },
+        { "type": "technique", "code": "note (\"<c5 g4 <ef4!2 bf4!2> <c4 f4>>\" + \"0(3,8) 0(3,8)\") # \"FMRhodes1\"", "description": "FM Rhodes with Euclidean repetition on Cm-G-Eb-Bb progression" },
+        { "type": "effect", "code": "# octerbus 71 (range 0 0.5 \"^55\")", "description": "Subtle octave effect on secondary key layer" }
+      ]
+    },
+    {
+      "name": "Sunny Side Up",
+      "file": "live/midi/nova/lounge/sunny_side_up.tidal",
+      "bpm": 120,
+      "style": "lounge",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (120/60/4)", "description": "120 BPM upbeat sunny lounge" },
+        { "type": "sample", "code": "\"sunny_bass\" / \"sunny_brass\"", "description": "Custom sunny pack with patient bass and deployable brass" },
+        { "type": "technique", "code": "arp \"up\" $ note (\"0(3,8) 0(<3!3 5>,8)\" + \"f gs c g\" + 12) # \"acidOto3092\"", "description": "Arpeggiated acid on F-Ab-C-G with dual Euclidean rhythm" },
+        { "type": "pattern", "code": "n \"<0 0 0 0 1 1 1 <0 1 2 ...>>\" # \"sunny_bass\"", "description": "Patient bass: 4 bars root, then gradual harmonic unfolding" },
+        { "type": "effect", "code": "# octersubbus 42 (range 0 2.5 \"^33\")", "description": "Dual sub-octave for massive low end on same MIDI knob" }
+      ]
+    },
+    {
+      "name": "Something about Drums",
+      "file": "live/midi/nova/dnb/something_about_drums.tidal",
+      "bpm": 160,
+      "style": "dnb",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (160/60/4)", "description": "160 BPM fast DnB with jazz harmony" },
+        { "type": "pattern", "code": "note (cat [\"[bf3, d4, f4, a4]\", \"[a3, c4, e4, g4]\", \"[d4, f4, a4, c5, <e5 e4>]\", \"[g3, b4, d5, <f5 ~>]\"] - 12)", "description": "Bbmaj7-Am7-Dm9-G7 progression at half speed on Warsaw bass" },
+        { "type": "sample", "code": "\"drumtraks:9\" / \"drum:2\"", "description": "DrumTraks snare with drum rolls for jazz-DnB hybrid" },
+        { "type": "technique", "code": "# \"FMRhodes2\" |+ note 2 # modIndex (range 0 2 \"^54\")", "description": "FM Rhodes2 transposed to C with subtle modulation" },
+        { "type": "effect", "code": "# delay 0.7 # delayt 0.125 # delayfb 0.5", "description": "Eighth-note delay with 50% feedback on moogBass" }
+      ]
+    },
+    {
+      "name": "Love First",
+      "file": "live/collab/nass/love_first.tidal",
+      "bpm": 120,
+      "style": "nujazz",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (120/60/4)", "description": "120 BPM -  collab with Nassim, nu-jazz love letter" },
+        { "type": "pattern", "code": "note (\"<c <ef <[ef@7 g] [ef [g ef g]]>> f@2>\" - 24) # \"bassWarsaw\"", "description": "C-Eb-G bass with weighted long notes and voice-like movement" },
+        { "type": "sample", "code": "\"nujazz_keys120:13\" / \"nujazz_guitar120:3\" / \"movie_cat\"", "description": "Jazz piano, guitar, and movie cat vocals for narrative layers" },
+        { "type": "technique", "code": "# delay (slow 16 $ range 0.4 \"<0!32 0.8!32>\" saw) # delayfb 0.5", "description": "Guitar delay that slowly opens up over 32 cycles" },
+        { "type": "effect", "code": "# crushbus 51 (range 10 1.8 \"^54\") # sz 0.8 # dry 1.2", "description": "Aggressive bitcrush on piano with large reverb" }
+      ]
+    },
+    {
+      "name": "Contre Visite",
+      "file": "live/midi/nova/ambient/contre_visite.tidal",
+      "bpm": 90,
+      "style": "techno",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (90/60/4)", "description": "90 BPM atmospheric techno" },
+        { "type": "pattern", "code": "note (scale \"aeolian\" \"<0!3 [0@6 <4 -1>@2]> 2\") # \"90s_synatm:18\"", "description": "Aeolian questioning lead melody" },
+        { "type": "sample", "code": "\"90s_synatm:8\" / \"90s_synatm:14\"", "description": "Aerial questions and electronic answers -  dual 90s synth" },
+        { "type": "technique", "code": "whenmod 32 8 (superimpose (arp \"<up!3 down>\" ...))", "description": "Every 32 cycles: 8-cycle arpeggiated doubt burst" },
+        { "type": "effect", "code": "# crushbus 62 (range 16 2.25 \"^55\")", "description": "Bitcrush on lead for lo-fi transformation" }
+      ]
+    },
+    {
+      "name": "Nuit Agitée",
+      "file": "live/midi/nova/breaks/nuit_agitee.tidal",
+      "bpm": 160,
+      "style": "dnb",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (160/60/4)", "description": "160 BPM restless night -  custom 'gameboy' scale" },
+        { "type": "pattern", "code": "note (scale \"gameboy\" (\"<1(3,8) [1(3,8), <~ [~!7 2]>] 0(3,8) ...>\")) # \"harpsichord2\"", "description": "Gameboy-scale harpsichord with Euclidean rhythm and evolving intervals" },
+        { "type": "sample", "code": "\"bass_commodore:7\" / \"amencutup\" / \"rolandtr909\"", "description": "Commodore bass chopped into 64 slices, amen breaks, 909 clap" },
+        { "type": "technique", "code": "midiOn \"^57\" (slow \"<1!12 [1 2]!3 [2 4]>\" . mask ... . stut \"<4!12 2 2 4 8>\" 0.7 ...)", "description": "Bass with decelerating stutter and increasingly sparse mask" },
+        { "type": "effect", "code": "# crushbus 41 (range 8 0.81 \"^53\") # octersubbus 42 (range 0 7 \"^33\")", "description": "Extreme bitcrush to 0.81 + massive sub-octave up to 7x on bass" }
+      ]
+    },
+    {
+      "name": "Invoque l'Été",
+      "file": "live/midi/nova/lounge/invoque_ete.tidal",
+      "bpm": 115,
+      "style": "lounge",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (115/60/4)", "description": "115 BPM summer lounge closer" },
+        { "type": "pattern", "code": "\"d ~ ~ d d ~ d <~!3 d>\" # \"[snare:22,sn:4]\"", "description": "Latin clave pattern on layered snares" },
+        { "type": "sample", "code": "\"fbass:13\" / \"fguitar:12\" / \"fpiano:13\"", "description": "Sliced funk trio: bass, guitar, piano" },
+        { "type": "technique", "code": "note (\"<a3'maj g3'maj a3'min d3'maj>\") # \"moogBass\"", "description": "Am-G-Am-D moog chord progression with frequency shift" },
+        { "type": "effect", "code": "# crushbus 91 (range 16 1.4 \"^19\") # roombus 92 (range 0 1.4 \"^18\")", "description": "Dual MIDI effects on moog: crush + room -  'Even an angel can fall in love'" }
+      ]
+    },
+    {
+      "name": "Permanence",
+      "file": "live/collab/raph/permanence.tidal",
+      "bpm": 150,
+      "style": "dnb",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (150/60/4)", "description": "150 BPM DnB closing track -  collab with Raph" },
+        { "type": "pattern", "code": "note (\"<c4 ef4 <bf3 <g3 g4>> <af3 f4 af3 af4>>\") # \"moogBass\"", "description": "Dark moog bass: C-Eb-Bb/G-Ab/F with octave jumps" },
+        { "type": "sample", "code": "\"bass_nes:1\" / \"fguitar:40\" / \"fsynth\"", "description": "NES bass, distorted guitar, synth pads" },
+        { "type": "technique", "code": "note (\"0@3 0 . <gs4 f4 ef4 d4>\") # \"superfork\"", "description": "Superfork melody with chromatic descent" },
+        { "type": "effect", "code": "# crushbus 51 (range 16 2.5 \"^54\") # distortbus 52 (range 0 1.5 \"^34\")", "description": "Guitar dual destruction: crush + distort on separate knobs" }
+      ]
+    }
+  ]
+}

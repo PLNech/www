@@ -1,0 +1,201 @@
+{
+  "gig": "algolia-fdlm",
+  "title": "Algolia FDLM 2024",
+  "date": "2024-06-21",
+  "bpmRange": [80, 160],
+  "styleDistribution": { "nujazz": 4, "dnb": 3, "lofi": 1, "techno": 2, "breaks": 2, "collab": 2 },
+  "samplePacks": [
+    { "name": "nujazz_keys120/125", "usage": "Sampled jazz piano across Cafe trilogy" },
+    { "name": "nujazz_bass120/125", "usage": "Upright bass samples in Cafe tracks" },
+    { "name": "nujazz_beats120", "usage": "Live jazz drum loops in Salut Nu" },
+    { "name": "jungle_breaks", "usage": "Chopped breakbeats across most tracks" },
+    { "name": "bassWarsaw", "usage": "Synth bass in multiple tracks" },
+    { "name": "FMRhodes", "usage": "Electric piano in Cafe Tiede, Lendemain Divin" },
+    { "name": "come_guitar", "usage": "Guitar samples in Lendemain Divin" },
+    { "name": "breaks165", "usage": "High-energy breakbeat in Permanence, JeuDrill" }
+  ],
+  "tracks": [
+    {
+      "name": "Lendemain Divin",
+      "file": "live/midi/nova/lofi/lendemain_divin.tidal",
+      "bpm": 95,
+      "style": "lofi",
+      "ingredients": [
+        { "type": "pattern", "code": ">| note \"<<d4!6 [d4@7 <f4 g4>]!2> <a3!4 [a3@7 <c4 c3>]!4> [<g3 [g3@7 f3]>] d3>\"", "description": "Dual-mode bassWarsaw bassline switching between habitual and alternative voicings" },
+        { "type": "sample", "code": "\"come_guitar\" # n \"<0 0 <6 5> 0 1 1 2 7>\"", "description": "Guitar sample sequence with crushbus and LPF" },
+        { "type": "effect", "code": "# octersubbus 42 (range 0 2.5 \"^33\")", "description": "Deep sub-octave on bass for heavy low end" },
+        { "type": "technique", "code": "note \"0 7 <0!3 [0 15]> 12\" # \"FMRhodes1\"", "description": "FMRhodes1 lead mirroring bass movement with interval jumps" },
+        { "type": "structure", "code": "setcps (95/60/4)", "description": "95 BPM, roland tr808/606 hats, vec1_snare, warm opener" }
+      ]
+    },
+    {
+      "name": "Contre Visite",
+      "file": "live/midi/nova/ambient/contre_visite.tidal",
+      "bpm": 80,
+      "style": "ambient",
+      "ingredients": [
+        { "type": "sample", "code": "\"celtic_guitar80\" # n \"4\"", "description": "Celtic guitar sample repurposed as bass" },
+        { "type": "pattern", "code": "note \"<ef ef {b, [~!7 fs]} fs>\"", "description": "Moog bass with sparse set-theoretic note pattern" },
+        { "type": "effect", "code": "# octerbus 52 (range 0 0.63 \"^36\")", "description": "Octaver on moog bass for sub depth" },
+        { "type": "technique", "code": "chop 4 $ \"voices_celtic\"", "description": "Celtic vocal sample chopped and sequenced" },
+        { "type": "structure", "code": "setcps (80/60/4)", "description": "80 BPM ambient with LPF automation over 64 cycles" }
+      ]
+    },
+    {
+      "name": "Nightly Repair",
+      "file": "live/techno/nightly_repair.tidal",
+      "bpm": 90,
+      "style": "techno",
+      "ingredients": [
+        { "type": "pattern", "code": "note (\"<bf g bf g bf g bf c c!4 g bf c6@2>\" - 24)", "description": "Voltaic bassline on 90s_matrix:3 with long melodic phrases" },
+        { "type": "sample", "code": "\"[jazz,909,808bd:4]\"", "description": "Triple-layered kick for heavy low end" },
+        { "type": "effect", "code": "# lesliebus 41 (range \"-1\" 1 \"^17\")", "description": "Leslie speaker on 90s_matrix bass creating rotary modulation" },
+        { "type": "technique", "code": "note (scale \"blues\" (arp \"<up pinkyup downup thumbupdown>\" \"[0,1,2,<3 4>,<4 <5 6>>]\"))", "description": "Blues scale arpeggiation on FMRhodes1 with varied arp directions" },
+        { "type": "structure", "code": "setcps (90/60/4)", "description": "90 BPM, custom blues scale, 90s_matrix Godzilla bass on d7" }
+      ]
+    },
+    {
+      "name": "Invoque l'Ete",
+      "file": "live/midi/nova/lounge/invoque_ete.tidal",
+      "bpm": 115,
+      "style": "lounge",
+      "ingredients": [
+        { "type": "pattern", "code": "\"d ~ ~ d d ~ d <~!3 d>\"", "description": "Latin clave rhythm forming the backbone" },
+        { "type": "sample", "code": "\"fguitar:12\"", "description": "Sweet guitar with loopAt 4 and variable chopping" },
+        { "type": "effect", "code": "# crushbus 61 (range 16 1.4 \"^54\")", "description": "Warm bitcrush on guitar" },
+        { "type": "technique", "code": "note (\"<a3'maj g3'maj a3'min d3'maj>\")", "description": "Jazz chord progression on moogBass and 90s_synatm" },
+        { "type": "structure", "code": "setcps (115/60/4)", "description": "115 BPM, fpiano:13 with slice patterns, breaks125 + breaks165" }
+      ]
+    },
+    {
+      "name": "Venons Ensemble",
+      "file": "live/midi/nova/dnb/venons_ensemble.tidal",
+      "bpm": 170,
+      "style": "dnb",
+      "ingredients": [
+        { "type": "sample", "code": "\"come_bass\"", "description": "Custom multi-sample bass" },
+        { "type": "pattern", "code": "fast 2 . struct \"t t t <t!3 t*2>\"", "description": "DNB kick pattern with half-time switching" },
+        { "type": "effect", "code": "# crushbus 43 (range 16 3.5 \"^53\")", "description": "Bitcrush on bass" },
+        { "type": "technique", "code": "come_voice with conditional sample selection", "description": "Voice samples triggered by MIDI probability" },
+        { "type": "structure", "code": "setcps (85/60/4)", "description": "170 BPM half-time, electric guitar + voice call-and-response" }
+      ]
+    },
+    {
+      "name": "JeuDrill",
+      "file": "live/collab/raph/jeudrill.tidal",
+      "bpm": 140,
+      "style": "drill",
+      "ingredients": [
+        { "type": "pattern", "code": "slow 2 $ note (\"<<fs <[fs@15 e] [fs@14 cs e]>> b4>\" - 12 + 2)", "description": "Slow-evolving giorgio_syn bassline with chromatic movement" },
+        { "type": "sample", "code": "\"bogdan_grime:1\"", "description": "Cardiff grime vocal sample with conditional playback" },
+        { "type": "effect", "code": "# octersubsubbus 42 (range 0 2 \"^33\")", "description": "Deep sub-sub-octave on bass for extreme low end" },
+        { "type": "technique", "code": "someCyclesBy \"<1!16 1!32 0!16>\" (>| note \"<b3 ~ ~ [~ ~ as4 ~]>\")", "description": "Multi-phase synth menace on 90s_synatm:10 with Adrianesque variants" },
+        { "type": "structure", "code": "setcps (140/60/4)", "description": "140 BPM, marimba on d5, breaks165 with Nassim button, bogdan vocal stabs" }
+      ]
+    },
+    {
+      "name": "PERMANENCE",
+      "file": "live/collab/raph/permanence.tidal",
+      "bpm": 150,
+      "style": "techno",
+      "ingredients": [
+        { "type": "pattern", "code": "chop 4 $ loopAt 4 $ \"bass_nes:1\"", "description": "NES bass sample chopped and looped with freeze effect" },
+        { "type": "sample", "code": "\"fguitar:40\"", "description": "Guitar sample with distort and crush for industrial texture" },
+        { "type": "effect", "code": "# distortbus 52 (range 0 1.5 \"^34\")", "description": "MIDI-controlled distortion on guitar" },
+        { "type": "technique", "code": "note (\"<c4 ef4 <bf3 <g3 g4>> <af3 f4 af3 af4>>\") # \"moogBass\"", "description": "moogBass pad following chromatic minor progression" },
+        { "type": "structure", "code": "setcps (150/60/4)", "description": "150 BPM, superfork lead with delay, fsynth with octer/crush" }
+      ]
+    },
+    {
+      "name": "Force Motrice",
+      "file": "live/midi/nova/dnb/force_motrice.tidal",
+      "bpm": 125,
+      "style": "dnb",
+      "ingredients": [
+        { "type": "sample", "code": "\"nujazz_bass125:1\"", "description": "Nu-jazz bass sample chopped and sliced" },
+        { "type": "pattern", "code": "note (\"[g@2 ~!4 <f ~ as5 c6>]\" - 12)", "description": "FMRhodes1 lead with sparse melodic intervals" },
+        { "type": "effect", "code": "# crushbus 71 (range 12 3.4 \"^55\")", "description": "Bitcrush on giorgio_syn creating gritty synth texture" },
+        { "type": "technique", "code": "midiOn \"^58\" (off 0.125 id . rev)", "description": "Reversed Rhodes with micro-offset creating echo-before-attack" },
+        { "type": "structure", "code": "setcps (125/60/4)", "description": "125 BPM, cbow cello on d11, risers on d10, jungle_vocals on d9" }
+      ]
+    },
+    {
+      "name": "Cafe Tiede",
+      "file": "live/midi/nova/nujazz/cafe_tiede.tidal",
+      "bpm": 125,
+      "style": "nujazz",
+      "ingredients": [
+        { "type": "sample", "code": "\"nujazz_keys125\" # n \"<56 56 57 56 58!4 59 59 56 59>\"", "description": "Sampled nu-jazz piano keys driving the harmony" },
+        { "type": "pattern", "code": "midiOn \"^42\" (<| \"k k k <k <k*2 [k <k ~> k ~]>>\")", "description": "Kick pattern with evolving 4th-beat variation" },
+        { "type": "effect", "code": "# crushbus 41 (range 12 4.5 \"^53\")", "description": "Gentle bitcrush on nujazz bass" },
+        { "type": "technique", "code": "chop 8 $ loopAt 2 $ \"nujazz_keys125\"", "description": "Live-recorded jazz keys chopped into 8 for real-time slicing" },
+        { "type": "structure", "code": "setcps(125/60/4)", "description": "125 BPM, FMRhodes1 with arpeggiated chords on d10, h2ogmcp clap" }
+      ]
+    },
+    {
+      "name": "Cafe Bouillant",
+      "file": "live/midi/nova/nujazz/cafe_bouillant.tidal",
+      "bpm": 120,
+      "style": "nujazz",
+      "ingredients": [
+        { "type": "sample", "code": "\"nujazz_keys120\" # n \"<61!24 60!8>\"", "description": "Piano keys switching between two voicings" },
+        { "type": "pattern", "code": "note (\"e3 <b2!3 <ef3 g3>>\" |+| \"[0 ~ ~ 0 ~ ~ 0 ~]\")", "description": "bassWarsaw with irregular euclidean-style note triggers" },
+        { "type": "effect", "code": "# roombus 42 (range 0 0.4 \"^33\")", "description": "MIDI-controlled reverb on bass" },
+        { "type": "technique", "code": "\"d([16 <16 [8 <8 32 16 32>]>],32,0)\"", "description": "Complex euclidean hi-hat pattern on rampleS57" },
+        { "type": "structure", "code": "setcps(120/60/4)", "description": "120 BPM, nujazz_bass120 plucked doubts on d11, cpluck:4 on d10" }
+      ]
+    },
+    {
+      "name": "Cafe Glace",
+      "file": "live/midi/nova/nujazz/cafe_glace.tidal",
+      "bpm": 120,
+      "style": "nujazz",
+      "ingredients": [
+        { "type": "sample", "code": "\"nujazz_keys120\" # n (slow 4 \"<5 6 7 8>\")", "description": "Piano samples rotating through 4 voicings" },
+        { "type": "pattern", "code": "midiOn \"^42\" (<| \"k k k <k!3 <[~ k*<1!3 2>]!3 k*2>>\")", "description": "Evolving kick with occasional rolls on 4th beat" },
+        { "type": "effect", "code": "# crushbus 51 (range 16 6.4 \"^54\")", "description": "Wide-range bitcrush on keys" },
+        { "type": "technique", "code": "\"meth_bass\" # n \"<10!3 [<10 11> 11] 9!24>\" $ loopAt 0.25", "description": "Glitchy meth_bass at 4x speed creating rhythmic noise texture" },
+        { "type": "structure", "code": "setcps(120/60/4)", "description": "120 BPM, double jungle_breaks on d7+d8, nujazz_bass120:4 sliced" }
+      ]
+    },
+    {
+      "name": "Salut Nu",
+      "file": "live/midi/nova/nujazz/salut_nu.tidal",
+      "bpm": 120,
+      "style": "nujazz",
+      "ingredients": [
+        { "type": "sample", "code": "\"nujazz_beats120\"", "description": "Live jazz drum loops as primary rhythm source" },
+        { "type": "pattern", "code": "note (\"<[a4@3 <c5 f5>] e5 [<d5!3 f5>] <a5!3 c6>>\" + \"<0!8 [0,12]!8>\")", "description": "moogBass melody with jux rev and octave doubling" },
+        { "type": "effect", "code": "# freezebus 51 (range 0 0.7 \"^34\")", "description": "Freeze effect on nujazz_keys120 piano" },
+        { "type": "technique", "code": "midiOn \"^58\" (juxBy 0.9 (mask \"<<f t> [<f t> t]>\" . (# begin 0.5) . rev . (|+ note 12)))", "description": "Complex jux with reversed, offset, octave-shifted piano reflection" },
+        { "type": "structure", "code": "setcps(120/60/4)", "description": "120 BPM, nujazz_wahwah125 guitar on d7, bassWarsaw with octer/squiz" }
+      ]
+    },
+    {
+      "name": "Nuit Agitee",
+      "file": "live/midi/nova/breaks/nuit_agitee.tidal",
+      "bpm": 160,
+      "style": "breaks",
+      "ingredients": [
+        { "type": "sample", "code": "\"bass_commodore:7\"", "description": "Commodore bass sample stretched over 8 cycles with heavy modulation" },
+        { "type": "pattern", "code": "note (scale \"gameboy\" (\"<1(3,8) [1(3,8), <~ [~!7 2]>] 0(3,8) <0!3 -2>(3,8)>\"))", "description": "Custom gameboy scale on harpsichord2 with euclidean rhythm" },
+        { "type": "effect", "code": "# lesliebus 43 (range 0 2 \"^29\")", "description": "Leslie speaker on Commodore bass" },
+        { "type": "technique", "code": "loopAt 8 $ chop 64 $ \"bass_commodore:7\"", "description": "Extreme granular slicing: 64 chops over 8-cycle loop" },
+        { "type": "structure", "code": "setcps (160/60/4)", "description": "160 BPM, custom gameboy scale, amencutup hats, moogBass angels" }
+      ]
+    },
+    {
+      "name": "MauerPark",
+      "file": "live/midi/nova/techno/ete_a_mauerpark.tidal",
+      "bpm": 120,
+      "style": "techno",
+      "ingredients": [
+        { "type": "pattern", "code": "note (\"<[g4 c ef@14] [<c g> ef g@14]>\" - 24)", "description": "Long sustained bass with brief melodic pickups" },
+        { "type": "sample", "code": "\"[techno:0,808bd:2,909,kick:4]\"", "description": "Four-layer kick stack" },
+        { "type": "effect", "code": "# chorus (range 0 2 \"^19\")", "description": "Chorus effect on moogBass nano-angels" },
+        { "type": "technique", "code": "arp \"<up!6 down downup>\" $ note (\"<ef4 g4 <ef g> d>\" + \"c'maj'4\")", "description": "Evolving arpeggio direction on FMRhodes1" },
+        { "type": "structure", "code": "setcps (120/60/4)", "description": "120 BPM, cbow cello, moogBass chorus, heavy closer" }
+      ]
+    }
+  ]
+}

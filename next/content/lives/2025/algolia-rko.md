@@ -1,10 +1,10 @@
 ---
-title: "Algolia — RKO 2025"
+title: "Algolia -  RKO 2025"
 date: "2025-01-10"
 time: "18:00"
 location: "Paris, France"
 address: "Algolia"
-description: "Dernier rendez-vous — RKO."
+description: "Dernier rendez-vous -  RKO."
 ctaURL: ""
 ctaText: ""
 video: ""
@@ -13,7 +13,7 @@ archive: ""
 tags: ["livecoding", "algolia", "paris"]
 ---
 
-# Algolia — RKO 2025
+# Algolia -  RKO 2025
 
 ## Tracklist
 - Café Bouillant

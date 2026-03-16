@@ -1,0 +1,133 @@
+{
+  "gig": "devcon23",
+  "title": "DevCon23 Performance",
+  "date": "2023-11-15",
+  "bpmRange": [60, 165],
+  "styleDistribution": {
+    "lofi": 2,
+    "lounge": 1,
+    "breakbeat": 2,
+    "dnb": 2,
+    "techno": 1
+  },
+  "samplePacks": [
+    { "name": "bassWarsaw", "usage": "primary bass synth in SlowMo, Lendemain Divin, Premiere Grillade, Nouveau Soleil" },
+    { "name": "FMRhodes1/FMRhodes2", "usage": "FM piano in SlowMo, Lendemain Divin, Premiere Grillade, Ete a Mauerpark" },
+    { "name": "jungle_breaks", "usage": "jungle breakbeats in Lendemain Divin, Nouveau Soleil, Ete a Mauerpark, Break Dynasty" },
+    { "name": "come_guitar", "usage": "guitar samples in Lendemain Divin" },
+    { "name": "shiloh", "usage": "lo-fi vocal chop samples in Premiere Grillade and Break Dynasty" },
+    { "name": "bass_gameboy/synth_gameboy/synth_atari", "usage": "retro game console sounds in Nouveau Soleil" },
+    { "name": "moogBass", "usage": "moog synth in SlowMo intro and Nouveau Soleil/Ete a Mauerpark" },
+    { "name": "cbow", "usage": "cello bow in Ete a Mauerpark" },
+    { "name": "90s_megafx", "usage": "cinematic FX pad in SlowMo" },
+    { "name": "fbreak80/fbass", "usage": "breakbeat and bass samples in Sessions Break" },
+    { "name": "breaks165", "usage": "fast break loop in Break Dynasty" },
+    { "name": "vec1_snare/rolandtr808/rolandtr606", "usage": "drum machine samples in Lendemain Divin" }
+  ],
+  "tracks": [
+    {
+      "name": "SlowMo",
+      "file": "live/hip/lofi/slow_mo.tidal",
+      "bpm": 60,
+      "style": "lofi",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (60/60/4)", "description": "60 BPM lo-fi - opens with live TidalCycles demo before transitioning into the track" },
+        { "type": "technique", "code": "note (scale \"aeolian\" \"[7, ~!7 <~!3 3 ~ 3 ~ 3>] . [4, ~!3 <~ <[~ 8] [8 9] ...>]\")", "description": "Organically grown aeolian main theme on FMRhodes1 with evolving counter-melody" },
+        { "type": "sample", "code": "# \"bassWarsaw\" # octave \"<2!16 3!16>\"", "description": "Warsaw bass shifting octaves every 16 cycles for gradual bass evolution" },
+        { "type": "effect", "code": "$ jux ((# crush (slow 16 (range 10 5 saw))) . (|* gain 0.93))", "description": "Stereo jux with slow saw-driven bitcrush creating lo-fi spatial depth" },
+        { "type": "technique", "code": "$ mask \"<f!32 t!32>\" $ whenmod 16 8 (superimpose (chop \"[<4!4 8!4>!3 1]!2\"))", "description": "Bass overdrone appears halfway through via mask, with evolving chop granularity" }
+      ]
+    },
+    {
+      "name": "Lendemain Divin",
+      "file": "live/midi/nova/lofi/lendemain_divin.tidal",
+      "bpm": 95,
+      "style": "lofi",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (95/60/4)", "description": "95 BPM lo-fi with MIDI mute matrix and triple control groups" },
+        { "type": "technique", "code": ">| note \"<<d4!6 [d4@7 <f4 g4>]!2> <a3!4 [a3@7 <c4 c3>]!4> ...>\"", "description": "Dual-mode bass line: MIDI toggles between complainte and ritournelle patterns" },
+        { "type": "sample", "code": "$ n \"<0 0 <6 5> 0 1 1 2 7>\" # \"come_guitar\" # crushbus 61 ...", "description": "Finger-picked guitar cycling through 8 takes with bitcrush" },
+        { "type": "sample", "code": "$ drumFrom \"[rolandtr808,rolandtr606]\" \"[hh]\"", "description": "drumFrom function layering 808 and 606 hi-hats for hybrid analog character" },
+        { "type": "effect", "code": "# crushbus 41 (range 16 2.5 \"^53\") # octersubbus 42 (range 0 2.5 \"^33\")", "description": "Bitcrush + sub-octave on bass for lo-fi warmth and low-end reinforcement" }
+      ]
+    },
+    {
+      "name": "Invoque l'Ete",
+      "file": "live/midi/nova/lounge/invoque_ete.tidal",
+      "bpm": 115,
+      "style": "lounge",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (115/60/4)", "description": "115 BPM lounge with clave-driven groove and jazz progression" },
+        { "type": "pattern", "code": "\"d ~ ~ d d ~ d <~!3 d>\"", "description": "Son clave pattern with variable ghost-note gain modulation" },
+        { "type": "sample", "code": "$ slice 8 (run \"<4!4 8 8 [4 8 4] [8 4 8]>\") $ \"fbass:13\"", "description": "Bass loop with escalating slice complexity for buildup" },
+        { "type": "technique", "code": "note (\"<a3'maj g3'maj a3'min d3'maj>\") # \"moogBass\"", "description": "Moog bass on I-bVII-i-IV jazz chord cycle" },
+        { "type": "effect", "code": "# crushbus 51 (range 16 4.5 \"^53\") # roombus 52 (range 0 0.8 \"^33\")", "description": "MIDI-controlled crush and reverb for live texture morphing" }
+      ]
+    },
+    {
+      "name": "Sessions Break",
+      "file": "live/midi/nova/breaks/break_the_rentree.tidal",
+      "bpm": 80,
+      "style": "breakbeat",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (80/60/4)", "description": "80 BPM slow breakbeat - 'le rythme de la rentree' (back-to-sessions)" },
+        { "type": "technique", "code": "$ whenmod 16 15 (slice 4 \"0*5 ~*3\") $ whenmod 8 7 (slice 4 \"0*8\")", "description": "Cascading break glitch: stutter patterns intensify at cycle boundaries" },
+        { "type": "sample", "code": "$ \"fbreak80:0\" # room 0.3 # dry 1 # sz 0.6", "description": "80 BPM break sample with spacious reverb and dry mix" },
+        { "type": "sample", "code": "$ loopAt 2 $ \"fbass:24/2\" # crushbus 61 (range 16 4 \"^53\")", "description": "Programmatic bass with MIDI-triggered slice recombinations" },
+        { "type": "effect", "code": "# delay (range 0.25 0.5 perlin) # delayt 0.375 # delayfb 0", "description": "Perlin-modulated delay amount on drumroll for organic temporal smearing" }
+      ]
+    },
+    {
+      "name": "Nouveau Soleil",
+      "file": "live/midi/nova/dnb/nouveau_soleil.tidal",
+      "bpm": 110,
+      "style": "dnb",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (110/60/4)", "description": "110 BPM mid-tempo DnB with gameboy/atari console sounds" },
+        { "type": "sample", "code": "$ \"bass_gameboy\" with midiOn \"^57\" (# \"bass_gameboy:5\")", "description": "Game Boy bass switching between two presets via MIDI for tonal contrast" },
+        { "type": "technique", "code": "$ whenmod 64 32 (off \"q\" ((|+ note 12) . (# pan 0.8)))", "description": "Progressive octave-up offsets activating at deeper cycle depths (64/32/16/8)" },
+        { "type": "sample", "code": "$ note \"<fs3 b4 a4 cs5 fs4 e4 d4 cs5 ...>\" # \"moogBass\"", "description": "Moog melody with 16-step chromatic sequence and octave reinforcement" },
+        { "type": "effect", "code": "# hpfbus 51 (range 0 8000 \"^34\")", "description": "MIDI high-pass filter on synth_gameboy for dramatic filter sweeps" }
+      ]
+    },
+    {
+      "name": "Premiere Grillade",
+      "file": "live/midi/nova/lofi/premiere_grillade.tidal",
+      "bpm": 80,
+      "style": "lofi",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (80/60/4)", "description": "80 BPM lo-fi with Yamaha RM50 drums and jazz major 7th progression" },
+        { "type": "technique", "code": "let prog = \"<[c,e,g,b] [c,e,g,bf] [c,ef,g,bf] [c,e,g,b]>\"", "description": "CMaj7-C7-CMin7-CMaj7 chord cycle on FMRhodes2 - classic lo-fi harmony" },
+        { "type": "sample", "code": "$ \"shiloh:1\" # lpf 5000 # room 0.4 # sz 0.59 # dry 2", "description": "Shiloh vocal sample with lo-fi filtering and saturated dry signal" },
+        { "type": "technique", "code": "note (\"<[c,c(3,8)] [g,[~ f6],g*4] [bf,bf(3,8)] c4>\" - 24) # \"bassWarsaw\"", "description": "Warsaw bass with euclidean-patterned chord tones for rhythmic bass line" },
+        { "type": "effect", "code": "# crushbus 51 (range 16 2 \"^53\") # room 0.2 # sz 0.2", "description": "Subtle bitcrush and tight room reverb for lo-fi warmth without muddiness" }
+      ]
+    },
+    {
+      "name": "Ete a Mauerpark",
+      "file": "live/midi/nova/techno/ete_a_mauerpark.tidal",
+      "bpm": 120,
+      "style": "techno",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (120/60/4)", "description": "120 BPM Berlin techno with 64-cycle LPF sweeps and cello lead" },
+        { "type": "technique", "code": "let gLPF = whenmod 64 48 (# lpfbus 4 (slow 16 $ range 20000 200 saw))", "description": "Global low-pass filter sweep from 20kHz to 200Hz over 16 cycles for massive breakdowns" },
+        { "type": "sample", "code": "note (\"<[g4 c ef@14] ...>\") # \"[cbow:3]\" # crushbus 71 ...", "description": "Cello bow lead with sustained notes (@14) and bitcrush texture" },
+        { "type": "technique", "code": "$ slow 2 $ someCyclesBy (\"^33\") (mask \"<t!2 f t f f t t> f t@14\")", "description": "MIDI probability-gated bass pattern with long sustain for Germanic weight" },
+        { "type": "effect", "code": "# lesliebus 102 (range 0 2 \"^18\") # chorus (range 0 2 \"^19\")", "description": "MIDI Leslie and chorus on moog for evolving stereo pad texture" }
+      ]
+    },
+    {
+      "name": "VelociTeuf",
+      "file": "live/midi/nova/breaks/break_dynasty.tidal",
+      "bpm": 165,
+      "style": "dnb",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (165/60/4)", "description": "165 BPM closing ramp-up - 'Ready for Mix / Takeoff' energy" },
+        { "type": "sample", "code": "$ loopAt 2 $ chop 16 $ \"jungle_breaks:6\"", "description": "Jungle breaks loop as the core drum pattern at DnB tempo" },
+        { "type": "technique", "code": "note (\"<<b4 [b4@3 cs5]> gs4@2 ~ gs4>\" - 24) # \"bassWarsaw\"", "description": "Warsaw bass with chromatic tension (b4/cs5) and sustained rests" },
+        { "type": "sample", "code": "$ slow 2 $ slice 16 \"~ <0 1 1 0 0 2 0 2 2 1 2 3 2 3 4 5>\" $ \"shiloh:2\"", "description": "Shiloh vocal chops in half-time with growing slice selection" },
+        { "type": "effect", "code": "# delaybus 61 (range 0 1 \"^55\") # delayfb 0.5 # delaytime 0.375", "description": "MIDI delay on Shiloh vocal creating dub echo trails" }
+      ]
+    }
+  ]
+}

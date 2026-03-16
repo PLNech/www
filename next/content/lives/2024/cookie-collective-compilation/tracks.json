@@ -1,0 +1,150 @@
+{
+  "gig": "cookie-collective-compilation",
+  "title": "Cookie Collective Compilation Release Party",
+  "date": "2024-10-25",
+  "bpmRange": [93, 170],
+  "styleDistribution": { "dnb": 3, "nujazz": 2, "breaks": 1, "collab": 2, "lounge": 2 },
+  "samplePacks": [
+    { "name": "jungle_breaks", "usage": "Breakbeats throughout the set" },
+    { "name": "breaks165", "usage": "High-energy breaks in multiple tracks" },
+    { "name": "bassWarsaw", "usage": "Primary bass synth" },
+    { "name": "FMRhodes", "usage": "Electric piano in L'ACID d'abord, Fabuleux" },
+    { "name": "vec1_acid/vec2_synth_acid", "usage": "Acid bass in L'ACID d'abord" },
+    { "name": "nujazz_keys120/125", "usage": "Jazz piano in Cafe tracks" },
+    { "name": "nujazz_beats120", "usage": "Jazz drum loops in Salut Nu" },
+    { "name": "aoc_fr", "usage": "French vocal samples in Fabuleux" },
+    { "name": "suns_keys/guitar/voice", "usage": "Leifur James samples in Blue Gold" }
+  ],
+  "tracks": [
+    {
+      "name": "L'ACID d'abord",
+      "file": "live/collab/raph/acidule.tidal",
+      "bpm": 135,
+      "style": "acid",
+      "ingredients": [
+        { "type": "pattern", "code": ">| note (\"[b d6 b cs6 d6 b cs6 b]*2\" - \"<0!32 12!32>\")", "description": "Acid bassline alternating between octaves every 32 cycles" },
+        { "type": "sample", "code": "\"vec1_acid:40\" and \"vec2_synth_acid\"", "description": "Dual acid synth layers blended via MIDI crossfade" },
+        { "type": "effect", "code": "# tremdp 4 # tremr 1.8", "description": "Tremolo on FMRhodes1 lead creating bouncy droplet texture" },
+        { "type": "technique", "code": "stack [n \"<30!16 31!16>\" # \"vec2_synth_acid\", \"vec1_acid:40\", \"vec1_acid:39\"]", "description": "Triple-stacked acid bass with independent MIDI gain control per layer" },
+        { "type": "structure", "code": "setcps (135/60/4)", "description": "135 BPM, rhadamanthe_vocal self-destruct sequence, moog caring bass on d7" }
+      ]
+    },
+    {
+      "name": "Alerte Verte",
+      "file": "live/midi/nova/dnb/alerte_verte.tidal",
+      "bpm": 160,
+      "style": "dnb",
+      "ingredients": [
+        { "type": "sample", "code": "\"fbass:25\"", "description": "Bass sample chopped into 16 with evolving slice patterns" },
+        { "type": "pattern", "code": "\"~ s . ~ <~ ~ s ~ s!3 ~ s s ~ s s ~ s s ~ s s s>\"", "description": "20-cycle snare pattern with gradual acceleration" },
+        { "type": "effect", "code": "# delay \"<0!12 0.3!3 0.8>\"", "description": "Dub-style delayed kick at phrase ends" },
+        { "type": "technique", "code": "rhadamanthe_vocal:45 self-destruct sequence on d11", "description": "Vocal sample with timed destruction and movie samples" },
+        { "type": "structure", "code": "setcps (160/60/4)", "description": "160 BPM, supersiren + moog pads, fguitar A/B, rhadamanthe angel choir" }
+      ]
+    },
+    {
+      "name": "Blue Gold",
+      "file": "live/collab/mousquetaires/blue_gold.tidal",
+      "bpm": 124,
+      "style": "breaks",
+      "ingredients": [
+        { "type": "sample", "code": "\"suns_keys\" # n \"<0 <1 2> 3 3>\"", "description": "Leifur James 'Suns of Gold' piano samples sliced and rearranged" },
+        { "type": "pattern", "code": "fast (4/3) $ note (\"<[fs4 <a5!2 gs!4 fs5!4>@3]*4>\")", "description": "Triplet bassWarsaw line by Valentin creating polyrhythmic tension" },
+        { "type": "effect", "code": "# octersubbus 71 (range 0 1.9 \"^35\")", "description": "Deep octaver burning the suns_guitar samples" },
+        { "type": "technique", "code": "someCyclesBy \"<0!16 1!16>\" (slice 10 \"<5 5 <2 2 7 2> <7 4>>\")", "description": "Phase-switching vocal slice patterns on suns_voice" },
+        { "type": "structure", "code": "setcps(124/60/4)", "description": "124 BPM, suns_guitar on d7+d11+d12, suns_voice on d9, Leifur James remix" }
+      ]
+    },
+    {
+      "name": "Nuit Agitee",
+      "file": "live/midi/nova/breaks/nuit_agitee.tidal",
+      "bpm": 160,
+      "style": "breaks",
+      "ingredients": [
+        { "type": "sample", "code": "\"bass_commodore:7\"", "description": "Commodore bass stretched with extreme granular processing" },
+        { "type": "pattern", "code": "note (scale \"gameboy\" (\"<1(3,8) [1(3,8), <~ [~!7 2]>]>\"))", "description": "Custom gameboy scale on harpsichord2" },
+        { "type": "effect", "code": "# lesliebus 43 (range 0 2 \"^29\")", "description": "Leslie speaker on Commodore bass" },
+        { "type": "technique", "code": "loopAt 8 $ chop 64", "description": "Extreme 64-chop granular on 8-cycle bass loop" },
+        { "type": "structure", "code": "setcps (160/60/4)", "description": "160 BPM, gameboy scale, jungbass arps, moogBass angels of constance" }
+      ]
+    },
+    {
+      "name": "Nass Revient de Mars",
+      "file": "live/dnb/nass_revient.tidal",
+      "bpm": 140,
+      "style": "dnb",
+      "ingredients": [
+        { "type": "pattern", "code": "note (\"<c c ds <c g>>\" + (arp \"up\" \"<[c'maj'4 c'maj'3]!12>\") - 24)", "description": "Rhodes arpeggios following minor progression with octave alternation" },
+        { "type": "sample", "code": "\"supersaw\" # voice 0.1", "description": "Supersaw bass with voice detuning for massive sound" },
+        { "type": "effect", "code": "# crushbus 6 (slow 16 $ range 16 4 saw)", "description": "Slow-ramping bitcrush on FMRhodes over 16 cycles" },
+        { "type": "technique", "code": "midiOn \"^36\" ((loopAt 1) . (# hpf 1500) . (# \"jungle_breaks:45\"))", "description": "MIDI-triggered jungle break with high-pass creating bell-like texture" },
+        { "type": "structure", "code": "setcps (140/60/4)", "description": "140 BPM, giorgio_syn bass friend, cosmicg glitch noise, forgan:24 organ, movie_vitality Mars vocals" }
+      ]
+    },
+    {
+      "name": "Force Motrice",
+      "file": "live/midi/nova/dnb/force_motrice.tidal",
+      "bpm": 125,
+      "style": "dnb",
+      "ingredients": [
+        { "type": "sample", "code": "\"nujazz_bass125:1\"", "description": "Nu-jazz bass sample chopped and sliced" },
+        { "type": "pattern", "code": "note (\"[g@2 ~!4 <f ~ as5 c6>]\" - 12)", "description": "Sparse FMRhodes1 lead" },
+        { "type": "effect", "code": "# crushbus 71 (range 12 3.4 \"^55\")", "description": "Bitcrush on giorgio_syn" },
+        { "type": "technique", "code": "midiOn \"^58\" (off 0.125 id . rev)", "description": "Reversed Rhodes with micro-offset" },
+        { "type": "structure", "code": "setcps (125/60/4)", "description": "125 BPM, cbow cello, risers, jungle_vocals" }
+      ]
+    },
+    {
+      "name": "Cafe Tiede",
+      "file": "live/midi/nova/nujazz/cafe_tiede.tidal",
+      "bpm": 125,
+      "style": "nujazz",
+      "ingredients": [
+        { "type": "sample", "code": "\"nujazz_keys125\" # n \"<56 56 57 56 58!4 59 59 56 59>\"", "description": "Sampled jazz piano keys" },
+        { "type": "pattern", "code": "midiOn \"^42\" (<| \"k k k <k <k*2 [k <k ~> k ~]>>\")", "description": "Evolving kick pattern" },
+        { "type": "effect", "code": "# crushbus 41 (range 12 4.5 \"^53\")", "description": "Gentle bitcrush on bass" },
+        { "type": "technique", "code": "chop 8 $ loopAt 2 $ \"nujazz_keys125\"", "description": "Jazz keys chopped for slicing" },
+        { "type": "structure", "code": "setcps(125/60/4)", "description": "125 BPM, FMRhodes1 arpeggiated chords" }
+      ]
+    },
+    {
+      "name": "Cafe Glace",
+      "file": "live/midi/nova/nujazz/cafe_glace.tidal",
+      "bpm": 120,
+      "style": "nujazz",
+      "ingredients": [
+        { "type": "sample", "code": "\"nujazz_keys120\" # n (slow 4 \"<5 6 7 8>\")", "description": "Rotating piano voicings" },
+        { "type": "pattern", "code": "midiOn \"^42\" (<| \"k k k <k!3 <[~ k*<1!3 2>]!3 k*2>>\")", "description": "Kick with occasional rolls" },
+        { "type": "effect", "code": "# crushbus 51 (range 16 6.4 \"^54\")", "description": "Wide-range bitcrush on keys" },
+        { "type": "technique", "code": "\"meth_bass\" $ loopAt 0.25", "description": "Glitchy meth_bass at 4x speed" },
+        { "type": "structure", "code": "setcps(120/60/4)", "description": "120 BPM, double jungle_breaks" }
+      ]
+    },
+    {
+      "name": "Salut Nu",
+      "file": "live/midi/nova/nujazz/salut_nu.tidal",
+      "bpm": 120,
+      "style": "nujazz",
+      "ingredients": [
+        { "type": "sample", "code": "\"nujazz_beats120\"", "description": "Live jazz drum loops" },
+        { "type": "pattern", "code": "note (\"<[a4@3 <c5 f5>] e5 [<d5!3 f5>] <a5!3 c6>>\")", "description": "moogBass melody with jux rev" },
+        { "type": "effect", "code": "# freezebus 51 (range 0 0.7 \"^34\")", "description": "Freeze on piano" },
+        { "type": "technique", "code": "juxBy 0.9 (mask . rev . (|+ note 12))", "description": "Complex jux reflection on piano" },
+        { "type": "structure", "code": "setcps(120/60/4)", "description": "120 BPM, wahwah guitar, bassWarsaw with octer" }
+      ]
+    },
+    {
+      "name": "Fabuleux",
+      "file": "live/midi/nova/lounge/fabuleux.tidal",
+      "bpm": 93,
+      "style": "lounge",
+      "ingredients": [
+        { "type": "sample", "code": "\"aoc_fr\"", "description": "French vocal samples (Alexandria Ocasio-Cortez speeches in French) with octer modulation" },
+        { "type": "pattern", "code": "note (\"[0,7(<3 5 [5 3] <3 [3 5]>>,8,1)]\" + \"<d b4 g4 fs4>\" - 24)", "description": "bassWarsaw with 5th-interval euclidean triggers (Bm-A-G-D progression)" },
+        { "type": "effect", "code": "# modIndex (range 0 16 \"^54\")", "description": "FM modulation on FMRhodes2 creating evolving timbres" },
+        { "type": "technique", "code": "someCyclesBy \"<0!8 1!8 0!16>\" (>| n \"<0 1 0 <4 6>>\")", "description": "Phase-cycling vocal sample selection creating narrative arc" },
+        { "type": "structure", "code": "setcps (93/60/4)", "description": "93 BPM, feelfx submarine pad, moogBass choir, warm closer vibe" }
+      ]
+    }
+  ]
+}

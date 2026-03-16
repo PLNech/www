@@ -1,0 +1,148 @@
+{
+  "gig": "divin-live",
+  "title": "Divin Live",
+  "date": "2024-06-09",
+  "bpmRange": [80, 170],
+  "styleDistribution": { "breaks": 3, "dnb": 2, "ambient": 1, "chip": 1, "techno": 1, "lounge": 1, "lofi": 1 },
+  "samplePacks": [
+    { "name": "jungle_breaks", "usage": "Foundation breakbeats in most tracks" },
+    { "name": "FMRhodes", "usage": "Electric piano leads (Ete a MauerPark, Green Land)" },
+    { "name": "bassWarsaw", "usage": "Primary bass synth across multiple tracks" },
+    { "name": "bass_gameboy", "usage": "Chiptune bass in Nouveau Soleil" },
+    { "name": "drums_atari", "usage": "Retro percussion in Atari-ght" },
+    { "name": "come_bass", "usage": "Custom sample-based bass in Venons Ensemble" },
+    { "name": "moogBass", "usage": "Analog-style bass in Ete a MauerPark and Invoque l'Ete" }
+  ],
+  "tracks": [
+    {
+      "name": "Green Land",
+      "file": "live/midi/nova/breaks/green_land.tidal",
+      "bpm": 80,
+      "style": "breaks",
+      "ingredients": [
+        { "type": "pattern", "code": "note (\"<[c,e,g,b] [c,e,g,bf] [c,ef,g,bf] [c,e,g,b]>\" - 12)", "description": "Jazz chord voicings on FMRhodes2 with FM modulation index control" },
+        { "type": "sample", "code": "\"shiloh:2\"", "description": "Shiloh vocal sample with delay and reverb for atmosphere" },
+        { "type": "effect", "code": "# delaybus 61 (range 0 1 \"^55\")", "description": "MIDI-controlled delay wet amount on vocal sample" },
+        { "type": "technique", "code": "midiOn \"^74\" (fast 2)", "description": "MIDI button doubles kick speed for dynamic energy shifts" },
+        { "type": "structure", "code": "setcps (165/60/4)", "description": "165 BPM half-time breaks, jungle_breaks:13 with loopAt variations" }
+      ]
+    },
+    {
+      "name": "Break Dynasty",
+      "file": "live/midi/nova/breaks/break_dynasty.tidal",
+      "bpm": 165,
+      "style": "breaks",
+      "ingredients": [
+        { "type": "pattern", "code": "\"<<b4 [b4@3 cs5]> gs4@2 ~ gs4>\" - 24", "description": "bassWarsaw riff with sustained notes and chromatic tension" },
+        { "type": "sample", "code": "\"jungle_breaks:6\"", "description": "Chopped jungle break on d3 with loopAt 2 and ply variations" },
+        { "type": "effect", "code": "# crushbus 51 (range 16 2 \"^53\")", "description": "Bitcrush on bass creating gritty texture" },
+        { "type": "technique", "code": "midiOn \"^75\" (ply \"<2 [2 <4 <2 4>>]>\")", "description": "Multi-level ply for snare rolls controlled by MIDI" },
+        { "type": "structure", "code": "setcps (165/60/4)", "description": "165 BPM, jungle_vocals on d10, FMRhodes2 with modIndex" }
+      ]
+    },
+    {
+      "name": "Venons Ensemble",
+      "file": "live/midi/nova/dnb/venons_ensemble.tidal",
+      "bpm": 170,
+      "style": "dnb",
+      "ingredients": [
+        { "type": "sample", "code": "\"come_bass\"", "description": "Custom multi-sample bass with crush and octer modulation" },
+        { "type": "pattern", "code": "\"~ cp ~ cp*<1!3 2 1 2 1 2 1 2 2 2 1 2 1 2 2 2 1 2>\"", "description": "Extended snare pattern with accelerating fills across 20 cycles" },
+        { "type": "effect", "code": "# crushbus 43 (range 16 3.5 \"^53\")", "description": "Bitcrush on come_bass creating distorted sub textures" },
+        { "type": "technique", "code": "someCyclesBy (\"^35\" - \"^91\") (>| n \"<0 1 2 3 4 5 6 7>/2\")", "description": "MIDI-conditional voice sample buildup" },
+        { "type": "structure", "code": "setcps (85/60/4)", "description": "170 BPM half-time, come_eguitar + come_voice samples, call-and-response" }
+      ]
+    },
+    {
+      "name": "Nouveau Soleil",
+      "file": "live/midi/nova/dnb/nouveau_soleil.tidal",
+      "bpm": 110,
+      "style": "dnb",
+      "ingredients": [
+        { "type": "sample", "code": "\"bass_gameboy\"", "description": "Gameboy-era bass sample chopped and looped" },
+        { "type": "pattern", "code": "note (\"<fs3 b4 a4 cs5 fs4 e4 d4 cs5 fs3 b4 a4 cs5 fs4 b5 a5 cs6>\")", "description": "16-step moogBass melody with superimposed 5th intervals" },
+        { "type": "effect", "code": "# octerbus 72 (range 0 1 \"^35\")", "description": "MIDI-controlled octaver adding sub harmonics to moogBass" },
+        { "type": "technique", "code": "whenmod 64 32 (off \"q\" ((|+ note 12) . (# pan 0.8)))", "description": "Long-form octave offset creating buildup over 64 cycles" },
+        { "type": "structure", "code": "setcps (110/60/4)", "description": "110 BPM, synth_gameboy lead + synth_atari horn, breaks165 with jungle_breaks" }
+      ]
+    },
+    {
+      "name": "Contre Visite",
+      "file": "live/midi/nova/ambient/contre_visite.tidal",
+      "bpm": 80,
+      "style": "ambient",
+      "ingredients": [
+        { "type": "sample", "code": "\"celtic_guitar80\" # n \"4\"", "description": "Celtic guitar sample repurposed as bass" },
+        { "type": "pattern", "code": "note \"<ef ef {b, [~!7 fs]} fs>\"", "description": "Moog bass with sparse set-theoretic note pattern" },
+        { "type": "effect", "code": "# octerbus 52 (range 0 0.63 \"^36\")", "description": "MIDI-controlled octaver on moog bass" },
+        { "type": "technique", "code": "chop 4 $ \"voices_celtic\" # n \"4 <4 4 5 <4 3>> 5 <6 5 5 4>\"", "description": "Celtic vocal sample chopped and sequenced" },
+        { "type": "structure", "code": "setcps (80/60/4)", "description": "80 BPM ambient piece with LPF automation over 64 cycles" }
+      ]
+    },
+    {
+      "name": "Atari-ght",
+      "file": "live/chip/ataright.tidal",
+      "bpm": 120,
+      "style": "chip",
+      "ingredients": [
+        { "type": "sample", "code": "\"drums_atari:21\"", "description": "Atari drum machine sample chopped at 32 subdivisions" },
+        { "type": "pattern", "code": "note (arp \"down\" (\"<c'maj'4!2 <c'maj'4!3 ef'maj'4> g'min'4>\" |+| \"ef3\" - 12))", "description": "Arpeggiated chord progression on FMRhodes2 (THE RAIN)" },
+        { "type": "effect", "code": "# modIndex (range 0 128 \"^53\")", "description": "Full-range FM modulation on Rhodes creating metallic timbres" },
+        { "type": "technique", "code": "midiOn \"^58\" ((whenmod 8 7 (off \"s\" id)) .(off \"e\" id))", "description": "Multi-offset echo technique creating rhythmic canon (THE RAIN)" },
+        { "type": "structure", "code": "setcps (120/60/4)", "description": "120 BPM, thematic orbits named THE ROAD/FUEL/GUIDELINES/THUNDER/RAIN" }
+      ]
+    },
+    {
+      "name": "It's About Time",
+      "file": "live/midi/nova/breaks/its_about_time.tidal",
+      "bpm": 110,
+      "style": "breaks",
+      "ingredients": [
+        { "type": "sample", "code": "\"drums_atari\" # n \"[29 29 <29 [29 28 29]> 28]\"", "description": "Atari drum machine samples driving the main beat" },
+        { "type": "pattern", "code": "slice 8 (\"0 1 2 3 4 5 <6!3 4> <7!3 [5 4]>\") . (loopAt \"q\")", "description": "Nassim-triggered break slicer on breaks165" },
+        { "type": "effect", "code": "# crushbus 51 (range 16 2.5 \"^54\")", "description": "Bitcrush on 90s_synatm pad synth" },
+        { "type": "technique", "code": "midiOn \"^89\" ((0.125 ~>) . chop (slow 4 $ \"[16 32 64 128]\"))", "description": "Accelerating chop granularity for builds" },
+        { "type": "structure", "code": "setcps (110/60/4)", "description": "110 BPM, synth_commodore on d7 with squiz/crush, fx_gameboy riser" }
+      ]
+    },
+    {
+      "name": "Ete a MauerPark",
+      "file": "live/midi/nova/techno/ete_a_mauerpark.tidal",
+      "bpm": 120,
+      "style": "techno",
+      "ingredients": [
+        { "type": "pattern", "code": "note (\"<[g4 c ef@14] [<c g> ef g@14] <[g4 c ef@14] [c5 bf5 g5@14]> [c ef d@13 ~]>\" - 24)", "description": "Long sustained bass notes with brief melodic pickups (Basse Germanique)" },
+        { "type": "sample", "code": "\"[techno:0,808bd:2,909,kick:4]\"", "description": "Four-layer kick stack for heavy four-on-the-floor" },
+        { "type": "effect", "code": "# lesliebus 102 (range 0 2 \"^18\")", "description": "Leslie speaker effect on moogBass creating rotary modulation" },
+        { "type": "technique", "code": "arp \"<up!6 down downup>\" $ note (\"<ef4 g4 <ef g> d>\" + \"c'maj'4\" - 12)", "description": "FMRhodes1 lead with evolving arpeggio direction" },
+        { "type": "structure", "code": "setcps (120/60/4)", "description": "120 BPM, cbow cello on d7, moogBass nano-angels chorus on d9" }
+      ]
+    },
+    {
+      "name": "Invoque l'Ete",
+      "file": "live/midi/nova/lounge/invoque_ete.tidal",
+      "bpm": 115,
+      "style": "lounge",
+      "ingredients": [
+        { "type": "pattern", "code": "\"d ~ ~ d d ~ d <~!3 d>\"", "description": "Latin clave rhythm on snare forming the rhythmic backbone" },
+        { "type": "sample", "code": "\"fguitar:12\"", "description": "Sweet guitar sample with loopAt 4 and variable chopping" },
+        { "type": "effect", "code": "# crushbus 61 (range 16 1.4 \"^54\")", "description": "Subtle bitcrush on guitar creating warm distortion" },
+        { "type": "technique", "code": "note (\"<a3'maj g3'maj a3'min d3'maj>\" + \"0*<4 [4 16]>\" + 0)", "description": "Jazz progression (vi-V-iv-I) on moogBass and 90s_synatm synth" },
+        { "type": "structure", "code": "setcps (115/60/4)", "description": "115 BPM, piano on fpiano:13, breaks125 + breaks165 layered" }
+      ]
+    },
+    {
+      "name": "Alerte Verte",
+      "file": "live/midi/nova/dnb/alerte_verte.tidal",
+      "bpm": 160,
+      "style": "dnb",
+      "ingredients": [
+        { "type": "sample", "code": "\"fbass:25\"", "description": "Bass sample chopped into 16 with evolving slice patterns" },
+        { "type": "pattern", "code": "\"~ s . ~ <~ ~ s ~ s!3 ~ s s ~ s s ~ s s ~ s s s>\"", "description": "20-cycle snare pattern with gradual fill acceleration" },
+        { "type": "effect", "code": "# delay \"<0!12 0.3!3 0.8>\" # delayfb \"<0!3 0.5>\"", "description": "Delayed kick creating dub-style echo at phrase ends" },
+        { "type": "technique", "code": "rhadamanthe_vocal:45 with self-destruct sequence", "description": "Vocal sample with whenmod-triggered destruction sequence on d11" },
+        { "type": "structure", "code": "setcps (160/60/4)", "description": "160 BPM, supersiren + moog bass pads, fguitar A/B switching, 808 clave" }
+      ]
+    }
+  ]
+}

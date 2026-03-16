@@ -1,0 +1,244 @@
+{
+  "gig": "raise",
+  "title": "RAISE AFTERPARTY",
+  "date": "2025-11-15",
+  "bpmRange": [80, 170],
+  "styleDistribution": { "ambient": 1, "dnb": 3, "lounge": 1, "techno": 3, "breaks": 3, "nujazz": 3, "drill": 1, "punk": 1, "acid": 1 },
+  "samplePacks": [
+    { "name": "ai_raise", "usage": "AI-generated voice samples for RAISE intro" },
+    { "name": "ai_welcome", "usage": "Welcome voice samples for ambient opener" },
+    { "name": "bassWarsaw", "usage": "Main synth bass throughout the set" },
+    { "name": "jungle_breaks", "usage": "Breakbeat layers and fills" },
+    { "name": "airports", "usage": "Airport ambience for atmosphere" },
+    { "name": "private_number", "usage": "Vocal sample for Ton Numero" },
+    { "name": "nujazz_keys120", "usage": "Pre-recorded nujazz piano loops" },
+    { "name": "nujazz_bass125", "usage": "Pre-recorded nujazz bass loops" },
+    { "name": "nujazz_wahwah125", "usage": "Wah-wah guitar samples" },
+    { "name": "orage", "usage": "Rain/storm sample pack" },
+    { "name": "FMRhodes1", "usage": "FM electric piano" },
+    { "name": "rhadamanthe_vocal", "usage": "Vocal/atmospheric samples" }
+  ],
+  "tracks": [
+    {
+      "name": "RAISE",
+      "file": "live/midi/nova/ambient/raise.tidal",
+      "bpm": 120,
+      "style": "ambient",
+      "ingredients": [
+        { "type": "sample", "code": "\"ai_raise\"", "description": "AI-generated voice samples with slice and gain variations" },
+        { "type": "sample", "code": "\"ai_welcome:3\"", "description": "Welcome voice with end-trimmed 'welcome' phrase" },
+        { "type": "technique", "code": "once $ slice 2 \"1\" \"ai_raise:2\"", "description": "One-shot sliced voice triggers for spoken-word intro" },
+        { "type": "pattern", "code": "$ whenmod 4 3 (slice 4 \"<0(3,8) 1>\")", "description": "Gradual rhythmic slicing on looped welcome voice" },
+        { "type": "structure", "code": "setcps (120/60/4)", "description": "Transition from ambient intro to 120 BPM" }
+      ]
+    },
+    {
+      "name": "Something About Drums",
+      "file": "live/midi/nova/dnb/something_about_drums.tidal",
+      "bpm": 160,
+      "style": "dnb",
+      "ingredients": [
+        { "type": "sample", "code": "\"[bskick,jazz]\"", "description": "Big-speaker kick layered with jazz brush kit" },
+        { "type": "pattern", "code": "note (cat [\"[bf3, d4, f4, a4]\", \"[a3, c4, e4, g4]\", \"[d4, f4, a4, c5, <e5 e4>]\", \"[g3, b4, d5, <f5 ~>]\"])", "description": "Jazz chord progression: Bbmaj7-Am7-Dm9-G7 arpeggiated" },
+        { "type": "sample", "code": "\"FMRhodes2\"", "description": "FM Rhodes playing same chord changes with modIndex" },
+        { "type": "sample", "code": "\"moogBass\"", "description": "Moog bass doubling chord progression with delay" },
+        { "type": "structure", "code": "setcps (160/60/4)", "description": "160 BPM jazz-inflected drum & bass" }
+      ]
+    },
+    {
+      "name": "Sunny Side Up",
+      "file": "live/midi/nova/lounge/sunny_side_up.tidal",
+      "bpm": 120,
+      "style": "lounge",
+      "ingredients": [
+        { "type": "sample", "code": "\"sunny_bass\"", "description": "Warm bass with crush and octave sub layers" },
+        { "type": "sample", "code": "\"sunny_brass\"", "description": "Brass with progressive reveal mask" },
+        { "type": "pattern", "code": "\"acidOto3092\" |- note 36", "description": "Acid overlay with MIDI width control" },
+        { "type": "sample", "code": "\"nujazz_keys120:35/4\"", "description": "Piano loop coda" },
+        { "type": "technique", "code": "$ mask \"<t f <f t> f>\"", "description": "4-bar gradual sample deployment" }
+      ]
+    },
+    {
+      "name": "Sept1",
+      "file": "live/collab/baba/sept1.tidal",
+      "bpm": 120,
+      "style": "techno",
+      "ingredients": [
+        { "type": "sample", "code": "\"rhadamanthe_melo:1\"", "description": "Piano with begin/mid/end gated sections" },
+        { "type": "pattern", "code": "note (\"<<[b3@5 a3 b3 a3]...>> [e3@7 b3]>\")", "description": "Cello-like bassline in B/A" },
+        { "type": "effect", "code": "# cps ((range 60 180 \"^29\")/60/4)", "description": "Live BPM morphing 60-180" },
+        { "type": "sample", "code": "\"breaks165\"", "description": "Energy injection breakbeat" },
+        { "type": "technique", "code": "$ midiOn \"^58\" (# silence)", "description": "MIDI-gated piano section switching" }
+      ]
+    },
+    {
+      "name": "Orage",
+      "file": "live/midi/nova/techno/techno_orage.tidal",
+      "bpm": 104,
+      "style": "techno",
+      "ingredients": [
+        { "type": "sample", "code": "\"orage\"", "description": "Storm sample pack used for all elements" },
+        { "type": "pattern", "code": "$ slow 4 $ ply \"4 . 2 0\"", "description": "Rain piano with progressive density" },
+        { "type": "sample", "code": "\"vec1_acid:30\"", "description": "Acid doubt line in C/Ab/D" },
+        { "type": "sample", "code": "\"FMRhodes2\"", "description": "FM Rhodes storm melody" },
+        { "type": "structure", "code": "setcps (104/60/4)", "description": "Slow 104 BPM atmospheric techno" }
+      ]
+    },
+    {
+      "name": "La Fin de l'Insouciance",
+      "file": "live/midi/nova/beatober/oct_16_haunted_house_insouciance.tidal",
+      "bpm": 120,
+      "style": "breaks",
+      "ingredients": [
+        { "type": "pattern", "code": "note \"<c3 c3 c3 c3 gs2 gs2 b2 b2>@5 ef3 d3 ...\"", "description": "Dark chromatic bassWarsaw descent" },
+        { "type": "sample", "code": "\"FMRhodes1\"", "description": "Bird call FM piano with modIndex control" },
+        { "type": "sample", "code": "\"808hc:2\"", "description": "Carillon bells with octave sub layering" },
+        { "type": "sample", "code": "\"armora:1\"", "description": "Hawk percussion with HPF sweep" },
+        { "type": "sample", "code": "\"trance_pads:7\"", "description": "Atmospheric pads following bass harmony" }
+      ]
+    },
+    {
+      "name": "Bain Electrique",
+      "file": "live/midi/nova/breaks/bain_electrique.tidal",
+      "bpm": 128,
+      "style": "breaks",
+      "ingredients": [
+        { "type": "sample", "code": "\"jungbass:3\"", "description": "Jungle bass with stutter and infraband crush" },
+        { "type": "sample", "code": "\"giorgio_syn:0\"", "description": "Giorgio bass appel with LPF modulation" },
+        { "type": "sample", "code": "\"fguitar:55\"", "description": "Salvational guitar sliced 16-ways" },
+        { "type": "sample", "code": "\"weird_dialogs\"", "description": "Movie dialog collage: atomic, faith, curiosity, planet sequences" },
+        { "type": "technique", "code": "let gO = (# octersubbus 5 ...) . (# octerbus 6 ...)", "description": "Global octave sub/up bus shared across tracks" }
+      ]
+    },
+    {
+      "name": "Jeudi Drill",
+      "file": "live/collab/raph/jeudrill.tidal",
+      "bpm": 140,
+      "style": "drill",
+      "ingredients": [
+        { "type": "sample", "code": "\"bogdan_grime\"", "description": "Cardiff grime vocals with speed modulation" },
+        { "type": "sample", "code": "\"giorgio_syn:1\"", "description": "Giorgio bass with crush and octave sub" },
+        { "type": "sample", "code": "\"marimba1\"", "description": "Marimba in B/D/F# with jux reversal" },
+        { "type": "sample", "code": "\"90s_synatm:10\"", "description": "Menacing 90s pad with Adrianesque variations" },
+        { "type": "structure", "code": "setcps (140/60/4)", "description": "140 BPM drill tempo" }
+      ]
+    },
+    {
+      "name": "PunkAChien",
+      "file": "live/collab/raph/punkachien.tidal",
+      "bpm": 170,
+      "style": "dnb",
+      "ingredients": [
+        { "type": "sample", "code": "\"vec1_acid:11\"", "description": "Acid bass with layered gain-controlled variants" },
+        { "type": "pattern", "code": "note (\"d*<3 4 3 2> . ds ds df\" + 2)", "description": "Rhythmic acid alternating 3-4-3-2 divisions" },
+        { "type": "sample", "code": "\"cpluck:1\"", "description": "Plucked synth with crush overlay" },
+        { "type": "sample", "code": "\"meth_bass:9\"", "description": "Lo-fi bass with delay feedback build" },
+        { "type": "structure", "code": "setcps (170/60/4)", "description": "170 BPM peak energy DnB" }
+      ]
+    },
+    {
+      "name": "Nuit Agitee",
+      "file": "live/midi/nova/breaks/nuit_agitee.tidal",
+      "bpm": 160,
+      "style": "breaks",
+      "ingredients": [
+        { "type": "technique", "code": "let scale = getScale (scaleTable ++ [(\"gameboy\", [1,2,4,5,7,9,11])])", "description": "Custom gameboy scale definition" },
+        { "type": "sample", "code": "\"bass_commodore:7\"", "description": "Commodore bass with leslie and crush modulation" },
+        { "type": "sample", "code": "\"harpsichord2\"", "description": "Harpsichord melody using gameboy scale" },
+        { "type": "sample", "code": "\"amencutup\"", "description": "Amen break cutup with stereo pan" },
+        { "type": "pattern", "code": "note (scale \"gameboy\" (...) )", "description": "Gameboy-scale melody with layered euclidean pattern" }
+      ]
+    },
+    {
+      "name": "L'or Bleu",
+      "file": "live/collab/mousquetaires/blue_gold.tidal",
+      "bpm": 124,
+      "style": "breaks",
+      "ingredients": [
+        { "type": "sample", "code": "\"suns_keys\"", "description": "Suns of Gold keys with tremolo slice" },
+        { "type": "sample", "code": "\"suns_guitar\"", "description": "Triple guitar layers: main, triplet, falling angel" },
+        { "type": "pattern", "code": "$ fast (4/3)", "description": "Signature 4/3 polyrhythmic bassline" },
+        { "type": "sample", "code": "\"suns_voice:0\"", "description": "Father's voice with phrase selection slicing" },
+        { "type": "technique", "code": "$ whenmod 32 16 (swingBy (slow 16 $ range 0.08 0.01 saw) 4)", "description": "Progressive swing fade-out over 16 bars" }
+      ]
+    },
+    {
+      "name": "Lady Perplexity",
+      "file": "live/midi/nova/breaks/lady_perplexity.tidal",
+      "bpm": 138,
+      "style": "breaks",
+      "ingredients": [
+        { "type": "sample", "code": "\"rhadamanthe_vocal:1\"", "description": "Vocal loop chopped 16-ways over 8-bar cycle" },
+        { "type": "technique", "code": "$ sometimesBy \"^35\" (juxBy 0.25 (loopAt 0.5 . (# cut 71)))", "description": "MIDI-controlled probability jux with half-speed ghost" },
+        { "type": "pattern", "code": "note (\"c3 <d3 [d3] d3 [d3@3 f3]> e3 <g3 b3 a3 c4>\")", "description": "BassWarsaw chromatic walk C-D-E-G with variations" },
+        { "type": "sample", "code": "\"FMRhodes2\"", "description": "FM Rhodes chords with delay feedback 0.8" },
+        { "type": "sample", "code": "\"giorgio_syn:7\"", "description": "Giorgio synth doubling bass with crush modulation" }
+      ]
+    },
+    {
+      "name": "Cafe Glace",
+      "file": "live/midi/nova/nujazz/cafe_glace.tidal",
+      "bpm": 120,
+      "style": "nujazz",
+      "ingredients": [
+        { "type": "sample", "code": "\"nujazz_bass120:4\"", "description": "Jazz bass loop sliced with MIDI variation" },
+        { "type": "sample", "code": "\"nujazz_keys120\"", "description": "Piano keys with freeze/crush" },
+        { "type": "sample", "code": "\"meth_bass\"", "description": "Lo-fi glitch bass in the cafe" },
+        { "type": "sample", "code": "\"jungle_breaks:53\"", "description": "Stereo jungle break layer" },
+        { "type": "structure", "code": "setcps(120/60/4)", "description": "120 BPM nujazz" }
+      ]
+    },
+    {
+      "name": "Cafe Tiede",
+      "file": "live/midi/nova/nujazz/cafe_tiede.tidal",
+      "bpm": 125,
+      "style": "nujazz",
+      "ingredients": [
+        { "type": "sample", "code": "\"nujazz_bass125:1\"", "description": "Jazz bass chopped 8/loopAt 4 with MIDI slice control" },
+        { "type": "sample", "code": "\"nujazz_keys125\"", "description": "Multiple key layers: n 56-59 main, n 66-67 octave, n 4-5 pad" },
+        { "type": "technique", "code": "$ slice 4 \"<<[0 1 2 3] [0 1 0 1 2 3 2 3]> [0 1 2 3]>\"", "description": "Alternating piano slice patterns for variation" },
+        { "type": "sample", "code": "\"jungle_breaks:20\"", "description": "Break with stereo pan alternation every 16 cycles" },
+        { "type": "effect", "code": "# roombus 110 (slow 16 $ range 0 0.9 saw)", "description": "Progressive reverb build on pad layer" }
+      ]
+    },
+    {
+      "name": "Atelier de Force Motrice",
+      "file": "live/midi/nova/dnb/force_motrice.tidal",
+      "bpm": 125,
+      "style": "dnb",
+      "ingredients": [
+        { "type": "sample", "code": "\"nujazz_bass125:1\"", "description": "Jazz bass with crush and octave modulation" },
+        { "type": "sample", "code": "\"FMRhodes1\"", "description": "FM piano lead with modIndex control" },
+        { "type": "sample", "code": "\"giorgio_syn:22\"", "description": "Giorgio synth with euclidean rhythmic struct" },
+        { "type": "sample", "code": "\"cbow:2\"", "description": "Cello bow pad with stutter superimposition" },
+        { "type": "sample", "code": "\"jungle_vocals\"", "description": "Jungle vocal one-shots between breaks" }
+      ]
+    },
+    {
+      "name": "Salut Nu",
+      "file": "live/midi/nova/nujazz/salut_nu.tidal",
+      "bpm": 120,
+      "style": "nujazz",
+      "ingredients": [
+        { "type": "sample", "code": "\"nujazz_keys120\"", "description": "Piano with jux mirror, slice and freeze effects" },
+        { "type": "pattern", "code": "note (\"<[a4@4 c5 <c5 d5 c5 fs4>] a4>\" + \"[0,12]\" - 36)", "description": "BassWarsaw with octave doubling and squiz modulation" },
+        { "type": "sample", "code": "\"nujazz_wahwah125\"", "description": "Wah-wah guitar with octave sub and destroy" },
+        { "type": "sample", "code": "\"nujazz_beats120\"", "description": "Jazz drum loops with octave sub processing" },
+        { "type": "effect", "code": "# freezebus 51 (range 0 0.7 \"^34\")", "description": "MIDI-controlled freeze effect on piano" }
+      ]
+    },
+    {
+      "name": "Ton Numero",
+      "file": "live/midi/nova/breaks/ton_numero.tidal",
+      "bpm": 99,
+      "style": "breaks",
+      "ingredients": [
+        { "type": "sample", "code": "\"private_number\"", "description": "Vocal sample: Drop Your Number, with begin-offset calage" },
+        { "type": "sample", "code": "\"vocalScatAr\" / \"vocalScatJ\"", "description": "Male/female scat vocals with room reverb" },
+        { "type": "pattern", "code": "note \"[<df4!2 cs4 g4>@2 <b3 e4!2 fs4>@2 <a3!2 fs4 e4>@5]/2\"", "description": "Moog bass with heartbeat-extracted ghost notes" },
+        { "type": "sample", "code": "\"vocalOoh1\" / \"vocalOoh2\"", "description": "Choir layers with LPF mask fading" },
+        { "type": "structure", "code": "setcps (99/60/4)", "description": "99 BPM slow groove with soul feel" }
+      ]
+    }
+  ]
+}

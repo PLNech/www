@@ -74,7 +74,7 @@
       "ingredients": [
         { "type": "structure", "code": "setcps (160/60/4)", "description": "160 BPM breakbeat tempo" },
         { "type": "technique", "code": "let scale = getScale (scaleTable ++ [(\"gameboy\", [1,2,4,5,7,9,11])])", "description": "Custom 'gameboy' scale definition for melodic content" },
-        { "type": "sample", "code": "$ loopAt 8 $ chop 64 $ \"bass_commodore:7\"", "description": "Commodore bass chopped into 64 slices — granular bass texture" },
+        { "type": "sample", "code": "$ loopAt 8 $ chop 64 $ \"bass_commodore:7\"", "description": "Commodore bass chopped into 64 slices -  granular bass texture" },
         { "type": "effect", "code": "# crushbus 41 # octersubbus 42 # lesliebus 43", "description": "Triple simultaneous bus effects on bass, all MIDI-controlled" },
         { "type": "sample", "code": "# \"harpsichord2\" # distortbus 51", "description": "Harpsichord lead using gameboy scale with MIDI distortion" }
       ]
@@ -89,7 +89,7 @@
         { "type": "technique", "code": "$ superimpose (|+| note \"~ 7(<3!3 5>,8)\")", "description": "Supersaw bassline with euclidean 5th-interval superimposition" },
         { "type": "sample", "code": "$ \"forgan:24\" # crushbus 5", "description": "Massive organ sample with perlin-noise-driven bitcrush" },
         { "type": "technique", "code": "arp \"up\" \"<[c'maj'4 c'maj'3]!12 ...>\"", "description": "FM Rhodes arpeggios using chord inversions" },
-        { "type": "sample", "code": "$ \"movie_vitality:10\"", "description": "'I WANT TO GO TO MARS' — movie sample with expanding window" }
+        { "type": "sample", "code": "$ \"movie_vitality:10\"", "description": "'I WANT TO GO TO MARS' -  movie sample with expanding window" }
       ]
     },
     {
@@ -127,7 +127,7 @@
         { "type": "structure", "code": "setcps(120/60/4)", "description": "120 BPM, cooler than Cafe Tiede" },
         { "type": "sample", "code": "$ \"nujazz_bass120:4\"", "description": "Nu-jazz bass at 120 BPM with MIDI-controlled bitcrush" },
         { "type": "technique", "code": "$ midiOn \"^58\" ((# freeze 0.2))", "description": "Spectral freeze effect triggered by MIDI on keys" },
-        { "type": "sample", "code": "$ \"meth_bass\" # crush 8 # lpf (slow 32 $ range 4000 400 sine)", "description": "'UN GLITCH DANS MON CAFE!!?!' — glitch bass with closing filter" },
+        { "type": "sample", "code": "$ \"meth_bass\" # crush 8 # lpf (slow 32 $ range 4000 400 sine)", "description": "'UN GLITCH DANS MON CAFE!!?!' -  glitch bass with closing filter" },
         { "type": "technique", "code": "$ midiOn \"^55\" (loopAt 1 . (|> \"jungle_breaks:19\"))", "description": "MIDI-switchable jungle break layers with variable slice density" }
       ]
     },
@@ -141,7 +141,7 @@
         { "type": "technique", "code": "juxBy 0.9 (mask ... . rev . (|+ note 12) . (|+ pan 0.2))", "description": "MIDI-triggered stereo mirror: reversed, octave-up, panned piano reflection" },
         { "type": "sample", "code": "$ slice 4 ... $ \"nujazz_keys120\" # n \"<54!16 53!16>\"", "description": "Piano with 16-step slice choreography between two presets" },
         { "type": "sample", "code": "note ... # \"bassWarsaw\" # octersub 0.5 # squizbus 42", "description": "Warsaw bass with sub-octave and MIDI-controlled squiz distortion" },
-        { "type": "technique", "code": "$ jux rev $ note ... # \"moogBass\" # chorus 0.2 # room 0.8", "description": "'La chorale du jugement' — Moog bass with stereo call-and-response" }
+        { "type": "technique", "code": "$ jux rev $ note ... # \"moogBass\" # chorus 0.2 # room 0.8", "description": "'La chorale du jugement' -  Moog bass with stereo call-and-response" }
       ]
     }
   ]

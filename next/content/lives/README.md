@@ -32,14 +32,14 @@
 
 ### Event Lifecycle
 1. **Pre-event**: Shows countdown with teasings based on days remaining
-   - J-14+: teasing1
-   - J-7 to J-3: teasing2
-   - J-3 to event: teasing3
+  - J-14+: teasing1
+  - J-7 to J-3: teasing2
+  - J-3 to event: teasing3
    
 2. **Post-event**: Shows full content with:
-   - Video/audio links (if provided)
-   - Image gallery (automatic)
-   - Collapsible teasings (for nostalgia)
+  - Video/audio links (if provided)
+  - Image gallery (automatic)
+  - Collapsible teasings (for nostalgia)
 
 ### Event Metadata Structure
 ```yaml

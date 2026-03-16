@@ -8,7 +8,7 @@ const featuredVideo = {
   id: 'bS5jcIJfU6c',
   source: 'youtube',
   title: 'Algorave GZ25',
-  subtitle: 'w/ Pérégrine · Algorave Lyon — European-wide annual event',
+  subtitle: 'w/ Pérégrine · Algorave Lyon, European-wide annual event',
   date: 'Fév 2025',
   featured: true,
 };

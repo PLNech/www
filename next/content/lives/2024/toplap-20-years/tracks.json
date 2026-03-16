@@ -1,0 +1,82 @@
+{
+  "gig": "toplap-20-years",
+  "title": "TOPLAP 20 Years (w/ z0rg)",
+  "date": "2024-02-24",
+  "bpmRange": [120, 160],
+  "styleDistribution": { "nujazz": 2, "dnb": 1, "breaks": 1, "techno": 1 },
+  "samplePacks": [
+    { "name": "nujazz_keys125", "usage": "Sampled jazz piano in Cafe Tiede" },
+    { "name": "nujazz_bass125", "usage": "Jazz bass sample in Cafe Tiede and Force Motrice" },
+    { "name": "jungle_breaks", "usage": "Breakbeats in most tracks" },
+    { "name": "bass_commodore", "usage": "Commodore bass in Nuit Agitee" },
+    { "name": "bass_nes", "usage": "NES bass in Permanence" },
+    { "name": "FMRhodes", "usage": "Electric piano in Force Motrice and Cafe Tiede" }
+  ],
+  "tracks": [
+    {
+      "name": "Cafe Tiede",
+      "file": "live/midi/nova/nujazz/cafe_tiede.tidal",
+      "bpm": 125,
+      "style": "nujazz",
+      "ingredients": [
+        { "type": "sample", "code": "\"nujazz_keys125\" # n \"<56 56 57 56 58!4 59 59 56 59>\"", "description": "Sampled nu-jazz piano keys driving the harmony" },
+        { "type": "pattern", "code": "midiOn \"^42\" (<| \"k k k <k <k*2 [k <k ~> k ~]>>\")", "description": "Kick with evolving 4th-beat variation" },
+        { "type": "effect", "code": "# crushbus 41 (range 12 4.5 \"^53\")", "description": "Gentle bitcrush on nujazz bass sample" },
+        { "type": "technique", "code": "chop 8 $ loopAt 2 $ \"nujazz_keys125\"", "description": "Live-recorded jazz keys chopped for real-time slicing" },
+        { "type": "structure", "code": "setcps(125/60/4)", "description": "125 BPM, FMRhodes1 arpeggiated chords, h2ogmcp clap" }
+      ]
+    },
+    {
+      "name": "Force Motrice",
+      "file": "live/midi/nova/dnb/force_motrice.tidal",
+      "bpm": 125,
+      "style": "dnb",
+      "ingredients": [
+        { "type": "sample", "code": "\"nujazz_bass125:1\"", "description": "Nu-jazz bass sample chopped and sliced" },
+        { "type": "pattern", "code": "note (\"[g@2 ~!4 <f ~ as5 c6>]\" - 12)", "description": "FMRhodes1 lead with sparse intervals" },
+        { "type": "effect", "code": "# crushbus 71 (range 12 3.4 \"^55\")", "description": "Bitcrush on giorgio_syn synth" },
+        { "type": "technique", "code": "midiOn \"^58\" (off 0.125 id . rev)", "description": "Reversed Rhodes with micro-offset echo-before-attack" },
+        { "type": "structure", "code": "setcps (125/60/4)", "description": "125 BPM, cbow cello on d11, risers on d10, jungle_vocals on d9" }
+      ]
+    },
+    {
+      "name": "Cafe Glace",
+      "file": "live/midi/nova/nujazz/cafe_glace.tidal",
+      "bpm": 120,
+      "style": "nujazz",
+      "ingredients": [
+        { "type": "sample", "code": "\"nujazz_keys120\" # n (slow 4 \"<5 6 7 8>\")", "description": "Piano samples rotating through 4 voicings" },
+        { "type": "pattern", "code": "midiOn \"^57\" (mask \"t(4,8)\")", "description": "Euclidean bass mask on nujazz_bass120:4" },
+        { "type": "effect", "code": "# crushbus 51 (range 16 6.4 \"^54\")", "description": "Wide-range bitcrush on keys" },
+        { "type": "technique", "code": "\"meth_bass\" # n \"<10!3 [<10 11> 11] 9!24>\" $ loopAt 0.25", "description": "Glitchy meth_bass at 4x speed for rhythmic noise" },
+        { "type": "structure", "code": "setcps(120/60/4)", "description": "120 BPM, double jungle_breaks on d7+d8" }
+      ]
+    },
+    {
+      "name": "Nuit Agitee",
+      "file": "live/midi/nova/breaks/nuit_agitee.tidal",
+      "bpm": 160,
+      "style": "breaks",
+      "ingredients": [
+        { "type": "sample", "code": "\"bass_commodore:7\"", "description": "Commodore bass stretched over 8 cycles with granular processing" },
+        { "type": "pattern", "code": "note (scale \"gameboy\" (\"<1(3,8) [1(3,8), <~ [~!7 2]>] 0(3,8) <0!3 -2>(3,8)>\"))", "description": "Custom gameboy scale on harpsichord2" },
+        { "type": "effect", "code": "# lesliebus 43 (range 0 2 \"^29\")", "description": "Leslie speaker on Commodore bass" },
+        { "type": "technique", "code": "loopAt 8 $ chop 64 $ \"bass_commodore:7\"", "description": "Extreme granular: 64 chops over 8-cycle loop" },
+        { "type": "structure", "code": "setcps (160/60/4)", "description": "160 BPM, gameboy scale, amencutup hats, moogBass angels" }
+      ]
+    },
+    {
+      "name": "Permanence",
+      "file": "live/collab/raph/permanence.tidal",
+      "bpm": 150,
+      "style": "techno",
+      "ingredients": [
+        { "type": "pattern", "code": "chop 4 $ loopAt 4 $ \"bass_nes:1\"", "description": "NES bass sample chopped with freeze and squiz effects" },
+        { "type": "sample", "code": "\"fguitar:40\"", "description": "Guitar with distort and crush for industrial texture" },
+        { "type": "effect", "code": "# distortbus 52 (range 0 1.5 \"^34\")", "description": "MIDI-controlled distortion on guitar" },
+        { "type": "technique", "code": "note (\"<c4 ef4 <bf3 <g3 g4>> <af3 f4 af3 af4>>\") # \"moogBass\"", "description": "Chromatic minor progression on moogBass pad" },
+        { "type": "structure", "code": "setcps (150/60/4)", "description": "150 BPM, superfork lead with delay, fsynth with octer/crush" }
+      ]
+    }
+  ]
+}

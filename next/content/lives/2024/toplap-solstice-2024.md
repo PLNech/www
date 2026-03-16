@@ -4,7 +4,7 @@ date: "2024-12-21"
 time: "20:30"
 location: "Les Carroz d'Arâches, France"
 address: "TOPLAP Stream (from the Alps)"
-description: "Breakbeat to techno and more — ALL I WANT FOR CHRISTMAS IS LIVECODE. Cookie Collective."
+description: "Breakbeat to techno and more -  ALL I WANT FOR CHRISTMAS IS LIVECODE. Cookie Collective."
 ctaURL: ""
 ctaText: ""
 video: "https://archive.org/details/toplap-solstice-dec2024-parvagues-"
@@ -17,6 +17,6 @@ tags: ["livecoding", "toplap", "solstice", "cookie-collective", "alps"]
 
 ALL I WANT FOR CHRISTMAS IS LIVECODE
 
-Breakbeat to techno and more — performed live from the Alps, Les Carroz d'Arâches.
+Breakbeat to techno and more -  performed live from the Alps, Les Carroz d'Arâches.
 
 A Cookie Collective performance.

@@ -1,5 +1,5 @@
 ---
-title: "Algolia — Last All Hands"
+title: "Algolia -  Last All Hands"
 date: "2024-12-15"
 time: "18:00"
 location: "Paris, France"
@@ -13,7 +13,7 @@ archive: ""
 tags: ["livecoding", "algolia", "paris"]
 ---
 
-# Algolia — Last All Hands
+# Algolia -  Last All Hands
 
 ## Tracklist
 - Blue Gold

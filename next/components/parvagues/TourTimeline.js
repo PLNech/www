@@ -43,6 +43,7 @@ export default function TourTimeline({ lives }) {
             {grouped[year].map((live) => {
               const isFuture = live._date > now;
               const hasMedia = live.audio || live.video || live.archive;
+              const bestLink = live.audio || live.video || live.archive;
               const city = live.location?.includes(',')
                 ? live.location.split(',')[0].trim()
                 : live.location;
@@ -83,13 +84,16 @@ export default function TourTimeline({ lives }) {
                     {city}
                   </span>
 
-                  {/* Media dot */}
+                  {/* Recording available - direct link to best source */}
                   {hasMedia && (
-                    <span
-                      className="flex-shrink-0 rounded-full"
-                      style={{ width: '6px', height: '6px', backgroundColor: 'rgba(217,0,255,0.5)' }}
-                      title="Enregistrement disponible"
-                    />
+                    <button
+                      type="button"
+                      onClick={(e) => { e.preventDefault(); e.stopPropagation(); window.open(bestLink, '_blank', 'noopener'); }}
+                      className="flex-shrink-0 flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[9px] tracking-wider uppercase border border-[var(--neon-high)]/20 text-[var(--neon-high)] opacity-60 hover:opacity-100 hover:bg-[var(--neon-high)]/10 transition-all cursor-pointer"
+                    >
+                      <svg className="w-2.5 h-2.5" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21" /></svg>
+                      <span className="hidden sm:inline">rec</span>
+                    </button>
                   )}
                 </Link>
               );

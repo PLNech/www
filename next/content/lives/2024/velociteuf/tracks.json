@@ -1,0 +1,135 @@
+{
+  "gig": "velociteuf",
+  "title": "VelociTeuf",
+  "date": "2024-07-05",
+  "bpmRange": [80, 134],
+  "styleDistribution": { "ambient": 2, "breaks": 2, "lofi": 2, "techno": 1, "dnb": 1, "collab": 1 },
+  "samplePacks": [
+    { "name": "jungle_breaks", "usage": "Chopped breakbeats across multiple tracks" },
+    { "name": "FMRhodes", "usage": "Electric piano leads and pads" },
+    { "name": "bassWarsaw", "usage": "Signature bass synth" },
+    { "name": "90s_matrix", "usage": "Bass and atmosphere in Oct4 Glitch Sauvages" },
+    { "name": "drums_atari", "usage": "Retro drum machine in It's About Time" },
+    { "name": "celtic_guitar80", "usage": "Sampled guitar turned bassline in Contre Visite" },
+    { "name": "shiloh", "usage": "Lofi vocal chops in Premiere Grillade" }
+  ],
+  "tracks": [
+    {
+      "name": "Prestance",
+      "file": "live/midi/nova/ambient/prestance.tidal",
+      "bpm": 134,
+      "style": "ambient",
+      "ingredients": [
+        { "type": "pattern", "code": "\"<[~ d5 d4 e4 g4 a4 b4 d4] [e4 g4 a4 b4 <e4 g4>@4]>\"", "description": "Melodic sequence ('praxis') reused across multiple synth voices with transposition and reversal" },
+        { "type": "sample", "code": "\"[jazz,808bd:3]\"", "description": "Layered kick combining jazz kit with 808 sub" },
+        { "type": "effect", "code": "# crushbus 41 (range 16 2.5 \"^53\")", "description": "MIDI-controlled bitcrush on FMRhodes chord pad" },
+        { "type": "technique", "code": "juxBy 0.3 (mask \"t(3,8) . t(12,16)\" . (|+ note 12))", "description": "Stereo jux with euclidean masking and octave shift on moogBass" },
+        { "type": "structure", "code": "setcps (134/60/4)", "description": "134 BPM, 10 orbits: drums/bass/synths layered via MIDI mute groups" }
+      ]
+    },
+    {
+      "name": "Oct4 Glitch Sauvages",
+      "file": "live/midi/nova/beatober/oct_glitchs_sauvages.tidal",
+      "bpm": 117,
+      "style": "techno",
+      "ingredients": [
+        { "type": "sample", "code": "\"90s_matrix:0\"", "description": "90s matrix bass with tremolo and comb filter modulation" },
+        { "type": "pattern", "code": "note \"f@2 f <gs!2 gf!2>@2 <gs!2 g!2> <g!2 gs <gs gs5>>@2\" - 12", "description": "Acid-style chromatic bassline on 90s_matrix:4" },
+        { "type": "effect", "code": "# tremoloratebus 41 (range 0 (slow 4 \"<2 4 8 16>\") \"^53\")", "description": "Escalating tremolo rate controlled by MIDI fader" },
+        { "type": "technique", "code": "superimpose ((# cut 51) . superimpose ((# cut 52) . (|+ note 12)))", "description": "Triple-stacked superimpose creating layered octave echoes" },
+        { "type": "structure", "code": "setcps (117/60/4)", "description": "117 BPM with risers on d10 for buildups, superfork synth pads" }
+      ]
+    },
+    {
+      "name": "About Time",
+      "file": "live/midi/nova/breaks/its_about_time.tidal",
+      "bpm": 110,
+      "style": "breaks",
+      "ingredients": [
+        { "type": "sample", "code": "\"drums_atari\" # n \"[29 29 <29 [29 28 29]> 28]\"", "description": "Atari-era drum machine samples chopped into main rhythm" },
+        { "type": "pattern", "code": "slice 8 (\"0 1 2 3 4 5 <6!3 4> <7!3 [5 4]>\") . (loopAt \"q\") . (# \"breaks165\")", "description": "Nassim-triggered break slicer with variable speed" },
+        { "type": "effect", "code": "# crushbus 41 (range 10 2.5 \"^53\")", "description": "MIDI-controlled bitcrush on the 90s_synatm bass" },
+        { "type": "technique", "code": "midiOn \"^89\" ((0.125 ~>) . chop (slow 4 $ \"[16 32 64 128]\"))", "description": "Accelerating chop granularity for build-up tension" },
+        { "type": "structure", "code": "setcps (110/60/4)", "description": "110 BPM, Commodore synth bus on d7 with squiz/crush, ASCII art intro" }
+      ]
+    },
+    {
+      "name": "Toxic",
+      "file": "live/boeuf/algorythm/fdlm2022/toxic.tidal",
+      "bpm": 140,
+      "style": "techno",
+      "ingredients": [
+        { "type": "pattern", "code": "note (\"0*8\" + \"<b3 b3 d3 [cs3 bs2]>\")", "description": "Rapid 8-note bassWarsaw riff with chromatic movement" },
+        { "type": "sample", "code": "\"[ifdrums,kick]\"", "description": "Layered industrial kick with interface drums" },
+        { "type": "effect", "code": "# crushbus 71 (range 16 1.5 \"^53\")", "description": "Heavy bitcrush on the Warsaw bass synth" },
+        { "type": "technique", "code": "note (\"fs7@4 cs7@4 d7@4 b7@4\" + \"[0,12]\" - 24)", "description": "High-register FMRhodes theme with octave doubling (Toxic melody cue)" },
+        { "type": "structure", "code": "setcps (140/60/4)", "description": "140 BPM, tight 5-orbit arrangement: kick/snare/hats/bass/rhodes" }
+      ]
+    },
+    {
+      "name": "Venons Ensemble",
+      "file": "live/midi/nova/dnb/venons_ensemble.tidal",
+      "bpm": 170,
+      "style": "dnb",
+      "ingredients": [
+        { "type": "sample", "code": "\"come_bass\"", "description": "Custom multi-sample bass with crush and octer modulation" },
+        { "type": "pattern", "code": "\"~ cp ~ cp*<1!3 2 1 2 1 2 1 2 2 2 1 2 1 2 2 2 1 2>\"", "description": "Extended snare pattern with accelerating fills across 20 cycles" },
+        { "type": "effect", "code": "# crushbus 71 (range 16 \"<5 10>\" \"^55\")", "description": "Variable bitcrush on come_voice vocal samples" },
+        { "type": "technique", "code": "someCyclesBy (\"^35\" - \"^91\") (>| n \"<0 1 2 3 4 5 6 7>/2\")", "description": "MIDI-conditional voice sample buildup using probability" },
+        { "type": "structure", "code": "setcps (85/60/4)", "description": "170 BPM (85 cps in half-time), electric guitar + voice samples, call-and-response structure" }
+      ]
+    },
+    {
+      "name": "Reboot",
+      "file": "live/midi/nova/lofi/reboot.tidal",
+      "bpm": 80,
+      "style": "lofi",
+      "ingredients": [
+        { "type": "pattern", "code": "slice 4 \"<0 0 [0 1] 3 0*2 [0 1] [3 2] [3*2 3*<2 4>]>\"", "description": "Evolving bass slice pattern on fbass:8 with gradual complexity increase" },
+        { "type": "sample", "code": "\"[reverbkick,jazz]\"", "description": "Reverb kick layered with jazz kit for warm low end" },
+        { "type": "effect", "code": "# crushbus 51 (range 8 1.9 \"^54\")", "description": "Aggressive bitcrush on climbing guitar sample" },
+        { "type": "technique", "code": "whenmod 64 32 (superimpose (slice 4 \"0*<1 2 1 <2 4>>\" . (# cut 51) . (|+ note 12)))", "description": "Long-form superimpose on guitar: octave-shifted slice after 32 cycles" },
+        { "type": "structure", "code": "setcps (80/60/4)", "description": "80 BPM, supersiren synth with crushbus, break-based structure with whenBrk bridges" }
+      ]
+    },
+    {
+      "name": "Premiere Grillade",
+      "file": "live/midi/nova/lofi/premiere_grillade.tidal",
+      "bpm": 80,
+      "style": "lofi",
+      "ingredients": [
+        { "type": "pattern", "code": "note (\"<[c,e,g,b] [c,e,g,bf] [c,ef,g,bf] [c,e,g,b]>\" - 12)", "description": "Jazz chord progression (Cmaj7-C7-Cm7-Cmaj7) on FMRhodes2" },
+        { "type": "sample", "code": "\"shiloh:1\"", "description": "Shiloh vocal sample sliced and delayed for lofi atmosphere" },
+        { "type": "effect", "code": "# modIndex (range 0 16 \"^54\")", "description": "MIDI-controlled FM modulation index on Rhodes piano" },
+        { "type": "technique", "code": "drumFrom \"yamaharm50\" \"hh*<8!3 [8 . 16 <8 16 [24 8] 32>]>\"", "description": "Yamaha RM50 hi-hat pattern with accelerating fills" },
+        { "type": "structure", "code": "setcps (80/60/4)", "description": "80 BPM, 808 kick + jungle breaks, bassWarsaw with crush, lofi Rhodes chords" }
+      ]
+    },
+    {
+      "name": "Rainy Day",
+      "file": "live/collab/josh/oct_18_rainy_day.tidal",
+      "bpm": 114,
+      "style": "breaks",
+      "ingredients": [
+        { "type": "pattern", "code": "note (\"<[c@2 e@2 d@1 b4@3]!2 [c@2 a4@2 d@1 b4@3]!2>\" - 3)", "description": "Melodic superfork lead with sustained notes and chromatic descents" },
+        { "type": "sample", "code": "\"trance_pads:7\"", "description": "Trance pad with stereo offset for atmospheric depth" },
+        { "type": "effect", "code": "# crushbus 51 (range 16 4.5 \"^54\")", "description": "Gentle bitcrush on superfork lead" },
+        { "type": "technique", "code": "off 0.25 ((# pan 0.8) . (# cut 91))", "description": "Stereo offset on pad creates wide spatial field" },
+        { "type": "structure", "code": "setcps (114/60/4)", "description": "114 BPM, collab with Josh, bass on bassWarsaw with euclidean rhythms" }
+      ]
+    },
+    {
+      "name": "Contre Visite",
+      "file": "live/midi/nova/ambient/contre_visite.tidal",
+      "bpm": 80,
+      "style": "ambient",
+      "ingredients": [
+        { "type": "sample", "code": "\"celtic_guitar80\" # n \"4\"", "description": "Celtic guitar sample repurposed as bass with chop and slice" },
+        { "type": "pattern", "code": "note \"<ef ef {b, [~!7 fs]} fs>\"", "description": "Moog bass with sparse set-theoretic note pattern" },
+        { "type": "effect", "code": "# octerbus 52 (range 0 0.63 \"^36\")", "description": "MIDI-controlled octaver on moog bass for sub-bass depth" },
+        { "type": "technique", "code": "chop 4 $ \"voices_celtic\" # n \"4 <4 4 5 <4 3>> 5 <6 5 5 4>\"", "description": "Celtic vocal sample chopped and sequenced as melodic element" },
+        { "type": "structure", "code": "setcps (80/60/4)", "description": "80 BPM, LPF automation over 64 cycles, celtic guitar + voices + moog layering" }
+      ]
+    }
+  ]
+}

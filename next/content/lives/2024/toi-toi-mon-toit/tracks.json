@@ -1,0 +1,91 @@
+{
+  "gig": "toi-toi-mon-toit",
+  "title": "Live @ Toi Toi Mon Toit",
+  "date": "2024-05-10",
+  "bpmRange": [80, 165],
+  "styleDistribution": {
+    "lofi": 1,
+    "dnb": 2,
+    "hip-hop": 1,
+    "breakbeat": 1
+  },
+  "samplePacks": [
+    { "name": "FMRhodes2", "usage": "FM piano in Premiere Grillade with lo-fi chord progression" },
+    { "name": "bassWarsaw", "usage": "primary bass synth in Premiere Grillade, Break Dynasty, Nouveau Soleil" },
+    { "name": "jungle_breaks", "usage": "jungle breakbeats in Break Dynasty, Nouveau Soleil, It's About Time" },
+    { "name": "shiloh", "usage": "lo-fi vocal samples in Premiere Grillade and Break Dynasty" },
+    { "name": "90s_matrix/bass1", "usage": "sub bass layers in Clameur" },
+    { "name": "voices_celtic/voices_persian", "usage": "vocal textures in Clameur (Morohai/Wooh)" },
+    { "name": "moogBass/superpiano", "usage": "pad and piano in Clameur lead section" },
+    { "name": "bass_gameboy/synth_gameboy/synth_atari", "usage": "retro console sounds in Nouveau Soleil" },
+    { "name": "808bd/808hc", "usage": "808 kick and hi-hat in It's About Time" },
+    { "name": "FMRhodes1", "usage": "bird-call melody in It's About Time" }
+  ],
+  "tracks": [
+    {
+      "name": "Premiere Grillade",
+      "file": "live/midi/nova/lofi/premiere_grillade.tidal",
+      "bpm": 80,
+      "style": "lofi",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (80/60/4)", "description": "80 BPM lo-fi opener with Yamaha RM50 drum machine and jazz harmony" },
+        { "type": "technique", "code": "let prog = \"<[c,e,g,b] [c,e,g,bf] [c,ef,g,bf] [c,e,g,b]>\"", "description": "CMaj7-C7-CMin7-CMaj7 cycle on FMRhodes2 - classic jazz voicing" },
+        { "type": "sample", "code": "$ \"shiloh:1\" # lpf 5000 # room 0.4 # dry 2", "description": "Shiloh vocal chop with lo-fi filter and saturated dry mix" },
+        { "type": "technique", "code": "note (\"<[c,c(3,8)] [g,[~ f6],g*4] [bf,bf(3,8)] c4>\" - 24) # \"bassWarsaw\"", "description": "Euclidean-patterned bass with chord-tone rhythm" },
+        { "type": "effect", "code": "# crushbus 51 (range 16 2 \"^53\")", "description": "Subtle bitcrush for lo-fi warmth" }
+      ]
+    },
+    {
+      "name": "Break Dynasty",
+      "file": "live/midi/nova/breaks/break_dynasty.tidal",
+      "bpm": 165,
+      "style": "dnb",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (165/60/4)", "description": "165 BPM DnB with jungle breaks and lo-fi vocal chops" },
+        { "type": "sample", "code": "$ loopAt 2 $ chop 16 $ \"jungle_breaks:6\"", "description": "Chopped jungle break loop as the core high-energy drum pattern" },
+        { "type": "technique", "code": "note (\"<<b4 [b4@3 cs5]> gs4@2 ~ gs4>\" - 24) # \"bassWarsaw\"", "description": "Warsaw bass with chromatic tension and dramatic rests" },
+        { "type": "sample", "code": "$ slow 2 $ slice 16 \"~ <0 1 1 0 0 2 0 2 ...>\" $ \"shiloh:2\"", "description": "Half-time Shiloh vocal chops with evolving slice selection" },
+        { "type": "effect", "code": "# delaybus 61 (range 0 1 \"^55\") # delayfb 0.5 # delaytime 0.375", "description": "MIDI-controlled delay on vocal for dub echo trails" }
+      ]
+    },
+    {
+      "name": "Clameur",
+      "file": "live/hip/darkside/clameur.tidal",
+      "bpm": 93,
+      "style": "hip-hop",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (93/60/4)", "description": "93 BPM dark hip-hop - 'Clameur pour Clement' - dedicated piece" },
+        { "type": "technique", "code": "fix (...(# \"90s_matrix:0\") . (# note (scale \"aeolian\" (slow 2 \"<0 0 2 3>\")))) \"matrix\"", "description": "Fix-based dual bass: matrix synth + bass1 infra sub in parallel via fix routing" },
+        { "type": "sample", "code": "$ stack [\"~ <~!3 wooh>\", \"<morohai ~>\"] with voices_celtic:32 and voices_persian:10", "description": "Celtic and Persian vocal layers stacked: Morohai chant + Wooh exclamation" },
+        { "type": "technique", "code": "(# \"superpiano\") . whenmod 64 16 (whenmod 4 3 (arp \"up\" . ply \"1!3 2\"))", "description": "Piano with conditional arp: only in the last quarter of 64-cycle phrases" },
+        { "type": "effect", "code": "# squizbus 61 (range 0 4 \"^55\")", "description": "MIDI squiz on celtic voices for controlled vocal degradation" }
+      ]
+    },
+    {
+      "name": "Nouveau Soleil",
+      "file": "live/midi/nova/dnb/nouveau_soleil.tidal",
+      "bpm": 110,
+      "style": "dnb",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (110/60/4)", "description": "110 BPM mid-tempo DnB with retro console sounds" },
+        { "type": "sample", "code": "$ \"bass_gameboy\" with midiOn \"^57\" (# \"bass_gameboy:5\")", "description": "Game Boy bass with MIDI-triggered preset switching" },
+        { "type": "technique", "code": "$ whenmod 64 32 (off \"q\" ((|+ note 12) . (# pan 0.8)))", "description": "Progressive octave offsets at nested cycle depths for gradual buildup" },
+        { "type": "sample", "code": "$ slice 8 \"<0 0 1 <[1 1] [2 <~ 2> 3 <~ 3>]>>\" $ \"synth_atari:5\"", "description": "Atari synth lead with expanding slice exploration" },
+        { "type": "effect", "code": "# roombus 71 (range 0.3 1.2 \"^55\") # dry 1.8 # sz 0.7", "description": "MIDI reverb on moog melody with dry emphasis for presence" }
+      ]
+    },
+    {
+      "name": "It's About Time",
+      "file": "live/midi/nova/breaks/its_about_time.tidal",
+      "bpm": 110,
+      "style": "breakbeat",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (110/60/4)", "description": "110 BPM breakbeat closer with long-form masks for gradual layer revelation" },
+        { "type": "technique", "code": "$ mask \"<[[t <f!4 t!4>] <f!8 t!8>]!8 t!24 t!96>\"", "description": "Multi-level mask: FMRhodes bird-call emerges after 8 cycles of silence" },
+        { "type": "sample", "code": "$ \"[808bd:4,kick:4]\"", "description": "Dual-layer kick combining 808 sub with acoustic punch" },
+        { "type": "sample", "code": "note (\"<c!4 ef!2 f g>\") # \"808hc:2\" # octersubbus 72 (range 0 1.4 \"^55\")", "description": "808 hi-hat carillon with chromatic melody and MIDI sub-octave" },
+        { "type": "effect", "code": "# delaybus 51 (range 0 0.8 \"^34\") # delayt \"<h>\" # delayfb 0.25", "description": "MIDI-controlled delay on Rhodes for growing spatial depth over time" }
+      ]
+    }
+  ]
+}

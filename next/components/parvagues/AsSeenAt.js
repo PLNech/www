@@ -1,8 +1,8 @@
 const credentials = [
-  { name: 'TOPLAP', detail: '20 Years', url: 'https://toplap.org/' },
+  { name: 'TOPLAP', detail: '20 Years', url: 'https://blog.toplap.org/2024/01/20/toplap20-events-feb-23-25/' },
   { name: 'Algorave', detail: 'GZ Lyon', url: 'https://algorave.com/' },
-  { name: 'Opal Festival', url: 'https://www.opal-music.com/' },
-  { name: 'Cookie Collective', url: 'https://www.cookie.paris/' },
+  { name: 'Opal Festival', detail: '2024 · 2025', url: 'https://www.opal-festival.com/' },
+  { name: 'Cookie Collective', detail: 'Compilation', url: 'https://ccc.cookie.paris/projects/ugo-parvague/' },
   { name: '38C3', detail: 'House of Tea', url: 'https://soundcloud.com/parvagues/live-38c3-house-of-tea' },
   { name: '39C3', detail: 'House of Tea', url: 'https://soundcloud.com/parvagues/live-39c3' },
 ];
@@ -17,7 +17,7 @@ export default function AsSeenAt() {
         >
           As seen at
         </p>
-        <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-4">
+        <div className="flex flex-wrap justify-center items-center gap-x-5 md:gap-x-8 gap-y-3">
           {credentials.map(({ name, detail, url }) => (
             <a
               key={name}

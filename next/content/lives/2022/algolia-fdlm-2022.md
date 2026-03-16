@@ -1,5 +1,5 @@
 ---
-title: "Live Algolia — Fête de la Musique 2022"
+title: "Live Algolia -  Fête de la Musique 2022"
 date: "2022-06-21"
 time: "18:00"
 location: "Paris, France"
@@ -13,6 +13,6 @@ archive: ""
 tags: ["livecoding", "algolia", "fdlm"]
 ---
 
-# Live Algolia — Fête de la Musique 2022
+# Live Algolia -  Fête de la Musique 2022
 
 Fête de la Musique at Algolia HQ, Paris.

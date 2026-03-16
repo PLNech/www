@@ -7,7 +7,7 @@ export default function BioSection() {
           style={{ color: 'var(--text-primary)' }}
         >
           <strong className="font-display">ParVagues</strong> est un projet de{' '}
-          <em>livecoding</em> solo — musique électronique composée et jouée en
+          <em>livecoding</em> solo, musique électronique composée et jouée en
           temps réel par le code. Algorave, techno, drum &amp; bass, breakbeat :
           chaque set est unique, joué sur scène avec{' '}
           <a

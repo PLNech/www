@@ -1,0 +1,173 @@
+{
+  "gig": "bazurto",
+  "title": "Bazurto Live @ Tignes",
+  "date": "2022-03-15",
+  "bpmRange": [90, 160],
+  "styleDistribution": {
+    "lounge": 2,
+    "breakbeat": 3,
+    "techno": 2,
+    "dnb": 2,
+    "chiptune": 1,
+    "ambient": 1
+  },
+  "samplePacks": [
+    { "name": "jazz/808bd/kick", "usage": "layered kick foundation across all tracks" },
+    { "name": "FMRhodes1/FMRhodes2", "usage": "FM piano in Solar, Lunar, Michael, Nightly Repair" },
+    { "name": "bassWarsaw", "usage": "primary bass synth in Solar, Lunar, Nightly Repair" },
+    { "name": "fbass", "usage": "chopped bass loops in Invoque l'ete and Alerte Verte" },
+    { "name": "fguitar", "usage": "chopped guitar in Invoque l'ete and Alerte Verte" },
+    { "name": "cpluck", "usage": "plucked bass/lead in Burn this Book" },
+    { "name": "90s_synatm", "usage": "atmospheric synth pads in Burn this Book, Nightly Repair, Atari-ght" },
+    { "name": "jungle_breaks/breaks165", "usage": "chopped jungle breaks in multiple tracks" },
+    { "name": "drums_atari", "usage": "retro drum samples in Atari-ght" },
+    { "name": "moogBass/moog", "usage": "moog synth bass/pad in Invoque l'ete, Alerte Verte" },
+    { "name": "break", "usage": "breakbeat loops sliced in Solar and Lunar" },
+    { "name": "fbreak120", "usage": "120 BPM break loop in Michael" }
+  ],
+  "tracks": [
+    {
+      "name": "Invoque l'ete",
+      "file": "live/midi/nova/lounge/invoque_ete.tidal",
+      "bpm": 115,
+      "style": "lounge",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (115/60/4)", "description": "115 BPM lounge groove with MIDI mask/mute system for live arrangement" },
+        { "type": "pattern", "code": "\"d ~ ~ d d ~ d <~!3 d>\"", "description": "Son clave pattern on snare:22 with variable ghost-note gain" },
+        { "type": "sample", "code": "$ \"fbass:13\" $ loopAt 2 $ slice 8 (run \"<4!4 8 8 [4 8 4] [8 4 8]>\")", "description": "Sliced bass loop doubling slice count for complexity buildup" },
+        { "type": "effect", "code": "# crushbus 51 (range 16 4.5 \"^53\") # roombus 52 (range 0 0.8 \"^33\")", "description": "MIDI-controlled bitcrush and reverb on bass for texture morphing" },
+        { "type": "technique", "code": "note (\"<a3'maj g3'maj a3'min d3'maj>\" + \"0*<4 [4 16]>\") # \"moogBass\"", "description": "Moog bass on a I-bVII-i-IV jazz progression with arpeggiated superimpose" }
+      ]
+    },
+    {
+      "name": "Solar",
+      "file": "live/midi/nova/breaks/solar.tidal",
+      "bpm": 110,
+      "style": "breakbeat",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (110/60/4)", "description": "110 BPM breakbeat with dual DJF bus for A/B filtering" },
+        { "type": "sample", "code": "$ loopAt 2 $ slice 8 (run 8) $ \"break:11\" # hpf 500", "description": "High-passed breakbeat loop with striate and ply variations" },
+        { "type": "technique", "code": "arp \"<up!8 converge!7 diverge>\" \"c'maj'8\" # \"bassWarsaw\"", "description": "Arpeggiated Warsaw bass cycling through up/converge/diverge patterns" },
+        { "type": "sample", "code": "# \"FMRhodes1\" # modIndex (range 0 128 \"^34\")", "description": "FM Rhodes with MIDI-controlled modulation index for timbre sweeping" },
+        { "type": "effect", "code": "# crushbus 51 (range 16 4.6 \"^53\")", "description": "Shared bitcrush bus across bass and piano channels" }
+      ]
+    },
+    {
+      "name": "Lunar",
+      "file": "live/midi/nova/breaks/lunar.tidal",
+      "bpm": 110,
+      "style": "breakbeat",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (110/60/4)", "description": "110 BPM companion piece to Solar - darker, deeper" },
+        { "type": "technique", "code": "note (scale \"aeolian\" \"<3 3 5 <5 4> 5 4 3 <~ 2 3 ~>>\") # \"bassWarsaw\"", "description": "Aeolian-mode bass melody with rests creating breathing space" },
+        { "type": "sample", "code": "\"break\" # n \"<13!12 14!4 15!12 14!4>\"", "description": "Cycling through 3 break variants on rotating 32-cycle pattern" },
+        { "type": "technique", "code": "|+| note \"~ 12(<1 1 2 1 2 5 2 1 2 2 5 2 2 4 3 8>,8)\"", "description": "Euclidean octave jumps on Rhodes superimpose for rhythmic sparkle" },
+        { "type": "effect", "code": "# modIndex (range 0.1 32 \"^54\")", "description": "Low modulation index ceiling on FMRhodes1 for warmer timbres" }
+      ]
+    },
+    {
+      "name": "Michael",
+      "file": "live/midi/nova/lounge/michael.tidal",
+      "bpm": 120,
+      "style": "lounge",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (120/60/4)", "description": "120 BPM lounge piano/brass hybrid" },
+        { "type": "technique", "code": "fix (... . arp \"pinkyup\" . (>| note (\"c'maj'3\" - 7))) \"a\"", "description": "Fix-based layering: three synth brass voices (a/b/c) with pinkyup arp" },
+        { "type": "sample", "code": "\"fsynth:3\" sliced across [a,b,c] bus with note offsets -12 and -24", "description": "Multi-octave brass choir from a single fsynth sample" },
+        { "type": "sample", "code": "$ juxBy 0.8 (rev . (# cut 51)) $ slice 8 (run ...) $ \"fpiano:3\"", "description": "Reversed piano jux with sliced groove for jumpy texture" },
+        { "type": "effect", "code": "# crushbus 41 (range 16 1.6 \"^13\") # room 0.3 # sz 0.6", "description": "Light crush + room reverb on brass for warm analog character" }
+      ]
+    },
+    {
+      "name": "Nightly Repair",
+      "file": "live/techno/nightly_repair.tidal",
+      "bpm": 90,
+      "style": "techno",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (90/60/4)", "description": "90 BPM slow techno with blues scale and custom scale definition" },
+        { "type": "technique", "code": "note (scale \"blues\" (arp \"<up pinkyup downup thumbupdown>\" \"[0,1,2,<3 4>,<4 <5 6>>]\"))", "description": "Blues-scale FM Rhodes run with rotating arp modes and expanding chord voicings" },
+        { "type": "sample", "code": "# \"90s_matrix:3\" # lesliebus 41 (range \"-1\" 1 \"^17\")", "description": "Leslie speaker simulation on 90s matrix bass with rate ramp" },
+        { "type": "effect", "code": "# crushbus 43 (range 16 2 (\"^53\" - 0.1 * (fast 4 perlin)))", "description": "Perlin-noise jittered bitcrush for organic grit on bass" },
+        { "type": "sample", "code": "$ \"90s_matrix:1/4\" # squizbus 92 (range 0 10 perlin)", "description": "Squiz distortion with perlin on 90s matrix lead for evolving texture" }
+      ]
+    },
+    {
+      "name": "Contre visite",
+      "file": "live/midi/nova/ambient/contre_visite.tidal",
+      "bpm": 90,
+      "style": "ambient",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (90/60/4)", "description": "90 BPM ambient techno with layered mute groups for gradual unveiling" },
+        { "type": "sample", "code": "\"90s_synatm:8/4\" # cut 4 # room 0.8 # legato 4", "description": "Quarter-speed atmospheric synth pad with heavy reverb" },
+        { "type": "technique", "code": "$ superimpose (struct \"t(5,8)\" . arp \"[down,up]\" . (|+ note 12))", "description": "Euclidean arp superimpose on the aerial synth for question-answer motif" },
+        { "type": "sample", "code": "$ \"90s_synatm:14/4\" # delayfb 0.25 # delayt 0.25 # delay 0.8", "description": "Second synth layer with dotted-eighth delay for rhythmic depth" },
+        { "type": "effect", "code": "# octersubbus 53 (range 0 1.85 \"^34\")", "description": "MIDI-controlled sub-octave for bass reinforcement on synth" }
+      ]
+    },
+    {
+      "name": "Burn this Book",
+      "file": "live/techno/noir/burn_this_book.tidal",
+      "bpm": 120,
+      "style": "techno",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (120/60/4)", "description": "120 BPM dark techno with ASCII art banner and fire emojis" },
+        { "type": "technique", "code": "note (scale \"aeolian\" ...) # \"cpluck:0\" # roombus 42 (range 0 0.8 \"^33\")", "description": "Aeolian pluck bass with arpeggiated superimpose triggered by MIDI" },
+        { "type": "sample", "code": "$ chop 16 $ loopAt 4 $ \"drums_nes:3\" # lpf 4000", "description": "NES drum chip sample chopped into 16 slices at slow speed for dark texture" },
+        { "type": "effect", "code": "# delay 0.85 # delayfb \"<0.25!3 <0.5 0.9>>\" # delayt 0.125", "description": "Ping-pong delay with escalating feedback on the NES drums" },
+        { "type": "technique", "code": "midiOn \"^58\" (>| note (scale \"aeolian\" (arp \"down\" ...))) $ \"cpluck:1\"", "description": "Second pluck voice overriding notes with descending arp on MIDI trigger" }
+      ]
+    },
+    {
+      "name": "Break the Loop",
+      "file": "live/midi/nova/dnb/break_the_loop.tidal",
+      "bpm": 165,
+      "style": "dnb",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (165/60/4)", "description": "165 BPM drum & bass with MIDI-controlled break switching" },
+        { "type": "technique", "code": "midiOn \"^76\" (scramble (8 - 4 * \"^44\"))", "description": "MIDI knob controls scramble amount on break slices for live glitching" },
+        { "type": "sample", "code": "$ \"90s_synatm:9\" # lesliebus 42 (range 0 1 \"^17\")", "description": "Leslie-processed 90s synth bass with MIDI-controlled rotation depth" },
+        { "type": "sample", "code": "note (scale \"aeolian\" ...) # \"FMRhodes1\" # modIndex (range 0 100 \"^54\")", "description": "Aeolian FM Rhodes with MIDI mod-index sweep" },
+        { "type": "technique", "code": "note (scale \"aeolian\" (arp \"<up downup down updown>\" ...)) # \"90s_matrix:3\"", "description": "Matrix synth voices with rotating arp patterns for evolving chord textures" }
+      ]
+    },
+    {
+      "name": "Atari-ght",
+      "file": "live/chip/ataright.tidal",
+      "bpm": 120,
+      "style": "chiptune",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (120/60/4)", "description": "120 BPM chiptune techno with Atari ASCII art header" },
+        { "type": "sample", "code": "$ chop 8 $ loopAt 4 $ \"drums_atari\" # n \"[29 29 <29 [29 28 29]> 28]\"", "description": "Atari drum machine samples chopped and looped" },
+        { "type": "technique", "code": "note (\"c'maj'4\" + \"<c!3 g g g [g, [~ c]] c>\" - 12) # \"90s_synatm:8/4\"", "description": "Synth pad ghost from an easier time with major chord progressions" },
+        { "type": "sample", "code": "$ chop 8 $ loopAt 16 $ \"synth_commodore\" # n \"0\"", "description": "Commodore synth sample as the retro BASIC bus lead" },
+        { "type": "effect", "code": "# crushbus 61 (range 20 2.25 \"^55\") # squizbus 62 (range 0 1.5 \"^35\")", "description": "Crush + squiz on Commodore synth for authentic 8-bit degradation" }
+      ]
+    },
+    {
+      "name": "Alerte Verte",
+      "file": "live/midi/nova/dnb/alerte_verte.tidal",
+      "bpm": 160,
+      "style": "dnb",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (160/60/4)", "description": "160 BPM DnB with layered kick (squiz+octersub) and MIDI mute matrix" },
+        { "type": "sample", "code": "$ loopAt 4 $ chop 16 $ \"fbass:25\"", "description": "Chopped bass loop with MIDI-switchable forward/reverse slicing" },
+        { "type": "technique", "code": "$ whenmod 16 12 (struct \"t*<4 4 8 16>\")", "description": "Snare rush pattern building from quarter to sixteenth notes" },
+        { "type": "sample", "code": "$ chop 16 $ loopAt 0.5 $ \"breaks165\"", "description": "Nassim button: half-speed breaks165 chopped for live glitch drops" },
+        { "type": "effect", "code": "# leslie \"^34\" # lsize (1 + (slow 16 perlin * 2)) # lrate 6.7", "description": "MIDI-controlled Leslie speaker on guitar with perlin-modulated cabinet size" }
+      ]
+    },
+    {
+      "name": "It's About Time",
+      "file": "live/midi/nova/breaks/its_about_time.tidal",
+      "bpm": 110,
+      "style": "breakbeat",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (110/60/4)", "description": "110 BPM breakbeat with slow introduction masks revealing layers over 64 cycles" },
+        { "type": "sample", "code": "$ \"[808bd:4,kick:4]\"", "description": "Dual-layered kick with 808 and acoustic for body and punch" },
+        { "type": "technique", "code": "$ mask \"<[[t <f!4 t!4>] <f!8 t!8>]!8 t!24 t!96>\"", "description": "Long-form mask: FMRhodes bird call emerges after 8 cycles of silence" },
+        { "type": "sample", "code": "note (\"<c!4 ef!2 f g>\" ...) # \"808hc:2\" # octersubbus 72 (range 0 1.4 \"^55\")", "description": "808 hi-hat carillon with sub-octave reinforcement via MIDI" },
+        { "type": "effect", "code": "# delaybus 51 (range 0 0.8 \"^34\") # delayt \"<h>\" # delayfb 0.25", "description": "MIDI-controlled delay amount on FMRhodes for growing spatial depth" }
+      ]
+    }
+  ]
+}

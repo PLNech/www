@@ -1,0 +1,123 @@
+{
+  "gig": "bunker",
+  "title": "BUNKER",
+  "date": "2025-10-31",
+  "bpmRange": [104, 142],
+  "styleDistribution": { "techno": 3, "lounge": 1, "nujazz": 1, "dnb": 1, "breaks": 1, "ambient": 1 },
+  "samplePacks": [
+    { "name": "bassWarsaw", "usage": "Main synth bass across techno and nujazz tracks" },
+    { "name": "orage", "usage": "Multi-purpose rain/storm sample pack (drums, bass, piano, voices)" },
+    { "name": "jungle_breaks", "usage": "Breakbeat fills and layers" },
+    { "name": "breaks165", "usage": "High-energy 165 BPM breakbeat" },
+    { "name": "sunny_bass", "usage": "Custom bass sample for Sunny" },
+    { "name": "vec1_acid", "usage": "Acid synth samples" },
+    { "name": "sogood", "usage": "Custom multi-sample pack (keys, voices, chorus)" },
+    { "name": "FMRhodes1", "usage": "FM electric piano for atmospheric layers" }
+  ],
+  "tracks": [
+    {
+      "name": "Sept1",
+      "file": "live/collab/baba/sept1.tidal",
+      "bpm": 120,
+      "style": "techno",
+      "ingredients": [
+        { "type": "sample", "code": "\"rhadamanthe_melo:1\"", "description": "Piano melody with begin/mid/end gated sections" },
+        { "type": "pattern", "code": "note (\"<<[b3@5 a3 b3 a3]...>> [e3@7 b3]>\")", "description": "Cello-like cpluck bassline in B/A with long sustain" },
+        { "type": "effect", "code": "# cps ((range 60 180 \"^29\")/60/4)", "description": "Live BPM morphing via MIDI fader" },
+        { "type": "sample", "code": "\"breaks165\"", "description": "Amen break energy injection layer" },
+        { "type": "technique", "code": "$ midiOn \"^56\" (loopAt 2 . (# n 12))", "description": "MIDI-triggered jungle break variations" }
+      ]
+    },
+    {
+      "name": "Sunny",
+      "file": "live/midi/nova/lounge/sunny_side_up.tidal",
+      "bpm": 120,
+      "style": "lounge",
+      "ingredients": [
+        { "type": "sample", "code": "\"sunny_bass\"", "description": "Warm bass with octave sub modulation" },
+        { "type": "sample", "code": "\"sunny_brass\"", "description": "Brass samples with gradual mask reveal" },
+        { "type": "pattern", "code": "\"acidOto3092\" |- note 36", "description": "Acid synth overlay in F/G#/C/G" },
+        { "type": "technique", "code": "$ superimpose ((# crushbus 41 ...) . (# lpf 2500))", "description": "Parallel bass processing with crush and filter" },
+        { "type": "sample", "code": "\"risers:8\"", "description": "Tension riser deploying at phrase boundaries" }
+      ]
+    },
+    {
+      "name": "Orage",
+      "file": "live/midi/nova/techno/techno_orage.tidal",
+      "bpm": 104,
+      "style": "techno",
+      "ingredients": [
+        { "type": "sample", "code": "\"orage\"", "description": "Multi-use rain/storm pack: hats (chop 8), bass (loopAt 2), piano, voices" },
+        { "type": "pattern", "code": "$ slow 4 $ ply \"4 . 2 0\"", "description": "Slow piano rain pattern with progressive ply density" },
+        { "type": "sample", "code": "\"vec1_acid:30\"", "description": "Acid doubt line in C/Ab/D with octave layering" },
+        { "type": "technique", "code": "$ midiOn \"^34\" ((>| n \"<<4!4 34 4!3> 4 33 <34 4>>\"))", "description": "MIDI-triggered infinite storm variation" },
+        { "type": "sample", "code": "\"FMRhodes2\"", "description": "FM Rhodes melody in F/C/G#/C/F/Bb/D/Bb" }
+      ]
+    },
+    {
+      "name": "Force Motrice",
+      "file": "live/midi/nova/dnb/force_motrice.tidal",
+      "bpm": 125,
+      "style": "dnb",
+      "ingredients": [
+        { "type": "sample", "code": "\"nujazz_bass125:1\"", "description": "Jazz bass loop chopped and sliced with crush" },
+        { "type": "sample", "code": "\"FMRhodes1\"", "description": "FM piano with modIndex and note offsetting" },
+        { "type": "sample", "code": "\"giorgio_syn:22\"", "description": "Giorgio synth with euclidean struct and crush" },
+        { "type": "sample", "code": "\"break:2\"", "description": "Breakbeat with loopAt 2 and MIDI-driven variations" },
+        { "type": "technique", "code": "$ midiOn \"^92\" (iter \"1 <1 4>\")", "description": "MIDI-triggered break iteration for live variation" }
+      ]
+    },
+    {
+      "name": "Drifting Soul",
+      "file": "live/collab/jane/drifting_soul.tidal",
+      "bpm": 80,
+      "style": "nujazz",
+      "ingredients": [
+        { "type": "sample", "code": "\"jane_wang\"", "description": "Jane's piano recording with MIDI-controlled slice/ply" },
+        { "type": "pattern", "code": "note (\"<[fs@7 <~ bf>] [fs@7 <~ cs>] <bf ef> <cs!3 bf>>\")", "description": "Cello bass with jux-doubled seventh intervals" },
+        { "type": "sample", "code": "\"movie_vitality\" / \"movie_wine\" / \"movie_statue\"", "description": "Cinema vocal collage: drift, wine, statue fragments" },
+        { "type": "sample", "code": "\"scratch_long:12\"", "description": "Scratch record with MIDI-triggered ply acceleration" },
+        { "type": "structure", "code": "setcps (80/60/4)", "description": "80 BPM slow groove, half-time feel" }
+      ]
+    },
+    {
+      "name": "Because It's There",
+      "file": "copycat/because_its_there.tidal",
+      "bpm": 110,
+      "style": "techno",
+      "ingredients": [
+        { "type": "sample", "code": "\"bassWarsaw\"", "description": "Warsaw bass in C#/G#/D# with crush and octave sub" },
+        { "type": "sample", "code": "\"ikedaBass\"", "description": "Minimal bass pad with delay chain" },
+        { "type": "sample", "code": "\"90s_synatm:0\"", "description": "90s synth atmosphere following B/A#/G# progression" },
+        { "type": "pattern", "code": "note \"<b4 as4 gs4 ~>\"", "description": "Descending chromatic pad motif" },
+        { "type": "sample", "code": "\"FMRhodes1\"", "description": "FM piano with room reverb and long delay" }
+      ]
+    },
+    {
+      "name": "Ere de Jeu",
+      "file": "live/midi/nova/techno/ere_de_jeu.tidal",
+      "bpm": 110,
+      "style": "techno",
+      "ingredients": [
+        { "type": "sample", "code": "\"[808bd:1,808bd:2,jazz,kick:4]\"", "description": "Quad-layered kick drum" },
+        { "type": "sample", "code": "\"vec1_acid:27\"", "description": "Angel acid bass with accelerating fast pattern" },
+        { "type": "sample", "code": "\"nujazz_keys120\"", "description": "Nu-jazz piano with freeze and striate" },
+        { "type": "technique", "code": "$ loopAt 0.5 . (# \"breaks165\") . (# octersub 2)", "description": "Nassim button: half-speed breaks with octave sub" },
+        { "type": "pattern", "code": "note \"[cs3 b3 <gs3!3 cs4> b3]\"", "description": "Melodic bass motif with C# to B resolution" }
+      ]
+    },
+    {
+      "name": "Acidule",
+      "file": "live/collab/raph/acidule.tidal",
+      "bpm": 135,
+      "style": "acid",
+      "ingredients": [
+        { "type": "sample", "code": "\"vec2_synth_acid\" / \"vec1_acid:40\"", "description": "Dual acid bass with independent crossfade" },
+        { "type": "pattern", "code": ">| note \"[b d6 b cs6 d6 b cs6 b]*2\"", "description": "Rapid alternating acid note sequence" },
+        { "type": "effect", "code": "# tremdp 4 # tremr 1.8", "description": "Bouncy droplet tremolo on FM Rhodes lead" },
+        { "type": "sample", "code": "\"rhadamanthe_vocal\"", "description": "Self-destruct vocal sequence with timed fragments" },
+        { "type": "sample", "code": "\"90s_synatm:21\"", "description": "Synthetic violin layer with dual-voice melody" }
+      ]
+    }
+  ]
+}

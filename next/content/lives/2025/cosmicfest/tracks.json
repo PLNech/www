@@ -18,7 +18,7 @@
     { "name": "FMRhodes1", "usage": "FM piano in insouciance, Mauerpark, and more" },
     { "name": "airports", "usage": "granular airport ambience in Quand on Décolle" },
     { "name": "aoc_fr", "usage": "French vocal collages in Fabuleux" },
-    { "name": "orage", "usage": "storm/thunder sample bank — bass, hats, piano, voices in Nuit d'orage" },
+    { "name": "orage", "usage": "storm/thunder sample bank -  bass, hats, piano, voices in Nuit d'orage" },
     { "name": "weird_dialogs", "usage": "sci-fi movie dialogs about electricity in Bain électrique" },
     { "name": "come_bass / come_eguitar / come_voice", "usage": "3-part band sample pack in Venons Ensemble" },
     { "name": "suns_keys / suns_guitar / suns_voice", "usage": "Leifur James-inspired originals in L'Or Bleu" },
@@ -147,7 +147,7 @@
       "bpm": 94,
       "style": "lounge",
       "ingredients": [
-        { "type": "structure", "code": "setcps (94/60/4)", "description": "94 BPM downtempo — original of 'Blue Gold' collab" },
+        { "type": "structure", "code": "setcps (94/60/4)", "description": "94 BPM downtempo -  original of 'Blue Gold' collab" },
         { "type": "sample", "code": "\"suns_keys\" / \"suns_guitar\" / \"suns_voice\"", "description": "3-part Leifur James-inspired sample pack" },
         { "type": "technique", "code": "loopAt 8 $ chop 16 $ \"suns_keys\"", "description": "8-cycle piano loop chopped into 16 grains" },
         { "type": "pattern", "code": "note (\"[b,fs6]@1.5 [a,e6]@1.5 ...\" - 24) # \"bassWarsaw\"", "description": "Weighted timing bass (1.5+1.5+3) with Euclidean sub-patterns" },
@@ -177,7 +177,7 @@
         { "type": "sample", "code": "\"rhadamanthe_melo:1\"", "description": "Rhadamanthe piano split into begin/mid/end narrative" },
         { "type": "technique", "code": "slow 2 \"<begin ~ begin ...>/2\" # cut 51 # begin 0 # end 0.2", "description": "Piano surgically split into 3 cue points" },
         { "type": "pattern", "code": "note (\"<<[b3@5 a3 b3 a3] ...>> [e3@7 b3]>\") # \"cpluck\"", "description": "Cello pluck B-A oscillation resolving to E" },
-        { "type": "effect", "code": "# cps ((range 60 180 \"^29\")/60/4)", "description": "MIDI live tempo from 60 to 180 BPM — real-time manipulation" }
+        { "type": "effect", "code": "# cps ((range 60 180 \"^29\")/60/4)", "description": "MIDI live tempo from 60 to 180 BPM -  real-time manipulation" }
       ]
     },
     {
@@ -187,7 +187,7 @@
       "style": "breaks",
       "ingredients": [
         { "type": "structure", "code": "setcps (138/60/4)", "description": "138 BPM fast breaks" },
-        { "type": "sample", "code": "\"rhadamanthe_vocal:1\"", "description": "The Lady — vocal chopped into 16 grains over 8 cycles" },
+        { "type": "sample", "code": "\"rhadamanthe_vocal:1\"", "description": "The Lady -  vocal chopped into 16 grains over 8 cycles" },
         { "type": "technique", "code": "sometimesBy \"^55\" (rev) . sometimesBy \"^35\" (juxBy 0.25 ...)", "description": "Triple probability: reversal, stereo micro-loops, euclidean masking" },
         { "type": "pattern", "code": "note (\"c3 <d3 ... [d3@3 f3]> e3 <g3 b3 a3 c4>\") # \"bassWarsaw\"", "description": "C minor walking bass with chromatic upper voice" },
         { "type": "effect", "code": "# crushbus 51 (range 16 3.5 \"^54\")", "description": "Bitcrush on Giorgio pad for lo-fi harmonic layer" }
@@ -213,7 +213,7 @@
       "style": "drill",
       "ingredients": [
         { "type": "structure", "code": "setcps (140/60/4)", "description": "140 BPM fast drill/grime" },
-        { "type": "sample", "code": "\"bogdan_grime\"", "description": "'I'm from Cardiff!', 'Pints' — grime vocals" },
+        { "type": "sample", "code": "\"bogdan_grime\"", "description": "'I'm from Cardiff!', 'Pints' -  grime vocals" },
         { "type": "technique", "code": "juxBy 0.4 rev $ note ... # \"marimba1\"", "description": "Marimba with stereo juxtaposed reversal at 40%" },
         { "type": "pattern", "code": "slow 2 $ note (\"<<fs ...>> b4>\" - 12 + 2) # \"giorgio_syn:1\"", "description": "Giorgio bass with long weighted F# notes resolving" },
         { "type": "effect", "code": "# crushbus 101 # octersub 1", "description": "Bitcrush + sub-octave on 90s synth pad" }

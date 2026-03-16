@@ -1,0 +1,142 @@
+{
+  "gig": "cmny-2",
+  "title": "Live @ CMNY #2",
+  "date": "2023-09-01",
+  "bpmRange": [90, 160],
+  "styleDistribution": {
+    "breakbeat": 3,
+    "ambient": 2,
+    "lounge": 2,
+    "dnb": 1,
+    "techno": 1
+  },
+  "samplePacks": [
+    { "name": "FMRhodes1/FMRhodes2", "usage": "FM piano across Solar, Lunar, Empreinte du numerique" },
+    { "name": "bassWarsaw", "usage": "primary bass synth in Solar, Lunar, CBOW, Nightly Repair" },
+    { "name": "break", "usage": "breakbeat loops in Solar and Lunar" },
+    { "name": "cbow/cpluck", "usage": "cello bow and plucked strings in CBOW" },
+    { "name": "90s_synatm", "usage": "atmospheric synth in Contre Visite and Nightly Repair" },
+    { "name": "90s_matrix", "usage": "bass synth in Nightly Repair" },
+    { "name": "fbass", "usage": "chopped bass in Empreinte du numerique and Alerte Verte" },
+    { "name": "supermandolin", "usage": "mandolin lead in Empreinte du numerique" },
+    { "name": "jungle_breaks/breaks165", "usage": "DnB breaks in Alerte Verte and Invoque l'ete" },
+    { "name": "moogBass", "usage": "moog bass/pad across Invoque l'ete and CBOW" }
+  ],
+  "tracks": [
+    {
+      "name": "We call it AlgoRave",
+      "file": null,
+      "bpm": 120,
+      "style": "breakbeat",
+      "ingredients": [
+        { "type": "structure", "code": "live improvisation", "description": "Improvised intro demonstrating TidalCycles basics - building from silence to beat" },
+        { "type": "technique", "code": "once $ arpeggiate $ note \"c'majPent'3\" # \"moog\"", "description": "Live one-shot demonstrations of samples, synths, and arpeggiation" },
+        { "type": "pattern", "code": "d1 $ \"jazz <cp [dr*<8 [8 16]>]>\"", "description": "Simple kick+clap loop as live-coded introduction to pattern syntax" }
+      ]
+    },
+    {
+      "name": "Solar",
+      "file": "live/midi/nova/breaks/solar.tidal",
+      "bpm": 110,
+      "style": "breakbeat",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (110/60/4)", "description": "110 BPM breakbeat with dual DJF bus filtering" },
+        { "type": "sample", "code": "$ loopAt 2 $ slice 8 (run 8) $ \"break:11\" # hpf 500", "description": "High-passed breakbeat loop with ply and striate variations" },
+        { "type": "technique", "code": "arp \"<up!8 converge!7 diverge>\" \"c'maj'8\" # \"bassWarsaw\"", "description": "Warsaw bass cycling through arpeggiation modes over C major" },
+        { "type": "sample", "code": "# \"FMRhodes1\" # modIndex (range 0 128 \"^34\")", "description": "FM Rhodes with full MIDI modulation sweep" },
+        { "type": "effect", "code": "# crushbus 51 (range 16 4.6 \"^53\")", "description": "Shared bitcrush bus for unified distortion across channels" }
+      ]
+    },
+    {
+      "name": "Lunar",
+      "file": "live/midi/nova/breaks/lunar.tidal",
+      "bpm": 110,
+      "style": "breakbeat",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (110/60/4)", "description": "110 BPM - darker companion to Solar with aeolian modality" },
+        { "type": "technique", "code": "note (scale \"aeolian\" \"<3 3 5 <5 4> 5 4 3 <~ 2 3 ~>>\") # \"bassWarsaw\"", "description": "Melodic bass line with rests for breathing space" },
+        { "type": "sample", "code": "\"break\" # n \"<13!12 14!4 15!12 14!4>\"", "description": "Three break variants cycling on 32-cycle rotation" },
+        { "type": "technique", "code": "superimpose (|+| note \"~ 12(<1 1 2 1 2 5 2 1 2 2 5 2 2 4 3 8>,8)\")", "description": "Euclidean octave jumps on Rhodes superimpose" },
+        { "type": "effect", "code": "# modIndex (range 0.1 32 \"^54\")", "description": "Restrained FM modulation for warmer timbre than Solar" }
+      ]
+    },
+    {
+      "name": "Contre Visite",
+      "file": "live/midi/nova/ambient/contre_visite.tidal",
+      "bpm": 90,
+      "style": "ambient",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (90/60/4)", "description": "90 BPM ambient with layered synth pads and gradual mute unveiling" },
+        { "type": "sample", "code": "\"90s_synatm:8/4\" # room 0.8 # legato 4", "description": "Quarter-speed atmospheric pad with heavy reverb wash" },
+        { "type": "technique", "code": "superimpose (struct \"t(5,8)\" . arp \"[down,up]\" . (|+ note 12))", "description": "Euclidean arp on synth creating call-and-response" },
+        { "type": "sample", "code": "\"90s_synatm:14/4\" # delay 0.8 # delayfb 0.25 # delayt 0.25", "description": "Second synth voice with dotted-eighth delay" },
+        { "type": "effect", "code": "# octersubbus 53 (range 0 1.85 \"^34\")", "description": "Sub-octave on synth for bass reinforcement" }
+      ]
+    },
+    {
+      "name": "Empreinte du numerique",
+      "file": "live/midi/nova/ambient/empreinte_du_numerique.tidal",
+      "bpm": 110,
+      "style": "ambient",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (110/60/4)", "description": "110 BPM with ASCII art header (computer/keyboard) - digital footprint theme" },
+        { "type": "sample", "code": "$ \"fbass:51\" # lesliebus 52 \"^33\" # lsizebus 51 (range 0.8 4.8 \"^17\")", "description": "Bass with Leslie speaker effect - MIDI-controlled cabinet size and speed" },
+        { "type": "technique", "code": "note (\"d4/2\" + scale \"<augmented!6 diminished2!2>\" (run 16)) # \"FMRhodes1\"", "description": "FM Rhodes running through augmented/diminished2 scales for digital dissonance" },
+        { "type": "sample", "code": "$ note \"<d <d a> <gf> c>\" # \"supermandolin\"", "description": "Mandolin lead with tritone (gf) creating tension in the progression" },
+        { "type": "effect", "code": "# crushbus 53 (range 10 1.61 \"^53\") # modIndex (range \"-0.1\" 100 \"^34\")", "description": "Bitcrush on bass and full-range mod index on Rhodes for timbral extremes" }
+      ]
+    },
+    {
+      "name": "CBOW",
+      "file": "live/midi/nova/lounge/cbow.tidal",
+      "bpm": 100,
+      "style": "lounge",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (100/60/4)", "description": "100 BPM lounge with cello bow (cbow) as primary instrument" },
+        { "type": "technique", "code": "note (arp \"up <up!8 down!8>\" \"d4'min7'4\") # \"cbow:0\"", "description": "CBOW electric bass arpeggiating d minor 7th with alternating up/down" },
+        { "type": "sample", "code": "$ note (arp \"converge\" chord) # \"cbow:2\" # lesliebus 41 (range 0 2 \"^54\")", "description": "High cbow lead with converging arp and MIDI Leslie effect" },
+        { "type": "technique", "code": "$ midiOn \"^57\" (euclid \"<1 <1 [1 2] 5> 3 5>\" 8) $ (\"0.125\" ~>)", "description": "Euclidean pattern evolving from sparse (1,8) to dense (5,8) with micro-offset" },
+        { "type": "effect", "code": "# crushbus 31 (range 10 2 \"^53\") # room 0.6 # sz 0.5", "description": "Light bitcrush and medium reverb for warm analog cello character" }
+      ]
+    },
+    {
+      "name": "Nightly Repair",
+      "file": "live/techno/nightly_repair.tidal",
+      "bpm": 90,
+      "style": "techno",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (90/60/4)", "description": "90 BPM slow techno - 'La nuit te repare'" },
+        { "type": "technique", "code": "note (scale \"blues\" (arp \"<up pinkyup downup thumbupdown>\" \"[0,1,2,<3 4>,<4 <5 6>>]\"))", "description": "Blues-scale Rhodes with 4 rotating arp modes and expanding voicings" },
+        { "type": "sample", "code": "# \"90s_matrix:3\" # lesliebus 41 (range \"-1\" 1 \"^17\")", "description": "Matrix bass with bidirectional Leslie simulation" },
+        { "type": "effect", "code": "# crushbus 43 (range 16 2 (\"^53\" - 0.1 * (fast 4 perlin)))", "description": "Perlin-jittered bitcrush for organic grit" },
+        { "type": "sample", "code": "# \"90s_matrix:1/4\" # squizbus 92 (range 0 10 perlin)", "description": "Squiz distortion with full perlin range for evolving texture" }
+      ]
+    },
+    {
+      "name": "Alerte Verte",
+      "file": "live/midi/nova/dnb/alerte_verte.tidal",
+      "bpm": 160,
+      "style": "dnb",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (160/60/4)", "description": "160 BPM DnB with layered kick (squiz+octersub) and MIDI mute matrix" },
+        { "type": "sample", "code": "$ loopAt 4 $ chop 16 $ \"fbass:25\"", "description": "Chopped bass loop with forward/reverse slice switching" },
+        { "type": "technique", "code": "$ whenmod 16 12 (struct \"t*<4 4 8 16>\")", "description": "Snare rush building from quarter to 16th notes" },
+        { "type": "sample", "code": "$ chop 16 $ loopAt 0.5 $ \"breaks165\"", "description": "Half-speed breaks165 for live glitch drops (Nassim button)" },
+        { "type": "effect", "code": "# leslie \"^34\" # lsize (1 + (slow 16 perlin * 2))", "description": "Leslie speaker on guitar with perlin-modulated cabinet" }
+      ]
+    },
+    {
+      "name": "Invoque l'Ete",
+      "file": "live/midi/nova/lounge/invoque_ete.tidal",
+      "bpm": 115,
+      "style": "lounge",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (115/60/4)", "description": "115 BPM lounge closer - 'Il ne viendra pas tout seul'" },
+        { "type": "pattern", "code": "\"d ~ ~ d d ~ d <~!3 d>\"", "description": "Son clave on snare:22 with variable ghost-note gain" },
+        { "type": "sample", "code": "$ slice 8 (run \"<4!4 8 8 [4 8 4] [8 4 8]>\") $ \"fbass:13\"", "description": "Bass sliced with escalating complexity" },
+        { "type": "technique", "code": "note (\"<a3'maj g3'maj a3'min d3'maj>\") # \"moogBass\"", "description": "I-bVII-i-IV jazz progression on Moog bass" },
+        { "type": "effect", "code": "# octersub 0.5 # crushbus 71 (range 16 2.5 \"^55\")", "description": "Sub-octave and crush on the piano for warm thickness" }
+      ]
+    }
+  ]
+}

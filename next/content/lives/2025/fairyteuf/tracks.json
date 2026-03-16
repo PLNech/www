@@ -1,0 +1,161 @@
+{
+  "gig": "fairyteuf",
+  "title": "FairyTeuf",
+  "date": "2025-08-20",
+  "bpmRange": [80, 170],
+  "styleDistribution": { "breaks": 3, "dnb": 2, "lounge": 1, "nujazz": 1, "drill": 1, "acid": 1, "funk": 1, "techno": 1, "hip-hop": 1 },
+  "samplePacks": [
+    { "name": "bassWarsaw", "usage": "Core synth bass across multiple tracks" },
+    { "name": "jungle_breaks", "usage": "Breakbeat layering and variations" },
+    { "name": "praise", "usage": "Fatboy Slim-inspired vocal/guitar/bass samples" },
+    { "name": "vec1_acid", "usage": "Acid bass synth patches" },
+    { "name": "gfunk_lead", "usage": "G-funk lead sample for Piment Bresilien" },
+    { "name": "law_adri", "usage": "Custom vocal/instrumental sample for Des Efforts" },
+    { "name": "wap", "usage": "Custom WAP sample pack (bass, vocals, drums)" },
+    { "name": "jane_wang", "usage": "Piano recording collaboration" },
+    { "name": "breaks165", "usage": "High-energy breakbeat standard" },
+    { "name": "moog", "usage": "Moog synthesizer for pad and bass layers" }
+  ],
+  "tracks": [
+    {
+      "name": "JeuDrill",
+      "file": "live/collab/raph/jeudrill.tidal",
+      "bpm": 140,
+      "style": "drill",
+      "ingredients": [
+        { "type": "sample", "code": "\"bogdan_grime:3\"", "description": "Grime vocal samples from Cardiff with speed modulation" },
+        { "type": "sample", "code": "\"giorgio_syn:1\"", "description": "Giorgio bass synth with crush and octave sub" },
+        { "type": "sample", "code": "\"marimba1\"", "description": "Marimba melody in B/D/F# with jux reversal" },
+        { "type": "technique", "code": "$ someCyclesBy \"^19\" (slice 4 \"...\")", "description": "MIDI-controlled probability-based meth bass slicing" },
+        { "type": "sample", "code": "\"90s_synatm:10\"", "description": "Menacing 90s synth pad with 4 Adrianesque variations" }
+      ]
+    },
+    {
+      "name": "Sunny Side Up",
+      "file": "live/midi/nova/lounge/sunny_side_up.tidal",
+      "bpm": 120,
+      "style": "lounge",
+      "ingredients": [
+        { "type": "sample", "code": "\"sunny_bass\"", "description": "Warm bass with superimposed crush layer" },
+        { "type": "sample", "code": "\"sunny_brass\"", "description": "Brass with progressive mask deployment" },
+        { "type": "pattern", "code": "\"acidOto3092\" |- note 36", "description": "Acid line with width MIDI modulation" },
+        { "type": "sample", "code": "\"nujazz_keys120:35/4\"", "description": "Piano outro with gentle slice" },
+        { "type": "structure", "code": "setcps (120/60/4)", "description": "120 BPM laid-back lounge groove" }
+      ]
+    },
+    {
+      "name": "Savoir Voyager",
+      "file": null,
+      "bpm": 120,
+      "style": "nujazz",
+      "ingredients": [
+        { "type": "technique", "code": "no source file found", "description": "Track likely composed live or from an untracked file. Name suggests travel/journey theme in nujazz style." }
+      ]
+    },
+    {
+      "name": "Menthe Givree",
+      "file": null,
+      "bpm": 130,
+      "style": "breaks",
+      "ingredients": [
+        { "type": "technique", "code": "no source file found", "description": "Track likely composed live. Name suggests frozen mint theme, probably a cool/icy breaks track." }
+      ]
+    },
+    {
+      "name": "Ouais je funk",
+      "file": null,
+      "bpm": 120,
+      "style": "funk",
+      "ingredients": [
+        { "type": "technique", "code": "no source file found", "description": "Track likely composed live. Name translates to 'Yeah I Funk', suggesting a funky groove-based track." }
+      ]
+    },
+    {
+      "name": "WAP",
+      "file": "live/midi/nova/dnb/wap.tidal",
+      "bpm": 133,
+      "style": "dnb",
+      "ingredients": [
+        { "type": "sample", "code": "\"wap\"", "description": "Custom WAP sample pack: bass (bandf 400), vocals (rotating n 8-31), drums" },
+        { "type": "pattern", "code": "$ stut 4 1 1 $ slow 4", "description": "4-repeat stutter on vocal samples for hall effect" },
+        { "type": "sample", "code": "\"vec2_synth_acid:25\" / \"vec1_acid:25\"", "description": "Acid bass with off-beat layering and crush" },
+        { "type": "technique", "code": "# n \"<8 9 10 11 ... 31>\"", "description": "Complete 24-sample vocal rotation across phrases" },
+        { "type": "sample", "code": "\"jungle_breaks:84\"", "description": "Jungle break stack with MIDI-triggered Orleans and jungle variants" }
+      ]
+    },
+    {
+      "name": "Long Way",
+      "file": "live/collab/raph/long_way.tidal",
+      "bpm": 102,
+      "style": "hip-hop",
+      "ingredients": [
+        { "type": "sample", "code": "\"praise\"", "description": "Praise sample pack: bass loop (n 12-15), voice (A LONG LONG WAY), guitar" },
+        { "type": "technique", "code": "$ midiOn \"^58\" (ply 4 . (# begin 0) . (# end 0.115))", "description": "Voice loop locked to first 11.5% for 'long way' phrase" },
+        { "type": "pattern", "code": "$ fast 2 $ \"~ s ~ [s*<1 2> <~ s*<2 [4 2]>>]\"", "description": "Double-time snare with accelerating fills" },
+        { "type": "sample", "code": "\"praise:16\" / \"praise:17\"", "description": "Stereo-panned guitar layers with crush modulation" },
+        { "type": "structure", "code": "setcps (102/60/4)", "description": "102 BPM half-time hip-hop feel" }
+      ]
+    },
+    {
+      "name": "Esperluette",
+      "file": "live/collab/raph/esperluette.tidal",
+      "bpm": 140,
+      "style": "techno",
+      "ingredients": [
+        { "type": "pattern", "code": "note \"<gs2 gs2 gs2 ef3>\"", "description": "Dual bassWarsaw lines in G#/Eb with MIDI ply" },
+        { "type": "sample", "code": "\"praise\"", "description": "Praise vocal pack reused with slice variations" },
+        { "type": "sample", "code": "\"moog:3\"", "description": "Moog pad with note variation and crush" },
+        { "type": "sample", "code": "\"jungle_breaks:45\"", "description": "Classic jungle break with MIDI break switching" },
+        { "type": "structure", "code": "setcps (140/60/4)", "description": "140 BPM driving techno pace" }
+      ]
+    },
+    {
+      "name": "Piment Bresilien",
+      "file": "live/collab/raph/piment_bresilien.tidal",
+      "bpm": 124,
+      "style": "breaks",
+      "ingredients": [
+        { "type": "sample", "code": "\"gfunk_lead:2\"", "description": "G-funk lead with striate and chop manipulation" },
+        { "type": "pattern", "code": "note \"<bf2 bf2 bf2 [bf2@7 cs3]>\"", "description": "Deep bassWarsaw in Bb with C# transition" },
+        { "type": "sample", "code": "\"FMRhodes2\"", "description": "FM Rhodes in F/C#/C progression with modIndex modulation" },
+        { "type": "sample", "code": "\"90s_synatm:10\"", "description": "Menacing pad building tension at Bb" },
+        { "type": "sample", "code": "\"jungle_breaks:45\"", "description": "Standard jungle break with MIDI switching" }
+      ]
+    },
+    {
+      "name": "Biscuit Acide",
+      "file": "live/collab/raph/biscuit_acide.tidal",
+      "bpm": 128,
+      "style": "acid",
+      "ingredients": [
+        { "type": "sample", "code": "\"vec1_acid:0\"", "description": "Acid bass with superimposed seventh/octave ghost notes" },
+        { "type": "pattern", "code": "note (\"fs [fs a] <a [fs a]> fs fs <a!3 e>\" + \"c4\")", "description": "Major-key acid pattern in F#/A/E with double layer" },
+        { "type": "sample", "code": "\"ho:2\"", "description": "Open hi-hat with stutter and reverse variations" },
+        { "type": "effect", "code": "# squizbus 41 (range 0 4 \"^53\")", "description": "MIDI-controlled squiz distortion on acid doubles" },
+        { "type": "sample", "code": "\"moog\"", "description": "Moog pad in F#/A/B/C# slow arpeggiation" }
+      ]
+    },
+    {
+      "name": "Des Efforts",
+      "file": "live/collab/raph/des_efforts.tidal",
+      "bpm": 120,
+      "style": "breaks",
+      "ingredients": [
+        { "type": "sample", "code": "\"law_adri\"", "description": "Custom sample with MIDI-driven n selection and ply" },
+        { "type": "pattern", "code": "note \"<g3 g3 bf3 d3>\"", "description": "BassWarsaw line in G/Bb/D with superimposed ghost notes" },
+        { "type": "technique", "code": "$ midiOn \"^57\" (superimpose ((0.25 ~>) . (|+| note \"[0 7 0 12]*2\" ...)))", "description": "MIDI-triggered bass doubling with seventh/octave offsets" },
+        { "type": "sample", "code": "\"breaks165\"", "description": "165 BPM break with MIDI jungle switching" },
+        { "type": "structure", "code": "setcps (120/60/4)", "description": "120 BPM mid-tempo breaks" }
+      ]
+    },
+    {
+      "name": "AUXiliaire",
+      "file": null,
+      "bpm": 130,
+      "style": "breaks",
+      "ingredients": [
+        { "type": "technique", "code": "no source file found", "description": "Track likely composed live or renamed. AUX-themed track, possibly referencing auxiliary sends/returns." }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "gig": "toplap-solstice",
+  "title": "TOPLAP SOLSTICE 23",
+  "date": "2023-12-21",
+  "bpmRange": [100, 150],
+  "styleDistribution": {
+    "techno": 1,
+    "nu-jazz": 2,
+    "breakbeat": 1
+  },
+  "samplePacks": [
+    { "name": "techno:0/808bd/909/kick", "usage": "layered techno kick stack in Permanence" },
+    { "name": "bass_nes", "usage": "NES bass chopped with freeze/squiz in Permanence" },
+    { "name": "fguitar", "usage": "distorted guitar with crushbus in Permanence" },
+    { "name": "jungle_breaks", "usage": "jungle breakbeats across Permanence and Bain Bouillant" },
+    { "name": "nujazz_keys120", "usage": "jazz piano chords in Bain Bouillant and Salut Nu" },
+    { "name": "nujazz_beats120", "usage": "jazz drum patterns in Bain Bouillant and Salut Nu" },
+    { "name": "nujazz_wahwah125", "usage": "wah-wah guitar in Salut Nu" },
+    { "name": "bassWarsaw", "usage": "primary bass synth in Bain Bouillant and Salut Nu" },
+    { "name": "FMRhodes1", "usage": "FM piano in Haunted House bird-call motif" },
+    { "name": "trance_pads", "usage": "atmospheric pad layer in Haunted House" },
+    { "name": "weird_dialogs", "usage": "vocal dialogue samples in Haunted House (sliced question/answer)" },
+    { "name": "moogBass", "usage": "moog pad in Permanence and Salut Nu" }
+  ],
+  "tracks": [
+    {
+      "name": "Permanence",
+      "file": "live/collab/raph/permanence.tidal",
+      "bpm": 150,
+      "style": "techno",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (150/60/4)", "description": "150 BPM high-energy techno with triple mute groups" },
+        { "type": "sample", "code": "$ \"[techno:0,808bd:2,909,kick:4]\" # lpf 1200", "description": "Four-layer kick stack low-passed at 1200 Hz for heavy sub weight" },
+        { "type": "sample", "code": "$ chop 4 $ loopAt 4 $ \"bass_nes:1\" # octersubbus 43 (range 0 1.5 \"^17\")", "description": "NES bass loop with MIDI-controlled sub-octave for massive low-end" },
+        { "type": "technique", "code": "$ note (\"0@3 0 . <gs4 f4 ef4 d4>\" + \"<g4!3 f4> . 0\" + \"[0,12]\") # \"superfork\"", "description": "Superfork lead with chromatic descent and octave-doubled unison" },
+        { "type": "effect", "code": "# crushbus 41 (range 16 2.5 \"^53\") # squizbus 44 (range 0 1.5 \"^33\")", "description": "Dual distortion: bitcrush + squiz on the NES bass for gnarly texture" }
+      ]
+    },
+    {
+      "name": "Bain Bouillant",
+      "file": "live/midi/nova/nujazz/cafe_bouillant.tidal",
+      "bpm": 120,
+      "style": "nu-jazz",
+      "ingredients": [
+        { "type": "structure", "code": "setcps(120/60/4)", "description": "120 BPM nu-jazz with house kick foundation and jazz sample layers" },
+        { "type": "sample", "code": "$ \"nujazz_keys120\" # n \"<61!24 60!8>\"", "description": "Jazz piano chords alternating between two voicings on 32-cycle rotation" },
+        { "type": "technique", "code": "note (\"e3 <b2!3 <ef3 g3>>\" |+| \"[0 ~ ~ 0 ~ ~ 0 ~] [...]\") # \"bassWarsaw\"", "description": "Warsaw bass with syncopated euclidean-style note triggering pattern" },
+        { "type": "sample", "code": "$ \"nujazz_bass120\" # n \"<33!64 34!64>\"", "description": "Plucked jazz bass alternating samples every 64 cycles for evolution" },
+        { "type": "effect", "code": "# roombus 42 (range 0 0.4 \"^33\") # crushbus 41 (range 16 3.4 \"^53\")", "description": "MIDI-controlled room reverb and bitcrush on bass for live dynamics" }
+      ]
+    },
+    {
+      "name": "Haunted House",
+      "file": "live/midi/nova/beatober/oct_16_haunted_house_insouciance.tidal",
+      "bpm": 120,
+      "style": "breakbeat",
+      "ingredients": [
+        { "type": "structure", "code": "setcps (120/60/4)", "description": "120 BPM Beatober track (Oct 16) - released as La Fin de l'Insouciance" },
+        { "type": "technique", "code": "note (\"<[<g4 <g4!3 gs4> gs4 gs4>@3 <c!13 gs4 c c>@2 ...]\") # \"FMRhodes1\"", "description": "Bird-call FM Rhodes melody with chromatic voice-leading (g/gs alternation)" },
+        { "type": "sample", "code": "\"weird_dialogs:39\" with fix slicing: begin/end for effects/almost/variations/answer", "description": "Vocal dialogue sample surgically sliced into 4 semantic sections for Q&A texture" },
+        { "type": "sample", "code": "$ \"trance_pads:7\" # legato 2 # room 0.4", "description": "Atmospheric trance pad layer with sustained legato and reverb wash" },
+        { "type": "effect", "code": "# delaybus 51 (range 0 0.8 \"^34\") # delayt \"<h>\" # delayfb 0.25", "description": "MIDI-controlled delay on FMRhodes creating spatial depth on demand" }
+      ]
+    },
+    {
+      "name": "Salut nu",
+      "file": "live/midi/nova/nujazz/salut_nu.tidal",
+      "bpm": 120,
+      "style": "nu-jazz",
+      "ingredients": [
+        { "type": "structure", "code": "setcps(120/60/4)", "description": "120 BPM nu-jazz with jazz samples and wah-wah guitar" },
+        { "type": "sample", "code": "$ \"nujazz_keys120\" # n \"<54!16 53!16>\" with juxBy 0.9 mirror", "description": "Jazz piano with reversed mirror superimpose creating stereo depth" },
+        { "type": "technique", "code": "note (\"<[a4@4 c5 <c5 d5 c5 fs4>] a4>\" + \"[0,12]\" - 36) # \"bassWarsaw\"", "description": "Warsaw bass with tritone movement (a4 to fs4) and octave doubling" },
+        { "type": "sample", "code": "$ \"nujazz_wahwah125\" # octersubbus 71 (range 0 2 \"^55\")", "description": "Wah-wah guitar with MIDI sub-octave for funky bass reinforcement" },
+        { "type": "effect", "code": "$ jux rev $ note (...) # \"moogBass\" # chorus 0.2 # att 0.3 # rel 2", "description": "Moog choir with jux-reversed stereo and slow attack/release for evolving pad" }
+      ]
+    }
+  ]
+}

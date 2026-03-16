@@ -1,0 +1,203 @@
+{
+  "gig": "val-thorens",
+  "title": "Val Thorens 2025",
+  "date": "2025-02-15",
+  "bpmRange": [110, 170],
+  "styleDistribution": { "techno": 3, "nujazz": 3, "breaks": 2, "dnb": 3, "lounge": 1, "punk": 1, "acid": 1 },
+  "samplePacks": [
+    { "name": "bassWarsaw", "usage": "Main synth bass across multiple tracks" },
+    { "name": "jungle_breaks", "usage": "Breakbeat layers and fills" },
+    { "name": "FMRhodes1", "usage": "FM electric piano for melodic layers" },
+    { "name": "nujazz_keys120", "usage": "Pre-recorded nujazz piano loops" },
+    { "name": "breaks165", "usage": "High-energy breakbeat sample" },
+    { "name": "sunny_bass", "usage": "Custom bass sample for Sunny Side Up" },
+    { "name": "vec1_acid", "usage": "Acid synth lines" },
+    { "name": "punk", "usage": "Punk guitar loops" },
+    { "name": "rhadamanthe_melo", "usage": "Melodic piano samples" },
+    { "name": "rhadamanthe_vocal", "usage": "Vocal atmospherics and self-destruct sequences" }
+  ],
+  "tracks": [
+    {
+      "name": "Because It's There",
+      "file": "copycat/because_its_there.tidal",
+      "bpm": 110,
+      "style": "techno",
+      "ingredients": [
+        { "type": "sample", "code": "\"bassWarsaw\"", "description": "Warsaw bass synth as melodic bassline in C#/G#/D#" },
+        { "type": "pattern", "code": "note \"[cs3@6 gs3 ds3]\"", "description": "6-beat sustained C# with G#/D# resolution" },
+        { "type": "effect", "code": "# crushbus 41 (range 16 2.5 \"^53\")", "description": "MIDI-controlled bitcrush for grit" },
+        { "type": "sample", "code": "\"ikedaBass\"", "description": "Ryoji Ikeda-inspired bass pad with delay" },
+        { "type": "technique", "code": "let gMask = (midiOn \"^41\" (mask \"t . <f t f <f t>> <t f f <t f>>\"))", "description": "MIDI-triggered masking for live build-up control" }
+      ]
+    },
+    {
+      "name": "Ere de Jeu",
+      "file": "live/midi/nova/techno/ere_de_jeu.tidal",
+      "bpm": 110,
+      "style": "techno",
+      "ingredients": [
+        { "type": "sample", "code": "\"[808bd:1,808bd:2,jazz,kick:4]\"", "description": "Layered kick: 808 + jazz kit + acoustic kick" },
+        { "type": "pattern", "code": "note \"[cs3 b3 <gs3!3 cs4> b3]\"", "description": "Melodic bassWarsaw line with octave leap variation" },
+        { "type": "sample", "code": "\"vec1_acid:27\"", "description": "Angel acid bass entering at bar 32" },
+        { "type": "technique", "code": "$ midiOn \"^57\" (fix (fast \"<4!3 [4 <4 4 2 4>]>\") \"vec1_acid:27\")", "description": "MIDI-triggered acid acceleration pattern" },
+        { "type": "sample", "code": "\"nujazz_keys120\"", "description": "Nu-jazz key loops with slice manipulation and freeze" }
+      ]
+    },
+    {
+      "name": "Cafe Glace",
+      "file": "live/midi/nova/nujazz/cafe_glace.tidal",
+      "bpm": 120,
+      "style": "nujazz",
+      "ingredients": [
+        { "type": "sample", "code": "\"nujazz_bass120:4\"", "description": "Pre-recorded nujazz bass loop, sliced and chopped" },
+        { "type": "technique", "code": "$ midiOn \"^57\" (slice 4 (fast 1 \"<0!3 <1 3>>\"))", "description": "MIDI-controlled bass slice variations" },
+        { "type": "sample", "code": "\"nujazz_keys120\"", "description": "Piano keys with freeze and crush effects" },
+        { "type": "sample", "code": "\"jungle_breaks:53\"", "description": "Chopped jungle break with stereo pan" },
+        { "type": "structure", "code": "setcps(120/60/4)", "description": "120 BPM nujazz groove" }
+      ]
+    },
+    {
+      "name": "Cafe Bouillant",
+      "file": "live/midi/nova/nujazz/cafe_bouillant.tidal",
+      "bpm": 120,
+      "style": "nujazz",
+      "ingredients": [
+        { "type": "sample", "code": "\"nujazz_bass120\"", "description": "Plucked bass with slow crush modulation via perlin noise" },
+        { "type": "pattern", "code": "note (\"e3 <b2!3 <ef3 g3>>\" |+| \"[0 ~ ~ 0 ~ ~ 0 ~] ...\")", "description": "Melodic bassWarsaw with euclidean-like offbeat hits" },
+        { "type": "sample", "code": "\"cpluck:4\"", "description": "Plucked string melody with cycling note additions" },
+        { "type": "technique", "code": "$ someCyclesBy \"<1!32 0!32>\" (|+ note \"<e g bf b>\")", "description": "Probabilistic note transposition alternating every 32 cycles" },
+        { "type": "sample", "code": "\"jungle_breaks:22\"", "description": "Stereo-panned jungle break with slice manipulation" }
+      ]
+    },
+    {
+      "name": "Sept1",
+      "file": "live/collab/baba/sept1.tidal",
+      "bpm": 120,
+      "style": "techno",
+      "ingredients": [
+        { "type": "sample", "code": "\"rhadamanthe_melo:1\"", "description": "Piano melody split into begin/mid/end sections" },
+        { "type": "pattern", "code": "note (\"<<[b3@5 a3 b3 a3] ...>> [e3@7 b3]>\")", "description": "Cello-like bassline with long sustain and cpluck layering" },
+        { "type": "technique", "code": "$ midiOn \"^58\" (# silence) $ slow 2 \"<begin ~ begin ...>/2\"", "description": "MIDI-gated piano section switching (begin/mid/end)" },
+        { "type": "sample", "code": "\"breaks165\"", "description": "High-tempo breakbeat for energy injection" },
+        { "type": "effect", "code": "# cps ((range 60 180 \"^29\")/60/4)", "description": "Real-time BPM control via MIDI fader (60-180 range)" }
+      ]
+    },
+    {
+      "name": "Sunny Side Up",
+      "file": "live/midi/nova/lounge/sunny_side_up.tidal",
+      "bpm": 120,
+      "style": "lounge",
+      "ingredients": [
+        { "type": "sample", "code": "\"sunny_bass\"", "description": "Custom sunny bass sample with octave sub variations" },
+        { "type": "sample", "code": "\"sunny_brass\"", "description": "Brass sample with slow deployment mask pattern" },
+        { "type": "pattern", "code": "\"acidOto3092\" |- note 36", "description": "Acid synth line in F/G#/C/G with width modulation" },
+        { "type": "technique", "code": "$ mask \"<t f <f t> f>\"", "description": "Progressive sample reveal over 4-bar cycle" },
+        { "type": "sample", "code": "\"nujazz_keys120:35/4\"", "description": "Piano outro loop with slow slice deployment" }
+      ]
+    },
+    {
+      "name": "Insouciance",
+      "file": "live/midi/nova/beatober/oct_16_haunted_house_insouciance.tidal",
+      "bpm": 120,
+      "style": "breaks",
+      "ingredients": [
+        { "type": "pattern", "code": "note \"<c3 c3 c3 c3 gs2 gs2 b2 b2>@5 ef3 d3 <ef3!4 c3!3 b2>\"", "description": "Dark bassWarsaw line with chromatic descent" },
+        { "type": "sample", "code": "\"FMRhodes1\"", "description": "FM piano bird call melody with modIndex modulation" },
+        { "type": "sample", "code": "\"armora:1\"", "description": "Hawk percussion with high-pass filtered reverb" },
+        { "type": "effect", "code": "# hpf (slow 8 $ range 5000 \"<8000!32 800!32>\" saw)", "description": "Slow HPF sweep on hawk sounds creating tension" },
+        { "type": "sample", "code": "\"trance_pads:7\"", "description": "Atmospheric pad layer following bass harmony" }
+      ]
+    },
+    {
+      "name": "So Good",
+      "file": "live/collab/nass/sogood.tidal",
+      "bpm": 142,
+      "style": "dnb",
+      "ingredients": [
+        { "type": "sample", "code": "\"sogood\"", "description": "Multi-sample pack: keys (sliced), voices, and chorus" },
+        { "type": "pattern", "code": "note \"<[f3 f3 gs3 f3@5] [<gs3!3 f3> gs3 g3 f3@5]>\"", "description": "Dual bassWarsaw line: foundation + bouncing acid layer" },
+        { "type": "technique", "code": "$ midiOn \"^19\" ((>| n \"<~!3 [~ 11]>\") . (# end \"<0.2!3 0.45>\"))", "description": "MIDI-triggered voice intro switching to chorus" },
+        { "type": "sample", "code": "\"cs80leadMH\"", "description": "CS-80 lead synth melody ascending F-Gs-C-Gs-F-Ef-Cs-C..." },
+        { "type": "structure", "code": "setcps (142/60/4)", "description": "142 BPM drum & bass tempo" }
+      ]
+    },
+    {
+      "name": "PunkAChien",
+      "file": "live/collab/raph/punkachien.tidal",
+      "bpm": 170,
+      "style": "dnb",
+      "ingredients": [
+        { "type": "sample", "code": "\"vec1_acid:11\"", "description": "Acid bass in D/D# with layered gain-controlled variants" },
+        { "type": "pattern", "code": "note (\"d*<3 4 3 2> . ds ds df\" + 2)", "description": "Rhythmic acid pattern alternating between 3-4-3-2 divisions" },
+        { "type": "sample", "code": "\"meth_bass:9\"", "description": "Lo-fi bass with progressive delay feedback build" },
+        { "type": "sample", "code": "\"cpluck:1\"", "description": "Plucked synth with octave crush layering" },
+        { "type": "structure", "code": "setcps (170/60/4)", "description": "170 BPM high-energy drum & bass" }
+      ]
+    },
+    {
+      "name": "ACIDULE",
+      "file": "live/collab/raph/acidule.tidal",
+      "bpm": 135,
+      "style": "acid",
+      "ingredients": [
+        { "type": "sample", "code": "\"vec2_synth_acid\" / \"vec1_acid:40\"", "description": "Dual acid synth layers with independent gain control" },
+        { "type": "pattern", "code": ">| note (\"[b d6 b cs6 d6 b cs6 b]*2\" - \"<0!32 12!32>\")", "description": "Rapid acid note pattern with 32-bar octave alternation" },
+        { "type": "sample", "code": "\"rhadamanthe_vocal\"", "description": "Self-destruction voice sample sequence with begin/end cuts" },
+        { "type": "effect", "code": "# tremdp 4 # tremr 1.8", "description": "Bouncy tremolo droplet effect on FM piano lead" },
+        { "type": "sample", "code": "\"90s_synatm:21\"", "description": "Synthetic violin with dual-voice ascending melody" }
+      ]
+    },
+    {
+      "name": "Alerte Verte",
+      "file": "live/midi/nova/dnb/alerte_verte.tidal",
+      "bpm": 160,
+      "style": "dnb",
+      "ingredients": [
+        { "type": "sample", "code": "\"fbass:25\"", "description": "Funky bass chopped into 16 slices with reverse variations" },
+        { "type": "sample", "code": "\"fguitar\"", "description": "Dual guitar system: guitarA (surprise) and guitarB (wait)" },
+        { "type": "technique", "code": "$ whenmod 16 14 (ply 2) $ every' 8 7 (ply 2)", "description": "Kick fill patterns at phrase boundaries" },
+        { "type": "sample", "code": "\"supersiren\"", "description": "Siren synth with slow speed and amplitude modulation" },
+        { "type": "effect", "code": "# leslie \"^34\" # lsize (1 + (slow 16 perlin * 2))", "description": "Leslie speaker effect on guitar with perlin-modulated size" }
+      ]
+    },
+    {
+      "name": "Nouveau Punk",
+      "file": "live/collab/raph/nouveau_punk.tidal",
+      "bpm": 155,
+      "style": "punk",
+      "ingredients": [
+        { "type": "sample", "code": "\"punk:0/4\"", "description": "Punk guitar loop chopped into 4, crushed and reverbed" },
+        { "type": "sample", "code": "\"90s_synatm:9\"", "description": "90s synth atmosphere with octave sub and crush" },
+        { "type": "pattern", "code": "note \"<e c d b4>\"", "description": "Core harmonic progression: E-C-D-B" },
+        { "type": "sample", "code": "\"meth_bass:3\"", "description": "Meth bass with progressive ply build-up" },
+        { "type": "sample", "code": "\"cpluck:2\"", "description": "Manouche-punk cello pluck with arpeggiated triads" }
+      ]
+    },
+    {
+      "name": "Nuit Agitee",
+      "file": "live/midi/nova/breaks/nuit_agitee.tidal",
+      "bpm": 160,
+      "style": "breaks",
+      "ingredients": [
+        { "type": "technique", "code": "let scale = getScale (scaleTable ++ [(\"gameboy\", [1,2,4,5,7,9,11])])", "description": "Custom 'gameboy' scale for retro melodic flavor" },
+        { "type": "sample", "code": "\"bass_commodore:7\"", "description": "Commodore bass chopped into 64 slices with leslie modulation" },
+        { "type": "sample", "code": "\"harpsichord2\"", "description": "Harpsichord melody using gameboy scale with distortion" },
+        { "type": "sample", "code": "\"amencutup\"", "description": "Amen break cutup with MIDI-panned hat patterns" },
+        { "type": "pattern", "code": "note (scale \"gameboy\" (\"<1(3,8) ...>\" + \"<<0 0 2 2> ...>\"))", "description": "Layered gameboy-scale melody with euclidean rhythm" }
+      ]
+    },
+    {
+      "name": "Blue Gold",
+      "file": "live/collab/mousquetaires/blue_gold.tidal",
+      "bpm": 124,
+      "style": "breaks",
+      "ingredients": [
+        { "type": "sample", "code": "\"suns_keys\"", "description": "Suns of Gold key samples with tremolo and slice manipulation" },
+        { "type": "sample", "code": "\"suns_guitar\"", "description": "Triple guitar system: main, flying triplet, falling angel" },
+        { "type": "pattern", "code": "$ fast (4/3) $ note \"<[fs4 <a5!2 gs!4 fs5!4...>@3]*4>\"", "description": "4/3 polyrhythm bassWarsaw line with shifting intervals" },
+        { "type": "sample", "code": "\"suns_voice:0\"", "description": "Father's voice sample with slice-based phrase selection" },
+        { "type": "technique", "code": "$ whenmod 32 16 (swingBy (slow 16 $ range 0.08 0.01 saw) 4)", "description": "Progressive swing reduction over 16-bar phrase" }
+      ]
+    }
+  ]
+}

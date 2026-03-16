@@ -44,4 +44,9 @@ tags: ["livecoding", "algorave", "lyon", "tidal"]
 
 # AlgoRave Lyon 2025
 
-Détails à venir...
+AlgoRave européenne annuelle, 18h-06h de musique algorithmique, installations et performances audiovisuelles au GRRRND ZERO.
+
+Set w/ Pérégrine -  techno, breakbeat, jungle à la sauce TidalCycles + MIDI.
+
+## Tracklist
+- Set complet disponible sur [Bandcamp](https://parvagues.bandcamp.com/track/live-algorave-ground-zero-2025)
