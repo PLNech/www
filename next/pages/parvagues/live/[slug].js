@@ -8,6 +8,7 @@ import ImageGallery from '@/components/parvagues/ImageGallery';
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
 import ReactMarkdown from 'react-markdown';
+import BpmCurve from '@/components/parvagues/BpmCurve';
 import Prism from 'prismjs';
 import 'prismjs/components/prism-haskell';
 import 'prismjs/themes/prism-tomorrow.css';
@@ -230,6 +231,9 @@ export default function LiveEvent({ live, images, tracks, isPostEvent: initialPo
                         <ReactMarkdown>{live.content}</ReactMarkdown>
                     </div>
                 )}
+
+                {/* BPM Curve */}
+                <BpmCurve tracks={tracks} />
 
                 {/* Tracks & Code */}
                 <TracksSection tracks={tracks} />

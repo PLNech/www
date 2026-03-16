@@ -233,7 +233,7 @@
       "bpm": 99,
       "style": "breaks",
       "ingredients": [
-        { "type": "sample", "code": "\"private_number\"", "description": "Vocal sample: Drop Your Number, with begin-offset calage" },
+        { "type": "sample", "code": "\"private_number\"", "description": "Judy Clay & William Bell - Private Number, with begin-offset calage" },
         { "type": "sample", "code": "\"vocalScatAr\" / \"vocalScatJ\"", "description": "Male/female scat vocals with room reverb" },
         { "type": "pattern", "code": "note \"[<df4!2 cs4 g4>@2 <b3 e4!2 fs4>@2 <a3!2 fs4 e4>@5]/2\"", "description": "Moog bass with heartbeat-extracted ghost notes" },
         { "type": "sample", "code": "\"vocalOoh1\" / \"vocalOoh2\"", "description": "Choir layers with LPF mask fading" },
