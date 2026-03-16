@@ -1,0 +1,86 @@
+# ParVagues Event Ontology
+# Maps recurring events, aliases, organizers
+
+cosmicfest:
+  fullName: "CosmicFest"
+  recurring: true
+  editions:
+    - { version: "v0", year: 2025, location: "labenne" }
+  aliases: ["labenne"]
+  notes: "Bunker after-party may recur with v1"
+
+algorave:
+  fullName: "AlgoRave"
+  recurring: true
+  editions:
+    - { year: 2025, city: "Lyon", venue: "GRRRND ZERO" }
+  organizer: "international algorave community"
+
+ccc:
+  fullName: "Chaos Communication Congress"
+  recurring: true
+  editions:
+    - { name: "38C3", year: 2024, rooms: ["House of Tea", "Secret Toilet Rave", "Chaos Music Club"] }
+    - { name: "39C3", year: 2025, rooms: ["House of Tea", "Toilet Rave"] }
+  venue: "CCH Hamburg"
+
+toplap:
+  fullName: "TOPLAP"
+  recurring: true
+  subEvents:
+    - { name: "TOPLAP Solstice", type: "stream", recurring: true, years: [2023, 2024] }
+    - { name: "TOPLAP 20 Years", type: "stream", year: 2024, collab: "z0rg" }
+    - { name: "TOPLAP From Scratch", type: "stream", year: 2025, theme: "Jungle" }
+
+psc_teuf:
+  fullName: "PSC Teuf Series"
+  venue: "psc"
+  organizer: "PSC crew"
+  recurring: true
+  editions:
+    - { name: "VelociTeuf", year: 2024 }
+    - { name: "DiviniTeuf", year: 2024, postEvent: "divin-live" }
+    - { name: "Air ELEMENTEUF", year: 2025 }
+    - { name: "FairyTeuf", year: 2025 }
+    - { name: "MephisTeuf", year: 2023 }
+
+fdlm_algolia:
+  fullName: "Fete de la Musique @ Algolia"
+  recurring: true
+  editions:
+    - { year: 2022 }
+    - { year: 2024 }
+  venue: "algolia_hq"
+
+bazurto_tignes:
+  fullName: "Bazurto @ Tignes"
+  recurring: true
+  editions:
+    - { year: 2022 }
+    - { year: 2024 }
+  type: "apres-ski livecoding"
+
+la_french_stack:
+  fullName: "La French Stack"
+  recurring: true
+  editions:
+    - { year: 2024 }
+    - { year: 2025 }
+  type: "tech collective"
+
+opal_festival:
+  fullName: "Opal Festival"
+  recurring: true
+  editions:
+    - { year: 2024 }
+    - { year: 2025 }
+  url: "https://www.opal-festival.com/"
+  notes: "Listed in AsSeenAt but no dedicated live page yet"
+
+cookie_collective:
+  fullName: "Cookie Collective"
+  recurring: true
+  subEvents:
+    - { name: "CCC LIVE", type: "stream", year: 2024 }
+    - { name: "Compilation Release Party", year: 2024, venue: "Secret Location, Paris" }
+  url: "https://ccc.cookie.paris/projects/ugo-parvague/"

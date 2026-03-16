@@ -1,0 +1,104 @@
+# ParVagues Venue Ontology
+# Each correction enriches future analysis
+
+psc:
+  fullName: "Palais Sans Couronne"
+  city: "Villejuif"
+  country: "France"
+  type: "private party venue"
+  notes: "Hosts the XXXTeuf series (VelociTeuf, FairyTeuf, MephisTeuf, ElementeTeuf, DiviniTeuf)"
+
+algolia_hq:
+  fullName: "Algolia HQ"
+  city: "Paris"
+  country: "France"
+  type: "corporate office"
+  notes: "Recurring FDLM + internal events"
+
+cch_hamburg:
+  fullName: "Congress Center Hamburg (CCH)"
+  city: "Hamburg"
+  country: "Germany"
+  type: "conference center"
+  notes: "Chaos Communication Congress. Multi-room: House of Tea, Toilet Rave, Chaos Music Club"
+
+grrrnd_zero:
+  fullName: "GRRRND ZERO"
+  city: "Vaulx-en-Velin"
+  country: "France"
+  type: "squat/venue"
+  notes: "AlgoRave Lyon host, 56-60 Avenue Bohlen"
+
+bazurto:
+  fullName: "Bazurto"
+  city: "Tignes"
+  country: "France"
+  type: "bar/club"
+  notes: "Apres-ski livecoding, 2022 only. Check if 2024 entry is duplicate."
+
+labenne:
+  fullName: "Labenne"
+  city: "Labenne"
+  country: "France"
+  type: "outdoor/festival"
+  notes: "CosmicFest v0 location"
+
+bunker:
+  fullName: "Bunker"
+  city: "unknown"
+  country: "France"
+  type: "underground"
+  notes: "One-off post CosmicFest v0. May recur if v1 has 'off au bunker'"
+
+cmny:
+  fullName: "CMNY"
+  city: "Paris"
+  country: "France"
+  type: "meetup/houseparty"
+  notes: "Private event, details uncertain"
+
+divin:
+  fullName: "Divin"
+  city: "Villejuif"
+  country: "France"
+  type: "event name (not venue)"
+  venue: "psc"
+  notes: "Named after PSC DiviniTeuf. Track 'Lendemain Divin' composed the sunday after"
+
+le_vortex:
+  fullName: "Le Vortex"
+  city: "Paris"
+  country: "France"
+  type: "venue"
+
+la_french_stack:
+  fullName: "La French Stack"
+  city: "Paris"
+  country: "France"
+  type: "tech collective event"
+  notes: "Recurring 2024, 2025"
+
+ensad:
+  fullName: "ENSAD Paris"
+  city: "Issy-les-Moulineaux"
+  country: "France"
+  type: "art school"
+  address: "20 cours Saint Vincent"
+
+devcon23:
+  fullName: "DevCon23"
+  city: "Berlin"
+  country: "Germany"
+  type: "conference"
+
+val_thorens:
+  fullName: "Val Thorens"
+  city: "Val Thorens"
+  country: "France"
+  type: "ski resort"
+
+online:
+  fullName: "Online/Stream"
+  country: "Internet"
+  type: "stream"
+  notes: "TOPLAP streams, Cookie Collective streams"

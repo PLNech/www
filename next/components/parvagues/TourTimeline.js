@@ -2,6 +2,20 @@ import Link from 'next/link';
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
 
+const COUNTRY_MAP = [
+  { match: ['Hamburg', 'Berlin', 'Germany'], flag: '\u{1F1E9}\u{1F1EA}', name: 'Germany' },
+  { match: ['Online', 'Stream'], flag: '\u{1F310}', name: 'Online' },
+];
+
+function detectCountry(location) {
+  if (!location) return { flag: '\u{1F1EB}\u{1F1F7}', name: 'France' };
+  const loc = location.toLowerCase();
+  for (const c of COUNTRY_MAP) {
+    if (c.match.some(m => loc.includes(m.toLowerCase()))) return c;
+  }
+  return { flag: '\u{1F1EB}\u{1F1F7}', name: 'France' };
+}
+
 export default function TourTimeline({ lives }) {
   const now = new Date();
 
@@ -44,9 +58,9 @@ export default function TourTimeline({ lives }) {
               const isFuture = live._date > now;
               const hasMedia = live.audio || live.video || live.archive;
               const bestLink = live.audio || live.video || live.archive;
-              const city = live.location?.includes(',')
-                ? live.location.split(',')[0].trim()
-                : live.location;
+              const locParts = live.location?.split(',').map(s => s.trim()) || [];
+              const city = locParts[0] || live.location;
+              const country = detectCountry(live.location);
 
               return (
                 <Link
@@ -76,12 +90,13 @@ export default function TourTimeline({ lives }) {
                     {live.title}
                   </span>
 
-                  {/* City - hidden on mobile */}
+                  {/* City + Country flag - hidden on mobile */}
                   <span
-                    className="hidden sm:block flex-shrink-0"
+                    className="hidden sm:flex items-center gap-1.5 flex-shrink-0"
                     style={{ fontSize: '11px', color: 'var(--text-muted)', letterSpacing: '0.05em' }}
                   >
                     {city}
+                    {country?.flag && <span className="text-[10px] opacity-60">{country.flag}</span>}
                   </span>
 
                   {/* Recording available - direct link to best source */}

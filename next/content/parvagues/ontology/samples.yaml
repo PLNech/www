@@ -1,0 +1,144 @@
+# ParVagues Sample Ontology
+# Maps sample directory names to real-world origins
+# Enriched by artist corrections
+
+# === CORE SYNTHS (Santa Clara Laptop Orchestra - SCLORK) ===
+bassWarsaw:
+  source: "SCLORK (Santa Clara Laptop Orchestra)"
+  type: "open-source synth"
+  description: "Primary bass synth, used in 100% of gigs"
+  license: "open-source"
+
+FMRhodes1:
+  source: "SCLORK"
+  type: "open-source synth"
+  description: "FM electric piano, melodic lead"
+
+FMRhodes2:
+  source: "SCLORK"
+  type: "open-source synth"
+  description: "FM electric piano variant"
+
+moogBass:
+  source: "SCLORK"
+  type: "open-source synth"
+  description: "Warm analog-style bass"
+
+acidOto3091:
+  source: "SCLORK"
+  type: "open-source synth"
+
+acidOto3092:
+  source: "SCLORK"
+  type: "open-source synth"
+
+marimba1:
+  source: "SCLORK"
+  type: "open-source synth"
+
+# === BREAKBEATS ===
+jungle_breaks:
+  source: "BluMarTen - Jungle Jungle (1989-1999)"
+  type: "breakbeat archive"
+  description: "Classic jungle breaks, used in 83% of gigs"
+
+breaks165:
+  source: "breakbeat collection"
+  type: "breaks"
+  description: "165 BPM breakbeats"
+
+# === SAMPLED TRACKS (discreet attributions) ===
+private_number:
+  source: "Judy Clay & William Bell"
+  track: "Private Number"
+  year: 1968
+  genre: "soul"
+
+suns_keys:
+  source: "Leifur James"
+  track: "Suns of Gold"
+  type: "sampled keys"
+
+suns_guitar:
+  source: "Leifur James"
+  track: "Suns of Gold"
+  type: "sampled guitar"
+
+suns_voice:
+  source: "Leifur James"
+  track: "Suns of Gold"
+  type: "sampled vocals"
+
+come_bass:
+  source: "that british band"
+  track: "Come Together"
+  type: "sampled bass"
+  notes: "lowkey attribution"
+
+come_eguitar:
+  source: "that british band"
+  track: "Come Together"
+  type: "sampled guitar"
+  notes: "lowkey attribution"
+
+come_voice:
+  source: "that british band"
+  track: "Come Together"
+  type: "sampled vocals"
+  notes: "lowkey attribution"
+
+orage:
+  source: "that californian band"
+  track: "Riders on the Storm"
+  type: "sampled storm/atmosphere"
+  notes: "lowkey attribution"
+
+giorgio_syn:
+  source: "Giorgio Moroder tribute"
+  type: "synth emulation"
+  genre: "italo-disco"
+
+# === PRODUCER PACKS ===
+rhadamanthe_melo:
+  source: "Rhadamanthe (French techno producer)"
+  type: "personal hard drive samples"
+
+rhadamanthe_vocal:
+  source: "Rhadamanthe"
+  type: "personal hard drive samples"
+
+# === COMMERCIAL PACKS ===
+vec1_acid:
+  source: "Vengeance 909"
+  type: "commercial sample pack"
+  genre: "techno/acid"
+
+vec2_synth_acid:
+  source: "Vengeance 909"
+  type: "commercial sample pack"
+
+# === NU-JAZZ ===
+nujazz_keys120:
+  source: "nu-jazz sample pack"
+  type: "pre-recorded loops"
+  bpm: 120
+
+nujazz_bass125:
+  source: "nu-jazz sample pack"
+  type: "pre-recorded loops"
+  bpm: 125
+
+nujazz_wahwah125:
+  source: "nu-jazz sample pack"
+  type: "pre-recorded loops"
+  bpm: 125
+
+# === MISC ===
+bogdan_grime:
+  source: "unknown"
+  type: "vocal sample"
+  description: "'I'm from Cardiff!' vocals"
+
+cpluck:
+  source: "cello plucked samples"
+  type: "acoustic instrument"
