@@ -71,11 +71,11 @@ la_french_stack:
 opal_festival:
   fullName: "Opal Festival"
   recurring: true
+  location: "Normandie, France"
   editions:
-    - { year: 2024 }
-    - { year: 2025 }
+    - { year: 2024, audio: "https://soundcloud.com/parvagues/sets/opal-2024", spotify: "https://open.spotify.com/album/1VKLZWeolFNfES2bWzYCWZ" }
+    - { year: 2025, audio: "https://soundcloud.com/parvagues/sets/opal-2025" }
   url: "https://www.opal-festival.com/"
-  notes: "Listed in AsSeenAt but no dedicated live page yet"
 
 cookie_collective:
   fullName: "Cookie Collective"

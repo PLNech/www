@@ -34,7 +34,14 @@ bazurto:
   city: "Tignes"
   country: "France"
   type: "bar/club"
-  notes: "Apres-ski livecoding, 2022 only. Check if 2024 entry is duplicate."
+  notes: "Apres-ski livecoding, 2022 only"
+
+opal_festival:
+  fullName: "Opal Festival"
+  city: "Normandie"
+  country: "France"
+  type: "festival"
+  url: "https://www.opal-festival.com/"
 
 labenne:
   fullName: "Labenne"
