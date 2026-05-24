@@ -20,13 +20,17 @@ const LOUPE_MARGIN = 16;
 function LoopThumb({ src, href }) {
     const thumbRef = useRef(null);
     const [pos, setPos] = useState(null);
+    const [canHover, setCanHover] = useState(true);
 
-    const onEnter = () => {
+    useEffect(() => {
+        setCanHover(window.matchMedia('(hover: hover)').matches);
+    }, []);
+
+    const showLoupe = () => {
         if (!thumbRef.current) return;
         const r = thumbRef.current.getBoundingClientRect();
         const vw = window.innerWidth;
         const vh = window.innerHeight;
-        // Center on thumb; clamp so the loupe always stays fully on-screen
         const x = Math.max(
             LOUPE_W / 2 + LOUPE_MARGIN,
             Math.min(vw - LOUPE_W / 2 - LOUPE_MARGIN, r.left + r.width / 2)
@@ -37,7 +41,37 @@ function LoopThumb({ src, href }) {
         );
         setPos({ x, y });
     };
-    const onLeave = () => setPos(null);
+    const hideLoupe = () => setPos(null);
+
+    const onEnter = () => { if (canHover) showLoupe(); };
+    const onLeave = () => { if (canHover) hideLoupe(); };
+
+    const onClick = (e) => {
+        // Touch path: first tap opens the loupe (preventDefault), second tap
+        // navigates. Mouse path: loupe was already opened by mouseenter, so
+        // pos is non-null and we just let the link fire.
+        if (!canHover && !pos) {
+            e.preventDefault();
+            showLoupe();
+        }
+    };
+
+    // Auto-close + outside-tap close on touch devices, so the loupe doesn't
+    // stick open forever.
+    useEffect(() => {
+        if (canHover || !pos) return;
+        const onDocTap = (ev) => {
+            if (thumbRef.current && !thumbRef.current.contains(ev.target)) {
+                hideLoupe();
+            }
+        };
+        const t = setTimeout(hideLoupe, 4000);
+        document.addEventListener('click', onDocTap);
+        return () => {
+            clearTimeout(t);
+            document.removeEventListener('click', onDocTap);
+        };
+    }, [pos, canHover]);
 
     return (
         <a
@@ -45,7 +79,7 @@ function LoopThumb({ src, href }) {
             href={href || '#'}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={(e) => e.stopPropagation()}
+            onClick={(e) => { e.stopPropagation(); onClick(e); }}
             onMouseEnter={onEnter}
             onMouseLeave={onLeave}
             title="Voir sur Instagram"
@@ -58,7 +92,7 @@ function LoopThumb({ src, href }) {
             />
             {pos && (
                 <div
-                    className="fixed z-[60] pointer-events-none transition-opacity duration-150 hidden md:block"
+                    className="fixed z-[60] pointer-events-none transition-opacity duration-150"
                     style={{
                         left: pos.x,
                         top: pos.y,
