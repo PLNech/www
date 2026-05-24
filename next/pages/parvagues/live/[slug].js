@@ -31,15 +31,18 @@ function LoopThumb({ src, href }) {
         const r = thumbRef.current.getBoundingClientRect();
         const vw = window.innerWidth;
         const vh = window.innerHeight;
+        // Shrink to fit narrow viewports while keeping 16:9 aspect
+        const w = Math.min(LOUPE_W, vw - 2 * LOUPE_MARGIN);
+        const h = w * (LOUPE_H / LOUPE_W);
         const x = Math.max(
-            LOUPE_W / 2 + LOUPE_MARGIN,
-            Math.min(vw - LOUPE_W / 2 - LOUPE_MARGIN, r.left + r.width / 2)
+            w / 2 + LOUPE_MARGIN,
+            Math.min(vw - w / 2 - LOUPE_MARGIN, r.left + r.width / 2)
         );
         const y = Math.max(
-            LOUPE_H / 2 + LOUPE_MARGIN,
-            Math.min(vh - LOUPE_H / 2 - LOUPE_MARGIN, r.top + r.height / 2)
+            h / 2 + LOUPE_MARGIN,
+            Math.min(vh - h / 2 - LOUPE_MARGIN, r.top + r.height / 2)
         );
-        setPos({ x, y });
+        setPos({ x, y, w });
     };
     const hideLoupe = () => setPos(null);
 
@@ -96,7 +99,7 @@ function LoopThumb({ src, href }) {
                     style={{
                         left: pos.x,
                         top: pos.y,
-                        width: LOUPE_W,
+                        width: pos.w,
                         transform: 'translate(-50%, -50%)',
                     }}
                 >
