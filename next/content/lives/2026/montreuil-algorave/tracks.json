@@ -1,0 +1,739 @@
+{
+  "gig": "montreuil-algorave",
+  "title": "Montreuil Algorave V3 — Mai Floral",
+  "date": "2026-05-22",
+  "bpmRange": [
+    60,
+    170
+  ],
+  "styleDistribution": {
+    "ambient": 1,
+    "nujazz": 3,
+    "lounge": 1,
+    "dnb": 4,
+    "drill": 1,
+    "punk": 1,
+    "dance": 1,
+    "breaks": 1,
+    "techno": 2
+  },
+  "samplePacks": [
+    {
+      "name": "jungle_breaks",
+      "usage": "used in 10 orbits"
+    },
+    {
+      "name": "bassWarsaw",
+      "usage": "used in 6 orbits"
+    },
+    {
+      "name": "h2ogmhh",
+      "usage": "used in 6 orbits"
+    },
+    {
+      "name": "risers",
+      "usage": "used in 5 orbits"
+    },
+    {
+      "name": "take5",
+      "usage": "used in 4 orbits"
+    },
+    {
+      "name": "orage",
+      "usage": "used in 4 orbits"
+    },
+    {
+      "name": "xplosive",
+      "usage": "used in 3 orbits"
+    },
+    {
+      "name": "suns_guitar",
+      "usage": "used in 3 orbits"
+    },
+    {
+      "name": "like_sugar",
+      "usage": "used in 3 orbits"
+    },
+    {
+      "name": "airports",
+      "usage": "used in 2 orbits"
+    },
+    {
+      "name": "moogBass",
+      "usage": "used in 2 orbits"
+    },
+    {
+      "name": "vec1_claps",
+      "usage": "used in 2 orbits"
+    }
+  ],
+  "instagramHighlight": "https://www.instagram.com/stories/highlights/18035324351004139/",
+  "tracks": [
+    {
+      "name": "Quand on décolle",
+      "file": "live/midi/nova/ambient/quand_on_decolle.tidal",
+      "bpm": 60,
+      "style": "ambient",
+      "duration": 362.0,
+      "ingredients": [
+        {
+          "type": "sample",
+          "code": "s \"bassWarsaw\"",
+          "description": "d4 — bass · CC crush, octersub, on"
+        },
+        {
+          "type": "pad",
+          "code": "s \"airports\"",
+          "description": "d5 — pad · CC delay, dt, on"
+        },
+        {
+          "type": "pad",
+          "code": "s \"airports\"",
+          "description": "d7 — pad · CC on"
+        },
+        {
+          "type": "sample",
+          "code": "s \"jungle_breaks:24\"",
+          "description": "BROKEN BEAT | BREAKS STACK · CC on"
+        },
+        {
+          "type": "effect",
+          "code": "s \"risers:8\"",
+          "description": "FIXME Other RISER"
+        },
+        {
+          "type": "sample",
+          "code": "s \"moogBass\"",
+          "description": "DRINK ME <3"
+        },
+        {
+          "type": "moment",
+          "code": "highlights",
+          "description": "breakdown×2 · transition×4 · buildup×3 · peak×1 · best cut @ 4:30"
+        }
+      ]
+    },
+    {
+      "name": "Piment brésilien",
+      "file": "live/collab/raph/piment_bresilien.tidal",
+      "bpm": 124,
+      "style": "nujazz",
+      "duration": 354.0,
+      "ingredients": [
+        {
+          "type": "sample",
+          "code": "s \"[techno:0,808bd:2,909,kick:4]\"",
+          "description": "d1 — rhythm · CC off, on"
+        },
+        {
+          "type": "sample",
+          "code": "s \"vec1_claps\"",
+          "description": "d2 — rhythm · CC on"
+        },
+        {
+          "type": "sample",
+          "code": "s \"bassWarsaw\"",
+          "description": "d4 — bass · CC crush, octer, off"
+        },
+        {
+          "type": "synth",
+          "code": "s \"gfunk_lead:2\"",
+          "description": "LE PIMENT BRESILIEN · CC octer, octersub, on"
+        },
+        {
+          "type": "sample",
+          "code": "s \"jungle_breaks:45\"",
+          "description": "La Boite à breaks de ParVagues <3 · CC off, on"
+        },
+        {
+          "type": "effect",
+          "code": "d10",
+          "description": "Menace · CC crush"
+        },
+        {
+          "type": "moment",
+          "code": "highlights",
+          "description": "breakdown×5 · buildup×2 · transition×2 · drop×3 · peak×1 · best cut @ 4:00"
+        }
+      ],
+      "loop": "/images/parvagues/lives/ig-live-highlight/18_montreuil26_3904124101644263299_loop.mp4"
+    },
+    {
+      "name": "Take 5 Drops",
+      "file": "live/midi/nova/lounge/take_5_drops.tidal",
+      "bpm": 124,
+      "style": "nujazz",
+      "duration": 418.0,
+      "ingredients": [
+        {
+          "type": "sample",
+          "code": "s \"bassWarsaw\"",
+          "description": "BASSLINE GENERATIVE · CC crush, octersub, on"
+        },
+        {
+          "type": "sample",
+          "code": "s \"moogBass\"",
+          "description": "CHOEUR GENERATIF ALONG THE BASS · CC crush, on, range"
+        },
+        {
+          "type": "sample",
+          "code": "s \"take5:0\"",
+          "description": "La Boite à breaks de ParVagues <3 · CC off, on"
+        },
+        {
+          "type": "effect",
+          "code": "s \"risers\"",
+          "description": "A FAIR RISER"
+        },
+        {
+          "type": "synth",
+          "code": "s \"take5\"",
+          "description": "THE FLUTIST"
+        },
+        {
+          "type": "synth",
+          "code": "s \"take5\"",
+          "description": "THE SLEEPWALKER"
+        },
+        {
+          "type": "moment",
+          "code": "highlights",
+          "description": "breakdown×2 · buildup×7 · drop×1 · transition×5 · peak×1 · best cut @ 0:52"
+        }
+      ]
+    },
+    {
+      "name": "Super Sunny Side Up",
+      "file": "live/midi/nova/lounge/sunny_side_up.tidal",
+      "bpm": 120,
+      "style": "lounge",
+      "duration": 271.0,
+      "ingredients": [
+        {
+          "type": "sample",
+          "code": "s \"h2ogmhh:3\"",
+          "description": "Hats closed legers"
+        },
+        {
+          "type": "sample",
+          "code": "s \"sunny_bass\"",
+          "description": "La super sunny bass on the other side of the sunny street · CC crush, octersub, octersubsub"
+        },
+        {
+          "type": "synth",
+          "code": "s \"sunny_brass\"",
+          "description": "On the Sunny side of the sample · CC on"
+        },
+        {
+          "type": "sample",
+          "code": "s \"h2ogmhh:5*8\"",
+          "description": "Hats closed legers · CC off"
+        },
+        {
+          "type": "sample",
+          "code": "s \"acidOto3092\"",
+          "description": "LA ACID BASS ARE YOU SUNNY NOW ?? <3 · CC crush, on, width"
+        },
+        {
+          "type": "synth",
+          "code": "s \"nujazz_keys120:35/4\"",
+          "description": "Sunny doux piano c'est cadeau"
+        },
+        {
+          "type": "moment",
+          "code": "highlights",
+          "description": "transition×4 · breakdown×3 · buildup×3 · peak×1 · best cut @ 2:17"
+        }
+      ]
+    },
+    {
+      "name": "W.I.P. W.A.P.",
+      "file": "live/midi/nova/dnb/wap.tidal",
+      "bpm": 133,
+      "style": "dnb",
+      "duration": 229.0,
+      "ingredients": [
+        {
+          "type": "sample",
+          "code": "s \"[kick:4]\"",
+          "description": "Kick · CC off, on"
+        },
+        {
+          "type": "sample",
+          "code": "s \"wap/2\"",
+          "description": "WAP BASS · CC crush, octer, octersubsub"
+        },
+        {
+          "type": "synth",
+          "code": "s \"wap:0\"",
+          "description": "WAP HOES v1 magic repeat · CC off, on"
+        },
+        {
+          "type": "sample",
+          "code": "s \"wap\"",
+          "description": "Les  WAP DRUMS · CC off, on"
+        },
+        {
+          "type": "sample",
+          "code": "s \"jungle_breaks:84\"",
+          "description": "La stack de breaks · CC off, on"
+        },
+        {
+          "type": "sample",
+          "code": "s \"vec1_acid:25\"",
+          "description": "d9 — bass · CC crush, gain"
+        },
+        {
+          "type": "moment",
+          "code": "highlights",
+          "description": "breakdown×2 · buildup×5 · peak×1 · transition×1 · drop×1 · best cut @ 3:33"
+        }
+      ],
+      "loop": "/images/parvagues/lives/ig-live-highlight/19_montreuil26_3904125516458554645_loop.mp4"
+    },
+    {
+      "name": "'Plosive",
+      "file": "live/midi/nova/dnb/plosive.tidal",
+      "bpm": 160,
+      "style": "dnb",
+      "duration": 178.71,
+      "ingredients": [
+        {
+          "type": "sample",
+          "code": "s \"[808bd:13,jazz,kicklinn]\"",
+          "description": "YRVHTECHNO KICK TO DNB · CC off, on"
+        },
+        {
+          "type": "sample",
+          "code": "s \"vec1_snare:4\"",
+          "description": "d2 — rhythm"
+        },
+        {
+          "type": "sample",
+          "code": "s \"bassWarsaw\"",
+          "description": "d4 — bass · CC crush, octersub, off"
+        },
+        {
+          "type": "synth",
+          "code": "s \"xplosive\"",
+          "description": "RIFFs <3"
+        },
+        {
+          "type": "sample",
+          "code": "s \"xplosive\"",
+          "description": "VOICES · CC off, on"
+        },
+        {
+          "type": "synth",
+          "code": "s \"xplosive:6\"",
+          "description": "d12 — lead · CC cyc"
+        },
+        {
+          "type": "moment",
+          "code": "highlights",
+          "description": "transition×5 · buildup×5 · peak×1 · best cut @ 0:46"
+        }
+      ]
+    },
+    {
+      "name": "Jeudi Drill",
+      "file": "live/collab/raph/jeudrill.tidal",
+      "bpm": 140,
+      "style": "drill",
+      "duration": 240.0,
+      "ingredients": [
+        {
+          "type": "sample",
+          "code": "s \"giorgio_syn:1\"",
+          "description": "Bassline aqualgorithmique · CC crush, octersubsub"
+        },
+        {
+          "type": "synth",
+          "code": "s \"marimba1\"",
+          "description": "Marimba fondamental · CC off"
+        },
+        {
+          "type": "sample",
+          "code": "d7",
+          "description": "d7 — bass · CC crush, cyc, on"
+        },
+        {
+          "type": "sample",
+          "code": "s \"jungle_breaks:26\"",
+          "description": "Come on breaks! · CC off, on"
+        },
+        {
+          "type": "pad",
+          "code": "s \"bogdan_grime:3\"",
+          "description": "Bogdan the Grime sample provider"
+        },
+        {
+          "type": "effect",
+          "code": "s \"90s_synatm:10\"",
+          "description": "Menace · CC crush"
+        },
+        {
+          "type": "moment",
+          "code": "highlights",
+          "description": "breakdown×2 · transition×5 · buildup×3 · peak×1 · drop×1 · best cut @ 3:35"
+        }
+      ],
+      "loop": "/images/parvagues/lives/ig-live-highlight/22_montreuil26_3904132082700135316_loop.mp4"
+    },
+    {
+      "name": "Aria Sans Serif",
+      "file": "live/collab/raph/aria_sans_serif.tidal",
+      "bpm": 160,
+      "style": "dnb",
+      "duration": 255.26,
+      "ingredients": [
+        {
+          "type": "sample",
+          "code": "s \"[jazz,clubkick]\"",
+          "description": "d1 — rhythm · CC off, on"
+        },
+        {
+          "type": "sample",
+          "code": "s \"jazz:4\"",
+          "description": "d2 — rhythm · CC off, on"
+        },
+        {
+          "type": "sample",
+          "code": "s \"h2ogmhh\"",
+          "description": "d3 — rhythm · CC off, on"
+        },
+        {
+          "type": "sample",
+          "code": "s \"moog:2\"",
+          "description": "d4 — bass · CC crush, octer, on"
+        },
+        {
+          "type": "sample",
+          "code": "s \"oil\"",
+          "description": "d5 — bass · CC off, on, squiz"
+        },
+        {
+          "type": "sample",
+          "code": "s \"acidOto3091\"",
+          "description": "d7 — bass · CC crush, octer, on"
+        },
+        {
+          "type": "moment",
+          "code": "highlights",
+          "description": "transition×4 · breakdown×2 · buildup×4 · peak×1 · best cut @ 0:56"
+        }
+      ],
+      "loop": "/images/parvagues/lives/ig-live-highlight/23_montreuil26_3904132801972947604_loop.mp4"
+    },
+    {
+      "name": "PunkAChien",
+      "file": "live/collab/raph/punkachien.tidal",
+      "bpm": 170,
+      "style": "punk",
+      "duration": 287.74,
+      "ingredients": [
+        {
+          "type": "sample",
+          "code": "s \"[kick:4]\"",
+          "description": "Kick · CC off, on"
+        },
+        {
+          "type": "sample",
+          "code": "s \"[snare:39]\"",
+          "description": "Snare melancolie fromagere · CC off, on"
+        },
+        {
+          "type": "sample",
+          "code": "s \"d*[16 <12 <16 [12 24]>> . 8]\"",
+          "description": "d3 — rhythm · CC on"
+        },
+        {
+          "type": "sample",
+          "code": "s \"vec1_acid:11\"",
+          "description": "d4 — bass · CC crush, on, range"
+        },
+        {
+          "type": "sample",
+          "code": "s \"cpluck:1\"",
+          "description": "d5 — bass · CC crush, octer, octersub"
+        },
+        {
+          "type": "pad",
+          "code": "s \"moog\"",
+          "description": "d9 — pad · CC crush, on"
+        },
+        {
+          "type": "moment",
+          "code": "highlights",
+          "description": "breakdown×3 · buildup×8 · transition×1 · drop×1 · peak×1 · best cut @ 4:25"
+        }
+      ],
+      "loop": "/images/parvagues/lives/ig-live-highlight/20_montreuil26_3904126116294333504_loop.mp4"
+    },
+    {
+      "name": "You My Sunshine",
+      "file": "live/midi/nova/dnb/liquid/you_my_sunshine.tidal",
+      "bpm": 144,
+      "style": "dnb",
+      "duration": 318.68,
+      "ingredients": [
+        {
+          "type": "sample",
+          "code": "s \"rampleS34:6\"",
+          "description": "Highest hats · CC on"
+        },
+        {
+          "type": "sample",
+          "code": "s \"bassWarsaw\"",
+          "description": "d4 — bass · CC crush, gain, off"
+        },
+        {
+          "type": "synth",
+          "code": "s \"no_sunshine\"",
+          "description": "d5 — lead · CC off, on"
+        },
+        {
+          "type": "sample",
+          "code": "s \"no_sunshine/2\"",
+          "description": "Guitar Sunshine · CC on"
+        },
+        {
+          "type": "sample",
+          "code": "s \"org_jungle_breaks:1\"",
+          "description": "JazzyBelle JazzyBreak · CC on"
+        },
+        {
+          "type": "pad",
+          "code": "s \"no_sunshine/4\"",
+          "description": "d9 — pad"
+        },
+        {
+          "type": "moment",
+          "code": "highlights",
+          "description": "breakdown×1 · buildup×5 · drop×1 · transition×2 · peak×1 · best cut @ 0:21"
+        }
+      ]
+    },
+    {
+      "name": "Desire",
+      "file": "live/collab/raph/desire.tidal",
+      "bpm": 129,
+      "style": "dance",
+      "duration": 246.0,
+      "ingredients": [
+        {
+          "type": "sample",
+          "code": "s \"[techno:0,jazz]\"",
+          "description": "KICK: Sub thud, 4otf with flourish (NTO: deepens over time) · CC off, on, some"
+        },
+        {
+          "type": "sample",
+          "code": "s \"h2ogmcp\"",
+          "description": "CLAP: Dry quiet snap, contretemps (enters late) · CC off, on, some"
+        },
+        {
+          "type": "sample",
+          "code": "s \"h2ogmhh\"",
+          "description": "OH/CY: Subtle offbeat hats, ^44 morphs to cymbal shimmer · CC legato, on, some"
+        },
+        {
+          "type": "synth",
+          "code": "s \"desire\"",
+          "description": "d5 — lead · CC octersub, on"
+        },
+        {
+          "type": "sample",
+          "code": "s \"desire\"",
+          "description": "Voices · CC off, on"
+        },
+        {
+          "type": "sample",
+          "code": "s \"desire_synth/2\"",
+          "description": "Announcing SYNTH · CC sup"
+        },
+        {
+          "type": "moment",
+          "code": "highlights",
+          "description": "breakdown×3 · transition×6 · drop×1 · buildup×4 · peak×1 · best cut @ 1:11"
+        }
+      ]
+    },
+    {
+      "name": "L'or Bleu",
+      "file": "live/collab/mousquetaires/blue_gold.tidal",
+      "bpm": 124,
+      "style": "breaks",
+      "duration": 258.0,
+      "ingredients": [
+        {
+          "type": "sample",
+          "code": "s \"~ h ~ h ~ h*<1 2> ~ h*<1!3 2>\"",
+          "description": "Highest hats · CC on"
+        },
+        {
+          "type": "sample",
+          "code": "s \"bassWarsaw\"",
+          "description": "BASSLINE VIOLENTE PAR VALENTIN <3 · CC crush, octer, octersub"
+        },
+        {
+          "type": "pad",
+          "code": "s \"suns_keys\"",
+          "description": "Suns of Gold Keys, samples · CC off, on, tremr"
+        },
+        {
+          "type": "pad",
+          "code": "s \"suns_guitar:0/2\"",
+          "description": "Suns of Gold Guitars, sampled and cut · CC crush, lpf, octersub"
+        },
+        {
+          "type": "pad",
+          "code": "s \"suns_voice:0\"",
+          "description": "Voice of the Father"
+        },
+        {
+          "type": "effect",
+          "code": "s \"[<~!3 rampleD5:3>,risers:5]\"",
+          "description": "CUES AND NOISES"
+        },
+        {
+          "type": "moment",
+          "code": "highlights",
+          "description": "breakdown×2 · buildup×8 · drop×1 · peak×1 · transition×1 · best cut @ 0:27"
+        }
+      ]
+    },
+    {
+      "name": "Premier Septembre",
+      "file": "live/collab/baba/sept1.tidal",
+      "bpm": 120,
+      "style": "techno",
+      "duration": 313.65,
+      "ingredients": [
+        {
+          "type": "sample",
+          "code": "s \"cy\"",
+          "description": "Cymbales sol · CC off, on"
+        },
+        {
+          "type": "sample",
+          "code": "s \"cpluck\"",
+          "description": "Bassline faite main avec un violoncelle californien · CC crush, octer, on"
+        },
+        {
+          "type": "synth",
+          "code": "s \"rhadamanthe_melo:1\"",
+          "description": "Piano nostalgique, temps inexorable · CC crush, on"
+        },
+        {
+          "type": "sample",
+          "code": "s \"breaks165\"",
+          "description": "Je t'avais oublie toi <3"
+        },
+        {
+          "type": "sample",
+          "code": "s \"jungle_breaks:1\"",
+          "description": "Break multi-facette, assez complexe, comme chacun d'entre nous · CC on"
+        },
+        {
+          "type": "synth",
+          "code": "s \"nujazz_keys120:35/4\"",
+          "description": "Intro doux piano · CC delay"
+        },
+        {
+          "type": "moment",
+          "code": "highlights",
+          "description": "breakdown×2 · buildup×4 · transition×5 · peak×1 · best cut @ 2:47"
+        }
+      ],
+      "loop": "/images/parvagues/lives/ig-live-highlight/24_montreuil26_3904133245638071567_loop.mp4"
+    },
+    {
+      "name": "Techno Orage",
+      "file": "live/midi/nova/techno/techno_orage.tidal",
+      "bpm": 104,
+      "style": "techno",
+      "duration": 424.07,
+      "ingredients": [
+        {
+          "type": "sample",
+          "code": "s \"orage\"",
+          "description": "BASS <3 · CC crush, octer"
+        },
+        {
+          "type": "synth",
+          "code": "s \"orage\"",
+          "description": "Rain piano <3 · CC crush, octer, octersub"
+        },
+        {
+          "type": "sample",
+          "code": "s \"orage\"",
+          "description": "Voices · CC on"
+        },
+        {
+          "type": "sample",
+          "code": "s \"jungle_breaks:12\"",
+          "description": "Break discret face à une telle idole · CC off, on"
+        },
+        {
+          "type": "sample",
+          "code": "s \"[acid1,acid2]\"",
+          "description": "ACID Doutes · CC gain, on, some"
+        },
+        {
+          "type": "effect",
+          "code": "s \"risers\"",
+          "description": "d10 — riser"
+        },
+        {
+          "type": "moment",
+          "code": "highlights",
+          "description": "breakdown×2 · buildup×4 · transition×3 · peak×1 · best cut @ 4:35"
+        }
+      ]
+    },
+    {
+      "name": "La Révolution Sera Samplée",
+      "file": "live/midi/nova/jazz/the_revolution_will_be_sampled.tidal",
+      "bpm": 114,
+      "style": "nujazz",
+      "duration": 424.27,
+      "ingredients": [
+        {
+          "type": "sample",
+          "code": "s \"like_sugar:0\"",
+          "description": "d4 — bass · CC bandf, crush, off"
+        },
+        {
+          "type": "sample",
+          "code": "d7",
+          "description": "LEAD: Rhodes arp in D Dorian (i7 → IV7 → bIII → v) · CC cutoff, off, on"
+        },
+        {
+          "type": "pad",
+          "code": "s \"like_sugar/2\"",
+          "description": "SUGAR CHOIR"
+        },
+        {
+          "type": "effect",
+          "code": "s \"like_sugar:21\"",
+          "description": "SUGAR KEY SWEET TRIGGER"
+        },
+        {
+          "type": "synth",
+          "code": "s \"like_sugar/2\"",
+          "description": "SUGAR GLITCH: stuttered chops + bitcrush"
+        },
+        {
+          "type": "synth",
+          "code": "s \"like_sugar:20/4\"",
+          "description": "HEY HEY!"
+        },
+        {
+          "type": "moment",
+          "code": "highlights",
+          "description": "breakdown×3 · buildup×10 · transition×2 · peak×1 · drop×1 · best cut @ 6:13"
+        }
+      ]
+    }
+  ]
+}

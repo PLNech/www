@@ -1,0 +1,495 @@
+{
+  "username": "parvagues.mp3",
+  "highlight_pk": "18035324351004139",
+  "highlight_title": "Live 🔊",
+  "highlight_url": "https://www.instagram.com/stories/highlights/18035324351004139/",
+  "fetched_at": "2026-05-24T16:22:18",
+  "items": [
+    {
+      "index": 1,
+      "gig": "ccc-2024",
+      "date_utc": "2024-10-06T13:34:22",
+      "mediaid": "3472897487859595026",
+      "typename": "GraphStoryVideo",
+      "is_video": true,
+      "story_url": "https://www.instagram.com/stories/parvagues.mp3/3472897487859595026/",
+      "files": [
+        "01_ccc-2024_3472897487859595026.jpg",
+        "01_ccc-2024_3472897487859595026.mp4"
+      ],
+      "loop_file": "01_ccc-2024_3472897487859595026_loop.mp4",
+      "loop_params": {
+        "start_s": 1.0,
+        "duration_s": 5.0,
+        "width": 540,
+        "crf": 28,
+        "crop": "iw:iw*9/16:0:(ih-iw*9/16)/2"
+      }
+    },
+    {
+      "index": 2,
+      "gig": "lyon-algorave-2025",
+      "date_utc": "2025-05-24T21:52:44",
+      "mediaid": "3639846751595324022",
+      "typename": "GraphStoryVideo",
+      "is_video": true,
+      "story_url": "https://www.instagram.com/stories/parvagues.mp3/3639846751595324022/",
+      "files": [
+        "02_lyon-algorave-2025_3639846751595324022.jpg",
+        "02_lyon-algorave-2025_3639846751595324022.mp4"
+      ],
+      "loop_file": "02_lyon-algorave-2025_3639846751595324022_loop.mp4",
+      "loop_params": {
+        "start_s": 1.0,
+        "duration_s": 5.0,
+        "width": 540,
+        "crf": 28,
+        "crop": "iw:iw*9/16:0:(ih-iw*9/16)/2"
+      }
+    },
+    {
+      "index": 3,
+      "gig": "lyon-algorave-2025",
+      "date_utc": "2025-05-25T14:16:02",
+      "mediaid": "3640341650342131394",
+      "typename": "GraphStoryVideo",
+      "is_video": true,
+      "story_url": "https://www.instagram.com/stories/parvagues.mp3/3640341650342131394/",
+      "files": [
+        "03_lyon-algorave-2025_3640341650342131394.jpg",
+        "03_lyon-algorave-2025_3640341650342131394.mp4"
+      ],
+      "loop_file": "03_lyon-algorave-2025_3640341650342131394_loop.mp4",
+      "loop_params": {
+        "start_s": 1.0,
+        "duration_s": 5.0,
+        "width": 540,
+        "crf": 28,
+        "crop": "iw:iw*9/16:0:(ih-iw*9/16)/2"
+      }
+    },
+    {
+      "index": 4,
+      "gig": "cosmicfest-2025",
+      "date_utc": "2025-06-22T17:38:52",
+      "mediaid": "3660738103656884158",
+      "typename": "GraphStoryVideo",
+      "is_video": true,
+      "story_url": "https://www.instagram.com/stories/parvagues.mp3/3660738103656884158/",
+      "files": [
+        "04_cosmicfest-2025_3660738103656884158.jpg",
+        "04_cosmicfest-2025_3660738103656884158.mp4"
+      ],
+      "loop_file": "04_cosmicfest-2025_3660738103656884158_loop.mp4",
+      "loop_params": {
+        "start_s": 1.0,
+        "duration_s": 5.0,
+        "width": 540,
+        "crf": 28,
+        "crop": "iw:iw*9/16:0:(ih-iw*9/16)/2"
+      }
+    },
+    {
+      "index": 5,
+      "gig": "cosmicfest-2025",
+      "date_utc": "2025-06-22T17:39:11",
+      "mediaid": "3660739426834044573",
+      "typename": "GraphStoryVideo",
+      "is_video": true,
+      "story_url": "https://www.instagram.com/stories/parvagues.mp3/3660739426834044573/",
+      "files": [
+        "05_cosmicfest-2025_3660739426834044573.jpg",
+        "05_cosmicfest-2025_3660739426834044573.mp4"
+      ],
+      "loop_file": "05_cosmicfest-2025_3660739426834044573_loop.mp4",
+      "loop_params": {
+        "start_s": 1.0,
+        "duration_s": 5.0,
+        "width": 540,
+        "crf": 28,
+        "crop": "iw:iw*9/16:0:(ih-iw*9/16)/2"
+      }
+    },
+    {
+      "index": 6,
+      "gig": "cosmicfest-2025",
+      "date_utc": "2025-06-22T17:39:24",
+      "mediaid": "3660740062203926753",
+      "typename": "GraphStoryVideo",
+      "is_video": true,
+      "story_url": "https://www.instagram.com/stories/parvagues.mp3/3660740062203926753/",
+      "files": [
+        "06_cosmicfest-2025_3660740062203926753.jpg",
+        "06_cosmicfest-2025_3660740062203926753.mp4"
+      ],
+      "loop_file": "06_cosmicfest-2025_3660740062203926753_loop.mp4",
+      "loop_params": {
+        "start_s": 1.0,
+        "duration_s": 5.0,
+        "width": 540,
+        "crf": 28,
+        "crop": "iw:iw*9/16:0:(ih-iw*9/16)/2"
+      }
+    },
+    {
+      "index": 7,
+      "gig": "cosmicfest-2025",
+      "date_utc": "2025-06-22T17:39:39",
+      "mediaid": "3660744267178404555",
+      "typename": "GraphStoryVideo",
+      "is_video": true,
+      "story_url": "https://www.instagram.com/stories/parvagues.mp3/3660744267178404555/",
+      "files": [
+        "07_cosmicfest-2025_3660744267178404555.jpg",
+        "07_cosmicfest-2025_3660744267178404555.mp4"
+      ],
+      "loop_file": "07_cosmicfest-2025_3660744267178404555_loop.mp4",
+      "loop_params": {
+        "start_s": 1.0,
+        "duration_s": 5.0,
+        "width": 540,
+        "crf": 28,
+        "crop": "iw:iw*9/16:0:(ih-iw*9/16)/2"
+      }
+    },
+    {
+      "index": 8,
+      "gig": "cosmicfest-2025",
+      "date_utc": "2025-06-22T17:39:49",
+      "mediaid": "3660744648365088582",
+      "typename": "GraphStoryVideo",
+      "is_video": true,
+      "story_url": "https://www.instagram.com/stories/parvagues.mp3/3660744648365088582/",
+      "files": [
+        "08_cosmicfest-2025_3660744648365088582.jpg",
+        "08_cosmicfest-2025_3660744648365088582.mp4"
+      ],
+      "loop_file": "08_cosmicfest-2025_3660744648365088582_loop.mp4",
+      "loop_params": {
+        "start_s": 1.0,
+        "duration_s": 5.0,
+        "width": 540,
+        "crf": 28,
+        "crop": "iw:iw*9/16:0:(ih-iw*9/16)/2"
+      }
+    },
+    {
+      "index": 9,
+      "gig": "cosmicfest-2025",
+      "date_utc": "2025-06-22T17:40:02",
+      "mediaid": "3660745080369921054",
+      "typename": "GraphStoryVideo",
+      "is_video": true,
+      "story_url": "https://www.instagram.com/stories/parvagues.mp3/3660745080369921054/",
+      "files": [
+        "09_cosmicfest-2025_3660745080369921054.jpg",
+        "09_cosmicfest-2025_3660745080369921054.mp4"
+      ],
+      "loop_file": "09_cosmicfest-2025_3660745080369921054_loop.mp4",
+      "loop_params": {
+        "start_s": 1.0,
+        "duration_s": 5.0,
+        "width": 540,
+        "crf": 28,
+        "crop": "iw:iw*9/16:0:(ih-iw*9/16)/2"
+      }
+    },
+    {
+      "index": 10,
+      "gig": "cosmicfest-2025",
+      "date_utc": "2025-06-22T17:41:16",
+      "mediaid": "3660745549611922275",
+      "typename": "GraphStoryVideo",
+      "is_video": true,
+      "story_url": "https://www.instagram.com/stories/parvagues.mp3/3660745549611922275/",
+      "files": [
+        "10_cosmicfest-2025_3660745549611922275.jpg",
+        "10_cosmicfest-2025_3660745549611922275.mp4"
+      ],
+      "loop_file": "10_cosmicfest-2025_3660745549611922275_loop.mp4",
+      "loop_params": {
+        "start_s": 1.0,
+        "duration_s": 5.0,
+        "width": 540,
+        "crf": 28,
+        "crop": "iw:iw*9/16:0:(ih-iw*9/16)/2"
+      }
+    },
+    {
+      "index": 11,
+      "gig": "cosmicfest-2025",
+      "date_utc": "2025-06-23T20:36:12",
+      "mediaid": "3661552020452984945",
+      "typename": "GraphStoryVideo",
+      "is_video": true,
+      "story_url": "https://www.instagram.com/stories/parvagues.mp3/3661552020452984945/",
+      "files": [
+        "11_cosmicfest-2025_3661552020452984945.jpg",
+        "11_cosmicfest-2025_3661552020452984945.mp4"
+      ],
+      "loop_file": "11_cosmicfest-2025_3661552020452984945_loop.mp4",
+      "loop_params": {
+        "start_s": 1.0,
+        "duration_s": 5.0,
+        "width": 540,
+        "crf": 28,
+        "crop": "iw:iw*9/16:0:(ih-iw*9/16)/2"
+      }
+    },
+    {
+      "index": 12,
+      "gig": "opal25",
+      "date_utc": "2025-08-13T10:05:06",
+      "mediaid": "3698197458484126827",
+      "typename": "GraphStoryVideo",
+      "is_video": true,
+      "story_url": "https://www.instagram.com/stories/parvagues.mp3/3698197458484126827/",
+      "files": [
+        "12_opal25_3698197458484126827.jpg",
+        "12_opal25_3698197458484126827.mp4"
+      ],
+      "loop_file": "12_opal25_3698197458484126827_loop.mp4",
+      "loop_params": {
+        "start_s": 1.0,
+        "duration_s": 5.0,
+        "width": 540,
+        "crf": 28,
+        "crop": "iw:iw*9/16:0:(ih-iw*9/16)/2"
+      }
+    },
+    {
+      "index": 13,
+      "gig": "opal25",
+      "date_utc": "2025-08-13T10:07:37",
+      "mediaid": "3698198749155237569",
+      "typename": "GraphStoryVideo",
+      "is_video": true,
+      "story_url": "https://www.instagram.com/stories/parvagues.mp3/3698198749155237569/",
+      "files": [
+        "13_opal25_3698198749155237569.jpg",
+        "13_opal25_3698198749155237569.mp4"
+      ],
+      "loop_file": "13_opal25_3698198749155237569_loop.mp4",
+      "loop_params": {
+        "start_s": 1.0,
+        "duration_s": 5.0,
+        "width": 540,
+        "crf": 28,
+        "crop": "iw:iw*9/16:0:(ih-iw*9/16)/2"
+      }
+    },
+    {
+      "index": 14,
+      "gig": "opal25",
+      "date_utc": "2025-08-13T10:08:57",
+      "mediaid": "3698199638557546211",
+      "typename": "GraphStoryVideo",
+      "is_video": true,
+      "story_url": "https://www.instagram.com/stories/parvagues.mp3/3698199638557546211/",
+      "files": [
+        "14_opal25_3698199638557546211.jpg",
+        "14_opal25_3698199638557546211.mp4"
+      ],
+      "loop_file": "14_opal25_3698199638557546211_loop.mp4",
+      "loop_params": {
+        "start_s": 1.0,
+        "duration_s": 5.0,
+        "width": 540,
+        "crf": 28,
+        "crop": "iw:iw*9/16:0:(ih-iw*9/16)/2"
+      }
+    },
+    {
+      "index": 15,
+      "gig": "standalone-2025-09",
+      "date_utc": "2025-09-26T09:32:53",
+      "mediaid": "3730071367052969862",
+      "typename": "GraphStoryImage",
+      "is_video": false,
+      "story_url": "https://www.instagram.com/stories/parvagues.mp3/3730071367052969862/",
+      "files": [
+        "15_standalone-2025-09_3730071367052969862.jpg"
+      ]
+    },
+    {
+      "index": 16,
+      "gig": "montreuil26",
+      "date_utc": "2026-05-22T22:31:52",
+      "mediaid": "3902959909721651162",
+      "typename": "GraphStoryVideo",
+      "is_video": true,
+      "story_url": "https://www.instagram.com/stories/parvagues.mp3/3902959909721651162/",
+      "files": [
+        "16_montreuil26_3902959909721651162.jpg",
+        "16_montreuil26_3902959909721651162.mp4"
+      ],
+      "loop_file": "16_montreuil26_3902959909721651162_loop.mp4",
+      "loop_params": {
+        "start_s": 1.0,
+        "duration_s": 5.0,
+        "width": 540,
+        "crf": 28,
+        "crop": "iw:iw*9/16:0:(ih-iw*9/16)/2"
+      }
+    },
+    {
+      "index": 17,
+      "gig": "montreuil26",
+      "date_utc": "2026-05-23T08:02:27",
+      "mediaid": "3903247087634803743",
+      "typename": "GraphStoryVideo",
+      "is_video": true,
+      "story_url": "https://www.instagram.com/stories/parvagues.mp3/3903247087634803743/",
+      "files": [
+        "17_montreuil26_3903247087634803743.jpg",
+        "17_montreuil26_3903247087634803743.mp4"
+      ],
+      "loop_file": "17_montreuil26_3903247087634803743_loop.mp4",
+      "loop_params": {
+        "start_s": 1.0,
+        "duration_s": 5.0,
+        "width": 540,
+        "crf": 28,
+        "crop": "iw:iw*9/16:0:(ih-iw*9/16)/2"
+      }
+    },
+    {
+      "index": 18,
+      "gig": "montreuil26",
+      "date_utc": "2026-05-24T13:04:53",
+      "mediaid": "3904124101644263299",
+      "typename": "GraphStoryVideo",
+      "is_video": true,
+      "story_url": "https://www.instagram.com/stories/parvagues.mp3/3904124101644263299/",
+      "files": [
+        "18_montreuil26_3904124101644263299.jpg",
+        "18_montreuil26_3904124101644263299.mp4"
+      ],
+      "loop_file": "18_montreuil26_3904124101644263299_loop.mp4",
+      "loop_params": {
+        "start_s": 1.0,
+        "duration_s": 5.0,
+        "width": 540,
+        "crf": 28,
+        "crop": "iw:iw*9/16:0:(ih-iw*9/16)/2"
+      }
+    },
+    {
+      "index": 19,
+      "gig": "montreuil26",
+      "date_utc": "2026-05-24T13:07:42",
+      "mediaid": "3904125516458554645",
+      "typename": "GraphStoryVideo",
+      "is_video": true,
+      "story_url": "https://www.instagram.com/stories/parvagues.mp3/3904125516458554645/",
+      "files": [
+        "19_montreuil26_3904125516458554645.jpg",
+        "19_montreuil26_3904125516458554645.mp4"
+      ],
+      "loop_file": "19_montreuil26_3904125516458554645_loop.mp4",
+      "loop_params": {
+        "start_s": 1.0,
+        "duration_s": 5.0,
+        "width": 540,
+        "crf": 28,
+        "crop": "iw:iw*9/16:0:(ih-iw*9/16)/2"
+      }
+    },
+    {
+      "index": 20,
+      "gig": "montreuil26",
+      "date_utc": "2026-05-24T13:08:52",
+      "mediaid": "3904126116294333504",
+      "typename": "GraphStoryVideo",
+      "is_video": true,
+      "story_url": "https://www.instagram.com/stories/parvagues.mp3/3904126116294333504/",
+      "files": [
+        "20_montreuil26_3904126116294333504.jpg",
+        "20_montreuil26_3904126116294333504.mp4"
+      ],
+      "loop_file": "20_montreuil26_3904126116294333504_loop.mp4",
+      "loop_params": {
+        "start_s": 1.0,
+        "duration_s": 5.0,
+        "width": 540,
+        "crf": 28,
+        "crop": "iw:iw*9/16:0:(ih-iw*9/16)/2"
+      }
+    },
+    {
+      "index": 21,
+      "gig": "montreuil26",
+      "date_utc": "2026-05-24T13:20:44",
+      "mediaid": "3904132182602628446",
+      "typename": "GraphStoryImage",
+      "is_video": false,
+      "story_url": "https://www.instagram.com/stories/parvagues.mp3/3904132182602628446/",
+      "files": [
+        "21_montreuil26_3904132182602628446.jpg"
+      ]
+    },
+    {
+      "index": 22,
+      "gig": "montreuil26",
+      "date_utc": "2026-05-24T13:20:48",
+      "mediaid": "3904132082700135316",
+      "typename": "GraphStoryVideo",
+      "is_video": true,
+      "story_url": "https://www.instagram.com/stories/parvagues.mp3/3904132082700135316/",
+      "files": [
+        "22_montreuil26_3904132082700135316.jpg",
+        "22_montreuil26_3904132082700135316.mp4"
+      ],
+      "loop_file": "22_montreuil26_3904132082700135316_loop.mp4",
+      "loop_params": {
+        "start_s": 1.0,
+        "duration_s": 5.0,
+        "width": 540,
+        "crf": 28,
+        "crop": "iw:iw*9/16:0:(ih-iw*9/16)/2"
+      }
+    },
+    {
+      "index": 23,
+      "gig": "montreuil26",
+      "date_utc": "2026-05-24T13:22:18",
+      "mediaid": "3904132801972947604",
+      "typename": "GraphStoryVideo",
+      "is_video": true,
+      "story_url": "https://www.instagram.com/stories/parvagues.mp3/3904132801972947604/",
+      "files": [
+        "23_montreuil26_3904132801972947604.jpg",
+        "23_montreuil26_3904132801972947604.mp4"
+      ],
+      "loop_file": "23_montreuil26_3904132801972947604_loop.mp4",
+      "loop_params": {
+        "start_s": 1.0,
+        "duration_s": 5.0,
+        "width": 540,
+        "crf": 28,
+        "crop": "iw:iw*9/16:0:(ih-iw*9/16)/2"
+      }
+    },
+    {
+      "index": 24,
+      "gig": "montreuil26",
+      "date_utc": "2026-05-24T13:23:10",
+      "mediaid": "3904133245638071567",
+      "typename": "GraphStoryVideo",
+      "is_video": true,
+      "story_url": "https://www.instagram.com/stories/parvagues.mp3/3904133245638071567/",
+      "files": [
+        "24_montreuil26_3904133245638071567.jpg",
+        "24_montreuil26_3904133245638071567.mp4"
+      ],
+      "loop_file": "24_montreuil26_3904133245638071567_loop.mp4",
+      "loop_params": {
+        "start_s": 1.0,
+        "duration_s": 5.0,
+        "width": 540,
+        "crf": 28,
+        "crop": "iw:iw*9/16:0:(ih-iw*9/16)/2"
+      }
+    }
+  ]
+}

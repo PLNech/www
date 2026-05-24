@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 import { getAllLives, getLiveData, getLivesImages, getLiveTracks } from '@/lib/livesData';
@@ -12,6 +12,70 @@ import BpmCurve from '@/components/parvagues/BpmCurve';
 import Prism from 'prismjs';
 import 'prismjs/components/prism-haskell';
 import 'prismjs/themes/prism-tomorrow.css';
+
+const LOUPE_W = 480;  // px, matches w-[480px]
+const LOUPE_H = 270;  // px, 16:9 aspect of 480w (loops cropped from 9:16 stories)
+const LOUPE_MARGIN = 16;
+
+function LoopThumb({ src, href }) {
+    const thumbRef = useRef(null);
+    const [pos, setPos] = useState(null);
+
+    const onEnter = () => {
+        if (!thumbRef.current) return;
+        const r = thumbRef.current.getBoundingClientRect();
+        const vw = window.innerWidth;
+        const vh = window.innerHeight;
+        // Center on thumb; clamp so the loupe always stays fully on-screen
+        const x = Math.max(
+            LOUPE_W / 2 + LOUPE_MARGIN,
+            Math.min(vw - LOUPE_W / 2 - LOUPE_MARGIN, r.left + r.width / 2)
+        );
+        const y = Math.max(
+            LOUPE_H / 2 + LOUPE_MARGIN,
+            Math.min(vh - LOUPE_H / 2 - LOUPE_MARGIN, r.top + r.height / 2)
+        );
+        setPos({ x, y });
+    };
+    const onLeave = () => setPos(null);
+
+    return (
+        <a
+            ref={thumbRef}
+            href={href || '#'}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            onMouseEnter={onEnter}
+            onMouseLeave={onLeave}
+            title="Voir sur Instagram"
+            className="flex-shrink-0"
+        >
+            <video
+                src={src}
+                autoPlay muted loop playsInline
+                className={`w-12 h-12 rounded-md object-cover border transition-colors ${pos ? 'border-[var(--neon-high)]/60' : 'border-white/10'}`}
+            />
+            {pos && (
+                <div
+                    className="fixed z-[60] pointer-events-none transition-opacity duration-150 hidden md:block"
+                    style={{
+                        left: pos.x,
+                        top: pos.y,
+                        width: LOUPE_W,
+                        transform: 'translate(-50%, -50%)',
+                    }}
+                >
+                    <video
+                        src={src}
+                        autoPlay muted loop playsInline
+                        className="w-full rounded-xl border-2 border-[var(--neon-high)]/50 shadow-2xl shadow-black/90"
+                    />
+                </div>
+            )}
+        </a>
+    );
+}
 
 function TrackIngredient({ ingredient }) {
     return (
@@ -61,6 +125,9 @@ function TracksSection({ tracks }) {
                     <details key={track.name} className="group bg-white/[0.02] border border-white/[0.06] rounded-xl overflow-hidden">
                         <summary className="flex items-center gap-4 px-5 py-4 cursor-pointer hover:bg-white/[0.03] transition-colors">
                             <span className="font-mono text-xs text-[var(--text-muted)] w-6">{String(i + 1).padStart(2, '0')}</span>
+                            {track.loop && (
+                                <LoopThumb src={track.loop} href={tracks.instagramHighlight} />
+                            )}
                             <span className="font-display font-semibold text-sm flex-grow">{track.name}</span>
                             {track.bpm && <span className="text-[11px] text-[var(--text-muted)] font-mono">{track.bpm} BPM</span>}
                             {track.style && <span className="text-[10px] tracking-wider uppercase text-[var(--text-muted)]">{track.style}</span>}
@@ -71,7 +138,15 @@ function TracksSection({ tracks }) {
                             ))}
                             {track.file && (
                                 <p className="text-[10px] text-[var(--text-muted)] font-mono mt-2">
-                                    src: {track.file}
+                                    src:{' '}
+                                    <a
+                                        href={`https://git.nech.pl/pln/Tidal/blob/master/${track.file}`}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="hover:text-[var(--neon-high)] transition-colors underline decoration-dotted decoration-white/20 underline-offset-2"
+                                    >
+                                        {track.file}
+                                    </a>
                                 </p>
                             )}
                         </div>
@@ -82,11 +157,12 @@ function TracksSection({ tracks }) {
     );
 }
 
-function MediaSection({ audio, video, archive }) {
+function MediaSection({ audio, video, archive, instagram }) {
     const links = [
         audio && { url: audio, label: detectPlatform(audio) },
         video && { url: video, label: detectPlatform(video) },
         archive && { url: archive, label: detectPlatform(archive) },
+        instagram && { url: instagram, label: detectPlatform(instagram) },
     ].filter(Boolean);
 
     if (links.length === 0) return null;
@@ -140,6 +216,7 @@ function detectPlatform(url) {
     if (url.includes('youtube')) return 'YouTube';
     if (url.includes('archive.org')) return 'Archive.org';
     if (url.includes('spotify')) return 'Spotify';
+    if (url.includes('instagram')) return 'Instagram';
     return 'Écouter';
 }
 
@@ -167,7 +244,7 @@ export default function LiveEvent({ live, images, tracks, isPostEvent: initialPo
     const fm = live.frontmatter;
     const eventDate = new Date((fm.date || '') + 'T00:00:00');
     const dateStr = isNaN(eventDate.getTime()) ? null : format(eventDate, 'dd MMMM yyyy', { locale: fr });
-    const hasMedia = fm.audio || fm.video || fm.archive;
+    const hasMedia = fm.audio || fm.video || fm.archive || fm.instagram;
     const title = fm.title || live.slug;
     const location = fm.location || '';
 
@@ -222,6 +299,7 @@ export default function LiveEvent({ live, images, tracks, isPostEvent: initialPo
                         audio={fm.audio}
                         video={fm.video}
                         archive={fm.archive}
+                        instagram={fm.instagram}
                     />
                 )}
 

@@ -32,3 +32,7 @@ yarn-error.log*
 # LLM exchanges
 code2prompt.json
 .vercel
+
+# IG highlight full-length MP4s — kept local for re-cropping; only loops + jpgs are shipped
+public/images/parvagues/lives/ig-live-highlight/*.mp4
+!public/images/parvagues/lives/ig-live-highlight/*_loop.mp4
