@@ -14,10 +14,9 @@ PLN's personal website (`pln-www`) — a Next.js **Pages Router** app that bundl
 
 ## Commands
 
-All app commands run from `next/` (the app root — **never** the repo root). **Use Node 20** (`nvm use 20`) — Yarn 4 refuses Node < 18.12, and the system default here is Node 16:
+All app commands run from the **repo root** (the app was hoisted out of the former `next/` subdirectory). **Use Node 20** (`nvm use 20`) — Yarn 4 refuses Node < 18.12, and the system default here is Node 16:
 
 ```bash
-cd next
 nvm use 20
 yarn install --frozen-lockfile   # deterministic install
 yarn dev                         # dev server on :3000
@@ -29,7 +28,7 @@ yarn test:e2e                    # Playwright e2e (auto-starts dev server)
 yarn test:e2e:ui                 # Playwright UI mode
 ```
 
-Deploy is Vercel, **preview-first** (Vercel "Root Directory" is `next/`):
+Deploy is Vercel, **preview-first** (after the hoist, Vercel "Root Directory" must be `.` / repo root — update in the Vercel UI):
 
 ```bash
 yarn deploy:preview              # vercel --yes  (every branch/PR)
@@ -40,10 +39,10 @@ yarn preview:env:pull            # vercel env pull .env.local (first-time local 
 ## Non-obvious conventions (enforced — see `.cursor/rules/`)
 
 - **Yarn 4 only.** `yarn.lock` is the single source of truth. Never create `package-lock.json` / `pnpm-lock.yaml`. Uses Yarn PnP (hence `jest-pnp-resolver` and the `.yarn/` dir).
-- **`@/` import alias** maps to `next/` (configured in `next.config.js` webpack and `jest.config.js` moduleNameMapper). Use `@/components/...`, `@/lib/...` instead of deep `../../` paths.
+- **`@/` import alias** maps to the repo root (configured in `next.config.js` webpack and `jest.config.js` moduleNameMapper). Use `@/components/...`, `@/lib/...` instead of deep `../../` paths.
 - **Global CSS only from `pages/_app.js`.** Everywhere else use CSS Modules (`*.module.css`) or Tailwind utility classes. Tailwind v4 is active alongside the legacy `.module.css` files — both styling systems coexist.
-- **One data-fetching strategy per page.** Never mix `getServerSideProps` with `getStaticProps`/`getStaticPaths` in the same file. If you see the "stale strategy" error after editing exports, delete `next/.next/` and restart.
-- **Content in `content/`, assets in `public/`.** Markdown lives under `next/content/SECTION/`; static assets under `next/public/images/SECTION/`, referenced by absolute path (`/images/...`). Don't hotlink persistent assets — copy them in. Avoid build-time network fetches for core UI.
+- **One data-fetching strategy per page.** Never mix `getServerSideProps` with `getStaticProps`/`getStaticPaths` in the same file. If you see the "stale strategy" error after editing exports, delete `.next/` and restart.
+- **Content in `content/`, assets in `public/`.** Markdown lives under `content/SECTION/`; static assets under `public/images/SECTION/`, referenced by absolute path (`/images/...`). Don't hotlink persistent assets — copy them in. Avoid build-time network fetches for core UI.
 - **Secrets via Vercel env**, never committed. `NEXT_PUBLIC_*` prefix only for browser-safe vars.
 
 ## Content model
