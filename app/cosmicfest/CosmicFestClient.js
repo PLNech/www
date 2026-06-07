@@ -1,9 +1,9 @@
-import Head from 'next/head';
+'use client';
+
 import Image from 'next/image'; // Using Next.js Image component for optimization
-import { useState, useEffect } from 'react'; // Added useState and useEffect
-import styles from '../../styles/cosmicfest.module.css';
-import Countdown from '../../components/cosmicfest/Countdown';
-// import ParVaguesFooter from '../../components/ParVaguesFooter'; // Optional: if you want to reuse the main site footer
+import { useState, useEffect } from 'react';
+import styles from '@/styles/cosmicfest.module.css';
+import Countdown from '@/components/cosmicfest/Countdown';
 
 // Helper function to calculate next June 21st
 const getNextJune21st = () => {
@@ -17,7 +17,7 @@ const getNextJune21st = () => {
   return nextJune21;
 };
 
-export default function CosmicFestHome() {
+export default function CosmicFestClient() {
   const nextFestivalDate = getNextJune21st();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalImageSrc, setModalImageSrc] = useState('');
@@ -87,12 +87,6 @@ export default function CosmicFestHome() {
 
   return (
     <div className={styles.container}>
-      <Head>
-        <title>cosmicfest</title>
-        <meta name="description" content="cosmicfest - festival indé de musique et création numérique à Labenne Océan. 21 juin." />
-        <link rel="icon" href="/favicon.ico" /> {/* Consider a specific cosmicfest favicon */}
-      </Head>
-
       <main className={styles.main}>
         <header className={styles.hero}>
           {/* Hero image is set via CSS background for now */}
@@ -219,11 +213,8 @@ export default function CosmicFestHome() {
             <button className={styles.modalCloseButton} onClick={closeModal} aria-label="Close image viewer">
               &times;
             </button>
-            {/* For Next/Image, provide intrinsic image width/height if known, or use layout fill with sized parent.
-                Using layout="responsive" with some default aspect ratio here.
-                Actual display size will be controlled by CSS for modalImage container. */}
             <div className={styles.modalImageContainer}>
-              <Image src={modalImageSrc} alt={modalImageAlt} layout="intrinsic" width={1200} height={900} objectFit="contain" />
+              <Image src={modalImageSrc} alt={modalImageAlt} width={1200} height={900} style={{ width: '100%', height: 'auto', objectFit: 'contain' }} />
             </div>
             {modalImageAlt && <p className={styles.modalCaption}>{modalImageAlt}</p>}
           </div>
@@ -231,15 +222,11 @@ export default function CosmicFestHome() {
       )}
 
       <footer className={styles.footer}>
-        <a
-          href="/parvagues/"
-        >
+        <a href="/parvagues/">
           vibe ~
           <span style={{fontWeight: 'bold'}}>parvagues</span>
-          {/* <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} /> You can use ParVagues logo here */}
         </a>
       </footer>
-      {/* <ParVaguesFooter /> */} {/* Or use the existing footer */}
     </div>
   );
 }
