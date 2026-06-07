@@ -1,4 +1,4 @@
-import { getAllLives, getLiveData, getLivesImages, getLiveTracks } from '@/lib/livesData';
+import { getAllLives, getLiveData, getLivesImages, getLiveTracks } from '@/lib/content';
 import LiveEvent from '@/components/parvagues/LiveEvent';
 
 export const revalidate = 60;

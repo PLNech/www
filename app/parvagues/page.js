@@ -1,4 +1,4 @@
-import { getAllLives } from '@/lib/livesData';
+import { getAllLives } from '@/lib/content';
 import Hero from '@/components/parvagues/Hero';
 import BioSection from '@/components/parvagues/BioSection';
 import AsSeenAt from '@/components/parvagues/AsSeenAt';

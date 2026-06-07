@@ -5,7 +5,7 @@ import { getPoemData, getAllPoemIds } from "@/lib/poems";
 import Link from "next/link";
 
 export function generateStaticParams() {
-  return getAllPoemIds().map(({ params }) => params);
+  return getAllPoemIds().map((id) => ({ id }));
 }
 
 export async function generateMetadata({ params }) {

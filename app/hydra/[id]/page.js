@@ -5,7 +5,7 @@ import { getAllHydraIds, getHydraData } from "@/lib/hydras";
 import HydraClient from "./HydraClient";
 
 export function generateStaticParams() {
-  return getAllHydraIds().map(({ params }) => params);
+  return getAllHydraIds().map((id) => ({ id }));
 }
 
 export async function generateMetadata({ params }) {
