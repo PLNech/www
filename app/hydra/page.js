@@ -1,27 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
-import Head from "next/head";
-import Layout from "../components/layout";
-import utilStyles from "../styles/utils.module.css";
-import { getHydrasData } from "../lib/hydras";
+import Layout from "@/components/layout";
+import utilStyles from "@/styles/utils.module.css";
+import { getHydrasData } from "@/lib/hydras";
 
-export async function getStaticProps() {
+export const metadata = {
+  title: "PLN's Hydra works",
+};
+
+export default function Hydra() {
   const hydras = getHydrasData();
 
-  return {
-    props: {
-      hydras,
-    },
-  };
-}
-
-export default function Hydra({ hydras }) {
   return (
     <Layout className="hydra">
-      <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>PLN's Hydra works</title>
-      </Head>
       <div>
         <h1>I create visuals with patterns</h1>
         <iframe
@@ -31,8 +22,8 @@ export default function Hydra({ hydras }) {
         />
         <p>
           <i>
-            <a 
-              href="https://nech.pl/glitchpool" 
+            <a
+              href="https://nech.pl/glitchpool"
               className={utilStyles.inlineLink}
             >
               GLITCHP00L
@@ -50,8 +41,8 @@ export default function Hydra({ hydras }) {
         <p>
           <i>
             Successive layers within the work{" "}
-            <a 
-              href="https://nech.pl/nights-galactic" 
+            <a
+              href="https://nech.pl/nights-galactic"
               className={utilStyles.inlineLink}
             >
               GaLactic
@@ -66,8 +57,8 @@ export default function Hydra({ hydras }) {
         <br />
 
         <h4>
-          All my Hydra <a 
-            href="https://git.plnech.fr/pln/Hydra" 
+          All my Hydra <a
+            href="https://git.plnech.fr/pln/Hydra"
             className={utilStyles.inlineLink}
           >
             code
@@ -82,18 +73,18 @@ export default function Hydra({ hydras }) {
         <div className={utilStyles.list}>
           {hydras.map(({ id, title, link }) => (
             <div className={utilStyles.hydraCard} key={id}>
-              <Link 
-                href={`/hydra/${id}`} 
+              <Link
+                href={`/hydra/${id}`}
                 className={utilStyles.listItemLink}
               >
                 {title}
               </Link>
-              
+
               <div className={utilStyles.poemMeta}>
                 <span className={utilStyles.poemMetaItem}>
-                  <a 
-                    href={link} 
-                    target="_blank" 
+                  <a
+                    href={link}
+                    target="_blank"
                     rel="noopener noreferrer"
                     className={utilStyles.inlineLink}
                   >

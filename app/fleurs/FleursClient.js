@@ -1,5 +1,15 @@
-import Head from "next/head";
+'use client';
+
 import { useEffect, useRef, useState } from "react";
+import { Cormorant_Garamond } from "next/font/google";
+
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
+  style: ["normal", "italic"],
+  variable: "--font-cormorant",
+  display: "swap",
+});
 
 const FLOWER_COLORS = [
   { h: 340, s: 62, b: 78 },
@@ -16,7 +26,7 @@ const FLOWER_COLORS = [
 
 const FLOWER_TYPES = ["rose", "daisy", "cosmos", "wild"];
 
-export default function Fleurs() {
+export default function FleursClient() {
   const containerRef = useRef(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [entered, setEntered] = useState(false);
@@ -635,466 +645,439 @@ export default function Fleurs() {
   }, [isModalOpen]);
 
   return (
-    <>
-      <Head>
-        <title>La Fête des Fleurs</title>
-        <meta
-          name="description"
-          content="Invitation — La Fête des Fleurs, 21 mars, Jour du Printemps. Dès 17 h."
-        />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta property="og:title" content="La Fête des Fleurs" />
-        <meta property="og:description" content="21 mars · Jour du Printemps · Dès 17 h · Éclosion collective." />
-        <meta property="og:image" content="https://me.nech.pl/og-fleurs.png" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta property="og:type" content="website" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="La Fête des Fleurs" />
-        <meta name="twitter:description" content="21 mars · Jour du Printemps · Dès 17 h" />
-        <meta name="twitter:image" content="https://me.nech.pl/og-fleurs.png" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,400;1,500;1,600&display=swap"
-          rel="stylesheet"
-        />
-      </Head>
+    <main id="fleurs-page" className={cormorant.variable}>
+      <div ref={containerRef} className="garden-canvas" aria-hidden="true" />
+      <div className="scan-lines" aria-hidden="true" />
+      <div className="vignette-css" aria-hidden="true" />
 
-      <main id="fleurs-page">
-        <div ref={containerRef} className="garden-canvas" aria-hidden="true" />
-        <div className="scan-lines" aria-hidden="true" />
-        <div className="vignette-css" aria-hidden="true" />
+      <section className={`invite ${entered ? "invite--visible" : ""}`}>
+        <p className="eyebrow" style={{ "--d": "0.3s" }}>
+          Invitation
+        </p>
+        <h1 style={{ "--d": "0.7s" }}>
+          La Fête
+          <br />
+          des Fleurs
+        </h1>
+        <p className="date" style={{ "--d": "1.1s" }}>
+          21 mars · Jour du Printemps
+        </p>
+        <div className="info" style={{ "--d": "1.4s" }}>
+          <span>Dès 17 h</span>
+          <span className="dot" aria-hidden="true" />
+          <span>Adresse habituelle</span>
+        </div>
+        <p className="note" style={{ "--d": "1.7s" }}>
+          Éclosion collective.
+        </p>
+        <p className="dress-code" style={{ "--d": "2.0s" }}>
+          Venez fleuris.
+        </p>
+        <button
+          type="button"
+          className="cta"
+          style={{ "--d": "2.4s" }}
+          onClick={() => setIsModalOpen(true)}
+        >
+          RSVP
+        </button>
+      </section>
 
-        <section className={`invite ${entered ? "invite--visible" : ""}`}>
-          <p className="eyebrow" style={{ "--d": "0.3s" }}>
-            Invitation
-          </p>
-          <h1 style={{ "--d": "0.7s" }}>
-            La Fête
-            <br />
-            des Fleurs
-          </h1>
-          <p className="date" style={{ "--d": "1.1s" }}>
-            21 mars · Jour du Printemps
-          </p>
-          <div className="info" style={{ "--d": "1.4s" }}>
-            <span>Dès 17 h</span>
-            <span className="dot" aria-hidden="true" />
-            <span>Adresse habituelle</span>
+      {isModalOpen && (
+        <div
+          className="modal-shell"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="fleurs-rsvp-title"
+          onClick={() => setIsModalOpen(false)}
+        >
+          <div className="modal-card" onClick={(e) => e.stopPropagation()}>
+            <span className="modal-flower mf1" aria-hidden="true">✿</span>
+            <span className="modal-flower mf2" aria-hidden="true">❀</span>
+            <span className="modal-flower mf3" aria-hidden="true">✾</span>
+            <span className="modal-flower mf4" aria-hidden="true">❁</span>
+            <span className="modal-flower mf5" aria-hidden="true">✿</span>
+            <span className="modal-flower mf6" aria-hidden="true">❀</span>
+            <button
+              type="button"
+              className="modal-close"
+              aria-label="Fermer"
+              onClick={() => setIsModalOpen(false)}
+            >
+              ×
+            </button>
+            <p className="modal-eyebrow">RSVP</p>
+            <h2 id="fleurs-rsvp-title">Tu viens ?</h2>
+            <p className="modal-body">Fais vite signe à PLN.</p>
           </div>
-          <p className="note" style={{ "--d": "1.7s" }}>
-            Éclosion collective.
-          </p>
-          <p className="dress-code" style={{ "--d": "2.0s" }}>
-            Venez fleuris.
-          </p>
-          <button
-            type="button"
-            className="cta"
-            style={{ "--d": "2.4s" }}
-            onClick={() => setIsModalOpen(true)}
-          >
-            RSVP
-          </button>
-        </section>
+        </div>
+      )}
 
-        {isModalOpen && (
-          <div
-            className="modal-shell"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="fleurs-rsvp-title"
-            onClick={() => setIsModalOpen(false)}
-          >
-            <div className="modal-card" onClick={(e) => e.stopPropagation()}>
-              <span className="modal-flower mf1" aria-hidden="true">✿</span>
-              <span className="modal-flower mf2" aria-hidden="true">❀</span>
-              <span className="modal-flower mf3" aria-hidden="true">✾</span>
-              <span className="modal-flower mf4" aria-hidden="true">❁</span>
-              <span className="modal-flower mf5" aria-hidden="true">✿</span>
-              <span className="modal-flower mf6" aria-hidden="true">❀</span>
-              <button
-                type="button"
-                className="modal-close"
-                aria-label="Fermer"
-                onClick={() => setIsModalOpen(false)}
-              >
-                ×
-              </button>
-              <p className="modal-eyebrow">RSVP</p>
-              <h2 id="fleurs-rsvp-title">Tu viens ?</h2>
-              <p className="modal-body">Fais vite signe à PLN.</p>
-            </div>
-          </div>
-        )}
+      <style jsx>{`
+        #fleurs-page,
+        #fleurs-page *,
+        #fleurs-page *::before,
+        #fleurs-page *::after {
+          box-sizing: border-box;
+          margin: 0;
+          padding: 0;
+        }
 
-        <style jsx>{`
-          #fleurs-page,
-          #fleurs-page *,
-          #fleurs-page *::before,
-          #fleurs-page *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
+        #fleurs-page {
+          --bg: #07110c;
+          --text: #f2f1e8;
+          --text-muted: rgba(242, 241, 232, 0.6);
+          --accent-warm: rgba(255, 225, 172, 0.88);
+          position: relative;
+          min-height: 100vh;
+          min-height: 100dvh;
+          overflow: hidden;
+          background: var(--bg);
+          color: var(--text);
+          font-family: var(--font-cormorant), "Georgia", serif;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        /* ── Canvas ── */
+
+        .garden-canvas {
+          position: fixed;
+          inset: 0;
+          z-index: 0;
+        }
+
+        .garden-canvas :global(canvas) {
+          display: block;
+          width: 100% !important;
+          height: 100% !important;
+          animation: subtle-glitch 9s ease-in-out infinite;
+        }
+
+        /* ── Overlays ── */
+
+        .scan-lines {
+          position: fixed;
+          inset: 0;
+          z-index: 1;
+          pointer-events: none;
+          background: repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 3px,
+            rgba(0, 0, 0, 0.025) 3px,
+            rgba(0, 0, 0, 0.025) 6px
+          );
+          opacity: 0.6;
+        }
+
+        .vignette-css {
+          position: fixed;
+          inset: 0;
+          z-index: 1;
+          pointer-events: none;
+          background: radial-gradient(
+            ellipse at 50% 40%,
+            transparent 25%,
+            rgba(7, 17, 12, 0.35) 70%,
+            rgba(3, 7, 5, 0.7) 100%
+          );
+        }
+
+        /* ── Invite text ── */
+
+        .invite {
+          position: relative;
+          z-index: 2;
+          width: min(100%, 36rem);
+          padding: 1.5rem 1rem 2rem;
+          text-align: center;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 0.85rem;
+        }
+
+        .invite > * {
+          opacity: 0;
+          transform: translateY(14px);
+          transition: opacity 0.9s ease-out, transform 0.9s ease-out;
+          transition-delay: var(--d, 0s);
+        }
+
+        .invite--visible > * {
+          opacity: 1;
+          transform: none;
+        }
+
+        .eyebrow,
+        .modal-eyebrow {
+          text-transform: uppercase;
+          letter-spacing: 0.3em;
+          font-size: 0.7rem;
+          font-weight: 400;
+          color: var(--text-muted);
+        }
+
+        h1 {
+          font-family: var(--font-cormorant), "Georgia", serif;
+          font-style: italic;
+          font-weight: 500;
+          font-size: clamp(3rem, 14vw, 5.6rem);
+          line-height: 0.9;
+          letter-spacing: -0.03em;
+          text-shadow: 0 0 40px rgba(7, 17, 12, 0.95), 0 0 80px rgba(7, 17, 12, 0.6),
+            0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .date {
+          font-size: 0.95rem;
+          font-weight: 300;
+          letter-spacing: 0.15em;
+          text-transform: uppercase;
+          color: var(--accent-warm);
+          text-shadow: 0 0 20px rgba(7, 17, 12, 0.9);
+        }
+
+        .info {
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+          font-size: 1rem;
+          font-weight: 300;
+          color: var(--text);
+          text-shadow: 0 0 24px rgba(7, 17, 12, 0.95);
+        }
+
+        .dot {
+          width: 3px;
+          height: 3px;
+          border-radius: 50%;
+          background: var(--text-muted);
+          flex-shrink: 0;
+        }
+
+        .note {
+          font-style: italic;
+          font-weight: 400;
+          font-size: 1.1rem;
+          color: var(--text-muted);
+          text-shadow: 0 0 24px rgba(7, 17, 12, 0.95);
+        }
+
+        .dress-code {
+          font-weight: 300;
+          font-size: 0.82rem;
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+          color: rgba(255, 210, 170, 0.65);
+          text-shadow: 0 0 20px rgba(7, 17, 12, 0.95);
+        }
+
+        /* ── CTA ── */
+
+        .cta {
+          appearance: none;
+          border: 0;
+          font-family: var(--font-cormorant), "Georgia", serif;
+          margin-top: 0.3rem;
+          min-width: 11rem;
+          padding: 0.9rem 2rem;
+          border-radius: 999px;
+          background: linear-gradient(
+            135deg,
+            rgba(252, 244, 188, 0.95),
+            rgba(255, 149, 201, 0.9) 50%,
+            rgba(130, 246, 179, 0.92)
+          );
+          color: #0c1a12;
+          font-size: 0.85rem;
+          font-weight: 600;
+          letter-spacing: 0.28em;
+          text-transform: uppercase;
+          cursor: pointer;
+          box-shadow: 0 16px 44px rgba(0, 0, 0, 0.35), 0 0 24px rgba(255, 182, 214, 0.2);
+          transition: transform 200ms ease, box-shadow 200ms ease, filter 200ms ease;
+          animation: cta-breathe 3.8s ease-in-out infinite;
+        }
+
+        .cta:hover,
+        .cta:focus-visible {
+          transform: translateY(-2px) scale(1.03);
+          box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), 0 0 36px rgba(160, 255, 200, 0.25);
+          filter: saturate(1.08) brightness(1.04);
+          outline: none;
+        }
+
+        /* ── Modal ── */
+
+        .modal-shell {
+          position: fixed;
+          inset: 0;
+          z-index: 20;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 1.2rem;
+          background: rgba(3, 7, 5, 0.65);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          animation: modal-fade-in 0.35s ease-out;
+        }
+
+        .modal-card {
+          position: relative;
+          width: min(100%, 26rem);
+          padding: 2.4rem 2.8rem 2.2rem;
+          border-radius: 1.4rem;
+          border: 1px solid rgba(206, 255, 222, 0.12);
+          background: radial-gradient(circle at 50% 0%, rgba(255, 211, 141, 0.12), transparent 45%),
+            radial-gradient(circle at 20% 80%, rgba(255, 170, 195, 0.06), transparent 40%),
+            radial-gradient(circle at 80% 80%, rgba(160, 225, 175, 0.06), transparent 40%),
+            linear-gradient(180deg, rgba(14, 25, 18, 0.96), rgba(7, 13, 10, 0.98));
+          box-shadow: 0 28px 70px rgba(0, 0, 0, 0.5), 0 0 40px rgba(255, 200, 180, 0.06);
+          text-align: center;
+          animation: modal-card-in 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .modal-close {
+          appearance: none;
+          border: 0;
+          font: inherit;
+          position: absolute;
+          top: 0.7rem;
+          right: 0.8rem;
+          width: 2.2rem;
+          height: 2.2rem;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.06);
+          color: rgba(255, 255, 255, 0.8);
+          font-size: 1.1rem;
+          cursor: pointer;
+          display: grid;
+          place-items: center;
+          transition: background 150ms ease;
+          z-index: 2;
+        }
+
+        .modal-close:hover {
+          background: rgba(255, 255, 255, 0.12);
+        }
+
+        .modal-card h2 {
+          font-style: italic;
+          font-weight: 500;
+          font-size: clamp(1.6rem, 7vw, 2.2rem);
+          line-height: 1.05;
+          margin-top: 0.4rem;
+        }
+
+        .modal-body {
+          margin-top: 0.8rem;
+          color: var(--text-muted);
+          font-size: 1rem;
+          font-weight: 300;
+          line-height: 1.5;
+        }
+
+        /* ── Modal decorative flowers ── */
+
+        .modal-flower {
+          position: absolute;
+          pointer-events: none;
+          line-height: 1;
+          animation: modal-flora-sway 5s ease-in-out infinite;
+          filter: blur(0.3px);
+        }
+
+        .mf1 { top: 0.5rem; left: 0.4rem; font-size: 1.6rem; color: rgba(255, 170, 195, 0.5); animation-delay: 0s; }
+        .mf2 { top: 46%; left: 0.15rem; font-size: 1.05rem; color: rgba(255, 220, 140, 0.4); animation-delay: -1.8s; }
+        .mf3 { bottom: 0.4rem; left: 0.6rem; font-size: 1.3rem; color: rgba(195, 160, 240, 0.42); animation-delay: -3.2s; }
+        .mf4 { top: 0.7rem; right: 0.35rem; font-size: 1.25rem; color: rgba(255, 185, 160, 0.48); animation-delay: -0.7s; }
+        .mf5 { top: 50%; right: 0.2rem; font-size: 1.45rem; color: rgba(160, 225, 175, 0.42); animation-delay: -2.4s; }
+        .mf6 { bottom: 0.6rem; right: 0.5rem; font-size: 0.95rem; color: rgba(255, 195, 210, 0.4); animation-delay: -4s; }
+
+        /* ── Animations ── */
+
+        @keyframes cta-breathe {
+          0%,
+          100% {
+            box-shadow: 0 16px 44px rgba(0, 0, 0, 0.35), 0 0 24px rgba(255, 182, 214, 0.2);
           }
-
-          #fleurs-page {
-            --bg: #07110c;
-            --text: #f2f1e8;
-            --text-muted: rgba(242, 241, 232, 0.6);
-            --accent-warm: rgba(255, 225, 172, 0.88);
-            position: relative;
-            min-height: 100vh;
-            min-height: 100dvh;
-            overflow: hidden;
-            background: var(--bg);
-            color: var(--text);
-            font-family: "Cormorant Garamond", "Georgia", serif;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+          50% {
+            box-shadow: 0 20px 52px rgba(0, 0, 0, 0.38), 0 0 34px rgba(160, 255, 200, 0.22);
           }
+        }
 
-          /* ── Canvas ── */
+        @keyframes modal-fade-in {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
 
-          .garden-canvas {
-            position: fixed;
-            inset: 0;
-            z-index: 0;
-          }
+        @keyframes modal-card-in {
+          from { opacity: 0; transform: scale(0.92) translateY(12px); }
+          to { opacity: 1; transform: none; }
+        }
 
-          .garden-canvas :global(canvas) {
-            display: block;
-            width: 100% !important;
-            height: 100% !important;
-            animation: subtle-glitch 9s ease-in-out infinite;
-          }
+        @keyframes modal-flora-sway {
+          0%, 100% { transform: rotate(0deg) scale(1); }
+          33% { transform: rotate(10deg) scale(1.08); }
+          66% { transform: rotate(-6deg) scale(0.95); }
+        }
 
-          /* ── Overlays ── */
-
-          .scan-lines {
-            position: fixed;
-            inset: 0;
-            z-index: 1;
-            pointer-events: none;
-            background: repeating-linear-gradient(
-              0deg,
-              transparent,
-              transparent 3px,
-              rgba(0, 0, 0, 0.025) 3px,
-              rgba(0, 0, 0, 0.025) 6px
-            );
-            opacity: 0.6;
-          }
-
-          .vignette-css {
-            position: fixed;
-            inset: 0;
-            z-index: 1;
-            pointer-events: none;
-            background: radial-gradient(
-              ellipse at 50% 40%,
-              transparent 25%,
-              rgba(7, 17, 12, 0.35) 70%,
-              rgba(3, 7, 5, 0.7) 100%
-            );
-          }
-
-          /* ── Invite text ── */
-
-          .invite {
-            position: relative;
-            z-index: 2;
-            width: min(100%, 36rem);
-            padding: 1.5rem 1rem 2rem;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.85rem;
-          }
-
-          .invite > * {
-            opacity: 0;
-            transform: translateY(14px);
-            transition: opacity 0.9s ease-out, transform 0.9s ease-out;
-            transition-delay: var(--d, 0s);
-          }
-
-          .invite--visible > * {
-            opacity: 1;
+        @keyframes subtle-glitch {
+          0%,
+          94%,
+          100% {
+            filter: none;
             transform: none;
           }
-
-          .eyebrow,
-          .modal-eyebrow {
-            text-transform: uppercase;
-            letter-spacing: 0.3em;
-            font-size: 0.7rem;
-            font-weight: 400;
-            color: var(--text-muted);
+          95% {
+            filter: saturate(1.12) brightness(1.02);
+            transform: translate(0.5px, 0);
           }
-
-          h1 {
-            font-family: "Cormorant Garamond", "Georgia", serif;
-            font-style: italic;
-            font-weight: 500;
-            font-size: clamp(3rem, 14vw, 5.6rem);
-            line-height: 0.9;
-            letter-spacing: -0.03em;
-            text-shadow: 0 0 40px rgba(7, 17, 12, 0.95), 0 0 80px rgba(7, 17, 12, 0.6),
-              0 2px 4px rgba(0, 0, 0, 0.5);
+          96.5% {
+            filter: hue-rotate(1deg);
+            transform: translate(-0.3px, 0.2px);
           }
+          98% {
+            filter: saturate(0.95);
+            transform: none;
+          }
+        }
 
-          .date {
-            font-size: 0.95rem;
-            font-weight: 300;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--accent-warm);
-            text-shadow: 0 0 20px rgba(7, 17, 12, 0.9);
+        /* ── Responsive ── */
+
+        @media (min-width: 800px) {
+          .invite {
+            gap: 1rem;
+            padding: 2rem;
           }
 
           .info {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            font-size: 1rem;
-            font-weight: 300;
-            color: var(--text);
-            text-shadow: 0 0 24px rgba(7, 17, 12, 0.95);
+            gap: 1rem;
           }
+        }
 
-          .dot {
-            width: 3px;
-            height: 3px;
-            border-radius: 50%;
-            background: var(--text-muted);
-            flex-shrink: 0;
+        /* ── Reduced Motion ── */
+
+        @media (prefers-reduced-motion: reduce) {
+          .invite > * {
+            transition: none !important;
+            opacity: 1 !important;
+            transform: none !important;
           }
-
-          .note {
-            font-style: italic;
-            font-weight: 400;
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            text-shadow: 0 0 24px rgba(7, 17, 12, 0.95);
-          }
-
-          .dress-code {
-            font-weight: 300;
-            font-size: 0.82rem;
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
-            color: rgba(255, 210, 170, 0.65);
-            text-shadow: 0 0 20px rgba(7, 17, 12, 0.95);
-          }
-
-          /* ── CTA ── */
 
           .cta {
-            appearance: none;
-            border: 0;
-            font-family: "Cormorant Garamond", "Georgia", serif;
-            margin-top: 0.3rem;
-            min-width: 11rem;
-            padding: 0.9rem 2rem;
-            border-radius: 999px;
-            background: linear-gradient(
-              135deg,
-              rgba(252, 244, 188, 0.95),
-              rgba(255, 149, 201, 0.9) 50%,
-              rgba(130, 246, 179, 0.92)
-            );
-            color: #0c1a12;
-            font-size: 0.85rem;
-            font-weight: 600;
-            letter-spacing: 0.28em;
-            text-transform: uppercase;
-            cursor: pointer;
-            box-shadow: 0 16px 44px rgba(0, 0, 0, 0.35), 0 0 24px rgba(255, 182, 214, 0.2);
-            transition: transform 200ms ease, box-shadow 200ms ease, filter 200ms ease;
-            animation: cta-breathe 3.8s ease-in-out infinite;
+            animation: none !important;
           }
 
-          .cta:hover,
-          .cta:focus-visible {
-            transform: translateY(-2px) scale(1.03);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), 0 0 36px rgba(160, 255, 200, 0.25);
-            filter: saturate(1.08) brightness(1.04);
-            outline: none;
+          .garden-canvas :global(canvas) {
+            animation: none !important;
           }
-
-          /* ── Modal ── */
-
-          .modal-shell {
-            position: fixed;
-            inset: 0;
-            z-index: 20;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1.2rem;
-            background: rgba(3, 7, 5, 0.65);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            animation: modal-fade-in 0.35s ease-out;
-          }
-
-          .modal-card {
-            position: relative;
-            width: min(100%, 26rem);
-            padding: 2.4rem 2.8rem 2.2rem;
-            border-radius: 1.4rem;
-            border: 1px solid rgba(206, 255, 222, 0.12);
-            background: radial-gradient(circle at 50% 0%, rgba(255, 211, 141, 0.12), transparent 45%),
-              radial-gradient(circle at 20% 80%, rgba(255, 170, 195, 0.06), transparent 40%),
-              radial-gradient(circle at 80% 80%, rgba(160, 225, 175, 0.06), transparent 40%),
-              linear-gradient(180deg, rgba(14, 25, 18, 0.96), rgba(7, 13, 10, 0.98));
-            box-shadow: 0 28px 70px rgba(0, 0, 0, 0.5), 0 0 40px rgba(255, 200, 180, 0.06);
-            text-align: center;
-            animation: modal-card-in 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-          }
-
-          .modal-close {
-            appearance: none;
-            border: 0;
-            font: inherit;
-            position: absolute;
-            top: 0.7rem;
-            right: 0.8rem;
-            width: 2.2rem;
-            height: 2.2rem;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.06);
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 1.1rem;
-            cursor: pointer;
-            display: grid;
-            place-items: center;
-            transition: background 150ms ease;
-            z-index: 2;
-          }
-
-          .modal-close:hover {
-            background: rgba(255, 255, 255, 0.12);
-          }
-
-          .modal-card h2 {
-            font-style: italic;
-            font-weight: 500;
-            font-size: clamp(1.6rem, 7vw, 2.2rem);
-            line-height: 1.05;
-            margin-top: 0.4rem;
-          }
-
-          .modal-body {
-            margin-top: 0.8rem;
-            color: var(--text-muted);
-            font-size: 1rem;
-            font-weight: 300;
-            line-height: 1.5;
-          }
-
-          /* ── Modal decorative flowers ── */
-
-          .modal-flower {
-            position: absolute;
-            pointer-events: none;
-            line-height: 1;
-            animation: modal-flora-sway 5s ease-in-out infinite;
-            filter: blur(0.3px);
-          }
-
-          .mf1 { top: 0.5rem; left: 0.4rem; font-size: 1.6rem; color: rgba(255, 170, 195, 0.5); animation-delay: 0s; }
-          .mf2 { top: 46%; left: 0.15rem; font-size: 1.05rem; color: rgba(255, 220, 140, 0.4); animation-delay: -1.8s; }
-          .mf3 { bottom: 0.4rem; left: 0.6rem; font-size: 1.3rem; color: rgba(195, 160, 240, 0.42); animation-delay: -3.2s; }
-          .mf4 { top: 0.7rem; right: 0.35rem; font-size: 1.25rem; color: rgba(255, 185, 160, 0.48); animation-delay: -0.7s; }
-          .mf5 { top: 50%; right: 0.2rem; font-size: 1.45rem; color: rgba(160, 225, 175, 0.42); animation-delay: -2.4s; }
-          .mf6 { bottom: 0.6rem; right: 0.5rem; font-size: 0.95rem; color: rgba(255, 195, 210, 0.4); animation-delay: -4s; }
-
-          /* ── Animations ── */
-
-          @keyframes cta-breathe {
-            0%,
-            100% {
-              box-shadow: 0 16px 44px rgba(0, 0, 0, 0.35), 0 0 24px rgba(255, 182, 214, 0.2);
-            }
-            50% {
-              box-shadow: 0 20px 52px rgba(0, 0, 0, 0.38), 0 0 34px rgba(160, 255, 200, 0.22);
-            }
-          }
-
-          @keyframes modal-fade-in {
-            from { opacity: 0; }
-            to { opacity: 1; }
-          }
-
-          @keyframes modal-card-in {
-            from { opacity: 0; transform: scale(0.92) translateY(12px); }
-            to { opacity: 1; transform: none; }
-          }
-
-          @keyframes modal-flora-sway {
-            0%, 100% { transform: rotate(0deg) scale(1); }
-            33% { transform: rotate(10deg) scale(1.08); }
-            66% { transform: rotate(-6deg) scale(0.95); }
-          }
-
-          @keyframes subtle-glitch {
-            0%,
-            94%,
-            100% {
-              filter: none;
-              transform: none;
-            }
-            95% {
-              filter: saturate(1.12) brightness(1.02);
-              transform: translate(0.5px, 0);
-            }
-            96.5% {
-              filter: hue-rotate(1deg);
-              transform: translate(-0.3px, 0.2px);
-            }
-            98% {
-              filter: saturate(0.95);
-              transform: none;
-            }
-          }
-
-          /* ── Responsive ── */
-
-          @media (min-width: 800px) {
-            .invite {
-              gap: 1rem;
-              padding: 2rem;
-            }
-
-            .info {
-              gap: 1rem;
-            }
-          }
-
-          /* ── Reduced Motion ── */
-
-          @media (prefers-reduced-motion: reduce) {
-            .invite > * {
-              transition: none !important;
-              opacity: 1 !important;
-              transform: none !important;
-            }
-
-            .cta {
-              animation: none !important;
-            }
-
-            .garden-canvas :global(canvas) {
-              animation: none !important;
-            }
-          }
-        `}</style>
-      </main>
-    </>
+        }
+      `}</style>
+    </main>
   );
 }

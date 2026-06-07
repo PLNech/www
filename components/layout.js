@@ -1,9 +1,10 @@
-import Head from "next/head";
+'use client';
+
 import Image from "next/image";
 import styles from "./layout.module.css";
 import utilStyles from "../styles/utils.module.css";
 import Link from "next/link";
-import Router from 'next/router'
+import { useRouter } from "next/navigation";
 
 const name = "PLN";
 export const siteTitle = "PLN's Works";
@@ -12,22 +13,9 @@ export const twitterHandle = "@PaulLouisNech";
 export const description = "PLN's Selected Works";
 
 export default function Layout({ children, home }) {
+  const router = useRouter();
   return (
     <div className={styles.container}>
-      <Head>
-        <link rel="icon" href="/favicon.ico" />
-        <meta name="description" content={description} />
-        {/* Twitter */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:creator" content={twitterHandle} key="twhandle" />
-        {/* Open Graph */}
-        <meta name="og:title" content={siteTitle} key="ogtitle"/>
-        <meta property="og:url" content={siteURL} key="ogurl" />
-        <meta property="og:site_name" content={siteTitle} key="ogsitename" />
-        <meta property="og:type" content="website" key="ogtype" />
-        <meta property="og:description" content={description} key="ogdesc" />
-        <meta property="og:image" content={`${siteURL}/images/profile.png`} />
-      </Head>
       <header className={styles.header}>
         {home ? (
           <>
@@ -44,7 +32,6 @@ export default function Layout({ children, home }) {
         ) : (
           <>
             <Link href="/">
-
               <Image
                 priority
                 src="/images/profile.png"
@@ -53,7 +40,6 @@ export default function Layout({ children, home }) {
                 width={108}
                 alt={name}
               />
-
             </Link>
             <h2 className={utilStyles.headingLg}>
               <Link href="/" className={utilStyles.colorInherit}>
@@ -66,7 +52,7 @@ export default function Layout({ children, home }) {
       <main>{children}</main>
       {!home && (
         <div className={styles.backToHome}>
-          <div onClick={() => Router.back()} className={utilStyles.backButton}>
+          <div onClick={() => router.back()} className={utilStyles.backButton}>
             Go Back
           </div>
         </div>

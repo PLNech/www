@@ -1,34 +1,19 @@
-import Head from "next/head";
 import Link from "next/link";
-import Date from "../components/date";
-import Layout from "../components/layout";
-import utilStyles from "../styles/utils.module.css";
-import { getPostsData } from "../lib/posts";
-import { getRecentTalksData } from "../lib/talks";
+import Layout from "@/components/layout";
+import utilStyles from "@/styles/utils.module.css";
+import { getRecentTalksData } from "@/lib/talks";
 import HoverTooltip from "@/components/HoverTooltip";
 
-export async function getStaticProps() {
-  const nbLastTalks = 3;
+export const metadata = {
+  title: "PLN's Home",
+};
+
+export default function Home() {
   const talks = getRecentTalksData();
-  const posts = getPostsData();
 
-  return {
-    props: {
-      posts,
-      talks,
-    },
-  };
-}
-
-export default function Home({ posts, talks }) {
   return (
     <div className="max-w-7xl mx-auto px-4">
       <Layout home>
-        <Head>
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <title>PLN's Home</title>
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
         <section className={utilStyles.headingMd}>
           <h1 className="title">Bonjour !</h1>
           <h2>
@@ -40,30 +25,30 @@ export default function Home({ posts, talks }) {
           </h3><br />
           <div className="description">
             At <a href="https://algolia.com">Algolia</a>, I've crafted tools that help you{" "}
-            <HoverTooltip 
+            <HoverTooltip
               content={
                 <>
-                  From <strong>2016</strong> to <strong>2018</strong>,<br /> 
+                  From <strong>2016</strong> to <strong>2018</strong>,<br />
                   I built tools to <strong>accelerate Android developers</strong> crafting unique search experiences.
                 </>
               }
               links={[
-                { 
-                  text: "InstantSearch-Android, the first Algolia Mobile Search Toolkit", 
-                  url: "https://github.com/algolia/instantsearch-android" 
+                {
+                  text: "InstantSearch-Android, the first Algolia Mobile Search Toolkit",
+                  url: "https://github.com/algolia/instantsearch-android"
                 },
-                { 
-                  text: "Voice-Overlay, an open-source speech-to-text helper", 
-                  url: "https://github.com/algolia/voice-overlay-android" 
+                {
+                  text: "Voice-Overlay, an open-source speech-to-text helper",
+                  url: "https://github.com/algolia/voice-overlay-android"
                 }
               ]}
             >
                 build mobile apps
             </HoverTooltip>,{" "}
-            <HoverTooltip 
+            <HoverTooltip
               content={
                 <>
-                  From <strong>2019</strong> to <strong>2021</strong>,<br /> 
+                  From <strong>2019</strong> to <strong>2021</strong>,<br />
                   I built APIs to better <strong>understand user language</strong> in search engines and give them semantic answers.
                   <br /><br />
                   <strong>Algolia Understand</strong> was a cross-index Intent Detection and Entity Recognition API.
@@ -72,27 +57,27 @@ export default function Home({ posts, talks }) {
                 </>
               }
               links={[
-                { 
-                  text: "Algolia Understand", 
+                {
+                  text: "Algolia Understand",
                   url: "https://www.algolia.com/blog/ai/launching-an-industry-leading-artificially-intelligent-search-platform/"
                 }
               ]}
             >
               understand your users
             </HoverTooltip>, and {" "}
-            <HoverTooltip 
+            <HoverTooltip
               content={
                 <>
-                  From <strong>2022</strong> to <strong>2024</strong>,<br /> 
+                  From <strong>2022</strong> to <strong>2024</strong>,<br />
                   I worked on <strong>Recommendation APIs</strong> - serving at high-scale (<i>billions</i><br /> of items per months) a blend of algorithms to recommend content by learning from either <i>user behavior</i>, <i>semantic image analysis</i>, or <i>textual analysis</i>.
                   <br /><br />
-                  <strong>LookingSimilar</strong> is the visual recommendation API I built over Algolia's NeuralHash engine, 
+                  <strong>LookingSimilar</strong> is the visual recommendation API I built over Algolia's NeuralHash engine,
                   leveraging open-source image vectorization models and HNSW graphs to recommend visually relevant items.
                 </>
               }
               links={[
-                { 
-                  text: "LookingSimilar", 
+                {
+                  text: "LookingSimilar",
                   url: "https://www.algolia.com/about/news/algolia-unveils-new-looking-similar-capability-elevating-shopping-experiences-with-image-based-recommendations"
                 }
               ]}
@@ -101,11 +86,11 @@ export default function Home({ posts, talks }) {
             </HoverTooltip>.<br />
             <div className="divider" />
             Nowadays, I create GenAI tools for builders of{" "}
-            <HoverTooltip 
+            <HoverTooltip
               content="Blending state-of-the-art LLMs with a distributed search engine to create a new kind of content discovery experiences."
               links={[
-                { 
-                  text: "Generative Experiences", 
+                {
+                  text: "Generative Experiences",
                   url: "https://www.algolia.com/about/news/revolutionizing-retail-algolia-unveils-groundbreaking-generative-ai-for-shopping-experiences"
                 }
               ]}
@@ -132,7 +117,7 @@ export default function Home({ posts, talks }) {
           <p className="description">
             Using <Link href="/hydra/" className={utilStyles.inlineLink}>Hydra</Link>, I create animations that
             offer{" "}
-            <HoverTooltip 
+            <HoverTooltip
               content={
                 <>
                   <img src="/images/halley.png" alt="Hydra" />
@@ -178,23 +163,6 @@ export default function Home({ posts, talks }) {
             ))}
           </ul>
         </section>
-        {/* TODO: Get rid of blog or use it :') */}
-        {/* <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-          <h2 className={utilStyles.headingLg}>Blog</h2>
-          <ul className={utilStyles.list}>
-            {posts.map(({ id, date, title }) => (
-              <li className={utilStyles.listItem} key={id}>
-                <Link href={`/post/${id}`}>
-                  <a>{title}</a>
-                </Link>
-                <br />
-                <small className={utilStyles.lightText}>
-                  <Date dateString={date} />
-                </small>
-              </li>
-            ))}
-          </ul>
-        </section> */}
       </Layout>
     </div>
   );
