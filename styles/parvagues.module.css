@@ -1,20 +1,5 @@
 /* ParVagues specific styles */
-/* New Color Palette */
-
-/* Fixing CSS Modules compatibility - defining colors in a local class */
-.colorRoot {
-  --neon-down: #8900b3;
-  --neon-low: #a700d1;
-  --neon-high: #d900ff;
-  --coral: #ff3d7b;
-  --biomod: #5bc091;
-  --cigarette: #ff8c00;
-}
-
-/* This class can be added to the main container to provide color variables to all children */
-.colorContainer {
-  composes: colorRoot;
-}
+/* Palette comes from tokens.css via [data-theme="parvagues"] on the layout wrapper. */
 
 .heroSection {
   min-height: 100vh;

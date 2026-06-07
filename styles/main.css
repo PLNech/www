@@ -12,26 +12,27 @@ body {
   box-sizing: border-box;
 }
 
-/* Scope legacy element styles to non-parvagues pages */
-body:not(:has(.parvagues-root)) a {
-  color: #0070f3;
+/* Legacy element defaults, scoped to the content/landing shell (components/layout.js).
+   ParVagues styles itself with Tailwind and opts out by not carrying .site-shell. */
+.site-shell a {
+  color: var(--link);
   text-decoration: none;
 }
 
-body:not(:has(.parvagues-root)) a:hover {
+.site-shell a:hover {
   text-decoration: underline;
 }
 
-body:not(:has(.parvagues-root)) img {
+.site-shell img {
   max-width: 100%;
   display: block;
 }
 
-body:not(:has(.parvagues-root)) header {
+.site-shell header {
   margin-bottom: 2em;
 }
 
-body:not(:has(.parvagues-root)) main h2 {
+.site-shell main h2 {
   margin-bottom: 1em;
 }
 
@@ -47,7 +48,7 @@ p.code {
   font-family: monospace;
 }
 
-body:not(:has(.parvagues-root)) section {
+.site-shell section {
   margin-bottom: 3em;
 }
 
@@ -55,7 +56,7 @@ small {
   font-size: 1rem;
 }
 
-body:not(:has(.parvagues-root)) footer {
+.site-shell footer {
   margin-top: 4em;
   text-align: center;
   color: #228;

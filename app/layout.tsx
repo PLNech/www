@@ -1,3 +1,4 @@
+import '@/styles/tokens.css';
 import '@/styles/globals.css';
 import '@/styles/main.css';
 import '@/styles/masonry.css';

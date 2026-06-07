@@ -15,7 +15,7 @@ export const description = "PLN's Selected Works";
 export default function Layout({ children, home }) {
   const router = useRouter();
   return (
-    <div className={styles.container}>
+    <div className={`site-shell ${styles.container}`}>
       <header className={styles.header}>
         {home ? (
           <>

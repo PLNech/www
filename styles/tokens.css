@@ -1,0 +1,39 @@
+/* Design tokens — the one place section themes diverge.
+ *
+ * The default (`:root`) is the neutral / professional palette for the landing
+ * and content pages. Each section that wants a different look sets
+ * `data-theme="<name>"` on its layout wrapper; the ~90 `var(--…)` consumers
+ * underneath resolve against that ancestor scope, so theming is a single
+ * attribute — no per-component edits.
+ *
+ * Token names are shared across themes (--surface, --text-primary, …) so the
+ * same component reads the right value in any theme. Theme-specific accents
+ * (--neon-*, --coral) only exist where a theme defines them.
+ */
+
+:root {
+  /* Neutral / professional default (landing + content) */
+  --surface: #ffffff;
+  --surface-raised: #f5f5f5;
+  --text-primary: #1a1a1a;
+  --text-muted: #555555;
+  --link: #0070f3;
+  --link-hover: #0051a8;
+  --border: #e0e0e0;
+  color-scheme: light;
+}
+
+/* ParVagues — neon / dark. Set on app/parvagues/layout.tsx wrapper. */
+[data-theme="parvagues"] {
+  --neon-down: #8900b3;
+  --neon-low: #a700d1;
+  --neon-high: #d900ff;
+  --coral: #ff3d7b;
+  --biomod: #5bc091;
+  --cigarette: #ff8c00;
+  --surface: #0a0a0a;
+  --surface-raised: #111111;
+  --text-primary: #e5e5e5;
+  --text-muted: #737373;
+  color-scheme: dark;
+}

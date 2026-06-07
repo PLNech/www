@@ -1,23 +1,10 @@
 @import "tailwindcss";
 
-/* ParVagues palette */
-:root {
-  --neon-down: #8900b3;
-  --neon-low: #a700d1;
-  --neon-high: #d900ff;
-  --coral: #ff3d7b;
-  --biomod: #5bc091;
-  --cigarette: #ff8c00;
-  --surface: #0a0a0a;
-  --surface-raised: #111111;
-  --text-primary: #e5e5e5;
-  --text-muted: #737373;
-}
+/* Palette lives in tokens.css (neutral :root + scoped [data-theme]). */
 
 html, body {
-  background-color: #0a0a0a;
-  color: #e5e5e5;
-  color-scheme: dark;
+  background-color: var(--surface);
+  color: var(--text-primary);
 }
 
 html {

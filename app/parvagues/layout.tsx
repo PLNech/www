@@ -31,6 +31,7 @@ export const metadata = {
 export default function ParvaguesLayout({ children }: { children: React.ReactNode }) {
   return (
     <div
+      data-theme="parvagues"
       className={`parvagues-root ${syne.variable} noise-overlay min-h-screen bg-[var(--surface)] text-[var(--text-primary)] selection:bg-[var(--neon-high)]/30 selection:text-white`}
     >
       <RevealController />
