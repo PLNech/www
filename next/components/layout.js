@@ -4,7 +4,6 @@ import styles from "./layout.module.css";
 import utilStyles from "../styles/utils.module.css";
 import Link from "next/link";
 import Router from 'next/router'
-import { useRouter } from 'next/router'
 
 const name = "PLN";
 export const siteTitle = "PLN's Works";
@@ -13,25 +12,9 @@ export const twitterHandle = "@PaulLouisNech";
 export const description = "PLN's Selected Works";
 
 export default function Layout({ children, home }) {
-  const router = useRouter();
-  const path = router?.asPath || router?.pathname || '';
-  const isDunbar = path.startsWith('/dunbar');
-  // Simple feedback launcher: prompts for text then opens default mail client
-  const handleFeedbackMail = () => {
-    try {
-      const txt = typeof window !== 'undefined' ? window.prompt('Feedback for Dunbar (will open your email client):', '') : '';
-      const subject = 'Dunbar feedback';
-      const url = typeof window !== 'undefined' ? window.location.href : '';
-      const body = `${txt ? txt + '\\n\\n' : ''}From: ${url}`;
-      const mailto = `mailto:dunbar@nech.pl?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      if (typeof window !== 'undefined') window.location.href = mailto;
-    } catch {}
-  };
-
   return (
     <div className={styles.container}>
       <Head>
-        <script src="http://localhost:8097"></script>
         <link rel="icon" href="/favicon.ico" />
         <meta name="description" content={description} />
         {/* Twitter */}
@@ -43,12 +26,7 @@ export default function Layout({ children, home }) {
         <meta property="og:site_name" content={siteTitle} key="ogsitename" />
         <meta property="og:type" content="website" key="ogtype" />
         <meta property="og:description" content={description} key="ogdesc" />
-        <meta
-          property="og:image"
-          content={`https://og-image.vercel.app/${encodeURI(
-            siteTitle
-          )}.png?theme=dark&md=0&fontSize=75px&images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fnextjs-black-logo.svg`}
-        />
+        <meta property="og:image" content={`${siteURL}/images/profile.png`} />
       </Head>
       <header className={styles.header}>
         {home ? (
@@ -94,7 +72,7 @@ export default function Layout({ children, home }) {
         </div>
       )}
       <footer>
-        PLN 2025 | ☇
+        PLN {new Date().getFullYear()} | ☇
         <a
           href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
           target="_blank"
@@ -102,20 +80,6 @@ export default function Layout({ children, home }) {
         >
           ▲
         </a>
-        {isDunbar && (
-          <>
-            {' '}|{' '}
-            <button
-              type="button"
-              onClick={handleFeedbackMail}
-              className={utilStyles.backButton}
-              style={{ cursor: 'pointer', border: 'none', background: 'transparent', padding: 0 }}
-              title="Send feedback about Dunbar"
-            >
-              Feedback (dunbar@nech.pl)
-            </button>
-          </>
-        )}
       </footer>
     </div>
   );
