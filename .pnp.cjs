@@ -26,7 +26,7 @@ const RAW_RUNTIME_STATE =
       [null, {\
         "packageLocation": "./",\
         "packageDependencies": [\
-          ["@playwright/test", "npm:1.57.0"],\
+          ["@playwright/test", "npm:1.60.0"],\
           ["@tailwindcss/postcss", "npm:4.2.1"],\
           ["@testing-library/dom", "npm:10.4.1"],\
           ["@testing-library/jest-dom", "npm:6.9.1"],\
@@ -46,7 +46,7 @@ const RAW_RUNTIME_STATE =
           ["next", "virtual:599f9545309f05166d506895056809d0f5971d8f55d13475681739816b4bb6745eb725b53ed2108e22ea4ce46b8a2c491882d38a9948455117b545da3880eea7#npm:15.5.6"],\
           ["next-router-mock", "virtual:599f9545309f05166d506895056809d0f5971d8f55d13475681739816b4bb6745eb725b53ed2108e22ea4ce46b8a2c491882d38a9948455117b545da3880eea7#npm:1.0.4"],\
           ["p5", "npm:1.11.3"],\
-          ["playwright", "npm:1.58.2"],\
+          ["playwright", "npm:1.60.0"],\
           ["postcss", "npm:8.5.8"],\
           ["prismjs", "npm:1.30.0"],\
           ["react", "npm:18.3.1"],\
@@ -2116,11 +2116,11 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@playwright/test", [\
-      ["npm:1.57.0", {\
-        "packageLocation": "../../../.yarn/berry/cache/@playwright-test-npm-1.57.0-d5b9717312-10c0.zip/node_modules/@playwright/test/",\
+      ["npm:1.60.0", {\
+        "packageLocation": "../../../.yarn/berry/cache/@playwright-test-npm-1.60.0-b1772ab412-10c0.zip/node_modules/@playwright/test/",\
         "packageDependencies": [\
-          ["@playwright/test", "npm:1.57.0"],\
-          ["playwright", "npm:1.57.0"]\
+          ["@playwright/test", "npm:1.60.0"],\
+          ["playwright", "npm:1.60.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -8245,7 +8245,7 @@ const RAW_RUNTIME_STATE =
           ["@next/swc-win32-arm64-msvc", "npm:15.5.6"],\
           ["@next/swc-win32-x64-msvc", "npm:15.5.6"],\
           ["@opentelemetry/api", null],\
-          ["@playwright/test", "npm:1.57.0"],\
+          ["@playwright/test", "npm:1.60.0"],\
           ["@swc/helpers", "npm:0.5.15"],\
           ["@types/babel-plugin-react-compiler", null],\
           ["@types/opentelemetry__api", null],\
@@ -8814,37 +8814,21 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["playwright", [\
-      ["npm:1.57.0", {\
-        "packageLocation": "../../../.yarn/berry/cache/playwright-npm-1.57.0-1712c32e43-10c0.zip/node_modules/playwright/",\
+      ["npm:1.60.0", {\
+        "packageLocation": "../../../.yarn/berry/cache/playwright-npm-1.60.0-f1d6ab02ce-10c0.zip/node_modules/playwright/",\
         "packageDependencies": [\
-          ["playwright", "npm:1.57.0"],\
+          ["playwright", "npm:1.60.0"],\
           ["fsevents", "patch:fsevents@npm%3A2.3.2#optional!builtin<compat/fsevents>::version=2.3.2&hash=df0bf1"],\
-          ["playwright-core", "npm:1.57.0"]\
-        ],\
-        "linkType": "HARD"\
-      }],\
-      ["npm:1.58.2", {\
-        "packageLocation": "../../../.yarn/berry/cache/playwright-npm-1.58.2-0c12daad27-10c0.zip/node_modules/playwright/",\
-        "packageDependencies": [\
-          ["playwright", "npm:1.58.2"],\
-          ["fsevents", "patch:fsevents@npm%3A2.3.2#optional!builtin<compat/fsevents>::version=2.3.2&hash=df0bf1"],\
-          ["playwright-core", "npm:1.58.2"]\
+          ["playwright-core", "npm:1.60.0"]\
         ],\
         "linkType": "HARD"\
       }]\
     ]],\
     ["playwright-core", [\
-      ["npm:1.57.0", {\
-        "packageLocation": "../../../.yarn/berry/cache/playwright-core-npm-1.57.0-1ccd5476ca-10c0.zip/node_modules/playwright-core/",\
+      ["npm:1.60.0", {\
+        "packageLocation": "../../../.yarn/berry/cache/playwright-core-npm-1.60.0-3d53a7d2d6-10c0.zip/node_modules/playwright-core/",\
         "packageDependencies": [\
-          ["playwright-core", "npm:1.57.0"]\
-        ],\
-        "linkType": "HARD"\
-      }],\
-      ["npm:1.58.2", {\
-        "packageLocation": "../../../.yarn/berry/cache/playwright-core-npm-1.58.2-7d85ddc78a-10c0.zip/node_modules/playwright-core/",\
-        "packageDependencies": [\
-          ["playwright-core", "npm:1.58.2"]\
+          ["playwright-core", "npm:1.60.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -8854,7 +8838,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./",\
         "packageDependencies": [\
           ["pln-www", "workspace:."],\
-          ["@playwright/test", "npm:1.57.0"],\
+          ["@playwright/test", "npm:1.60.0"],\
           ["@tailwindcss/postcss", "npm:4.2.1"],\
           ["@testing-library/dom", "npm:10.4.1"],\
           ["@testing-library/jest-dom", "npm:6.9.1"],\
@@ -8874,7 +8858,7 @@ const RAW_RUNTIME_STATE =
           ["next", "virtual:599f9545309f05166d506895056809d0f5971d8f55d13475681739816b4bb6745eb725b53ed2108e22ea4ce46b8a2c491882d38a9948455117b545da3880eea7#npm:15.5.6"],\
           ["next-router-mock", "virtual:599f9545309f05166d506895056809d0f5971d8f55d13475681739816b4bb6745eb725b53ed2108e22ea4ce46b8a2c491882d38a9948455117b545da3880eea7#npm:1.0.4"],\
           ["p5", "npm:1.11.3"],\
-          ["playwright", "npm:1.58.2"],\
+          ["playwright", "npm:1.60.0"],\
           ["postcss", "npm:8.5.8"],\
           ["prismjs", "npm:1.30.0"],\
           ["react", "npm:18.3.1"],\
