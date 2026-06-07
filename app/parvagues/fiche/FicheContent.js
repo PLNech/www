@@ -1,4 +1,5 @@
-import Layout from '@/components/parvagues/Layout';
+'use client';
+
 import { FaEnvelope, FaPrint, FaLaptopCode, FaSlidersH, FaVolumeUp, FaVideo, FaPlug, FaClock } from 'react-icons/fa';
 
 const SHOW_INFOS = [
@@ -152,9 +153,9 @@ function StagePlot() {
   );
 }
 
-export default function FicheTechnique() {
+export default function FicheContent() {
   return (
-    <Layout title="ParVagues — Fiche Technique">
+    <>
       {/* Hero */}
       <section className="pt-32 pb-10 md:pt-40 md:pb-14">
         <div className="max-w-3xl mx-auto px-6 text-center">
@@ -369,6 +370,6 @@ export default function FicheTechnique() {
           a { text-decoration: none !important; }
         }
       `}</style>
-    </Layout>
+    </>
   );
 }

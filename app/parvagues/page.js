@@ -1,5 +1,4 @@
 import { getAllLives } from '@/lib/livesData';
-import Layout from '@/components/parvagues/Layout';
 import Hero from '@/components/parvagues/Hero';
 import BioSection from '@/components/parvagues/BioSection';
 import AsSeenAt from '@/components/parvagues/AsSeenAt';
@@ -8,21 +7,13 @@ import MusicSection from '@/components/parvagues/MusicSection';
 import VideoSection from '@/components/parvagues/VideoSection';
 import BookingForm from '@/components/parvagues/BookingForm';
 
-export default function ParVagues({ lives }) {
-  return (
-    <Layout title="ParVagues - Musique Algorithmique">
-      <Hero />
-      <BioSection />
-      <AsSeenAt />
-      <TourTimeline lives={lives} />
-      <MusicSection />
-      <VideoSection />
-      <BookingForm />
-    </Layout>
-  );
-}
+export const revalidate = 60;
 
-export async function getStaticProps() {
+export const metadata = {
+  title: { absolute: 'ParVagues - Musique Algorithmique' },
+};
+
+export default function ParVaguesPage() {
   const allLives = getAllLives();
 
   // Only send fields needed by the landing page
@@ -34,8 +25,15 @@ export async function getStaticProps() {
     ctaURL: ctaURL || '',
   }));
 
-  return {
-    props: { lives },
-    revalidate: 60,
-  };
+  return (
+    <>
+      <Hero />
+      <BioSection />
+      <AsSeenAt />
+      <TourTimeline lives={lives} />
+      <MusicSection />
+      <VideoSection />
+      <BookingForm />
+    </>
+  );
 }

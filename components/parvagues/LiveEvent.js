@@ -1,8 +1,7 @@
+'use client';
+
 import { useState, useEffect, useRef } from 'react';
-import Head from 'next/head';
 import Image from 'next/image';
-import { getAllLives, getLiveData, getLivesImages, getLiveTracks } from '@/lib/livesData';
-import Layout from '@/components/parvagues/Layout';
 import Countdown from '@/components/parvagues/Countdown';
 import ImageGallery from '@/components/parvagues/ImageGallery';
 import { format } from 'date-fns';
@@ -286,113 +285,84 @@ export default function LiveEvent({ live, images, tracks, isPostEvent: initialPo
     const location = fm.location || '';
 
     return (
-        <Layout title={`${title} - ParVagues`}>
-            <div className="max-w-4xl mx-auto px-6 pt-24 pb-16">
-                {/* Header */}
-                <div className="text-center mb-12">
-                    {dateStr && (
-                        <div className="inline-block px-3 py-1 mb-4 text-xs font-mono text-[var(--neon-high)] border border-[var(--neon-high)]/30 rounded-full">
-                            {dateStr}
-                        </div>
-                    )}
-                    <h1 className="font-display text-4xl md:text-6xl font-extrabold mb-4 tracking-tight">
-                        {title}
-                    </h1>
-                    {location && (
-                        <p className="text-lg text-[var(--text-muted)] flex items-center justify-center gap-2">
-                            <span className="w-2 h-2 bg-[var(--neon-high)] rounded-full" style={{ opacity: isPostEvent ? 0.4 : 1, animation: isPostEvent ? 'none' : 'pulse 2s infinite' }} />
-                            {location}
-                        </p>
-                    )}
-                </div>
-
-                {/* Poster */}
-                {fm.poster && (
-                    <div className="mb-12 rounded-2xl overflow-hidden border border-white/[0.06]">
-                        <Image
-                            src={fm.poster}
-                            alt={`${title} poster`}
-                            width={1200}
-                            height={1710}
-                            className="w-full h-auto"
-                            priority
-                        />
+        <div className="max-w-4xl mx-auto px-6 pt-24 pb-16">
+            {/* Header */}
+            <div className="text-center mb-12">
+                {dateStr && (
+                    <div className="inline-block px-3 py-1 mb-4 text-xs font-mono text-[var(--neon-high)] border border-[var(--neon-high)]/30 rounded-full">
+                        {dateStr}
                     </div>
                 )}
-
-                {/* Countdown for future events */}
-                {!isPostEvent && (
-                    <div className="text-center mb-12">
-                        <div className="inline-block p-6 bg-black/50 backdrop-blur-md rounded-xl border border-[var(--neon-high)]/30 shadow-[0_0_30px_rgba(137,0,179,0.2)]">
-                            <h3 className="text-[var(--neon-high)] mb-4 font-mono text-sm">&gt; INITIALIZING_EVENT</h3>
-                            <Countdown targetDate={fm.date} onPhaseChange={setPhase} />
-                        </div>
-                    </div>
-                )}
-
-                {/* Audio/Video Recording */}
-                {hasMedia && (
-                    <MediaSection
-                        audio={fm.audio}
-                        video={fm.video}
-                        archive={fm.archive}
-                        instagram={fm.instagram}
-                    />
-                )}
-
-                {/* Main Content */}
-                {live.content && live.content.trim() && (
-                    <div className="prose prose-invert prose-purple max-w-none mb-16 bg-black/30 p-8 rounded-2xl border border-white/5">
-                        <ReactMarkdown>{live.content}</ReactMarkdown>
-                    </div>
-                )}
-
-                {/* BPM Curve */}
-                <BpmCurve tracks={tracks} />
-
-                {/* Tracks & Code */}
-                <TracksSection tracks={tracks} />
-
-                {/* Gallery */}
-                {images && images.length > 0 && (
-                    <div className="mb-16">
-                        <div className="flex items-center gap-4 mb-8">
-                            <h2 className="font-display text-2xl font-bold text-white">
-                                <span className="text-[var(--neon-high)]">#</span> Galerie
-                            </h2>
-                            <div className="h-px bg-[var(--neon-high)]/20 flex-grow" />
-                        </div>
-                        <ImageGallery images={images} />
-                    </div>
+                <h1 className="font-display text-4xl md:text-6xl font-extrabold mb-4 tracking-tight">
+                    {title}
+                </h1>
+                {location && (
+                    <p className="text-lg text-[var(--text-muted)] flex items-center justify-center gap-2">
+                        <span className="w-2 h-2 bg-[var(--neon-high)] rounded-full" style={{ opacity: isPostEvent ? 0.4 : 1, animation: isPostEvent ? 'none' : 'pulse 2s infinite' }} />
+                        {location}
+                    </p>
                 )}
             </div>
-        </Layout>
+
+            {/* Poster */}
+            {fm.poster && (
+                <div className="mb-12 rounded-2xl overflow-hidden border border-white/[0.06]">
+                    <Image
+                        src={fm.poster}
+                        alt={`${title} poster`}
+                        width={1200}
+                        height={1710}
+                        className="w-full h-auto"
+                        priority
+                    />
+                </div>
+            )}
+
+            {/* Countdown for future events */}
+            {!isPostEvent && (
+                <div className="text-center mb-12">
+                    <div className="inline-block p-6 bg-black/50 backdrop-blur-md rounded-xl border border-[var(--neon-high)]/30 shadow-[0_0_30px_rgba(137,0,179,0.2)]">
+                        <h3 className="text-[var(--neon-high)] mb-4 font-mono text-sm">&gt; INITIALIZING_EVENT</h3>
+                        <Countdown targetDate={fm.date} onPhaseChange={setPhase} />
+                    </div>
+                </div>
+            )}
+
+            {/* Audio/Video Recording */}
+            {hasMedia && (
+                <MediaSection
+                    audio={fm.audio}
+                    video={fm.video}
+                    archive={fm.archive}
+                    instagram={fm.instagram}
+                />
+            )}
+
+            {/* Main Content */}
+            {live.content && live.content.trim() && (
+                <div className="prose prose-invert prose-purple max-w-none mb-16 bg-black/30 p-8 rounded-2xl border border-white/5">
+                    <ReactMarkdown>{live.content}</ReactMarkdown>
+                </div>
+            )}
+
+            {/* BPM Curve */}
+            <BpmCurve tracks={tracks} />
+
+            {/* Tracks & Code */}
+            <TracksSection tracks={tracks} />
+
+            {/* Gallery */}
+            {images && images.length > 0 && (
+                <div className="mb-16">
+                    <div className="flex items-center gap-4 mb-8">
+                        <h2 className="font-display text-2xl font-bold text-white">
+                            <span className="text-[var(--neon-high)]">#</span> Galerie
+                        </h2>
+                        <div className="h-px bg-[var(--neon-high)]/20 flex-grow" />
+                    </div>
+                    <ImageGallery images={images} />
+                </div>
+            )}
+        </div>
     );
-}
-
-export async function getStaticPaths() {
-    const lives = getAllLives();
-    const paths = lives.map((live) => ({
-        params: { slug: live.slug },
-    }));
-
-    return { paths, fallback: false };
-}
-
-export async function getStaticProps({ params }) {
-    const live = await getLiveData(params.slug);
-    const images = getLivesImages(params.slug);
-    const tracks = getLiveTracks(params.slug);
-
-    const isPostEvent = new Date() > new Date((live.frontmatter?.date || '2099-01-01') + 'T23:59:59');
-
-    return {
-        props: {
-            live,
-            images,
-            tracks,
-            isPostEvent,
-        },
-        revalidate: 60,
-    };
 }
