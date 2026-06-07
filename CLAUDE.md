@@ -47,14 +47,18 @@ yarn preview:env:pull            # vercel env pull .env.local (first-time local 
 
 ## Content model
 
-Markdown sections are loaded server-side at build via `gray-matter` (frontmatter) + `remark`/`remark-html` (body → HTML). The shared loader is `lib/utils.js`:
-- `getAllContentData(section, sorted)` — list with frontmatter only (used for index/listing pages).
-- `getAllContentIds(section)` — `[{ params: { id } }]` shape; map to `generateStaticParams()` via `.map(({ params }) => params)`.
+Markdown sections are loaded server-side at build via `gray-matter` (frontmatter) + `remark`/`remark-html` (body → HTML). The single loader is **`lib/content/index.ts`**, which holds two collection shapes on purpose (not one forced shape):
+
+*Flat Markdown collections* (posts, poems, talks, hydras — one `.md` per item under `content/SECTION/`):
+- `getAllContentData(section, sorted)` — list with frontmatter only (index/listing pages).
+- `getAllContentIds(section)` — plain `string[]`; dynamic pages map it to params via `.map((id) => ({ id }))`.
 - `getContentData(section, id)` — single item with rendered `contentHtml`.
 
-Thin per-section wrappers (`lib/posts.js`, `lib/hydras.js`, `lib/poems.js`, `lib/talks.js`) just bind a section name to these helpers. Dynamic content pages (`app/post/[id]/page.js`, `app/poesie/[id]/page.js`, `app/hydra/[id]/page.js`) are async server components that pair `generateStaticParams()` + a `params`-driven fetch (`params` is a Promise — `await` it).
+Thin per-section wrappers (`lib/posts.js`, `lib/hydras.js`, `lib/poems.js`, `lib/talks.js`) just re-export from `@/lib/content`, binding a section name. Dynamic content pages (`app/post/[id]/page.js`, `app/poesie/[id]/page.js`, `app/hydra/[id]/page.js`) are async server components that pair `generateStaticParams()` + a `params`-driven fetch (`params` is a Promise — `await` it).
 
-**ParVagues "lives" are a separate, richer model** (`lib/livesData.js`, NOT the generic loader): Markdown files organized by year under `content/lives/YYYY/slug.md`, with optional `content/lives/YYYY/slug/tracks.json` and gig photos under `public/images/parvagues/lives/YYYY/slug/`. Frontmatter carries gig metadata (date, time, location, audio/video/instagram/archive links, tags). `getAllLives()` aggregates across all year folders, sorted newest-first.
+*ParVagues "lives"* — a richer collection in the SAME module: Markdown organized by year under `content/lives/YYYY/slug.md`, with optional `content/lives/YYYY/slug/tracks.json` and gig photos under `public/images/parvagues/lives/YYYY/slug/`. Frontmatter carries gig metadata (date, time, location, audio/video/instagram/archive links, tags). `getAllLives()` aggregates across all year folders, sorted newest-first; `getLiveData`/`getLiveTracks`/`getLivesImages` resolve a single gig. The ParVagues pages import these directly from `@/lib/content`.
+
+**Presence seam:** `lib/content/parvagues-presence.ts` is the single place ParVagues platform links live. It's a thin typed stub (no schema, no invented links) so a future tooling-emitted `presence.json` can swap in without touching components — components are not yet wired to it.
 
 ## Architecture notes
 
