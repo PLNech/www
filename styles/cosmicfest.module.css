@@ -258,6 +258,19 @@
 }
 .lineupRow:nth-child(odd) .lineupName:hover { color: var(--cf-cyan); }
 .lineupRow:nth-child(even) .lineupName:hover { color: var(--cf-magenta); }
+/* The artist name links out to where their latest work actually lives.
+   `inherit` keeps the odd/even cyan/magenta hover rules above in charge. */
+.lineupLink {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: color-mix(in oklch, currentColor 30%, transparent);
+  text-underline-offset: 0.14em;
+  transition: text-decoration-color 0.2s ease;
+}
+.lineupLink:hover,
+.lineupLink:focus-visible { text-decoration-color: currentColor; }
+
 .lineupReal { color: var(--cf-muted); font-weight: 500; font-size: 0.5em; font-stretch: 100%; }
 .lineupRole {
   font-family: var(--cf-font-mono);

@@ -11,11 +11,32 @@ const sans = Archivo({ subsets: ['latin'], axes: ['wdth'], display: 'swap', vari
 const mono = Martian_Mono({ subsets: ['latin'], display: 'swap', variable: '--font-cf-mono' });
 
 const JOUR_J = '2026-08-22T18:00:00+02:00';
+const RSVP_DEADLINE = '2026-08-01T23:59:59+02:00';
+const ARRIVALS_OPEN = '2026-08-15T00:00:00+02:00';
+const FEST_END = '2026-08-23T23:59:59+02:00';
 
 const LINEUP = [
-  { name: 'ParVagues', real: 'PLN', role: 'live coding · breakbeat → techno nujazz', emoji: '💻' },
-  { name: 'Nesta Flex', real: 'Antoine', role: 'dj set', emoji: '🎛️' },
-  { name: 'shipow', real: 'Kévin', role: 'projection visuelle', emoji: '🖼️' },
+  {
+    name: 'ParVagues',
+    real: 'PLN',
+    role: 'live coding · breakbeat → techno nujazz',
+    emoji: '💻',
+    url: 'https://soundcloud.com/parvagues',
+  },
+  {
+    name: 'Nesta Flex',
+    real: 'Antoine',
+    role: 'dj set',
+    emoji: '🎛️',
+    url: 'https://soundcloud.com/antoine-renaudet',
+  },
+  {
+    name: 'shipow',
+    real: 'Kévin',
+    role: 'projection visuelle',
+    emoji: '🖼️',
+    url: 'https://www.instagram.com/shipow/',
+  },
 ];
 
 const PROGRAMME = [
@@ -48,6 +69,59 @@ const MAILTO =
   encodeURIComponent('je suis chaud · cosmicfest_v2.67Hz') +
   '&body=' +
   encodeURIComponent('salut ! je viens.\n\nmon côté cosmique : ...\n+1 : oui / non\narrivée prévue : ...\n');
+
+/**
+ * The RSVP line used to hardcode "réponds avant le 1er août" — correct when it was
+ * written, quietly wrong from 2 August onward, and actively confusing during the
+ * festival itself. It now reads the clock instead of a frozen sentence.
+ *
+ * Rendered empty on the server and filled in an effect: the phase depends on the
+ * viewer's `now`, and any server/client disagreement would be a hydration mismatch.
+ * The invariant "pas de billetterie" line sits outside, so the page never looks
+ * broken if JS never arrives.
+ */
+function RsvpNote() {
+  const [phase, setPhase] = useState(null);
+
+  useEffect(() => {
+    const now = Date.now();
+    if (now < Date.parse(RSVP_DEADLINE)) setPhase('early');
+    else if (now < Date.parse(ARRIVALS_OPEN)) setPhase('late');
+    else if (now <= Date.parse(FEST_END)) setPhase('now');
+    else setPhase('over');
+  }, []);
+
+  if (!phase) return null;
+
+  if (phase === 'early') {
+    return (
+      <>
+        Une réponse avant le <b>1er août</b>, ce serait top.{' '}
+      </>
+    );
+  }
+  if (phase === 'late') {
+    return (
+      <>
+        La date de réponse est passée — <b>écris-moi quand même</b>.{' '}
+      </>
+    );
+  }
+  if (phase === 'now') {
+    return (
+      <>
+        Ça y est : les arrivées sont ouvertes depuis le <b>15 août</b>, jour J le{' '}
+        <b>22</b>. Écris-moi, même à la dernière minute.{' '}
+      </>
+    );
+  }
+  return (
+    <>
+      La v2.67Hz est passée. Rendez-vous pour la <b>cosmicfest_v3.42Hz</b>, plus sauvage
+      et entièrement décohérée.{' '}
+    </>
+  );
+}
 
 export default function CosmicFest() {
   const [modal, setModal] = useState(null); // { src, alt }
@@ -162,7 +236,19 @@ export default function CosmicFest() {
             {LINEUP.map((act) => (
               <li key={act.name} className={styles.lineupRow}>
                 <span className={styles.lineupName}>
-                  {act.name} <span className={styles.lineupReal}>~ {act.real}</span>
+                  {act.url ? (
+                    <a
+                      className={styles.lineupLink}
+                      href={act.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {act.name}
+                    </a>
+                  ) : (
+                    act.name
+                  )}{' '}
+                  <span className={styles.lineupReal}>~ {act.real}</span>
                 </span>
                 <span className={styles.lineupRole}>
                   {act.emoji} {act.role}
@@ -316,8 +402,9 @@ export default function CosmicFest() {
             réponds à l&rsquo;invitation
           </a>
           <p className={styles.waitlistMessage}>
-            Une réponse avant le <b>1er août</b>, ce serait top. Pas de billetterie : cosmicfest, c&rsquo;est
-            sur invitation. <b>Riders, come to the storm.</b>
+            <RsvpNote />
+            Pas de billetterie : cosmicfest, c&rsquo;est sur invitation.{' '}
+            <b>Riders, come to the storm.</b>
           </p>
         </section>
       </main>
