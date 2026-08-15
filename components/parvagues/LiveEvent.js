@@ -113,6 +113,26 @@ function LoopThumb({ src, href }) {
     );
 }
 
+function TrackSamples({ samples }) {
+    return (
+        <div className="bg-black/30 rounded-lg p-3 border border-white/5">
+            <div className="text-[10px] tracking-widest uppercase text-[var(--text-muted)] mb-2">
+                samples
+            </div>
+            <div className="flex flex-wrap gap-1.5">
+                {samples.map((name, j) => (
+                    <code
+                        key={j}
+                        className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-white/[0.04] border border-white/[0.06] text-[var(--text-muted)]"
+                    >
+                        {name}
+                    </code>
+                ))}
+            </div>
+        </div>
+    );
+}
+
 function TrackIngredient({ ingredient }) {
     return (
         <div className="bg-black/30 rounded-lg p-3 border border-white/5">
@@ -169,9 +189,17 @@ function TracksSection({ tracks }) {
                             {track.style && <span className="text-[10px] tracking-wider uppercase text-[var(--text-muted)]">{track.style}</span>}
                         </summary>
                         <div className="px-5 pb-5 pt-2 space-y-3 border-t border-white/[0.04]">
-                            {track.ingredients.map((ing, j) => (
-                                <TrackIngredient key={j} ingredient={ing} />
-                            ))}
+                            {/* Two generations of tracks.json live side by side: the older
+                                gigs carry rich `ingredients` objects, while the parser-generated
+                                ones (OPAL 2026 onward) carry a flat `samples` name list. Render
+                                whichever is present — and never assume either exists. */}
+                            {Array.isArray(track.ingredients) &&
+                                track.ingredients.map((ing, j) => (
+                                    <TrackIngredient key={j} ingredient={ing} />
+                                ))}
+                            {Array.isArray(track.samples) && track.samples.length > 0 && (
+                                <TrackSamples samples={track.samples} />
+                            )}
                             {track.file && (
                                 <p className="text-[10px] text-[var(--text-muted)] font-mono mt-2">
                                     src:{' '}

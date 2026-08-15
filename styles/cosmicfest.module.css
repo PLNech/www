@@ -1,497 +1,572 @@
-/* Styles for cosmicfest */
-/* vibe: Surfers cross Techno; années 60 cross cyberpunk, Biarritz cross Paris cross Berlin cross Bayonne, Waves of rhythms, ocean and code, VibeCoding meets LiveCoding meets SkateBoarding meets Rock Climbing on former german bunkers meets long nights of chats and fun and drinks and dance and love and freedom */
-/* aesthetic: lowercase, light theme, chill et oceanique, mais pas cliche baba cool, juste posé. */
+/* cosmicfest_v2.67Hz — intrication
+   Concept: two states, one system. A dark cosmic ground, two accents (cyan + magenta)
+   that always travel together the way entangled states do, resolving to white where they meet.
+   Fonts: Archivo (variable, wdth axis) for display+body, Martian Mono for instrument/data.
+   See DESIGN.md at repo root. */
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+.page {
+  /* ── tokens ── */
+  --cf-bg: oklch(0.15 0.03 275);
+  --cf-bg-deep: oklch(0.11 0.025 275);
+  --cf-surface: oklch(0.19 0.035 278);
+  --cf-surface-2: oklch(0.23 0.04 280);
+  --cf-border: oklch(1 0 0 / 0.10);
+  --cf-border-strong: oklch(1 0 0 / 0.18);
 
-/*
-  font-family: 'Montserrat', sans-serif; // For general text, headings
-  font-family: 'Space Mono', monospace; // For techy bits, or accent text
-*/
+  --cf-ink: oklch(0.97 0.01 270);
+  --cf-muted: oklch(0.80 0.02 272);
 
-.container {
-  padding: 0;
+  --cf-cyan: oklch(0.84 0.14 200);
+  --cf-magenta: oklch(0.72 0.21 350);
+  --cf-white: oklch(0.99 0 0);
+  --cf-amber: oklch(0.82 0.15 75);
+
+  --cf-cyan-soft: oklch(0.84 0.14 200 / 0.14);
+  --cf-magenta-soft: oklch(0.72 0.21 350 / 0.14);
+
+  --cf-font-sans: var(--font-cf-sans), system-ui, sans-serif;
+  --cf-font-mono: var(--font-cf-mono), ui-monospace, monospace;
+
+  --cf-z-canvas: 0;
+  --cf-z-content: 1;
+  --cf-z-overlay: 50;
+  --cf-z-modal: 100;
+
+  --cf-maxw: 64rem;
+
   margin: 0;
-  background-color: #fafafa; /* Light, slightly off-white for a softer feel */
-  color: #2c3e50; /* Dark blue-grey, less harsh than black */
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 300;
-  line-height: 1.6;
-  text-transform: lowercase; /* Global lowercase aesthetic */
+  padding: 0;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: var(--cf-bg);
+  color: var(--cf-ink);
+  font-family: var(--cf-font-sans);
+  font-weight: 400;
+  font-stretch: 100%;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 .main {
-  flex: 1; /* Ensures footer stays at bottom */
-  /* padding: 4rem 0; remove default padding to allow full-width hero */
+  flex: 1;
 }
 
+/* ── shared display / mono helpers ── */
+.page :where(h1, h2, h3) {
+  font-family: var(--cf-font-sans);
+  font-stretch: 125%;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.02;
+  text-wrap: balance;
+  margin: 0;
+}
+
+.mono {
+  font-family: var(--cf-font-mono);
+  font-stretch: 100%;
+  letter-spacing: -0.01em;
+}
+
+/* ════════════════════════════════════════════ HERO ══ */
 .hero {
-  width: 100%;
-  height: 80vh; /* Taller hero */
-  min-height: 400px;
-  background-color: #3498db; /* Placeholder - vibrant blue, like deep ocean */
-  background-image: url('/images/cosmicfest/hero.jpg');
-  background-size: cover;
-  background-position: center 60%; /* Focus slightly lower than true center */
+  position: relative;
+  min-height: 100svh;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Center content vertically */
-  align-items: center; /* Center content horizontally */
-  text-align: center;
-  color: #ffffff;
-  padding: 2rem;
-  position: relative; /* For potential overlay or pseudo-elements */
+  justify-content: center;
+  align-items: flex-start;
+  overflow: hidden;
+  padding: clamp(1.5rem, 5vw, 4rem);
+  background:
+    radial-gradient(120% 80% at 80% 0%, var(--cf-magenta-soft), transparent 55%),
+    radial-gradient(120% 90% at 10% 100%, var(--cf-cyan-soft), transparent 55%),
+    var(--cf-bg-deep);
 }
 
-.hero::before { /* Subtle vignette or color overlay */
-  content: '';
+.heroCanvas {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.2); /* Dark overlay to help text pop */
-  /* background: linear-gradient(to bottom, rgba(52, 152, 219, 0.1), rgba(26, 82, 118, 0.5)); /* Ocean gradient overlay */
-}
-
-.hero h1 {
-  font-family: 'Space Mono', monospace;
-  font-size: clamp(2.5rem, 8vw, 5.5rem); /* Responsive font size */
-  margin-bottom: 0.5rem;
-  text-shadow: 0px 2px 8px rgba(0,0,0,0.7);
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  z-index: 1; /* Above overlay */
-}
-
-.hero p {
-  font-size: clamp(1rem, 3vw, 1.5rem);
-  text-shadow: 0px 1px 4px rgba(0,0,0,0.6);
-  max-width: 600px; /* Keep tagline readable */
-  font-weight: 400;
-  z-index: 1; /* Above overlay */
-}
-
-.section {
-  margin: 3rem auto; /* More vertical space between sections */
-  padding: 2rem clamp(1rem, 5vw, 3rem); /* Responsive horizontal padding */
-  max-width: 1000px; /* Max content width */
-  background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white for depth */
-  border-radius: 12px; /* Softer corners */
-  box-shadow: 0 8px 25px rgba(44, 62, 80, 0.08); /* Softer, more diffused shadow */
-}
-
-.section h2 {
-  font-family: 'Space Mono', monospace;
-  font-size: clamp(1.8rem, 5vw, 2.8rem);
-  margin-bottom: 2rem; /* More space after heading */
-  color: #2980b9; /* Ocean blue, slightly darker than hero for contrast */
-  text-align: center;
-  font-weight: 700;
-  letter-spacing: 0.03em;
-}
-
-.grid {
-  display: grid; /* Using grid for more control */
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive columns */
-  gap: 1.5rem; /* Space between cards */
-}
-
-.card {
-  background-color: #ffffff;
-  padding: 1rem; /* Reduced padding */
-  border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(44, 62, 80, 0.05);
-  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
-  text-align: left;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(44, 62, 80, 0.1);
-}
-
-.card h3 {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 1.25rem; /* Reduced font size */
-  margin-bottom: 0.5rem; /* Reduced margin */
-  color: #16a085; /* Teal/Turquoise for a fresh vibe */
-  font-weight: 700; /* Bolder artist names */
-}
-
-.card p {
-  font-size: 0.9rem; /* Reduced font size */
-  line-height: 1.4; /* Added for better readability with smaller font */
-  color: #34495e; /* Slightly lighter text for description */
-}
-
-/* Specific styling for the emoji line in the card */
-.card p:last-child {
-  margin-top: 0.5rem; /* Add some space above the emoji line */
-  margin-bottom: 0; /* Remove bottom margin if it's the last element */
-}
-
-.countdownContainer { /* Renamed to avoid conflict if .countdown is too generic */
-  text-align: center;
-  margin: 2.5rem 0;
-  padding: 2rem;
-  background-color: rgba(236, 240, 241, 0.7); /* Light grey, slightly transparent */
-  border-radius: 8px;
-}
-/* Style for individual countdown items is in Countdown.js for now, can be moved here */
-.countdownContainer span div:first-child { /* The number */
-  font-family: 'Space Mono', monospace;
-  color: #e67e22; /* Warm orange, like sunset */
-  font-size: clamp(2rem, 6vw, 3.5rem);
-}
-.countdownContainer span div:last-child { /* The label (jours, heures) */
-  color: #7f8c8d; /* Muted grey */
-  font-size: clamp(0.7rem, 2vw, 0.9rem);
-}
-
-
-.ctaButton {
-  display: inline-block;
-  background-color: #007ef9; /* Coral/Red for strong CTA */
-  color: white;
-  padding: 0.8rem 2.5rem; /* Adjusted padding */
-  border-radius: 50px; /* Pill shape */
-  text-decoration: none;
-  font-size: 1.2rem;
-  font-weight: 700; /* Bolder CTA text */
-  transition: background-color 0.2s ease, transform 0.2s ease;
-  border: none;
-  cursor: pointer;
-  box-shadow: 0 4px 10px rgba(231, 76, 60, 0.3);
-  font-family: 'Montserrat', sans-serif; /* Consistent font */
-}
-
-.ctaButton:hover {
-  background-color: #c0392b; /* Darker red on hover */
-  transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(231, 76, 60, 0.4);
-}
-
-.waitlistMessage {
-  text-align: center;
-  margin-top: 1.5rem; /* More space */
-  font-style: normal; /* Less italic, more direct */
-  color: #7f8c8d; /* Muted grey */
-  font-size: 0.9rem;
-  line-height: 1.4;
-}
-
-.footer {
-  width: 100%;
-  padding: 2.5rem 1rem; /* More padding */
-  border-top: 1px solid #ecf0f1; /* Lighter border */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #ffffff; /* Clean white footer */
-  color: #95a5a6; /* Muted text color for footer */
-  font-size: 0.9rem;
-}
-
-.audioEmbed { /* This class is now on the individual player wrappers */
-  display: flex;
-  justify-content: center;
-  /* margin: 1rem 0; Retained for stacking, but might be overridden by flex container gap or item margins */
-}
-
-.audioPlayersContainer {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap; /* Allow players to wrap to next line if not enough space */
-  justify-content: space-around; /* Distribute space around players */
-  align-items: flex-start; /* Align items to the top if heights differ slightly */
-  gap: 2rem; /* Spacing between players when side-by-side */
-  margin-top: 1.5rem; /* Space above the container */
-}
-
-.bandcampPlayer {
-  flex: 1 1 350px;
-  min-width: 300px;
-  margin: 0.5rem;
-}
-.soundcloudPlayer {
-  flex: 1 1 450px; /* Adjusted flex-basis for SoundCloud player */
-  min-width: 300px; /* Still allow shrinking if necessary */
-  max-width: 450px; /* Ensure it doesn't grow beyond 450px unless flex grow allows */
-  margin: 0.5rem;
-}
-
-.bandcampPlayer iframe {
-  max-width: 100%; /* Responsive within its container */
-  /* width and height are set inline on the iframe by Bandcamp's embed usually, or by our style attribute */
-}
-
-.soundcloudPlayer iframe {
-  width: 450px;
-  height: 450px;
-  max-width: 100%; /* Allows it to shrink if container is smaller than 450px */
-}
-
-
-/* Media query for smaller screens to stack players */
-@media (max-width: 768px) { /* Breakpoint can be adjusted based on when it looks best */
-  .audioPlayersContainer {
-    flex-direction: column;
-    align-items: center; /* Center players when stacked */
-  }
-  .bandcampPlayer, .soundcloudPlayer {
-    flex-basis: auto; /* Reset flex-basis for stacked layout */
-    width: 100%; /* Make players take full width when stacked */
-    max-width: 400px; /* Optional: constrain max width when stacked, e.g. for SoundCloud visual player */
-    margin: 1rem 0; /* Adjust margin for vertical stacking */
-  }
-  .hero {
-    height: 70vh; /* Adjust hero height */
-  }
-  .section {
-    margin: 2rem auto;
-    padding: 1.5rem clamp(0.5rem, 3vw, 1.5rem);
-  }
-  .grid {
-    grid-template-columns: 1fr; /* Stack cards on smaller screens */
-  }
-  .card {
-    width: auto; /* Full width */
-  }
-  .card h3 {
-    font-size: 1.1rem; /* Further reduce font size on small screens for title/emojis */
-  }
-  .countdownContainer span div:first-child { /* The number */
-    font-size: clamp(1.8rem, 5vw, 3rem);
-  }
-}
-
-.footer a {
-  text-decoration: none;
-  color: #3498db; /* Link color for parvagues */
-  transition: color 0.2s ease;
-}
-.footer a:hover {
-  color: #2980b9; /* Darker blue on hover */
-}
-.footer span {
-  margin-left: 0.3rem;
-  font-weight: 400; /* Normal weight for 'parvagues' in footer */
-}
-
-
-/* Image gallery styles */
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Increased min item width */
-  gap: 1rem;
-}
-
-/* Common styles for all gallery items (photos and video links) */
-.galleryItem {
-  width: 100%;
-  height: 200px; /* Increased height */
-  border-radius: 8px; /* Consistent rounding */
-  background-color: #ecf0f1; /* Light placeholder color for items without BG image */
-  display: flex; /* Enables flexbox for content alignment */
-  overflow: hidden; /* Ensure content fits */
-  position: relative; /* For absolute positioning of children or pseudo-elements */
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  text-decoration: none; /* Remove underline from links if .galleryItem is an <a> */
-  color: #7f8c8d; /* Default text color, useful for video links */
-}
-
-.galleryItem:hover {
-  transform: scale(1.03);
-  box-shadow: 0 5px 15px rgba(44, 62, 80, 0.1);
-}
-
-/* Specific styles for photo items (divs with background images) */
-.galleryPhotoItem {
-  background-size: cover;
-  background-position: center;
-  justify-content: center; /* Center content horizontally (span) */
-  align-items: flex-end;  /* Align content (span) to the bottom */
-  min-height: 150px; /* Ensure a minimum height as per user feedback, though .galleryItem height should cover this */
-}
-
-/* Styling for the text overlay (alt text) on photo items */
-.galleryPhotoItem span {
-  color: #fff;
-  background-color: rgba(0,0,0,0.7); /* Slightly darker for better contrast */
-  padding: 0.4em 0.8em; /* Increased padding */
-  border-radius: 4px 4px 0 0; /* Rounded top corners if at bottom edge */
-  width: 100%; /* Make span take full width of the item */
-  text-align: center;
-  font-size: 0.85rem; /* Slightly smaller font for alt text */
-  z-index: 1;
-  box-sizing: border-box; /* Ensure padding doesn't increase width beyond 100% */
-}
-
-/* Specific styles for video link items (<a> tags) */
-.galleryVideoLink { /* This will be used for the <a> tags for videos */
-  justify-content: center; /* Center text horizontally */
-  align-items: center;   /* Center text vertically */
-  text-align: center;
-  font-size: 0.9rem;
-  background-color: #333; /* Darker for video links */
-  color: #fff; /* Text color for video links */
-  /* height: 180px; Inherits from galleryItem. If different height is needed, uncomment and set. */
-}
-.galleryVideoLink:hover {
-  background-color: #444;
-  /* Potentially darken the background image or text background on hover too */
-}
-
-/* Styles for Photo Modal */
-.modalOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.85); /* Darker overlay */
+  z-index: var(--cf-z-canvas);
+  display: block;
+}
+
+.heroInner {
+  position: relative;
+  z-index: var(--cf-z-content);
+  max-width: var(--cf-maxw);
+  width: 100%;
+  margin: 0 auto;
+}
+
+.freq {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--cf-font-mono);
+  font-size: clamp(0.75rem, 1.6vw, 0.95rem);
+  letter-spacing: 0.04em;
+  color: var(--cf-cyan);
+  border: 1px solid var(--cf-border-strong);
+  border-radius: 999px;
+  padding: 0.35rem 0.9rem;
+  background: oklch(0.15 0.03 275 / 0.5);
+  backdrop-filter: blur(6px);
+}
+.freq b { color: var(--cf-magenta); font-weight: 600; }
+.freqDot {
+  width: 0.5rem; height: 0.5rem; border-radius: 50%;
+  background: var(--cf-amber);
+  box-shadow: 0 0 10px var(--cf-amber);
+}
+
+.wordmark {
+  font-size: clamp(2.8rem, 13vw, 7rem);
+  font-stretch: 125%;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+  margin: 1.2rem 0 0;
+  color: var(--cf-white);
+}
+.wordmark em {
+  font-style: normal;
+  /* the two entangled states meeting: cyan + magenta glow, solid white core */
+  color: var(--cf-white);
+  text-shadow:
+    -0.04em 0 0 oklch(0.84 0.14 200 / 0.55),
+    0.04em 0 0 oklch(0.72 0.21 350 / 0.55);
+}
+
+.heroTagline {
+  font-size: clamp(1.05rem, 2.6vw, 1.5rem);
+  max-width: 42ch;
+  margin: 1.4rem 0 0;
+  color: var(--cf-ink);
+  text-wrap: pretty;
+  font-weight: 500;
+}
+
+.heroMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.1rem;
+  margin: 1.6rem 0 0;
+  font-family: var(--cf-font-mono);
+  font-size: clamp(0.8rem, 1.8vw, 0.95rem);
+  color: var(--cf-muted);
+}
+.heroMeta span { display: inline-flex; align-items: center; gap: 0.5rem; }
+.heroMeta span::before {
+  content: "";
+  width: 0.4rem; height: 0.4rem; border-radius: 50%;
+  background: var(--cf-cyan);
+}
+.heroMeta span:nth-child(even)::before { background: var(--cf-magenta); }
+
+.heroActions { margin-top: 2.2rem; display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
+
+.scrollCue {
+  position: absolute;
+  bottom: 1.4rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: var(--cf-z-content);
+  font-family: var(--cf-font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--cf-muted);
+  animation: cuePulse 2.4s ease-in-out infinite;
+}
+@keyframes cuePulse {
+  0%, 100% { opacity: 0.35; transform: translateX(-50%) translateY(0); }
+  50% { opacity: 1; transform: translateX(-50%) translateY(4px); }
+}
+
+/* ════════════════════════════════════════════ SECTIONS ══ */
+.section {
+  max-width: var(--cf-maxw);
+  margin: 0 auto;
+  padding: clamp(3.5rem, 9vw, 7rem) clamp(1.5rem, 5vw, 3rem);
+}
+
+.sectionTitle {
+  font-size: clamp(1.8rem, 5.5vw, 3.4rem);
+  color: var(--cf-white);
+}
+.sectionLede {
+  margin: 1.1rem 0 0;
+  max-width: 60ch;
+  color: var(--cf-muted);
+  font-size: clamp(1rem, 2.2vw, 1.18rem);
+  text-wrap: pretty;
+}
+
+.stamp {
+  font-family: var(--cf-font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  color: var(--cf-cyan);
+}
+
+/* ── concept / intrication ── */
+.concept {
+  text-align: center;
+  border-top: 1px solid var(--cf-border);
+  border-bottom: 1px solid var(--cf-border);
+}
+.conceptQuote {
+  font-size: clamp(1.5rem, 4.5vw, 2.7rem);
+  font-stretch: 110%;
+  font-weight: 700;
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+  max-width: 22ch;
+  margin: 0 auto;
+  color: var(--cf-ink);
+  text-wrap: balance;
+}
+.conceptQuote .a { color: var(--cf-cyan); }
+.conceptQuote .b { color: var(--cf-magenta); }
+
+/* ── lineup ── */
+.lineup { list-style: none; padding: 0; margin: 2.5rem 0 0; }
+.lineupRow {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: 0.4rem 1.5rem;
+  padding: 1.4rem 0;
+  border-top: 1px solid var(--cf-border);
+  /* transform, not padding — keeps the hover slide off the layout thread */
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.lineupRow:last-child { border-bottom: 1px solid var(--cf-border); }
+.lineupRow:hover { transform: translateX(0.5rem); }
+.lineupName {
+  font-size: clamp(1.5rem, 5vw, 2.6rem);
+  font-stretch: 120%;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--cf-white);
+  line-height: 1;
+}
+.lineupRow:nth-child(odd) .lineupName:hover { color: var(--cf-cyan); }
+.lineupRow:nth-child(even) .lineupName:hover { color: var(--cf-magenta); }
+.lineupReal { color: var(--cf-muted); font-weight: 500; font-size: 0.5em; font-stretch: 100%; }
+.lineupRole {
+  font-family: var(--cf-font-mono);
+  font-size: clamp(0.78rem, 1.8vw, 0.92rem);
+  color: var(--cf-muted);
+  text-align: right;
+}
+.lineupGuests {
+  margin-top: 1.6rem;
+  font-family: var(--cf-font-mono);
+  font-size: 0.9rem;
+  color: var(--cf-muted);
+}
+.lineupGuests b { color: var(--cf-amber); font-weight: 600; }
+
+/* ── programme chips ── */
+.chips { display: flex; flex-wrap: wrap; gap: 0.7rem; margin: 2.2rem 0 0; }
+.chip {
+  font-family: var(--cf-font-mono);
+  font-size: 0.92rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--cf-border);
+  border-radius: 999px;
+  background: var(--cf-surface);
+  color: var(--cf-ink);
+}
+
+/* ── definition-style logistics blocks ── */
+.defs { margin: 2.2rem 0 0; display: grid; gap: 0; }
+.def {
+  display: grid;
+  grid-template-columns: minmax(8rem, 14rem) 1fr;
+  gap: 0.4rem 2rem;
+  padding: 1.2rem 0;
+  border-top: 1px solid var(--cf-border);
+  align-items: start;
+}
+.def:last-child { border-bottom: 1px solid var(--cf-border); }
+.defKey {
+  font-family: var(--cf-font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.01em;
+  color: var(--cf-cyan);
+  padding-top: 0.15rem;
+}
+.def:nth-child(even) .defKey { color: var(--cf-magenta); }
+.defVal { color: var(--cf-ink); }
+.defVal p { margin: 0; }
+.defVal p + p { margin-top: 0.5rem; }
+.defVal .sub { color: var(--cf-muted); font-size: 0.95rem; }
+
+/* ── packing grid ── */
+.packGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.8rem;
+  margin: 2.2rem 0 0;
+}
+.packItem {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--cf-border);
+  border-radius: 10px;
+  background: var(--cf-surface);
+  color: var(--cf-ink);
+}
+.packItem span:first-child { font-size: 1.2rem; }
+
+/* ════════════════════════════════════════════ SOUVENIRS V0 ══ */
+.souvenirs { border-top: 1px solid var(--cf-border); }
+.audioPlayersContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin: 2.2rem 0 0;
+  align-items: flex-start;
+}
+.audioEmbed { display: flex; justify-content: center; }
+.bandcampPlayer { flex: 1 1 320px; min-width: 280px; }
+.soundcloudPlayer { flex: 1 1 380px; min-width: 280px; max-width: 460px; }
+/* Surface + border behind the third-party iframes so they read as a deliberate
+   panel while loading (and on slow networks), not a black void. */
+.bandcampPlayer iframe,
+.soundcloudPlayer iframe {
+  max-width: 100%;
+  border-radius: 10px;
+  background: var(--cf-surface);
+  border: 1px solid var(--cf-border);
+}
+.soundcloudPlayer iframe { width: 100%; max-width: 460px; height: 380px; }
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.9rem;
+  margin: 2rem 0 0;
+}
+.galleryItem {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--cf-border);
+  background: var(--cf-surface);
+  cursor: pointer;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+}
+.galleryItem:hover, .galleryItem:focus-visible {
+  transform: translateY(-4px);
+  border-color: var(--cf-cyan);
+  outline: none;
+}
+.galleryItem img { object-fit: cover; }
+.galleryCaption {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  font-family: var(--cf-font-mono);
+  font-size: 0.74rem;
+  color: var(--cf-white);
+  padding: 0.5rem 0.7rem;
+  background: linear-gradient(to top, oklch(0.11 0.025 275 / 0.92), transparent);
+  z-index: 1;
+}
+
+/* ════════════════════════════════════════════ RSVP ══ */
+.rsvp {
+  text-align: center;
+  border-top: 1px solid var(--cf-border);
+}
+.countdownContainer { margin: 2.4rem auto; max-width: 40rem; }
+.countdown {
+  display: flex;
+  justify-content: center;
+  gap: clamp(1rem, 5vw, 2.5rem);
+  flex-wrap: wrap;
+}
+.countUnit { text-align: center; }
+.countNum {
+  font-family: var(--cf-font-mono);
+  font-size: clamp(2rem, 8vw, 3.6rem);
+  font-weight: 600;
+  line-height: 1;
+  color: var(--cf-white);
+  font-variant-numeric: tabular-nums;
+}
+.countUnit:nth-child(odd) .countNum { color: var(--cf-cyan); }
+.countUnit:nth-child(even) .countNum { color: var(--cf-magenta); }
+.countLabel {
+  display: block;
+  margin-top: 0.5rem;
+  font-family: var(--cf-font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cf-muted);
+}
+.countDone { font-size: 1.6rem; font-weight: 700; color: var(--cf-amber); }
+
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: var(--cf-white);
+  color: oklch(0.13 0.03 275);
+  padding: 0.95rem 2.2rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+  font-stretch: 110%;
+  font-size: 1.05rem;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+  box-shadow: 0 0 0 0 oklch(0.84 0.14 200 / 0.5);
+}
+.ctaButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px oklch(0.72 0.21 350 / 0.35), 0 0 0 1px var(--cf-border-strong);
+}
+.ctaButton:active { transform: translateY(0); transition-duration: 0.08s; }
+.ctaGhost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--cf-ink);
+  text-decoration: none;
+  font-family: var(--cf-font-mono);
+  font-size: 0.92rem;
+  padding: 0.95rem 0.4rem;
+  border-bottom: 1px solid var(--cf-border-strong);
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.ctaGhost:hover { color: var(--cf-cyan); border-color: var(--cf-cyan); }
+
+.waitlistMessage {
+  margin: 1.8rem auto 0;
+  max-width: 44ch;
+  color: var(--cf-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+.waitlistMessage b { color: var(--cf-ink); font-weight: 600; }
+
+/* ════════════════════════════════════════════ FOOTER ══ */
+.footer {
+  width: 100%;
+  padding: 3rem 1.5rem;
+  border-top: 1px solid var(--cf-border);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000; /* Ensure it's on top */
-  cursor: pointer; /* Indicate overlay can be clicked to close */
+  gap: 0.4rem;
+  background: var(--cf-bg-deep);
+  font-family: var(--cf-font-mono);
+  font-size: 0.9rem;
+  color: var(--cf-muted);
 }
+.footer a { color: var(--cf-muted); text-decoration: none; transition: color 0.2s ease; }
+.footer a:hover { color: var(--cf-cyan); }
+.footer a b { color: var(--cf-ink); font-weight: 700; }
 
+/* ════════════════════════════════════════════ LIGHTBOX ══ */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: oklch(0.08 0.02 275 / 0.9);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: var(--cf-z-modal);
+  cursor: pointer;
+  padding: 1.5rem;
+  animation: fadeIn 0.25s ease;
+}
 .modalContent {
-  background-color: #2c3e50; /* Dark theme for modal content box */
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 5px 25px rgba(0,0,0,0.5);
-  position: relative; /* For close button positioning */
-  cursor: default; /* Reset cursor for content area */
-  max-width: 90vw; /* Max width relative to viewport width */
-  max-height: 90vh; /* Max height relative to viewport height */
+  position: relative;
+  max-width: 92vw;
+  max-height: 90vh;
+  cursor: default;
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 0.8rem;
 }
-
-.modalImageContainer {
-  width: 100%; /* Container takes width of modalContent or image's intrinsic */
-  max-height: calc(85vh - 80px); /* Adjust based on padding and caption height */
-  display: flex; /* Helps with centering the image if it's smaller than container */
-  justify-content: center;
-  align-items: center;
-  overflow: hidden; /* In case image is larger than this container */
+.modalImageContainer { display: flex; justify-content: center; }
+.modalImageContainer img {
+  max-width: 92vw;
+  max-height: 80vh;
+  width: auto;
+  height: auto;
+  border-radius: 10px;
+  border: 1px solid var(--cf-border-strong);
 }
-
-/* next/image specific styling might need to target its internal structure if needed,
-   but objectFit="contain" and layout="intrinsic" should handle most cases.
-   The parent .modalImageContainer will constrain its max size. */
-.modalImageContainer img { /* Targets the actual img tag from Next/Image */
-  max-width: 100%;
-  max-height: 100%; /* Ensure image scales down to fit container */
-  object-fit: contain; /* Redundant with next/image prop but good fallback */
-}
-
-
+.modalCaption { color: var(--cf-muted); font-family: var(--cf-font-mono); font-size: 0.82rem; text-align: center; }
 .modalCloseButton {
   position: absolute;
-  top: -10px; /* Position outside slightly or adjust padding */
-  right: -10px;
-  background: #e74c3c;
-  color: white;
-  border: none;
+  top: -1rem; right: -1rem;
+  width: 2.4rem; height: 2.4rem;
   border-radius: 50%;
-  width: 35px;
-  height: 35px;
-  font-size: 1.8rem;
-  line-height: 30px; /* Center the '×' */
-  text-align: center;
+  border: 1px solid var(--cf-border-strong);
+  background: var(--cf-surface);
+  color: var(--cf-ink);
+  font-size: 1.4rem;
+  line-height: 1;
   cursor: pointer;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-  transition: background-color 0.2s ease;
-  z-index: 1001; /* Above modal content */
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.modalCloseButton:hover { background: var(--cf-magenta); color: oklch(0.13 0.03 275); }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* ════════════════════════════════════════════ REVEAL ══
+   Content is visible by default. Only once JS has mounted (.jsReady is added to the
+   page root, and never under reduced-motion) do reveals start hidden and animate in.
+   This keeps headless renders, hidden tabs, and no-JS from shipping blank sections. */
+.jsReady .reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.jsReady .reveal.revealIn { opacity: 1; transform: none; }
+
+/* ════════════════════════════════════════════ RESPONSIVE ══ */
+@media (max-width: 640px) {
+  .def { grid-template-columns: 1fr; gap: 0.3rem; }
+  .lineupRow { grid-template-columns: 1fr; }
+  .lineupRole { text-align: left; }
+  .heroMeta { gap: 0.5rem 0.9rem; }
 }
 
-.modalCloseButton:hover {
-  background-color: #c0392b;
-}
-
-.modalCaption {
-  color: #ecf0f1; /* Light text for caption */
-  text-align: center;
-  margin-top: 10px;
-  font-size: 0.9rem;
-  max-width: 100%;
-}
-
-/* Styling for the text overlay on video links (if they have a background image) */
-.galleryVideoLink span {
-  color: #fff;
-  background-color: rgba(0,0,0,0.7); /* Consistent with photo item caption background */
-  padding: 0.4em 0.8em;
-  border-radius: 4px;
-  z-index: 1;
-  box-sizing: border-box;
-  max-width: 90%; /* Prevent text from touching edges if too long */
-  text-align: center; /* Ensure text within span is centered */
-}
-
-/* Remove the old generic .gallery a and .gallery div span if they are fully replaced */
-/* The old .gallery a styling for height:30px is now incorporated or decided by .galleryVideoLink with .galleryItem height */
-
-/* Section specific styling for V0 */
-#v0 h3 {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 1.2rem;
-  color: #2c3e50;
-  margin-top: 2.5rem;
-  margin-bottom: 1rem;
-  text-align: left;
-  font-weight: 700;
-  border-bottom: 1px solid #ecf0f1;
-  padding-bottom: 0.5rem;
-}
-#v0 ul {
-  list-style: none;
-  padding-left: 0;
-  text-align: left;
-}
-#v0 li {
-  padding: 0.3rem 0;
-  color: #34495e;
-}
-
-/* Festival Off */
-#off-festival p {
-  font-family: 'Space Mono', monospace;
-  color: #9b59b6; /* Mysterious purple */
-  font-size: 1.1rem;
-  line-height: 1.7;
-}
-
-/* Accessibility: Focus indicator */
-/*:global(a:focus), :global(button:focus), :global(input:focus) {*/
-/*  outline: 2px solid #3498db;*/
-/*  outline-offset: 2px;*/
-/*}*/
-
-/* Responsive adjustments for smaller screens */
-@media (max-width: 768px) {
-  .hero {
-    height: 70vh; /* Adjust hero height */
+/* ════════════════════════════════════════════ REDUCED MOTION ══ */
+@media (prefers-reduced-motion: reduce) {
+  .page *, .page *::before, .page *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
   }
-  .section {
-    margin: 2rem auto;
-    padding: 1.5rem clamp(0.5rem, 3vw, 1.5rem);
-  }
-  .grid {
-    grid-template-columns: 1fr; /* Stack cards on smaller screens */
-  }
-  .card {
-    width: auto; /* Full width */
-  }
-  .countdownContainer span div:first-child { /* The number */
-    font-size: clamp(1.8rem, 5vw, 3rem);
-  }
+  .reveal { opacity: 1; transform: none; }
+  .scrollCue { animation: none; }
+}
+
+/* ════════════════════════════════════════════ FOCUS ══ */
+.page a:focus-visible,
+.page button:focus-visible {
+  outline: 2px solid var(--cf-cyan);
+  outline-offset: 3px;
+  border-radius: 2px;
 }

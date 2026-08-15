@@ -1,54 +1,50 @@
 import { useState, useEffect } from 'react';
-import styles from '../../styles/cosmicfest.module.css'; // Assuming you might want specific styles
+import styles from '../../styles/cosmicfest.module.css';
 
-const Countdown = ({ targetDate }) => {
-  const calculateTimeLeft = () => {
-    const difference = +new Date(targetDate) - +new Date();
-    let timeLeft = {};
+const LABELS = { jours: 'jours', heures: 'heures', minutes: 'min', secondes: 'sec' };
 
-    if (difference > 0) {
-      timeLeft = {
-        jours: Math.floor(difference / (1000 * 60 * 60 * 24)),
-        heures: Math.floor((difference / (1000 * 60 * 60)) % 24),
-        minutes: Math.floor((difference / 1000 / 60) % 60),
-        secondes: Math.floor((difference / 1000) % 60),
-      };
-    } else {
-      timeLeft = { jours: 0, heures: 0, minutes: 0, secondes: 0 };
-    }
-    return timeLeft;
+function computeLeft(targetDate) {
+  const diff = +new Date(targetDate) - Date.now();
+  if (diff <= 0) return null;
+  return {
+    jours: Math.floor(diff / 86400000),
+    heures: Math.floor((diff / 3600000) % 24),
+    minutes: Math.floor((diff / 60000) % 60),
+    secondes: Math.floor((diff / 1000) % 60),
   };
+}
 
-  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+export default function Countdown({ targetDate }) {
+  // undefined = not yet mounted (SSR / first paint) → neutral "--" placeholder, so the
+  //   server never wrongly claims the event is happening now.
+  // null = actually expired → the celebratory message.
+  // object = live remaining time.
+  const [left, setLeft] = useState(undefined);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setTimeLeft(calculateTimeLeft());
-    }, 1000);
+    setLeft(computeLeft(targetDate));
+    const id = setInterval(() => setLeft(computeLeft(targetDate)), 1000);
+    return () => clearInterval(id);
+  }, [targetDate]);
 
-    return () => clearTimeout(timer);
-  });
-
-  const timerComponents = [];
-
-  Object.keys(timeLeft).forEach((interval) => {
-    if (!timeLeft[interval] && timeLeft[interval] !== 0) { // handles case where initial timeLeft is empty
-      return;
-    }
-
-    timerComponents.push(
-      <span key={interval} style={{ margin: '0 0.5rem', textAlign: 'center' }}>
-        <div style={{ fontSize: '2.5rem', fontWeight: 'bold' }}>{timeLeft[interval]}</div>
-        <div style={{ fontSize: '0.8rem', textTransform: 'uppercase' }}>{interval}</div>
-      </span>
+  if (left === null) {
+    return (
+      <div className={styles.countdown} aria-live="polite">
+        <span className={styles.countDone}>c&rsquo;est l&rsquo;heure. on s&rsquo;intrique. 🌀</span>
+      </div>
     );
-  });
+  }
 
   return (
-    <div className={styles.countdown} style={{ display: 'flex', justifyContent: 'center', alignItems: 'baseline' }}>
-      {timerComponents.length ? timerComponents : <span>c'est l'heure!</span>}
+    <div className={styles.countdown} aria-label="compte à rebours jusqu'au jour J">
+      {Object.keys(LABELS).map((unit) => (
+        <span key={unit} className={styles.countUnit}>
+          <span className={styles.countNum}>
+            {left ? String(left[unit]).padStart(2, '0') : '--'}
+          </span>
+          <span className={styles.countLabel}>{LABELS[unit]}</span>
+        </span>
+      ))}
     </div>
   );
-};
-
-export default Countdown;
+}
