@@ -1,0 +1,941 @@
+{
+  "count": 187,
+  "source": "ceejbot/oblique-strategies (cross-edition superset, deduped)",
+  "cards": [
+    {
+      "id": 1,
+      "text": "(Organic) machinery",
+      "hex": "䷀"
+    },
+    {
+      "id": 2,
+      "text": "A line has two sides",
+      "hex": "䷁"
+    },
+    {
+      "id": 3,
+      "text": "A very small object Its center",
+      "hex": "䷂"
+    },
+    {
+      "id": 4,
+      "text": "Abandon desire",
+      "hex": "䷃"
+    },
+    {
+      "id": 5,
+      "text": "Abandon normal instructions",
+      "hex": "䷄"
+    },
+    {
+      "id": 6,
+      "text": "Abandon normal instruments",
+      "hex": "䷅"
+    },
+    {
+      "id": 7,
+      "text": "Accept advice",
+      "hex": "䷆"
+    },
+    {
+      "id": 8,
+      "text": "Accretion",
+      "hex": "䷇"
+    },
+    {
+      "id": 9,
+      "text": "Adding on",
+      "hex": "䷈"
+    },
+    {
+      "id": 10,
+      "text": "Allow an easement (an easement is the abandonment of a stricture)",
+      "hex": "䷉"
+    },
+    {
+      "id": 11,
+      "text": "Always first steps",
+      "hex": "䷊"
+    },
+    {
+      "id": 12,
+      "text": "Always give yourself credit for having more than personality (given by Arto Lindsay)",
+      "hex": "䷋"
+    },
+    {
+      "id": 13,
+      "text": "Always the first steps",
+      "hex": "䷌"
+    },
+    {
+      "id": 14,
+      "text": "Are there sections? Consider transitions",
+      "hex": "䷍"
+    },
+    {
+      "id": 15,
+      "text": "Ask people to work against their better judgement",
+      "hex": "䷎"
+    },
+    {
+      "id": 16,
+      "text": "Ask your body",
+      "hex": "䷏"
+    },
+    {
+      "id": 17,
+      "text": "Assemble some of the elements in a group and treat the group",
+      "hex": "䷐"
+    },
+    {
+      "id": 18,
+      "text": "Balance the consistency principle with the inconsistency principle",
+      "hex": "䷑"
+    },
+    {
+      "id": 19,
+      "text": "Be dirty",
+      "hex": "䷒"
+    },
+    {
+      "id": 20,
+      "text": "Be extravagant",
+      "hex": "䷓"
+    },
+    {
+      "id": 21,
+      "text": "Be less critical",
+      "hex": "䷔"
+    },
+    {
+      "id": 22,
+      "text": "Breathe more deeply",
+      "hex": "䷕"
+    },
+    {
+      "id": 23,
+      "text": "Bridges -build -burn",
+      "hex": "䷖"
+    },
+    {
+      "id": 24,
+      "text": "Cascades",
+      "hex": "䷗"
+    },
+    {
+      "id": 25,
+      "text": "Change ambiguities to specifics",
+      "hex": "䷘"
+    },
+    {
+      "id": 26,
+      "text": "Change instrument roles",
+      "hex": "䷙"
+    },
+    {
+      "id": 27,
+      "text": "Change nothing and continue consistently",
+      "hex": "䷚"
+    },
+    {
+      "id": 28,
+      "text": "Change nothing and continue with immaculate consistency",
+      "hex": "䷛"
+    },
+    {
+      "id": 29,
+      "text": "Change specifics to ambiguities",
+      "hex": "䷜"
+    },
+    {
+      "id": 30,
+      "text": "Children -speaking -singing",
+      "hex": "䷝"
+    },
+    {
+      "id": 31,
+      "text": "Cluster analysis",
+      "hex": "䷞"
+    },
+    {
+      "id": 32,
+      "text": "Consider different fading systems",
+      "hex": "䷟"
+    },
+    {
+      "id": 33,
+      "text": "Consider transitions",
+      "hex": "䷠"
+    },
+    {
+      "id": 34,
+      "text": "Consult other sources -promising -unpromising",
+      "hex": "䷡"
+    },
+    {
+      "id": 35,
+      "text": "Convert a melodic element into a rhythmic element",
+      "hex": "䷢"
+    },
+    {
+      "id": 36,
+      "text": "Courage!",
+      "hex": "䷣"
+    },
+    {
+      "id": 37,
+      "text": "Cut a vital conenction",
+      "hex": "䷤"
+    },
+    {
+      "id": 38,
+      "text": "Cut a vital connection",
+      "hex": "䷥"
+    },
+    {
+      "id": 39,
+      "text": "Decorate, decorate",
+      "hex": "䷦"
+    },
+    {
+      "id": 40,
+      "text": "Define an area as `safe' and use it as an anchor",
+      "hex": "䷧"
+    },
+    {
+      "id": 41,
+      "text": "Destroy -nothing -the most important thing",
+      "hex": "䷨"
+    },
+    {
+      "id": 42,
+      "text": "Destroy nothing; Destroy the most important thing",
+      "hex": "䷩"
+    },
+    {
+      "id": 43,
+      "text": "Discard an axiom",
+      "hex": "䷪"
+    },
+    {
+      "id": 44,
+      "text": "Disciplined self-indulgence",
+      "hex": "䷫"
+    },
+    {
+      "id": 45,
+      "text": "Disconnect from desire",
+      "hex": "䷬"
+    },
+    {
+      "id": 46,
+      "text": "Discover the recipes you are using and abandon them",
+      "hex": "䷭"
+    },
+    {
+      "id": 47,
+      "text": "Discover your formulas and abandon them",
+      "hex": "䷮"
+    },
+    {
+      "id": 48,
+      "text": "Display your talent",
+      "hex": "䷯"
+    },
+    {
+      "id": 49,
+      "text": "Distort time",
+      "hex": "䷰"
+    },
+    {
+      "id": 50,
+      "text": "Distorting time",
+      "hex": "䷱"
+    },
+    {
+      "id": 51,
+      "text": "Do nothing for as long as possible",
+      "hex": "䷲"
+    },
+    {
+      "id": 52,
+      "text": "Do something boring",
+      "hex": "䷳"
+    },
+    {
+      "id": 53,
+      "text": "Do something sudden, destructive and unpredictable",
+      "hex": "䷴"
+    },
+    {
+      "id": 54,
+      "text": "Do the last thing first",
+      "hex": "䷵"
+    },
+    {
+      "id": 55,
+      "text": "Do the washing up",
+      "hex": "䷶"
+    },
+    {
+      "id": 56,
+      "text": "Do the words need changing?",
+      "hex": "䷷"
+    },
+    {
+      "id": 57,
+      "text": "Do we need holes?",
+      "hex": "䷸"
+    },
+    {
+      "id": 58,
+      "text": "Don't avoid what is easy",
+      "hex": "䷹"
+    },
+    {
+      "id": 59,
+      "text": "Don't be frightened of cliches",
+      "hex": "䷺"
+    },
+    {
+      "id": 60,
+      "text": "Don't break the silence",
+      "hex": "䷻"
+    },
+    {
+      "id": 61,
+      "text": "Don't stress on thing more than another [sic]",
+      "hex": "䷼"
+    },
+    {
+      "id": 62,
+      "text": "Don't stress one thing more than another",
+      "hex": "䷽"
+    },
+    {
+      "id": 63,
+      "text": "Dont be afraid of things because they're easy to do",
+      "hex": "䷾"
+    },
+    {
+      "id": 64,
+      "text": "Dont be frightened to display your talents",
+      "hex": "䷿"
+    },
+    {
+      "id": 65,
+      "text": "Emphasize differences",
+      "hex": "䷀"
+    },
+    {
+      "id": 66,
+      "text": "Emphasize repetitions",
+      "hex": "䷁"
+    },
+    {
+      "id": 67,
+      "text": "Emphasize the flaws",
+      "hex": "䷂"
+    },
+    {
+      "id": 68,
+      "text": "Faced with a choice, do both (from Dieter Rot)",
+      "hex": "䷃"
+    },
+    {
+      "id": 69,
+      "text": "Faced with a choice, do both (given by Dieter Rot)",
+      "hex": "䷄"
+    },
+    {
+      "id": 70,
+      "text": "Feed the recording back out of the medium",
+      "hex": "䷅"
+    },
+    {
+      "id": 71,
+      "text": "Fill every beat with something",
+      "hex": "䷆"
+    },
+    {
+      "id": 72,
+      "text": "Find a safe part and use it as an anchor",
+      "hex": "䷇"
+    },
+    {
+      "id": 73,
+      "text": "Get your neck massaged",
+      "hex": "䷈"
+    },
+    {
+      "id": 74,
+      "text": "Ghost echoes",
+      "hex": "䷉"
+    },
+    {
+      "id": 75,
+      "text": "Give the game away",
+      "hex": "䷊"
+    },
+    {
+      "id": 76,
+      "text": "Give the name away",
+      "hex": "䷋"
+    },
+    {
+      "id": 77,
+      "text": "Give way to your worst impulse",
+      "hex": "䷌"
+    },
+    {
+      "id": 78,
+      "text": "Go outside. Shut the door.",
+      "hex": "䷍"
+    },
+    {
+      "id": 79,
+      "text": "Go slowly all the way round the outside",
+      "hex": "䷎"
+    },
+    {
+      "id": 80,
+      "text": "Go to an extreme, come part way back",
+      "hex": "䷏"
+    },
+    {
+      "id": 81,
+      "text": "Honor thy error as a hidden intention",
+      "hex": "䷐"
+    },
+    {
+      "id": 82,
+      "text": "Honor thy mistake as a hidden intention",
+      "hex": "䷑"
+    },
+    {
+      "id": 83,
+      "text": "How would someone else do it?",
+      "hex": "䷒"
+    },
+    {
+      "id": 84,
+      "text": "How would you have done it?",
+      "hex": "䷓"
+    },
+    {
+      "id": 85,
+      "text": "Humanize something free of error",
+      "hex": "䷔"
+    },
+    {
+      "id": 86,
+      "text": "Idiot glee (?)",
+      "hex": "䷕"
+    },
+    {
+      "id": 87,
+      "text": "Imagine the piece as a set of disconnected events",
+      "hex": "䷖"
+    },
+    {
+      "id": 88,
+      "text": "In total darkness, or in a very large room, very quietly",
+      "hex": "䷗"
+    },
+    {
+      "id": 89,
+      "text": "Infinitesimal gradations",
+      "hex": "䷘"
+    },
+    {
+      "id": 90,
+      "text": "Intentions -nobility of -humility of -credibility of",
+      "hex": "䷙"
+    },
+    {
+      "id": 91,
+      "text": "Into the impossible",
+      "hex": "䷚"
+    },
+    {
+      "id": 92,
+      "text": "Is it finished?",
+      "hex": "䷛"
+    },
+    {
+      "id": 93,
+      "text": "Is something missing?",
+      "hex": "䷜"
+    },
+    {
+      "id": 94,
+      "text": "Is the information correct?",
+      "hex": "䷝"
+    },
+    {
+      "id": 95,
+      "text": "Is the style right?",
+      "hex": "䷞"
+    },
+    {
+      "id": 96,
+      "text": "Is there something missing",
+      "hex": "䷟"
+    },
+    {
+      "id": 97,
+      "text": "It is quite possible (after all)",
+      "hex": "䷠"
+    },
+    {
+      "id": 98,
+      "text": "It is simply a matter or work",
+      "hex": "䷡"
+    },
+    {
+      "id": 99,
+      "text": "Just carry on",
+      "hex": "䷢"
+    },
+    {
+      "id": 100,
+      "text": "Left channel, right channel, center channel",
+      "hex": "䷣"
+    },
+    {
+      "id": 101,
+      "text": "Listen to the quiet voice",
+      "hex": "䷤"
+    },
+    {
+      "id": 102,
+      "text": "Look at the order in which you do things",
+      "hex": "䷥"
+    },
+    {
+      "id": 103,
+      "text": "Look closely at the most embarrassing details & amplify them",
+      "hex": "䷦"
+    },
+    {
+      "id": 104,
+      "text": "Lost in useless territory",
+      "hex": "䷧"
+    },
+    {
+      "id": 105,
+      "text": "Lowest common denominator",
+      "hex": "䷨"
+    },
+    {
+      "id": 106,
+      "text": "Magnify the most difficult details",
+      "hex": "䷩"
+    },
+    {
+      "id": 107,
+      "text": "Make a blank valuable by putting it in an exquisite frame",
+      "hex": "䷪"
+    },
+    {
+      "id": 108,
+      "text": "Make a sudden, destructive unpredictable action; incorporate",
+      "hex": "䷫"
+    },
+    {
+      "id": 109,
+      "text": "Make an exhaustive list of everything you might do & do the last thing on the list",
+      "hex": "䷬"
+    },
+    {
+      "id": 110,
+      "text": "Make it more sensual",
+      "hex": "䷭"
+    },
+    {
+      "id": 111,
+      "text": "Make what's perfect more human",
+      "hex": "䷮"
+    },
+    {
+      "id": 112,
+      "text": "Mechanicalize something idiosyncratic",
+      "hex": "䷯"
+    },
+    {
+      "id": 113,
+      "text": "Move towards the unimportant",
+      "hex": "䷰"
+    },
+    {
+      "id": 114,
+      "text": "Mute and continue",
+      "hex": "䷱"
+    },
+    {
+      "id": 115,
+      "text": "Not building a wall but making a brick",
+      "hex": "䷲"
+    },
+    {
+      "id": 116,
+      "text": "Not building a wall; making a brick",
+      "hex": "䷳"
+    },
+    {
+      "id": 117,
+      "text": "Once the search has begun, something will be found",
+      "hex": "䷴"
+    },
+    {
+      "id": 118,
+      "text": "Only a part, not the whole",
+      "hex": "䷵"
+    },
+    {
+      "id": 119,
+      "text": "Only one element of each kind",
+      "hex": "䷶"
+    },
+    {
+      "id": 120,
+      "text": "Openly resist change",
+      "hex": "䷷"
+    },
+    {
+      "id": 121,
+      "text": "Overtly resist change",
+      "hex": "䷸"
+    },
+    {
+      "id": 122,
+      "text": "Pae White's non-blank graphic metacard",
+      "hex": "䷹"
+    },
+    {
+      "id": 123,
+      "text": "Put in earplugs",
+      "hex": "䷺"
+    },
+    {
+      "id": 124,
+      "text": "Question the heroic",
+      "hex": "䷻"
+    },
+    {
+      "id": 125,
+      "text": "Question the heroic approach",
+      "hex": "䷼"
+    },
+    {
+      "id": 126,
+      "text": "Reevaluation (a warm feeling)",
+      "hex": "䷽"
+    },
+    {
+      "id": 127,
+      "text": "Remember quiet evenings",
+      "hex": "䷾"
+    },
+    {
+      "id": 128,
+      "text": "Remember those quiet evenings",
+      "hex": "䷿"
+    },
+    {
+      "id": 129,
+      "text": "Remove a restriction",
+      "hex": "䷀"
+    },
+    {
+      "id": 130,
+      "text": "Remove ambiguities and convert to specifics",
+      "hex": "䷁"
+    },
+    {
+      "id": 131,
+      "text": "Remove specifics and convert to ambiguities",
+      "hex": "䷂"
+    },
+    {
+      "id": 132,
+      "text": "Repetition is a form of change",
+      "hex": "䷃"
+    },
+    {
+      "id": 133,
+      "text": "Retrace your steps",
+      "hex": "䷄"
+    },
+    {
+      "id": 134,
+      "text": "Reverse",
+      "hex": "䷅"
+    },
+    {
+      "id": 135,
+      "text": "Short circuit (example; a man eating peas with the idea that they will improve his virility shovels them straight into his lap)",
+      "hex": "䷆"
+    },
+    {
+      "id": 136,
+      "text": "Simple Subtraction",
+      "hex": "䷇"
+    },
+    {
+      "id": 137,
+      "text": "Simply a matter of work",
+      "hex": "䷈"
+    },
+    {
+      "id": 138,
+      "text": "Slow preparation, fast execution",
+      "hex": "䷉"
+    },
+    {
+      "id": 139,
+      "text": "Spectrum analysis",
+      "hex": "䷊"
+    },
+    {
+      "id": 140,
+      "text": "State the problem as clearly as possible",
+      "hex": "䷋"
+    },
+    {
+      "id": 141,
+      "text": "State the problem in words as clearly as possible",
+      "hex": "䷌"
+    },
+    {
+      "id": 142,
+      "text": "Take a break",
+      "hex": "䷍"
+    },
+    {
+      "id": 143,
+      "text": "Take away the elements in order of apparent non-importance",
+      "hex": "䷎"
+    },
+    {
+      "id": 144,
+      "text": "Take away the important parts",
+      "hex": "䷏"
+    },
+    {
+      "id": 145,
+      "text": "Tape your mouth (given by Ritva Saarikko)",
+      "hex": "䷐"
+    },
+    {
+      "id": 146,
+      "text": "The inconsistency principle",
+      "hex": "䷑"
+    },
+    {
+      "id": 147,
+      "text": "The most easily forgotten thing is the most important",
+      "hex": "䷒"
+    },
+    {
+      "id": 148,
+      "text": "The most important thing is the thing most easily forgotten",
+      "hex": "䷓"
+    },
+    {
+      "id": 149,
+      "text": "The tape is now the music",
+      "hex": "䷔"
+    },
+    {
+      "id": 150,
+      "text": "Think - inside the work -outside the work",
+      "hex": "䷕"
+    },
+    {
+      "id": 151,
+      "text": "Think of the radio",
+      "hex": "䷖"
+    },
+    {
+      "id": 152,
+      "text": "Tidy up",
+      "hex": "䷗"
+    },
+    {
+      "id": 153,
+      "text": "Towards the insignificant",
+      "hex": "䷘"
+    },
+    {
+      "id": 154,
+      "text": "Trust in the you of now",
+      "hex": "䷙"
+    },
+    {
+      "id": 155,
+      "text": "Try faking it (from Stewart Brand)",
+      "hex": "䷚"
+    },
+    {
+      "id": 156,
+      "text": "Turn it upside down",
+      "hex": "䷛"
+    },
+    {
+      "id": 157,
+      "text": "Twist the spine",
+      "hex": "䷜"
+    },
+    {
+      "id": 158,
+      "text": "Use 'unqualified' people",
+      "hex": "䷝"
+    },
+    {
+      "id": 159,
+      "text": "Use `unqualified' people",
+      "hex": "䷞"
+    },
+    {
+      "id": 160,
+      "text": "Use an old idea",
+      "hex": "䷟"
+    },
+    {
+      "id": 161,
+      "text": "Use an unacceptable color",
+      "hex": "䷠"
+    },
+    {
+      "id": 162,
+      "text": "Use cliches",
+      "hex": "䷡"
+    },
+    {
+      "id": 163,
+      "text": "Use fewer notes",
+      "hex": "䷢"
+    },
+    {
+      "id": 164,
+      "text": "Use filters",
+      "hex": "䷣"
+    },
+    {
+      "id": 165,
+      "text": "Use something nearby as a model",
+      "hex": "䷤"
+    },
+    {
+      "id": 166,
+      "text": "Use your own ideas",
+      "hex": "䷥"
+    },
+    {
+      "id": 167,
+      "text": "Voice your suspicions",
+      "hex": "䷦"
+    },
+    {
+      "id": 168,
+      "text": "Water",
+      "hex": "䷧"
+    },
+    {
+      "id": 169,
+      "text": "What are the sections sections of? Imagine a caterpillar moving",
+      "hex": "䷨"
+    },
+    {
+      "id": 170,
+      "text": "What are you really thinking about just now?",
+      "hex": "䷩"
+    },
+    {
+      "id": 171,
+      "text": "What context would look right?",
+      "hex": "䷪"
+    },
+    {
+      "id": 172,
+      "text": "What is the reality of the situation?",
+      "hex": "䷫"
+    },
+    {
+      "id": 173,
+      "text": "What is the simplest solution?",
+      "hex": "䷬"
+    },
+    {
+      "id": 174,
+      "text": "What mistakes did you make last time?",
+      "hex": "䷭"
+    },
+    {
+      "id": 175,
+      "text": "What to increase? What to reduce? What to maintain?",
+      "hex": "䷮"
+    },
+    {
+      "id": 176,
+      "text": "What were you really thinking about just now?",
+      "hex": "䷯"
+    },
+    {
+      "id": 177,
+      "text": "What would your closest friend do?",
+      "hex": "䷰"
+    },
+    {
+      "id": 178,
+      "text": "What wouldn't you do?",
+      "hex": "䷱"
+    },
+    {
+      "id": 179,
+      "text": "When is it for?",
+      "hex": "䷲"
+    },
+    {
+      "id": 180,
+      "text": "Where is the edge?",
+      "hex": "䷳"
+    },
+    {
+      "id": 181,
+      "text": "Which parts can be grouped?",
+      "hex": "䷴"
+    },
+    {
+      "id": 182,
+      "text": "Work at a different speed",
+      "hex": "䷵"
+    },
+    {
+      "id": 183,
+      "text": "Would anyone want it?",
+      "hex": "䷶"
+    },
+    {
+      "id": 184,
+      "text": "You are an engineer",
+      "hex": "䷷"
+    },
+    {
+      "id": 185,
+      "text": "You can only make one dot at a time",
+      "hex": "䷸"
+    },
+    {
+      "id": 186,
+      "text": "You don't have to be ashamed of using your own ideas",
+      "hex": "䷹"
+    },
+    {
+      "id": 187,
+      "text": "[blank white card]",
+      "hex": "䷺"
+    }
+  ]
+}

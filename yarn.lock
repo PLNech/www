@@ -3957,6 +3957,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"framer-motion@npm:^13.1.1":
+  version: 13.1.1
+  resolution: "framer-motion@npm:13.1.1"
+  dependencies:
+    motion-dom: "npm:^13.1.1"
+    motion-utils: "npm:^13.0.0"
+    tslib: "npm:^2.4.0"
+  peerDependencies:
+    react: ^18.0.0 || ^19.0.0
+    react-dom: ^18.0.0 || ^19.0.0
+  peerDependenciesMeta:
+    react:
+      optional: true
+    react-dom:
+      optional: true
+  checksum: 10c0/db1601442047bbd06286ef9fd5c9af06b4530984dc0cd0f77dffa8590a8dbcac92db05e992b62041455b55db6791bdfba8cd7c0aaa920a2325eba2c277fb7baa
+  languageName: node
+  linkType: hard
+
 "fs-extra@npm:11.1.0":
   version: 11.1.0
   resolution: "fs-extra@npm:11.1.0"
@@ -6662,6 +6681,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"motion-dom@npm:^13.1.1":
+  version: 13.1.1
+  resolution: "motion-dom@npm:13.1.1"
+  dependencies:
+    motion-utils: "npm:^13.0.0"
+  checksum: 10c0/c7697e6937920f9f584c04d59fe8589e7bbca18a85d2cf1ec7cf4ee229fb29054dda41bec6db2dde4fdf43436f17cfc2a3bbab06d2d9f8232dfa7921e0382d20
+  languageName: node
+  linkType: hard
+
+"motion-utils@npm:^13.0.0":
+  version: 13.0.0
+  resolution: "motion-utils@npm:13.0.0"
+  checksum: 10c0/4b279ce85f71926d668ff5966feb898b174541d16952a61c7150982388553266602ecd2a76e057530076ff8f38d06672e585639ddc73c41dd1a67d04aaa3662d
+  languageName: node
+  linkType: hard
+
 "mri@npm:1.2.0, mri@npm:^1.1.0":
   version: 1.2.0
   resolution: "mri@npm:1.2.0"
@@ -7284,6 +7319,7 @@ __metadata:
     "@types/react": "npm:^18.2.61"
     classnames: "npm:^2.5.1"
     date-fns: "npm:^3.6.0"
+    framer-motion: "npm:^13.1.1"
     gray-matter: "npm:^4.0.3"
     hydra-synth: "npm:^1.3.29"
     jest: "npm:^30.1.3"

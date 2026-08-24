@@ -1,0 +1,688 @@
+/* oblique — aurora-glass + max filigree.
+   Dark #0d1117 base, drifting aurora blobs, frosted-glass cards with an
+   iridescent conic foil edge, Flower-of-Life sacred geometry as a co-star,
+   I Ching hexagram filigree. Fonts: Fraunces (serif) for strategy text +
+   wordmark, Space Mono for ordinals/captions/controls.
+
+   CSS variable names (--ob-serif, --ob-mono, --ob-*) are intentionally
+   distinct from oblique.design.module.css so the two pages don't bleed. */
+
+.page {
+  /* tokens */
+  --ob-bg: #0d1117;
+  --ob-bg-deep: #080b10;
+  --ob-surface: rgba(255, 255, 255, 0.06);
+  --ob-surface-2: rgba(255, 255, 255, 0.10);
+  --ob-border: rgba(255, 255, 255, 0.14);
+  --ob-border-strong: rgba(255, 255, 255, 0.22);
+  --ob-ink: #f2f4f8;
+  --ob-muted: #9aa4b2;
+  --ob-teal: #0fb5b5;
+  --ob-purple: #7c3aed;
+  --ob-indigo: #4f46e5;
+  --ob-amber: #f59e0b;
+
+  /* next/font populates --font-ob-serif / --font-ob-mono (see pages/oblique/index.js);
+     these are the family stacks consumed across the module. */
+  --ob-serif: var(--font-ob-serif, 'Fraunces'), Georgia, 'Times New Roman', serif;
+  --ob-mono: var(--font-ob-mono, 'Space Mono'), ui-monospace, 'SFMono-Regular', monospace;
+
+  --ob-maxw: 72rem;
+
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--ob-bg);
+  color: var(--ob-ink);
+  font-family: var(--ob-serif);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.main {
+  flex: 1;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ════════════════════════════ AURORA ══ */
+.aurora {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background: var(--ob-bg-deep);
+}
+.auroraBlob {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  filter: blur(60px);
+  transform: translate(-50%, -50%);
+  will-change: transform;
+  mix-blend-mode: screen;
+}
+.auroraBlob:nth-child(1) { transform: translate(-58%, -55%); }
+.auroraBlob:nth-child(2) { transform: translate(-42%, -48%); }
+.auroraBlob:nth-child(3) { transform: translate(-50%, -52%); }
+
+.grain {
+  position: absolute;
+  inset: 0;
+  background-size: 160px 160px;
+  opacity: 0.04;
+  mix-blend-mode: overlay;
+}
+
+/* ════════════════════════════ TOP BAR ══ */
+.topBar {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: calc(env(safe-area-inset-top, 0px) + 1.4rem) clamp(1rem, 4vw, 2rem) 0.6rem;
+}
+.wordmarkWrap { display: flex; flex-direction: column; gap: 0.2rem; }
+.wordmark {
+  font-family: var(--ob-serif);
+  font-weight: 500;
+  font-variation-settings: 'opsz' 144, 'SOFT' 50, 'WONK' 1;
+  font-size: clamp(2.4rem, 9vw, 4.4rem);
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+  margin: 0;
+  color: var(--ob-ink);
+}
+.tagline {
+  font-family: var(--ob-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  color: var(--ob-muted);
+  margin: 0;
+}
+
+.modeToggle {
+  display: inline-flex;
+  gap: 0.4rem;
+  align-self: flex-start;
+}
+.tabBtn {
+  font-family: var(--ob-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  padding: 0.5rem 1.1rem;
+  border-radius: 999px;
+  border: 1px solid var(--ob-border);
+  background: var(--ob-surface);
+  color: var(--ob-muted);
+  cursor: pointer;
+  min-height: 44px;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+.tabBtn:hover { color: var(--ob-ink); border-color: var(--ob-border-strong); }
+.tabOn {
+  color: var(--ob-bg);
+  background: var(--ob-ink);
+  border-color: var(--ob-ink);
+}
+
+/* ════════════════════════════ STAGE ══ */
+.stage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1.4rem clamp(1rem, 4vw, 2rem) 2rem;
+}
+.boot { min-height: 50vh; }
+
+/* ════════════════════════════ CARD ══ */
+.card {
+  position: relative;
+  border-radius: 18px;
+  background: var(--ob-surface);
+  backdrop-filter: blur(14px) saturate(1.1);
+  -webkit-backdrop-filter: blur(14px) saturate(1.1);
+  border: 1px solid var(--ob-border);
+  box-shadow:
+    0 18px 50px rgba(0, 0, 0, 0.45),
+    0 2px 0 rgba(255, 255, 255, 0.05) inset;
+  overflow: hidden;
+  isolation: isolate;
+  user-select: none;
+}
+.cardDraw {
+  width: min(92vw, 30rem);
+  aspect-ratio: 5 / 7;
+  margin: 0 auto;
+}
+.cardBrowse {
+  width: 100%;
+  aspect-ratio: 5 / 6;
+}
+
+/* iridescent foil edge — a conic-gradient ring shifted on hover via --foil-angle.
+   Applied as a pseudo so the glass face stays clean inside. */
+.foilEdge {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  padding: 1px;
+  background: conic-gradient(
+    from var(--foil-angle, 0deg),
+    #ff8a5c, #7c3aed, #0fb5b5, #f59e0b, #ff8a5c
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  opacity: 0.55;
+  transition: opacity 0.3s ease;
+  z-index: 3;
+}
+.card:hover .foilEdge {
+  opacity: 1;
+  --foil-angle: 90deg;
+}
+
+.card3d { perspective: 1400px; }
+.cardInner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+}
+.cardHalf {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.cardHalfFront { transform: rotateY(0deg); transition: transform 0.6s 0.35s cubic-bezier(0.16, 1, 0.3, 1); }
+/* settled resting tilt once the card lands face-up */
+.cardHalfFront.tilted { transform: rotateY(0deg) rotateZ(-1.5deg); }
+
+/* card back */
+.cardBack {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.cardBackFlower {
+  position: absolute;
+  inset: 0;
+  width: 80%;
+  height: 80%;
+  margin: auto;
+  color: var(--ob-ink);
+}
+.cardBackHex {
+  font-family: var(--ob-mono);
+  font-size: clamp(3rem, 12vw, 5rem);
+  color: var(--ob-ink);
+  opacity: 0.22;
+  line-height: 1;
+  position: relative;
+  z-index: 2;
+}
+.cardBackMark {
+  font-family: var(--ob-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ob-muted);
+  position: relative;
+  z-index: 2;
+}
+
+/* card face */
+.cardFace {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 1.4rem 1.3rem;
+  border-radius: inherit;
+}
+.cardFaceFlower {
+  position: absolute;
+  inset: -10%;
+  width: 120%;
+  height: 120%;
+  margin: auto;
+  color: var(--ob-teal);
+  z-index: 0;
+  opacity: 0.22; /* MAX FILIGREE but legible: text patch carries the halo */
+}
+.cardHex {
+  position: absolute;
+  top: 0.9rem;
+  left: 1.1rem;
+  font-family: var(--ob-mono);
+  font-size: clamp(1.6rem, 6vw, 2.4rem);
+  color: var(--ob-ink);
+  opacity: 0.16;
+  line-height: 1;
+  z-index: 1;
+}
+.cardOrdinal {
+  position: absolute;
+  top: 1.1rem;
+  right: 1.2rem;
+  font-family: var(--ob-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: var(--ob-muted);
+  z-index: 2;
+}
+.cardTextPatch {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  /* denser glass patch behind the text for legibility over the Flower-of-Life */
+  background: rgba(13, 17, 23, 0.34);
+  border-radius: 10px;
+  margin: 2.6rem 0 1.6rem;
+  padding: 0.9rem 0.7rem;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+.cardText {
+  font-family: var(--ob-serif);
+  font-weight: 450;
+  font-variation-settings: 'opsz' 80, 'SOFT' 30;
+  font-size: clamp(1.4rem, 5vw, 2.4rem);
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+  color: var(--ob-ink);
+  text-align: center;
+  margin: 0;
+  text-wrap: balance;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* favorite ◆ */
+.favBtn, .favMark {
+  position: absolute;
+  bottom: 0.9rem;
+  right: 1.1rem;
+  z-index: 3;
+  font-family: var(--ob-mono);
+  font-size: 1.1rem;
+  line-height: 1;
+  color: var(--ob-muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.4rem;
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+.favBtn:hover { transform: scale(1.1); }
+.favOn { color: var(--ob-amber); }
+
+/* ════════════════════════════ DRAW ══ */
+.draw {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+.drawStage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.1rem;
+  position: relative;
+}
+.dailyCaption {
+  font-family: var(--ob-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  color: var(--ob-amber);
+  margin: 0;
+}
+.drawCardWrap {
+  position: relative;
+  touch-action: pan-y;
+  cursor: grab;
+}
+.drawCardWrap:active { cursor: grabbing; }
+
+/* directional swipe hints — faint, brighten on drag (via sibling hover/drag) */
+.swipeHint {
+  position: absolute;
+  z-index: 4;
+  font-family: var(--ob-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  color: var(--ob-muted);
+  opacity: 0.5;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+.swipeLeft { left: -0.4rem; top: 50%; transform: translateY(-50%) translateX(-100%); }
+.swipeRight { right: -0.4rem; top: 50%; transform: translateY(-50%) translateX(100%); }
+.swipeUp { top: -0.4rem; left: 50%; transform: translateX(-50%) translateY(-100%); }
+
+.drawActions {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+  justify-content: center;
+}
+.ghostBtn {
+  font-family: var(--ob-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  color: var(--ob-muted);
+  background: none;
+  border: 1px solid var(--ob-border);
+  border-radius: 999px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  min-height: 46px;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+.ghostBtn:hover { color: var(--ob-ink); border-color: var(--ob-border-strong); background: var(--ob-surface); }
+
+.drawHint {
+  font-family: var(--ob-mono);
+  font-size: 0.72rem;
+  color: var(--ob-muted);
+  opacity: 0.7;
+  margin: 0;
+  text-align: center;
+}
+
+.toast {
+  font-family: var(--ob-mono);
+  font-size: 0.74rem;
+  color: var(--ob-teal);
+  background: var(--ob-surface-2);
+  border: 1px solid var(--ob-border);
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+}
+
+/* kept-spread */
+.kept {
+  flex-shrink: 0;
+  padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 0.6rem);
+}
+.keptHeader {
+  font-family: var(--ob-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.06em;
+  color: var(--ob-muted);
+  margin: 0 0 0.6rem;
+}
+.keptEmpty {
+  font-family: var(--ob-mono);
+  font-size: 0.72rem;
+  color: var(--ob-muted);
+  opacity: 0.5;
+  margin: 0;
+}
+.keptRow {
+  display: flex;
+  gap: 0.6rem;
+  overflow-x: auto;
+  padding-bottom: 0.4rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--ob-border-strong) transparent;
+}
+.keptChip {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  border: 1px solid var(--ob-border);
+  border-radius: 10px;
+  background: var(--ob-surface);
+  overflow: hidden;
+}
+.keptChipBody {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  background: none;
+  border: none;
+  color: var(--ob-ink);
+  cursor: pointer;
+  padding: 0.6rem 0.7rem;
+  max-width: 13rem;
+  text-align: left;
+  min-height: 44px;
+}
+.keptChipHex {
+  font-family: var(--ob-mono);
+  font-size: 1rem;
+  color: var(--ob-teal);
+  line-height: 1;
+}
+.keptChipText {
+  font-family: var(--ob-serif);
+  font-size: 0.8rem;
+  color: var(--ob-muted);
+  line-height: 1.25;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.keptRemove {
+  background: none;
+  border: none;
+  border-left: 1px solid var(--ob-border);
+  color: var(--ob-muted);
+  cursor: pointer;
+  padding: 0 0.5rem;
+  min-width: 28px;
+  font-size: 0.8rem;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+.keptRemove:hover { color: var(--ob-amber); background: rgba(245, 158, 11, 0.1); }
+
+/* ════════════════════════════ BROWSE ══ */
+.browse {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  max-width: var(--ob-maxw);
+  width: 100%;
+  margin: 0 auto;
+}
+.browseBar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  align-items: center;
+}
+.searchInput {
+  flex: 1 1 18rem;
+  font-family: var(--ob-mono);
+  font-size: 0.9rem;
+  color: var(--ob-ink);
+  background: var(--ob-surface);
+  border: 1px solid var(--ob-border);
+  border-radius: 999px;
+  padding: 0.6rem 1.1rem;
+  min-height: 44px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+.searchInput::placeholder { color: var(--ob-muted); opacity: 0.7; }
+.searchInput:focus { border-color: var(--ob-teal); }
+.matchCount {
+  font-family: var(--ob-mono);
+  font-size: 0.74rem;
+  color: var(--ob-muted);
+  letter-spacing: 0.04em;
+}
+.pill {
+  font-family: var(--ob-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  color: var(--ob-muted);
+  background: var(--ob-surface);
+  border: 1px solid var(--ob-border);
+  border-radius: 999px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  min-height: 44px;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+.pill:hover { color: var(--ob-ink); border-color: var(--ob-border-strong); }
+.pillOn { color: var(--ob-amber); border-color: rgba(245, 158, 11, 0.5); background: rgba(245, 158, 11, 0.1); }
+
+.browseEmpty {
+  font-family: var(--ob-mono);
+  color: var(--ob-muted);
+  text-align: center;
+  padding: 3rem 0;
+}
+
+/* responsive grid — generous breathing room on desktop (the owner asked for
+   empty space, not cram). Mobile 1 col, tablet 2-3, desktop 3-4, wide gaps. */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 1.4rem;
+}
+@media (min-width: 640px) {
+  .grid { grid-template-columns: repeat(2, 1fr); gap: 1.6rem; }
+}
+@media (min-width: 960px) {
+  .grid { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+}
+@media (min-width: 1280px) {
+  .grid { grid-template-columns: repeat(4, 1fr); gap: 2.2rem; }
+}
+
+.gridCard {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-align: left;
+  display: block;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.gridCard:hover { transform: translateY(-4px); }
+.gridCard:focus-visible { outline: 2px solid var(--ob-teal); outline-offset: 4px; border-radius: 20px; }
+
+/* compact browse card: smaller text, 2-line clamp */
+.gridCard .cardBrowse .cardFace { padding: 1rem 1rem; }
+.gridCard .cardText {
+  font-size: clamp(0.95rem, 1.6vw, 1.1rem);
+  line-height: 1.3;
+  text-align: left;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-shadow: none;
+}
+.gridCard .cardTextPatch { margin: 2rem 0 0.5rem; padding: 0; background: none; backdrop-filter: none; -webkit-backdrop-filter: none; }
+.gridCard .cardHex { font-size: 1.4rem; }
+.gridCard .favMark { font-size: 0.9rem; }
+
+/* ════════════════════════════ OVERLAY ══ */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(8, 11, 16, 0.82);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.2rem;
+}
+.overlayCard {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  max-width: 92vw;
+}
+.overlayActions {
+  display: flex;
+  gap: 0.7rem;
+}
+
+/* ════════════════════════════ FOOTER ══ */
+.footer {
+  flex-shrink: 0;
+  padding: 1.4rem;
+  border-top: 1px solid var(--ob-border);
+  text-align: center;
+}
+.footerMono {
+  font-family: var(--ob-mono);
+  font-size: 0.76rem;
+  color: var(--ob-muted);
+}
+.footerMono a { color: var(--ob-teal); text-decoration: none; }
+.footerMono a:hover { color: var(--ob-ink); }
+
+/* ════════════════════════════ FLOWER helper ══ */
+.flower {
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* ════════════════════════════ REDUCED MOTION ══ */
+@media (prefers-reduced-motion: reduce) {
+  .page *, .page *::before, .page *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  /* aurora static, flip → fade (handled in JS). The resting tilt is a static
+     transform, not motion, so it may stay; only its transition is killed above. */
+}
+
+/* freeze aurora on metered/low-data connections */
+@media (prefers-reduced-data: reduce) {
+  .auroraBlob { filter: none; opacity: 0.4; }
+  .grain { display: none; }
+}
+
+/* ════════════════════════════ FOCUS ══ */
+.page a:focus-visible,
+.page button:focus-visible,
+.page input:focus-visible {
+  outline: 2px solid var(--ob-teal);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
