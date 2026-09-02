@@ -1,7 +1,7 @@
 ---
 title: "CosmicSet 2026"
 date: "2026-08-22"
-time: ""
+time: "20:30"
 location: "Labenne-Océan, France"
 address: "CosmicFest"
 stage: "Le Jardin"
@@ -24,6 +24,10 @@ Un set de live coding TidalCycles en 14 morceaux, 63 minutes, joué en cinq
 mouvements — *Ouverture*, *SUNSET*, *We call it NuJazz*, *NUIT*, *FINALE* — de 89
 à 170 BPM, puis un outro à la dub sirène improvisé, sans partition. Chaque
 morceau est un fichier `.tidal` autonome, écrit et modifié en direct.
+
+Le plan de set prévoyait *WAP* en deuxième position ; il n'a pas été joué. Le
+choix a été fait sur le moment : enchaînement direct de *Ceci n'est pas Une
+Bombe* à *Something About Drums*, à 6:46.
 
 À la différence d'Opal, **il n'y a pas de stems** : le set n'existe que dans un
 seul enregistrement, un micro de scène dans un Zoom, MP3 320 kbps. Pas d'orbites

@@ -74,8 +74,8 @@
       "source": "PLN's own set plan in backlog.md — the canonical informal tracklist source (reference_gig_tracklist_sources). NOT invented.",
       "locator": "Tidal/backlog.md ## COSMICFEST (~line 1986): Ouverture / SUNSET / _We call it NuJazz_ / NUIT / FINALE",
       "date": "2026-09-02",
-      "caveat": "The planned order matches the measured set exactly, with ONE difference: the plan lists 'WAP' [133] second in Ouverture and it does not appear in the recording, so the mapping shifts up by one from track 2 onward. Track 14 ('Outro: La Dub Sirene') is not in the plan at all - its section is taken from PLN's own title for it.",
-      "open_question": "Was WAP played? Track 1 is 6.8 min, in line with other single tracks (3 is 6.6, 7 is 6.3), so it does not look like two tracks merged - but that is an inference, not a measurement."
+      "caveat": "The planned order matches the measured set exactly, with ONE difference: the plan lists 'WAP' [133] second in Ouverture and it was NOT PLAYED. PLN, 2026-09-02: \"didnt play WAP i think in the end [...] i confirm, direct from Bombe DJ to Something about Drums, its what i chose that day\". So the section mapping shifts up by one from track 2 onward. Track 14 ('Outro: La Dub Sirene') is not in the plan at all - its section is taken from PLN's own title.",
+      "open_question": "RESOLVED 2026-09-02 by PLN, and independently checked against the audio: see tempo_timeline.py on track 1's drums stem (Bombe DJ is 124 BPM, WAP 133 - 7% apart and resolvable). A live decision, not a boundary-detection miss."
     },
     "title": {
       "source": "PLN",
@@ -88,8 +88,8 @@
       "date": "2026-09-02"
     },
     "stage": {
-      "source": "derived from the invite page's lineup heading — PLN to confirm the name and casing",
-      "locator": "www/app/cosmicfest/CosmicFestClient.js:234 \"le 22 aout, dans le jardin\"",
+      "source": "PLN, confirming the invite page — derived from the lineup heading and then approved verbatim",
+      "locator": "PLN chat 2026-09-02: \"\\\"Le Jardin\\\" case perfect\" · www/app/cosmicfest/CosmicFestClient.js:234 \"le 22 aout, dans le jardin\"",
       "date": "2026-09-02"
     },
     "description": {
