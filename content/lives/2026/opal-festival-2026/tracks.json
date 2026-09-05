@@ -446,5 +446,11 @@
         "the_revolution"
       ]
     }
-  ]
+  ],
+  "durationBasis": "PERFORMANCE axis, not release axis. Every start_s/end_s/duration_s here is measured on the Ardour recording of the set as played, so duration_s == end_s - start_s for every row and the timeline is continuous with real between-track gaps. The released FLACs are NOT the same lengths, because mastering adds material the performance did not contain: 'Vague de CRIME' ships at 271.05s (269.05 here + a 2.0s rest PLN asked for after the CRIME->REVOLUTION seam) and 'REVOLUTION' ships at 205.55s (204.90 here + 0.65s of reverb tail). A mismatch against a FLAC duration is therefore expected for those two and is not drift -- compare against Opal26_master/segments_v4.json, which carries both the boundary and the render padding that explains the difference.",
+  "performedButUnreleased": {
+    "track": "Desire",
+    "perf_track": 14,
+    "why": "Played on the night, cut from the release. This page documents the set AS PERFORMED (PLN's call, 2026-09-05), so Desire keeps its slot and its numbering here while the release renumbers REVOLUTION 15 -> 14. Desire has no entry in segments_v4.json at all, so its timecodes are carried through unchanged from the v3 ear pass rather than guessed at; that is why its duration (367.35) matches no v4 render. Its master survives at Opal26_master/tracks/14 - Desire.flac."
+  }
 }
