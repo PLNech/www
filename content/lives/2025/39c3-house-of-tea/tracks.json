@@ -1,0 +1,342 @@
+{
+  "_draft": [
+    "Mechanically drafted from backlog.md by build_gig_tracksjson.py",
+    "--backlog-slug on 2026-09-05, via backlog_setlists.py's anchor+alias",
+    "resolution. NOT ear-verified: no recording was measured for this gig,",
+    "so there are no start_s/end_s/duration_s and no `section` (movements) —",
+    "both would have to be guessed, and this tool never guesses. Any track",
+    "below with \"resolved\": false failed to match the catalog's alias index",
+    "and needs PLN's eyes (raw backlog.md name kept verbatim, not dropped)."
+  ],
+  "gig": "39c3-house-of-tea",
+  "title": "[39C3] House of Tea",
+  "date": "2025-12-28",
+  "venue": "CCH, Hamburg",
+  "stage": null,
+  "trackCount": 14,
+  "bpmRange": null,
+  "styleDistribution": {
+    "ambient": 1,
+    "collab": 2,
+    "dnb": 3,
+    "lounge": 1,
+    "nujazz": 3,
+    "techno": 2
+  },
+  "samplePacks": [
+    "909",
+    "90s_synatm",
+    "FMRhodes1",
+    "FMRhodes2",
+    "acidOto3092",
+    "airports",
+    "bassWarsaw",
+    "breaks165",
+    "cbow",
+    "come_bass",
+    "come_eguitar",
+    "come_guitar",
+    "come_voice",
+    "cpluck",
+    "drum",
+    "drumtraks",
+    "gfunk_lead",
+    "giorgio_syn",
+    "h2ogmcp",
+    "h2ogmcy",
+    "h2ogmhh",
+    "h2ogmsn",
+    "hh",
+    "ho",
+    "house",
+    "jazz",
+    "jungle",
+    "jungle_breaks",
+    "jungle_vocals",
+    "meth_bass",
+    "moogBass",
+    "movie_paris",
+    "nujazz_bass120",
+    "nujazz_bass125",
+    "nujazz_beats120",
+    "nujazz_keys120",
+    "nujazz_keys125",
+    "rampleM1",
+    "rampleM8",
+    "rampleS57",
+    "rhadamanthe_melo",
+    "risers",
+    "sn",
+    "snare",
+    "sunny_bass",
+    "sunny_brass",
+    "superpiano",
+    "vec1_acid",
+    "vec1_claps"
+  ],
+  "_needs_pln": [
+    "stage",
+    "unresolved: \"TechnOrage\""
+  ],
+  "_provenance": {
+    "tracklist": {
+      "source": "backlog.md",
+      "locator": "# CCC 39c3 ALGORAVE <3",
+      "date": "2026-09-05"
+    },
+    "title": {
+      "source": "/home/pln/Work/Web/www/content/lives/2025/39c3-house-of-tea.md",
+      "locator": "frontmatter.title"
+    },
+    "date": {
+      "source": "/home/pln/Work/Web/www/content/lives/2025/39c3-house-of-tea.md",
+      "locator": "frontmatter.date"
+    },
+    "venue": {
+      "source": "/home/pln/Work/Web/www/content/lives/2025/39c3-house-of-tea.md",
+      "locator": "frontmatter.address"
+    },
+    "stage": {
+      "source": "/home/pln/Work/Web/www/content/lives/2025/39c3-house-of-tea.md",
+      "locator": "frontmatter.stage"
+    }
+  },
+  "durationBasis": "No ear-verified recording exists for this gig (or none has been reviewed yet), so this tracklist carries NO per-track timecodes and NO `section` (movements) — both are PLN-only and this draft never invents them. Order and content come straight from backlog.md via backlog_setlists.py, mechanically resolved to .tidal scores.",
+  "tracks": [
+    {
+      "name": "Quand on décolle",
+      "file": "live/midi/nova/ambient/quand_on_decolle.tidal",
+      "resolved": true,
+      "bpm": null,
+      "style": "ambient",
+      "samples": [
+        "airports",
+        "bassWarsaw",
+        "hh",
+        "jazz",
+        "jungle_breaks",
+        "moogBass",
+        "risers",
+        "snare"
+      ]
+    },
+    {
+      "name": "Because it's there",
+      "file": "copycat/because_its_there.tidal",
+      "resolved": true,
+      "bpm": null,
+      "style": null,
+      "samples": [
+        "90s_synatm",
+        "FMRhodes1",
+        "bassWarsaw",
+        "giorgio_syn",
+        "ho",
+        "jazz",
+        "jungle_breaks",
+        "risers",
+        "sn"
+      ]
+    },
+    {
+      "name": "Ere de jeu",
+      "file": "live/midi/nova/techno/ere_de_jeu.tidal",
+      "resolved": true,
+      "bpm": null,
+      "style": "techno",
+      "samples": [
+        "FMRhodes1",
+        "cbow",
+        "cpluck",
+        "giorgio_syn",
+        "h2ogmhh",
+        "jazz",
+        "jungle_breaks",
+        "moogBass",
+        "risers",
+        "snare",
+        "vec1_acid"
+      ]
+    },
+    {
+      "name": "Sunny",
+      "file": "live/midi/nova/lounge/sunny_side_up.tidal",
+      "resolved": true,
+      "bpm": null,
+      "style": "lounge",
+      "samples": [
+        "acidOto3092",
+        "h2ogmhh",
+        "jazz",
+        "jungle",
+        "jungle_breaks",
+        "nujazz_keys120",
+        "risers",
+        "sunny_bass",
+        "sunny_brass"
+      ]
+    },
+    {
+      "name": "TechnOrage",
+      "file": null,
+      "resolved": false,
+      "bpm": null,
+      "style": null,
+      "samples": []
+    },
+    {
+      "name": "L'Ete a Mauerpark",
+      "file": "live/midi/nova/techno/ete_a_mauerpark.tidal",
+      "resolved": true,
+      "bpm": null,
+      "style": "techno",
+      "samples": [
+        "909",
+        "FMRhodes1",
+        "bassWarsaw",
+        "cbow",
+        "jungle_breaks",
+        "moogBass"
+      ]
+    },
+    {
+      "name": "Piment Bresilien",
+      "file": "live/collab/raph/piment_bresilien.tidal",
+      "resolved": true,
+      "bpm": null,
+      "style": "collab",
+      "samples": [
+        "909",
+        "90s_synatm",
+        "FMRhodes2",
+        "bassWarsaw",
+        "gfunk_lead",
+        "h2ogmhh",
+        "jungle_breaks",
+        "vec1_claps"
+      ]
+    },
+    {
+      "name": "Venons Ensemble",
+      "file": "live/midi/nova/dnb/venons_ensemble.tidal",
+      "resolved": true,
+      "bpm": null,
+      "style": "dnb",
+      "samples": [
+        "909",
+        "come_bass",
+        "come_eguitar",
+        "come_guitar",
+        "come_voice",
+        "jazz",
+        "jungle_breaks",
+        "risers"
+      ]
+    },
+    {
+      "name": "Something about Drums",
+      "file": "live/midi/nova/dnb/something_about_drums.tidal",
+      "resolved": true,
+      "bpm": null,
+      "style": "dnb",
+      "samples": [
+        "FMRhodes2",
+        "bassWarsaw",
+        "drum",
+        "drumtraks",
+        "jazz",
+        "jungle_breaks",
+        "moogBass",
+        "movie_paris",
+        "superpiano"
+      ]
+    },
+    {
+      "name": "Cafe Bouillant",
+      "file": "live/midi/nova/nujazz/cafe_bouillant.tidal",
+      "resolved": true,
+      "bpm": null,
+      "style": "nujazz",
+      "samples": [
+        "bassWarsaw",
+        "cpluck",
+        "house",
+        "jungle_breaks",
+        "nujazz_bass120",
+        "nujazz_beats120",
+        "nujazz_keys120",
+        "rampleM1",
+        "rampleS57"
+      ]
+    },
+    {
+      "name": "Cafe Tiede",
+      "file": "live/midi/nova/nujazz/cafe_tiede.tidal",
+      "resolved": true,
+      "bpm": null,
+      "style": "nujazz",
+      "samples": [
+        "FMRhodes1",
+        "h2ogmcp",
+        "h2ogmsn",
+        "jazz",
+        "jungle_breaks",
+        "nujazz_bass125",
+        "nujazz_keys125"
+      ]
+    },
+    {
+      "name": "Force motrice",
+      "file": "live/midi/nova/dnb/force_motrice.tidal",
+      "resolved": true,
+      "bpm": null,
+      "style": "dnb",
+      "samples": [
+        "FMRhodes1",
+        "cbow",
+        "giorgio_syn",
+        "jazz",
+        "jungle_breaks",
+        "jungle_vocals",
+        "meth_bass",
+        "nujazz_bass125",
+        "rampleM8",
+        "risers"
+      ]
+    },
+    {
+      "name": "Cafe Glacé",
+      "file": "live/midi/nova/nujazz/cafe_glace.tidal",
+      "resolved": true,
+      "bpm": null,
+      "style": "nujazz",
+      "samples": [
+        "h2ogmcy",
+        "house",
+        "jungle_breaks",
+        "meth_bass",
+        "nujazz_bass120",
+        "nujazz_keys120",
+        "rampleM1"
+      ]
+    },
+    {
+      "name": "Sept1",
+      "file": "live/collab/baba/sept1.tidal",
+      "resolved": true,
+      "bpm": null,
+      "style": "collab",
+      "samples": [
+        "breaks165",
+        "cpluck",
+        "h2ogmcy",
+        "h2ogmhh",
+        "jazz",
+        "jungle_breaks",
+        "nujazz_keys120",
+        "rhadamanthe_melo",
+        "risers"
+      ]
+    }
+  ]
+}

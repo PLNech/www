@@ -1,0 +1,367 @@
+{
+  "_draft": [
+    "Mechanically drafted from backlog.md by build_gig_tracksjson.py",
+    "--backlog-slug on 2026-09-05, via backlog_setlists.py's anchor+alias",
+    "resolution. NOT ear-verified: no recording was measured for this gig,",
+    "so there are no start_s/end_s/duration_s and no `section` (movements) —",
+    "both would have to be guessed, and this tool never guesses. Any track",
+    "below with \"resolved\": false failed to match the catalog's alias index",
+    "and needs PLN's eyes (raw backlog.md name kept verbatim, not dropped)."
+  ],
+  "gig": "opal-festival-2025",
+  "title": "Opal Festival 2025",
+  "date": "2025-08-10",
+  "venue": "Opal Festival",
+  "stage": null,
+  "trackCount": 17,
+  "bpmRange": [
+    60,
+    160
+  ],
+  "styleDistribution": {
+    "ambient": 2,
+    "breaks": 2,
+    "collab": 3,
+    "dnb": 1,
+    "lounge": 1,
+    "techno": 1
+  },
+  "samplePacks": [
+    "808bd",
+    "909",
+    "90s_synatm",
+    "FMRhodes1",
+    "FMRhodes2",
+    "acidOto3092",
+    "airports",
+    "armora",
+    "bassWarsaw",
+    "bogdan",
+    "break",
+    "clubkick",
+    "come_guitar",
+    "cp",
+    "cpluck",
+    "cs80leadMH",
+    "drum",
+    "drumtraks",
+    "giorgio_syn",
+    "gtkick",
+    "h2ogmhh",
+    "hh",
+    "jane_wang",
+    "jazz",
+    "jungle",
+    "jungle_breaks",
+    "lead",
+    "marimba1",
+    "meth_bass",
+    "moogBass",
+    "movie_paris",
+    "movie_vitality",
+    "nujazz_keys120",
+    "orage",
+    "private_number",
+    "rampleM6",
+    "rampleS13",
+    "rhadamanthe_vocal",
+    "risers",
+    "scratch_long",
+    "sn",
+    "snare",
+    "sogood",
+    "sunny_bass",
+    "sunny_brass",
+    "superpiano",
+    "techno",
+    "vec1_acid",
+    "vec1_snare",
+    "vocalOoh1",
+    "vocalScatAr",
+    "vocalScatJ"
+  ],
+  "_needs_pln": [
+    "stage",
+    "unresolved: \"The Secret\"",
+    "unresolved: \"1er Septembre Pour Elle\"",
+    "unresolved: \"Chere Mireille\"",
+    "unresolved: \"JEROME\"",
+    "unresolved: \"Oct29 Love First\"",
+    "unresolved: \"Cafes du plus chaud au plus froid\""
+  ],
+  "_provenance": {
+    "tracklist": {
+      "source": "backlog.md",
+      "locator": "# OPAL 2025",
+      "date": "2026-09-05"
+    },
+    "title": {
+      "source": "/home/pln/Work/Web/www/content/lives/2025/opal-festival-2025.md",
+      "locator": "frontmatter.title"
+    },
+    "date": {
+      "source": "/home/pln/Work/Web/www/content/lives/2025/opal-festival-2025.md",
+      "locator": "frontmatter.date"
+    },
+    "venue": {
+      "source": "/home/pln/Work/Web/www/content/lives/2025/opal-festival-2025.md",
+      "locator": "frontmatter.address"
+    },
+    "stage": {
+      "source": "/home/pln/Work/Web/www/content/lives/2025/opal-festival-2025.md",
+      "locator": "frontmatter.stage"
+    }
+  },
+  "durationBasis": "No ear-verified recording exists for this gig (or none has been reviewed yet), so this tracklist carries NO per-track timecodes and NO `section` (movements) — both are PLN-only and this draft never invents them. Order and content come straight from backlog.md via backlog_setlists.py, mechanically resolved to .tidal scores.",
+  "tracks": [
+    {
+      "name": "Drifting soul",
+      "file": "live/collab/jane/drifting_soul.tidal",
+      "resolved": true,
+      "bpm": 80,
+      "style": "collab",
+      "samples": [
+        "cpluck",
+        "h2ogmhh",
+        "jane_wang",
+        "jungle_breaks",
+        "moogBass",
+        "movie_vitality",
+        "rampleM6",
+        "scratch_long",
+        "sn",
+        "techno"
+      ],
+      "transition": "10+5->4+11"
+    },
+    {
+      "name": "Lendemain Divin",
+      "file": "live/midi/nova/lofi/lendemain_divin.tidal",
+      "resolved": true,
+      "bpm": 95,
+      "style": null,
+      "samples": [
+        "FMRhodes1",
+        "bassWarsaw",
+        "come_guitar",
+        "jazz",
+        "jungle_breaks",
+        "vec1_snare"
+      ],
+      "transition": "4,5,6->6"
+    },
+    {
+      "name": "Quand on Décolle",
+      "file": "live/midi/nova/ambient/quand_on_decolle.tidal",
+      "resolved": true,
+      "bpm": 120,
+      "style": "ambient",
+      "samples": [
+        "airports",
+        "bassWarsaw",
+        "hh",
+        "jazz",
+        "jungle_breaks",
+        "moogBass",
+        "risers",
+        "snare"
+      ],
+      "transition": "11+12->11"
+    },
+    {
+      "name": "The Secret",
+      "file": null,
+      "resolved": false,
+      "bpm": 80,
+      "style": null,
+      "samples": [],
+      "transition": "11.3->3.12"
+    },
+    {
+      "name": "Jeudi Drill",
+      "file": "live/collab/raph/jeudrill.tidal",
+      "resolved": true,
+      "bpm": 70,
+      "style": "collab",
+      "samples": [
+        "90s_synatm",
+        "bogdan",
+        "clubkick",
+        "giorgio_syn",
+        "jungle_breaks",
+        "marimba1",
+        "meth_bass",
+        "snare"
+      ],
+      "transition": "3..10->10..3"
+    },
+    {
+      "name": "1er Septembre Pour Elle",
+      "file": null,
+      "resolved": false,
+      "bpm": 60,
+      "style": null,
+      "samples": [],
+      "transition": "9.11.->5"
+    },
+    {
+      "name": "Sunny Side Up",
+      "file": "live/midi/nova/lounge/sunny_side_up.tidal",
+      "resolved": true,
+      "bpm": 120,
+      "style": "lounge",
+      "samples": [
+        "acidOto3092",
+        "h2ogmhh",
+        "jazz",
+        "jungle",
+        "jungle_breaks",
+        "nujazz_keys120",
+        "risers",
+        "sunny_bass",
+        "sunny_brass"
+      ],
+      "transition": "4.5->5..11..."
+    },
+    {
+      "name": "Chere Mireille",
+      "file": null,
+      "resolved": false,
+      "bpm": 120,
+      "style": null,
+      "samples": [],
+      "transition": "11+6..4"
+    },
+    {
+      "name": "So G00D",
+      "file": "live/collab/nass/sogood.tidal",
+      "resolved": true,
+      "bpm": 140,
+      "style": "collab",
+      "samples": [
+        "armora",
+        "bassWarsaw",
+        "cs80leadMH",
+        "gtkick",
+        "h2ogmhh",
+        "jungle_breaks",
+        "moogBass",
+        "risers",
+        "sogood"
+      ],
+      "transition": "3.4->11..."
+    },
+    {
+      "name": "Nuit d'Orage",
+      "file": "live/midi/nova/techno/techno_orage.tidal",
+      "resolved": true,
+      "bpm": 104,
+      "style": "techno",
+      "samples": [
+        "FMRhodes2",
+        "bassWarsaw",
+        "jungle_breaks",
+        "lead",
+        "orage",
+        "risers",
+        "superpiano",
+        "vec1_acid"
+      ],
+      "transition": "11.3.4->"
+    },
+    {
+      "name": "Something About Drums",
+      "file": "live/midi/nova/dnb/something_about_drums.tidal",
+      "resolved": true,
+      "bpm": 160,
+      "style": "dnb",
+      "samples": [
+        "FMRhodes2",
+        "bassWarsaw",
+        "drum",
+        "drumtraks",
+        "jazz",
+        "jungle_breaks",
+        "moogBass",
+        "movie_paris",
+        "superpiano"
+      ],
+      "transition": "10.5..9->5.9"
+    },
+    {
+      "name": "Ton Numero",
+      "file": "live/midi/nova/breaks/ton_numero.tidal",
+      "resolved": true,
+      "bpm": 99,
+      "style": "breaks",
+      "samples": [
+        "808bd",
+        "bassWarsaw",
+        "h2ogmhh",
+        "jungle_breaks",
+        "private_number",
+        "rampleS13",
+        "vec1_snare",
+        "vocalOoh1",
+        "vocalScatAr",
+        "vocalScatJ"
+      ],
+      "transition": "RTFM"
+    },
+    {
+      "name": "Lady Perplexity",
+      "file": "live/midi/nova/breaks/lady_perplexity.tidal",
+      "resolved": true,
+      "bpm": 138,
+      "style": "breaks",
+      "samples": [
+        "909",
+        "FMRhodes1",
+        "FMRhodes2",
+        "bassWarsaw",
+        "jungle_breaks",
+        "rhadamanthe_vocal"
+      ]
+    },
+    {
+      "name": "JEROME",
+      "file": null,
+      "resolved": false,
+      "bpm": null,
+      "style": null,
+      "samples": []
+    },
+    {
+      "name": "Contre Visite",
+      "file": "live/midi/nova/ambient/contre_visite.tidal",
+      "resolved": true,
+      "bpm": null,
+      "style": "ambient",
+      "samples": [
+        "90s_synatm",
+        "bassWarsaw",
+        "break",
+        "cp",
+        "h2ogmhh",
+        "jazz",
+        "jungle_breaks"
+      ]
+    },
+    {
+      "name": "Oct29 Love First",
+      "file": null,
+      "resolved": false,
+      "bpm": null,
+      "style": null,
+      "samples": []
+    },
+    {
+      "name": "Cafes du plus chaud au plus froid",
+      "file": null,
+      "resolved": false,
+      "bpm": null,
+      "style": null,
+      "samples": []
+    }
+  ]
+}

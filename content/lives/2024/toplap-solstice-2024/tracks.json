@@ -1,0 +1,141 @@
+{
+  "_draft": [
+    "Mechanically drafted from backlog.md by build_gig_tracksjson.py",
+    "--backlog-slug on 2026-09-05, via backlog_setlists.py's anchor+alias",
+    "resolution. NOT ear-verified: no recording was measured for this gig,",
+    "so there are no start_s/end_s/duration_s and no `section` (movements) —",
+    "both would have to be guessed, and this tool never guesses. Any track",
+    "below with \"resolved\": false failed to match the catalog's alias index",
+    "and needs PLN's eyes (raw backlog.md name kept verbatim, not dropped)."
+  ],
+  "gig": "toplap-solstice-2024",
+  "title": "TOPLAP Solstice 2024",
+  "date": "2024-12-21",
+  "venue": "TOPLAP Stream (from the Alps)",
+  "stage": null,
+  "trackCount": 4,
+  "bpmRange": null,
+  "styleDistribution": {
+    "collab": 1,
+    "dnb": 1
+  },
+  "samplePacks": [
+    "808hc",
+    "909",
+    "FMRhodes1",
+    "FMRhodes2",
+    "armora",
+    "bassWarsaw",
+    "ccc",
+    "cp",
+    "cpluck",
+    "drum",
+    "drumtraks",
+    "h2ogmhh",
+    "jazz",
+    "jungle_breaks",
+    "moog",
+    "moogBass",
+    "movie_paris",
+    "risers",
+    "snare",
+    "superpiano",
+    "trance_pads",
+    "vec2_synth_acid",
+    "weird_dialogs"
+  ],
+  "_needs_pln": [
+    "stage",
+    "unresolved: \"Deck the Hall\""
+  ],
+  "_provenance": {
+    "tracklist": {
+      "source": "backlog.md",
+      "locator": "### TopLap Solstice Stream 2024",
+      "date": "2026-09-05"
+    },
+    "title": {
+      "source": "/home/pln/Work/Web/www/content/lives/2024/toplap-solstice-2024.md",
+      "locator": "frontmatter.title"
+    },
+    "date": {
+      "source": "/home/pln/Work/Web/www/content/lives/2024/toplap-solstice-2024.md",
+      "locator": "frontmatter.date"
+    },
+    "venue": {
+      "source": "/home/pln/Work/Web/www/content/lives/2024/toplap-solstice-2024.md",
+      "locator": "frontmatter.address"
+    },
+    "stage": {
+      "source": "/home/pln/Work/Web/www/content/lives/2024/toplap-solstice-2024.md",
+      "locator": "frontmatter.stage"
+    }
+  },
+  "durationBasis": "No ear-verified recording exists for this gig (or none has been reviewed yet), so this tracklist carries NO per-track timecodes and NO `section` (movements) — both are PLN-only and this draft never invents them. Order and content come straight from backlog.md via backlog_setlists.py, mechanically resolved to .tidal scores.",
+  "tracks": [
+    {
+      "name": "Deck the Hall",
+      "file": null,
+      "resolved": false,
+      "bpm": null,
+      "style": null,
+      "samples": []
+    },
+    {
+      "name": "Something about DRUMS",
+      "file": "live/midi/nova/dnb/something_about_drums.tidal",
+      "resolved": true,
+      "bpm": null,
+      "style": "dnb",
+      "samples": [
+        "FMRhodes2",
+        "bassWarsaw",
+        "drum",
+        "drumtraks",
+        "jazz",
+        "jungle_breaks",
+        "moogBass",
+        "movie_paris",
+        "superpiano"
+      ]
+    },
+    {
+      "name": "La fin de l'insouciance",
+      "file": "live/midi/nova/beatober/oct_16_haunted_house_insouciance.tidal",
+      "resolved": true,
+      "bpm": null,
+      "style": null,
+      "samples": [
+        "808hc",
+        "FMRhodes1",
+        "armora",
+        "bassWarsaw",
+        "cp",
+        "jazz",
+        "jungle_breaks",
+        "risers",
+        "snare",
+        "trance_pads",
+        "weird_dialogs"
+      ]
+    },
+    {
+      "name": "Blue Gold",
+      "file": "live/collab/ccc/ccc0.tidal",
+      "resolved": true,
+      "bpm": null,
+      "style": "collab",
+      "samples": [
+        "909",
+        "ccc",
+        "cp",
+        "cpluck",
+        "h2ogmhh",
+        "jungle_breaks",
+        "moog",
+        "risers",
+        "vec2_synth_acid"
+      ]
+    }
+  ]
+}

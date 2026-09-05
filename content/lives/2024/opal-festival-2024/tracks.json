@@ -1,0 +1,356 @@
+{
+  "_draft": [
+    "Mechanically drafted from backlog.md by build_gig_tracksjson.py",
+    "--backlog-slug on 2026-09-05, via backlog_setlists.py's anchor+alias",
+    "resolution. NOT ear-verified: no recording was measured for this gig,",
+    "so there are no start_s/end_s/duration_s and no `section` (movements) —",
+    "both would have to be guessed, and this tool never guesses. Any track",
+    "below with \"resolved\": false failed to match the catalog's alias index",
+    "and needs PLN's eyes (raw backlog.md name kept verbatim, not dropped)."
+  ],
+  "gig": "opal-festival-2024",
+  "title": "Opal Festival 2024",
+  "date": "2024-08-10",
+  "venue": "Opal Festival",
+  "stage": null,
+  "trackCount": 14,
+  "bpmRange": null,
+  "styleDistribution": {
+    "ambient": 1,
+    "collab": 3,
+    "dnb": 2,
+    "lounge": 1,
+    "nujazz": 4,
+    "techno": 1
+  },
+  "samplePacks": [
+    "808hc",
+    "808mc",
+    "909",
+    "90s_synatm",
+    "FMRhodes1",
+    "FMRhodes2",
+    "aoc_fr",
+    "armora",
+    "bassWarsaw",
+    "bogdan",
+    "break",
+    "cbow",
+    "ccc",
+    "clubkick",
+    "come_guitar",
+    "cp",
+    "cpluck",
+    "fbass",
+    "feelfx",
+    "fguitar",
+    "giorgio_syn",
+    "h2ogmcp",
+    "h2ogmcy",
+    "h2ogmhh",
+    "h2ogmsn",
+    "hh",
+    "house",
+    "jazz",
+    "jungle_breaks",
+    "jungle_vocals",
+    "marimba1",
+    "meth_bass",
+    "moog",
+    "moogBass",
+    "movie_giant",
+    "movie_wolf",
+    "nujazz_bass120",
+    "nujazz_bass125",
+    "nujazz_beats120",
+    "nujazz_keys120",
+    "nujazz_keys125",
+    "punk",
+    "rampleA0",
+    "rampleM1",
+    "rampleM8",
+    "rampleS57",
+    "rhadamanthe_vocal",
+    "risers",
+    "snare",
+    "supersiren",
+    "trance_pads",
+    "vec1_snare",
+    "vec2_synth_acid",
+    "weird_dialogs"
+  ],
+  "_needs_pln": [
+    "stage"
+  ],
+  "_provenance": {
+    "tracklist": {
+      "source": "backlog.md",
+      "locator": "## Opal <3🦉",
+      "date": "2026-09-05"
+    },
+    "title": {
+      "source": "/home/pln/Work/Web/www/content/lives/2024/opal-festival-2024.md",
+      "locator": "frontmatter.title"
+    },
+    "date": {
+      "source": "/home/pln/Work/Web/www/content/lives/2024/opal-festival-2024.md",
+      "locator": "frontmatter.date"
+    },
+    "venue": {
+      "source": "/home/pln/Work/Web/www/content/lives/2024/opal-festival-2024.md",
+      "locator": "frontmatter.address"
+    },
+    "stage": {
+      "source": "/home/pln/Work/Web/www/content/lives/2024/opal-festival-2024.md",
+      "locator": "frontmatter.stage"
+    }
+  },
+  "durationBasis": "No ear-verified recording exists for this gig (or none has been reviewed yet), so this tracklist carries NO per-track timecodes and NO `section` (movements) — both are PLN-only and this draft never invents them. Order and content come straight from backlog.md via backlog_setlists.py, mechanically resolved to .tidal scores.",
+  "tracks": [
+    {
+      "name": "Fabuleux",
+      "file": "live/midi/nova/lounge/fabuleux.tidal",
+      "resolved": true,
+      "bpm": null,
+      "style": "lounge",
+      "samples": [
+        "FMRhodes2",
+        "aoc_fr",
+        "bassWarsaw",
+        "break",
+        "feelfx",
+        "hh",
+        "moogBass",
+        "rampleA0",
+        "snare"
+      ]
+    },
+    {
+      "name": "Cafe Glacé",
+      "file": "live/midi/nova/nujazz/cafe_glace.tidal",
+      "resolved": true,
+      "bpm": null,
+      "style": "nujazz",
+      "samples": [
+        "h2ogmcy",
+        "house",
+        "jungle_breaks",
+        "meth_bass",
+        "nujazz_bass120",
+        "nujazz_keys120",
+        "rampleM1"
+      ]
+    },
+    {
+      "name": "Café Bouillant",
+      "file": "live/midi/nova/nujazz/cafe_bouillant.tidal",
+      "resolved": true,
+      "bpm": null,
+      "style": "nujazz",
+      "samples": [
+        "bassWarsaw",
+        "cpluck",
+        "house",
+        "jungle_breaks",
+        "nujazz_bass120",
+        "nujazz_beats120",
+        "nujazz_keys120",
+        "rampleM1",
+        "rampleS57"
+      ]
+    },
+    {
+      "name": "Cafe Tiède",
+      "file": "live/midi/nova/nujazz/cafe_tiede.tidal",
+      "resolved": true,
+      "bpm": null,
+      "style": "nujazz",
+      "samples": [
+        "FMRhodes1",
+        "h2ogmcp",
+        "h2ogmsn",
+        "jazz",
+        "jungle_breaks",
+        "nujazz_bass125",
+        "nujazz_keys125"
+      ]
+    },
+    {
+      "name": "Force MOTRICE",
+      "file": "live/midi/nova/dnb/force_motrice.tidal",
+      "resolved": true,
+      "bpm": null,
+      "style": "dnb",
+      "samples": [
+        "FMRhodes1",
+        "cbow",
+        "giorgio_syn",
+        "jazz",
+        "jungle_breaks",
+        "jungle_vocals",
+        "meth_bass",
+        "nujazz_bass125",
+        "rampleM8",
+        "risers"
+      ]
+    },
+    {
+      "name": "Alerte verte",
+      "file": "live/midi/nova/dnb/alerte_verte.tidal",
+      "resolved": true,
+      "bpm": null,
+      "style": "dnb",
+      "samples": [
+        "808mc",
+        "cp",
+        "fbass",
+        "fguitar",
+        "h2ogmhh",
+        "jungle_breaks",
+        "movie_giant",
+        "movie_wolf",
+        "rhadamanthe_vocal",
+        "snare",
+        "supersiren"
+      ]
+    },
+    {
+      "name": "Nouveau Punk",
+      "file": "live/collab/raph/nouveau_punk.tidal",
+      "resolved": true,
+      "bpm": null,
+      "style": "collab",
+      "samples": [
+        "90s_synatm",
+        "cbow",
+        "cpluck",
+        "h2ogmhh",
+        "jazz",
+        "jungle_breaks",
+        "meth_bass",
+        "moogBass",
+        "punk",
+        "snare"
+      ]
+    },
+    {
+      "name": "Jeudrill",
+      "file": "live/collab/raph/jeudrill.tidal",
+      "resolved": true,
+      "bpm": null,
+      "style": "collab",
+      "samples": [
+        "90s_synatm",
+        "bogdan",
+        "clubkick",
+        "giorgio_syn",
+        "jungle_breaks",
+        "marimba1",
+        "meth_bass",
+        "snare"
+      ]
+    },
+    {
+      "name": "Bain Bouillant",
+      "file": "live/midi/nova/nujazz/cafe_bouillant.tidal",
+      "resolved": true,
+      "bpm": null,
+      "style": "nujazz",
+      "samples": [
+        "bassWarsaw",
+        "cpluck",
+        "house",
+        "jungle_breaks",
+        "nujazz_bass120",
+        "nujazz_beats120",
+        "nujazz_keys120",
+        "rampleM1",
+        "rampleS57"
+      ]
+    },
+    {
+      "name": "Haunted House",
+      "file": "live/midi/nova/beatober/oct_16_haunted_house_insouciance.tidal",
+      "resolved": true,
+      "bpm": null,
+      "style": null,
+      "samples": [
+        "808hc",
+        "FMRhodes1",
+        "armora",
+        "bassWarsaw",
+        "cp",
+        "jazz",
+        "jungle_breaks",
+        "risers",
+        "snare",
+        "trance_pads",
+        "weird_dialogs"
+      ]
+    },
+    {
+      "name": "Blue Gold",
+      "file": "live/collab/ccc/ccc0.tidal",
+      "resolved": true,
+      "bpm": null,
+      "style": "collab",
+      "samples": [
+        "909",
+        "ccc",
+        "cp",
+        "cpluck",
+        "h2ogmhh",
+        "jungle_breaks",
+        "moog",
+        "risers",
+        "vec2_synth_acid"
+      ]
+    },
+    {
+      "name": "L'été à MauerPark",
+      "file": "live/midi/nova/techno/ete_a_mauerpark.tidal",
+      "resolved": true,
+      "bpm": null,
+      "style": "techno",
+      "samples": [
+        "909",
+        "FMRhodes1",
+        "bassWarsaw",
+        "cbow",
+        "jungle_breaks",
+        "moogBass"
+      ]
+    },
+    {
+      "name": "Contre Visite",
+      "file": "live/midi/nova/ambient/contre_visite.tidal",
+      "resolved": true,
+      "bpm": null,
+      "style": "ambient",
+      "samples": [
+        "90s_synatm",
+        "bassWarsaw",
+        "break",
+        "cp",
+        "h2ogmhh",
+        "jazz",
+        "jungle_breaks"
+      ]
+    },
+    {
+      "name": "Lendemain Divin",
+      "file": "live/midi/nova/lofi/lendemain_divin.tidal",
+      "resolved": true,
+      "bpm": null,
+      "style": null,
+      "samples": [
+        "FMRhodes1",
+        "bassWarsaw",
+        "come_guitar",
+        "jazz",
+        "jungle_breaks",
+        "vec1_snare"
+      ]
+    }
+  ]
+}

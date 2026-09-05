@@ -1,0 +1,166 @@
+{
+  "_draft": [
+    "Mechanically drafted from backlog.md by build_gig_tracksjson.py",
+    "--backlog-slug on 2026-09-05, via backlog_setlists.py's anchor+alias",
+    "resolution. NOT ear-verified: no recording was measured for this gig,",
+    "so there are no start_s/end_s/duration_s and no `section` (movements) —",
+    "both would have to be guessed, and this tool never guesses. Any track",
+    "below with \"resolved\": false failed to match the catalog's alias index",
+    "and needs PLN's eyes (raw backlog.md name kept verbatim, not dropped)."
+  ],
+  "gig": "mephisteuf",
+  "title": "Live @ MephisTeuf",
+  "date": "2023-10-01",
+  "venue": "MephisTeuf",
+  "stage": null,
+  "trackCount": 6,
+  "bpmRange": null,
+  "styleDistribution": {
+    "ambient": 1,
+    "breaks": 2,
+    "chip": 1,
+    "techno": 1
+  },
+  "samplePacks": [
+    "808bd",
+    "90s_megafx",
+    "90s_synatm",
+    "FMRhodes1",
+    "FMRhodes2",
+    "bassWarsaw",
+    "break",
+    "cbow",
+    "clap",
+    "cp",
+    "cpluck",
+    "drums_atari",
+    "drums_nes",
+    "fbass",
+    "fbreak100",
+    "fbreak120",
+    "forgan",
+    "fx_gameboy",
+    "h2ogmhh",
+    "jazz",
+    "jungle_breaks",
+    "synth_commodore"
+  ],
+  "_needs_pln": [
+    "stage",
+    "unresolved: \"TOP HATS\""
+  ],
+  "_provenance": {
+    "tracklist": {
+      "source": "backlog.md",
+      "locator": "## Live @MephisTeuf 😈‍💻😈",
+      "date": "2026-09-05"
+    },
+    "title": {
+      "source": "/home/pln/Work/Web/www/content/lives/2023/mephisteuf.md",
+      "locator": "frontmatter.title"
+    },
+    "date": {
+      "source": "/home/pln/Work/Web/www/content/lives/2023/mephisteuf.md",
+      "locator": "frontmatter.date"
+    },
+    "venue": {
+      "source": "/home/pln/Work/Web/www/content/lives/2023/mephisteuf.md",
+      "locator": "frontmatter.address"
+    },
+    "stage": {
+      "source": "/home/pln/Work/Web/www/content/lives/2023/mephisteuf.md",
+      "locator": "frontmatter.stage"
+    }
+  },
+  "durationBasis": "No ear-verified recording exists for this gig (or none has been reviewed yet), so this tracklist carries NO per-track timecodes and NO `section` (movements) — both are PLN-only and this draft never invents them. Order and content come straight from backlog.md via backlog_setlists.py, mechanically resolved to .tidal scores.",
+  "tracks": [
+    {
+      "name": "TOP HATS",
+      "file": null,
+      "resolved": false,
+      "bpm": null,
+      "style": null,
+      "samples": []
+    },
+    {
+      "name": "Contre-Visite",
+      "file": "live/midi/nova/ambient/contre_visite.tidal",
+      "resolved": true,
+      "bpm": null,
+      "style": "ambient",
+      "samples": [
+        "90s_synatm",
+        "bassWarsaw",
+        "break",
+        "cp",
+        "h2ogmhh",
+        "jazz",
+        "jungle_breaks"
+      ]
+    },
+    {
+      "name": "ATARI-ght",
+      "file": "live/chip/ataright.tidal",
+      "resolved": true,
+      "bpm": null,
+      "style": "chip",
+      "samples": [
+        "808bd",
+        "FMRhodes1",
+        "FMRhodes2",
+        "drums_atari",
+        "fbreak120",
+        "h2ogmhh"
+      ]
+    },
+    {
+      "name": "Burn this B00K",
+      "file": "live/techno/noir/burn_this_book.tidal",
+      "resolved": true,
+      "bpm": null,
+      "style": "techno",
+      "samples": [
+        "90s_megafx",
+        "90s_synatm",
+        "cp",
+        "cpluck",
+        "drums_nes",
+        "jazz"
+      ]
+    },
+    {
+      "name": "It's About TIME",
+      "file": "live/midi/nova/breaks/its_about_time.tidal",
+      "resolved": true,
+      "bpm": null,
+      "style": "breaks",
+      "samples": [
+        "808bd",
+        "90s_synatm",
+        "cp",
+        "drums_atari",
+        "fbreak100",
+        "fx_gameboy",
+        "jungle_breaks",
+        "synth_commodore"
+      ]
+    },
+    {
+      "name": "Solar",
+      "file": "live/midi/nova/breaks/solar.tidal",
+      "resolved": true,
+      "bpm": null,
+      "style": "breaks",
+      "samples": [
+        "FMRhodes1",
+        "bassWarsaw",
+        "break",
+        "cbow",
+        "clap",
+        "fbass",
+        "forgan",
+        "jazz"
+      ]
+    }
+  ]
+}
